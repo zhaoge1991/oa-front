@@ -1,4 +1,4 @@
-import {Directive, ElementRef, HostListener, HostBinding} from '@angular/core';
+import {Directive, ElementRef, HostListener, HostBinding,Input} from '@angular/core';
 import {BaThemeConfigProvider} from '../../../theme';
 
 import {BaCardBlurHelper} from './baCardBlurHelper.service';

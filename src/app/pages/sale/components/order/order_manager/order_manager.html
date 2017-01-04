@@ -1,0 +1,89 @@
+<div class="row">
+  <ba-card>
+    <action-bar >
+      <div class="actionbar">
+        <button type="button"  class="available">
+          <i class="ion-android-folder-open"></i><span>打开</span>
+        </button>
+        <button type="button"  class="available">
+          <i class="ion-plus-circled"></i><span>新建</span>
+        </button>
+        <button type="button"  class="available">
+          <i class="ion-compose"></i><span>编辑</span>
+        </button>
+        <button type="button"  class="available" [ngClass]="{'active':isbatches}" (click)="batchesClick($event)">
+          <i class="ion-clipboard"></i><span>批处理</span>
+        </button>
+        <button type="button"  disabled>
+          <i class="ion-settings"></i><span>操作</span>
+        </button>
+        <button type="button"  class="available">
+          <i class="ion-document-text"></i><span>附件</span>
+        </button>
+      </div>
+    </action-bar>
+  </ba-card>
+</div>
+<div class="row">
+  <ba-card title="订单管理" baCardClass="with-scroll">
+      <div class="row">
+        <div class="col-md-12 col-xs-12">
+          <div class="mysearch">
+            <input #search type="text" (keyup)="onQuickFilterEnter($event)" id="quickFilterInput" placeholder="快速搜索" class="form-control" style="width: 180px;display: inline-block"/>
+            <button (click)="onQuickFilterChanged(search)" class="btn btn-primary  btn-sm" type="button">搜索</button>
+          </div>
+          <ag-grid-ng2 #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                       [gridOptions]="gridOptions"
+                       [columnDefs]="columnDefs"
+                       [rowData]="rowData"
+                       enableColResize
+                       enableSorting
+                       enableFilter
+                       groupHeaders
+
+                       rowHeight="22"
+                       rowSelection="multiple"
+
+                       (rowSelected)="onRowSelected($event)"
+
+          ></ag-grid-ng2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" *ngIf="selectedeRow">
+          <ng2-tab selected="pro-list"
+                   selected-contents-class="fadeIn animated"
+                   selected-index-class="selected">
+            <div class="tabs">
+              <div index="pro-list">商品清单</div>
+              <div index="other">其他费用</div>
+            </div>
+            <div class="tab-contents">
+              <div contents="pro-list">
+                <ag-grid-ng2 #selectedrow style="width: 100%; height: 180px;" class="ag-fresh"
+
+                             [columnDefs]="selectedcolumnDefs"
+                             [rowData]="selectedrowData"
+                             enableColResize
+                             enableSorting
+                             enableFilter
+                             groupHeaders
+
+                             rowHeight="22"
+                             rowSelection="multiple"
+                ></ag-grid-ng2>
+              </div>
+              <div contents="other">
+                <ag-grid-ng2  style="width: 100%;  height: 140px;" class="ag-fresh"
+                              [columnDefs]="[{headerName: '',field: 'index',width: 60},{headerName: '费用名称',field: 'proname',width: 240},{headerName: '费用金额',field: 'money',width: 240}]"
+                              [rowData]="[{index: 1,proname: 'A',money: '1180'},{index: 2,proname: 'B',money: '1870'},{index: 3,proname: 'C',money: '245'}]"
+                >加载其他费用清单</ag-grid-ng2>
+              </div>
+            </div>
+          </ng2-tab>
+
+
+        </div>
+      </div>
+  </ba-card>
+</div>
