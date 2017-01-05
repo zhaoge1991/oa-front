@@ -1,8 +1,12 @@
 import { Routes, RouterModule }  from '@angular/router';
 
 import {Sale} from './sale.component';
+
 import {ProvisionComponent} from './components/info/provision/provision.component';
-import {OrderManagerComponent} from './components/order/order_manager/order_manager.component';
+
+import {OrderManagerComponent} from './components/order/order_manager/list/order-list.component.ts';
+import {OrderEditComponent} from './components/order/order_manager/edit/order-edit';
+
 import {InquiryComponent} from './components/saletable/inquiry/inquiry.component';
 
 
@@ -21,6 +25,12 @@ const routes: Routes = [
       {
         path: 'order-manager',
         component: OrderManagerComponent
+      },
+      {
+        path: 'order-manager',
+        children: [
+          {path: 'edit', component: OrderEditComponent}
+        ]
       },
       {
         path: 'info',

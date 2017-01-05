@@ -1,0 +1,146 @@
+<div class="row">
+  <ba-card>
+    <action-bar >
+      <div class="actionbar">
+        <button type="button"  class="available">
+          <i class="ion-android-folder-open"></i><span>打开</span>
+        </button>
+        <button type="button"  disabled>
+          <i class="ion-plus-circled"></i><span>新建</span>
+        </button>
+        <button type="button"  class="available" (click)="editClick($event)">
+          <i class="ion-compose"></i><span>编辑</span>
+        </button>
+        <button type="button"  class="available" [ngClass]="{'active':isbatches}" (click)="batchesClick($event)">
+          <i class="ion-clipboard"></i><span>批处理</span>
+        </button>
+        <button type="button"  disabled>
+          <i class="ion-settings"></i><span>操作</span>
+        </button>
+        <button type="button"  class="available">
+          <i class="ion-document-text"></i><span>附件</span>
+        </button>
+        <button type="button"  class="available" (click)="goBack()">
+          <i class="ion-android-arrow-back"></i><span>返回</span>
+        </button>
+      </div>
+    </action-bar>
+  </ba-card>
+</div>
+
+
+  <div class="row">
+    <ba-card title="编辑订单" baCardClass="with-scroll">
+      <form class="form-horizontal">
+        <div class="row">
+          <div class="col-md-4 col-xs-12">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 form-control-label">订单编号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">客户id</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">网上订单号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">其他费用</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">价格条款</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 form-control-label">PI编号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">国家</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">支付方式</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">商品总金额</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">订单来源</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-4 form-control-label">期望发货时间</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">项目</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">运输方式</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">订单总金额</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-4 form-control-label">订单状态</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-xs-12">
+            <div class="form-group row">
+              <label for="textarea01" class="col-sm-4 form-control-label">备注</label>
+              <div class="col-sm-8">
+                <textarea class="form-control" id="textarea01" placeholder="备注信息"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="clearfix"></div>
+    </ba-card>
+  </div>
+
+

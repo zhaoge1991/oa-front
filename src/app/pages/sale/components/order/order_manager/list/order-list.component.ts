@@ -1,11 +1,12 @@
 import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
 
 @Component({
   selector: 'order-manager',
-  template: require('./order_manager.html'),
-  styles: [require('./order-manager.scss')]
+  template: require('./order-list.html'),
+  styles: [require('./order-list.scss')]
 })
 
 export class OrderManagerComponent{
@@ -18,7 +19,7 @@ export class OrderManagerComponent{
   public selectedrowData: any[];
   public isbatches: boolean = false;
 
-  constructor() {
+  constructor(private router: Router) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -163,10 +164,15 @@ export class OrderManagerComponent{
     }
   }
 
+  //编辑操作
+  private editClick($event){
+    if(this.selectedrowData){
+      this.router.navigate(['pages/sale/order-manager/edit']);
+    }
+  }
+
   //选中行列表行配置
   private onRowSelected($event) {
-    // taking out, as when we 'select all', it prints to much to the console!!
-    console.log('onRowSelected: ' , $event);
     if($event.node.selected){
       this.selectedrowData = [$event.node.data];
       this.selectedcolumnDefs = [
