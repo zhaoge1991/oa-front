@@ -20,7 +20,7 @@
         <button type="button"  class="available">
           <i class="ion-document-text"></i><span>附件</span>
         </button>
-        <button type="button"  class="available" (click)="goBack()">
+        <button type="button"  class="available" (click)="goback($event)">
           <i class="ion-android-arrow-back"></i><span>返回</span>
         </button>
       </div>
@@ -37,31 +37,31 @@
             <div class="form-group row">
               <label for="inputEmail3" class="col-sm-4 form-control-label">订单编号</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="编号" [(ngModel)]="data.num" name="num">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">客户id</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+                <input type="text" class="form-control" id="inputPassword3" placeholder="ID" [(ngModel)]="data.id" name="id">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">网上订单号</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
+                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号" [(ngModel)]="data.state" name="state">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">其他费用</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
+                <input type="text" class="form-control" id="inputPassword5" placeholder="其他" [(ngModel)]="data.pi" name="pi">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">价格条款</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
+                <input type="text" class="form-control" id="inputPassword6" placeholder="条款" [(ngModel)]="data.usname" name="usname">
               </div>
             </div>
           </div>
@@ -69,31 +69,31 @@
             <div class="form-group row">
               <label for="inputEmail3" class="col-sm-4 form-control-label">PI编号</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
+                <input type="text" class="form-control" id="inputEmail3" placeholder="编号" [(ngModel)]="data.usid" name="usid">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">国家</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
+                <input type="text" class="form-control" id="inputPassword3" placeholder="ID" [(ngModel)]="data.addname" name="addname">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">支付方式</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
+                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号" [(ngModel)]="data.pay" name="pay">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">商品总金额</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
+                <input type="text" class="form-control" id="inputPassword5" placeholder="其他" [(ngModel)]="data.money" name="money">
               </div>
             </div>
             <div class="form-group row">
               <label for="inputPassword3" class="col-sm-4 form-control-label">订单来源</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
+                <input type="text" class="form-control" id="inputPassword6" placeholder="条款" [(ngModel)]="data.ormoney" name="ormoney">
               </div>
             </div>
           </div>

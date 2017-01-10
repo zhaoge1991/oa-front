@@ -27,7 +27,8 @@ import {
   BaPictureUploader,
   BaSidebar,
   Ng2Tab,
-  ActionBar
+  ActionBar,
+  TextAlertComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -47,13 +48,18 @@ import {
 import {
   BaImageLoaderService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
+  TextAlertService
 } from './services';
 
 import {
   EmailValidator,
   EqualPasswordsValidator
 } from './validators';
+
+import {
+  AuthGuard
+} from './guards'
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -71,7 +77,8 @@ const NGA_COMPONENTS = [
   BaPictureUploader,
   BaSidebar,
   Ng2Tab,
-  ActionBar
+  ActionBar,
+  TextAlertComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -90,7 +97,8 @@ const NGA_PIPES = [
 const NGA_SERVICES = [
   BaImageLoaderService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
+  TextAlertService
 ];
 
 const NGA_VALIDATORS = [
@@ -98,11 +106,15 @@ const NGA_VALIDATORS = [
   EqualPasswordsValidator
 ];
 
+const NGA_GUARDS = [
+  AuthGuard
+]
+
 @NgModule({
   declarations: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
   ],
   imports: [
     CommonModule,
@@ -113,7 +125,7 @@ const NGA_VALIDATORS = [
   exports: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
   ]
 })
 export class NgaModule {

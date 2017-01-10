@@ -29,7 +29,8 @@ const routes: Routes = [
       {
         path: 'order-manager',
         children: [
-          {path: 'edit', component: OrderEditComponent}
+          {path: 'edit', component: OrderEditComponent},
+          {path: 'edit/:id', component: OrderEditComponent}
         ]
       },
       {

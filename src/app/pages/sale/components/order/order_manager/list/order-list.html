@@ -2,10 +2,10 @@
   <ba-card>
     <action-bar >
       <div class="actionbar">
-        <button type="button"  class="available">
+        <button type="button"  class="available" (click)="test($event)">
           <i class="ion-android-folder-open"></i><span>打开</span>
         </button>
-        <button type="button"  class="available">
+        <button type="button"  class="available" (click)="addClick($event)">
           <i class="ion-plus-circled"></i><span>新建</span>
         </button>
         <button type="button"  class="available" (click)="editClick($event)">

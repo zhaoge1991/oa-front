@@ -2,11 +2,13 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
+import {TestService} from './test.service';
 
 @Component({
   selector: 'order-manager',
   template: require('./order-list.html'),
-  styles: [require('./order-list.scss')]
+  styles: [require('./order-list.scss')],
+  providers: [TestService]
 })
 
 export class OrderManagerComponent{
@@ -19,7 +21,7 @@ export class OrderManagerComponent{
   public selectedrowData: any[];
   public isbatches: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private testService: TestService) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -27,11 +29,18 @@ export class OrderManagerComponent{
     this.showGrid = true;
   }
 
+  //http测试
+  private test($event){
+    this.testService.login('adolph@sopto.com','adolph123')
+      .subscribe(data => {
+        console.log(data)})
+  }
+
   //行配置项(获取数据)
   private createRowData() {
     var rowData:any[] = [];
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 500; i++) {
       rowData.push({
         num: i+1,
         id: 'CZK-'+Math.random()*1000000,
@@ -167,8 +176,13 @@ export class OrderManagerComponent{
   //编辑操作
   private editClick($event){
     if(this.selectedrowData){
-      this.router.navigate(['pages/sale/order-manager/edit']);
+      this.router.navigate(['pages/sale/order-manager/edit',1]);
     }
+  }
+
+  //新建操作
+  private addClick(){
+    this.router.navigate(['pages/sale/order-manager/edit']);
   }
 
   //选中行列表行配置

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import { NgaModule } from '../../theme/nga.module';
 import {AgGridModule} from 'ag-grid-ng2/main';
 import { FormsModule as AngularFormsModule } from '@angular/forms';
+import {HttpModule} from '@angular/http';
 
 import {routing} from './sale.routing';
 
@@ -13,7 +14,7 @@ import {OrderEditComponent} from './components/order/order_manager/edit/order-ed
 import {InquiryComponent} from './components/saletable/inquiry/inquiry.component';
 
 @NgModule({
-  imports: [CommonModule,NgaModule,AgGridModule.withAotSupport(),routing,AngularFormsModule],
+  imports: [CommonModule,NgaModule,AgGridModule.withAotSupport(),routing,AngularFormsModule,HttpModule],
   declarations: [
     Sale,
     ProvisionComponent,
