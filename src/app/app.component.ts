@@ -40,7 +40,7 @@ export class App {
   public ngAfterViewInit(): void {
     // hide spinner once all loaders are completed
     BaThemePreloader.load().then((values) => {
-      this._spinner.hide();
+      setTimeout(()=>this._spinner.hide(),5000);
     });
   }
 

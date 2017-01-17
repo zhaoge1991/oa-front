@@ -1,5 +1,6 @@
 import {Component,OnInit} from '@angular/core';
-import {TextAlertService} from '../../services/textAlert/textAlert.service';
+import {TextAlertService} from "../../../core/textAlertService/textAlert.service";
+
 
 @Component({
   selector: 'text-alert',

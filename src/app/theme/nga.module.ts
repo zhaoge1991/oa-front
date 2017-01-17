@@ -28,7 +28,7 @@ import {
   BaSidebar,
   Ng2Tab,
   ActionBar,
-  TextAlertComponent
+  TextAlertComponent,
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';

@@ -18,6 +18,8 @@
     "@angularclass/conventions-loader": "^1.0.2",
     "@angularclass/hmr": "~1.2.0",
     "@angularclass/hmr-loader": "~3.0.2",
+    "ag-grid": "6.2.x",
+    "ag-grid-ng2": "6.2.x",
     "amcharts3": "github:amcharts/amcharts3",
     "ammap3": "github:amcharts/ammap3",
     "animate.css": "^3.5.1",
@@ -45,6 +47,7 @@
     "lodash": "^4.12.0",
     "ng2-bootstrap": "1.1.14",
     "ng2-ckeditor": "1.0.7",
+    "ng2-interceptors": "^1.2.4",
     "ng2-smart-table": "^0.3.2",
     "ng2-tree": "^0.0.2-7",
     "ng2-uploader": "1.1.0",
@@ -52,9 +55,7 @@
     "postcss-loader": "^1.0.0",
     "rxjs": "5.0.0-beta.12",
     "tether": "^1.2.4",
-    "zone.js": "~0.6.25",
-    "ag-grid": "6.2.x",
-    "ag-grid-ng2": "6.2.x"
+    "zone.js": "~0.6.25"
   },
   "devDependencies": {
     "angular2-template-loader": "^0.5.0",

@@ -3,6 +3,10 @@ import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
 import {TestService} from './test.service';
+import {LocationService} from "../../../../../../core/locationService/location.services";
+import {CountryService} from "../../../../../../core/countryService/country.service";
+import {PositionService} from "../../../../../../core/positionService/position.service";
+
 
 @Component({
   selector: 'order-manager',
@@ -21,7 +25,7 @@ export class OrderManagerComponent{
   public selectedrowData: any[];
   public isbatches: boolean = false;
 
-  constructor(private router: Router,private testService: TestService) {
+  constructor(private router: Router,private testService: PositionService) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -31,35 +35,21 @@ export class OrderManagerComponent{
 
   //http测试
   private test($event){
-    this.testService.login('adolph@sopto.com','adolph123')
-      .subscribe(data => {
-        console.log(data)})
+    //this.testService.login('adolph@sopto.com','adph123')
+    //  .subscribe(data => {
+    //    console.log(data)})
+    this.testService.getpositions()
+    .subscribe(data=>{console.log(data.json())})
   }
 
   //行配置项(获取数据)
   private createRowData() {
     var rowData:any[] = [];
 
-    for (var i = 0; i < 500; i++) {
-      rowData.push({
-        num: i+1,
-        id: 'CZK-'+Math.random()*1000000,
-        state: Math.random()>0.5 ? '客户已收货':'已发货',
-        pi: 'SOP-'+Math.random()*1000000,
-        usid: 'SOP'+Math.random()*1000,
-        usname: Math.random()>0.5 ? 'Nelson':'Apolph',
-        addname: Math.random()>0.5 ? 'lucy':'starain',
-        pay: Math.random()>0.5 ? 'paypal':'T/T',
-        doll: Math.random()>0.5 ? 'USD':'EUR',
-        money: Math.random()*10000,
-        ormoney:  Math.random()*10000,
-        getmoney:  Math.random()*10000,
-        demoney:  Math.random()*10000,
-        trmoney:  Math.random()*10000
-      });
-    }
-
-    this.rowData = rowData;
+    //this.testService.getLocation()
+    //  .subscribe(data=>{
+    //    this.rowData = data.json().results.data.inquirys.data;
+    //  })
   }
 
   //列配置项
@@ -70,51 +60,51 @@ export class OrderManagerComponent{
         suppressMenu: true, pinned: true, hide: true
       },
       {
-        headerName: ' ',field: 'num', width: 30,suppressSorting: true,
+        headerName: ' ',field: 'id', width: 30,suppressSorting: true,
         suppressMenu: true, pinned: true
       },
       {
         headerName: '订单编号',
-        field: 'id',
+        field: 'quote_no',
         width: 120,
         pinned: true //固定列
       },
       {
         headerName: '订单状态',
-        field: 'state',
+        field: 'quote_date',
         width: 120,
         pinned: true //固定列
       },
       {
         headerName: 'PI编号',
-        field: 'pi',
+        field: 'validity_date',
         width: 120,
       },
       {
         headerName: '客户ID',
-        field: 'usid',
+        field: 'delivery_date',
         width: 120,
       },
       {
         headerName: '客户名',
-        field: 'usname',
+        field: 'table_order_id',
         width: 120,
       },
       {
         headerName: '录入人',
-        field: 'addname',
+        field: 'remark',
         width: 120,
         editable: true //是否可双击编辑
       },
       {
         headerName: '付款方式',
-        field: 'pay',
+        field: 'created_at',
         width: 120,
         editable: true
       },
       {
         headerName: '货币',
-        field: 'doll',
+        field: 'updated_at',
         width: 60,
         editable: true
       },

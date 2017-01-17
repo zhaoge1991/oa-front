@@ -2,7 +2,8 @@ import {Component, ViewEncapsulation,OnInit} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {Router,ActivatedRoute} from '@angular/router';
 import {LoginServices} from './login.services';
-import {TextAlertService} from '../../theme/services/textAlert/textAlert.service';
+import {TextAlertService} from "../../core/textAlertService/textAlert.service";
+
 
 @Component({
   selector: 'login',
@@ -29,6 +30,7 @@ export class Login implements OnInit{
     this.password = this.form.controls['password'];
   }
   ngOnInit(){
+    localStorage.removeItem('currentUser');
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   public onSubmit(value):void {

@@ -1,9 +1,15 @@
-import { NgModule, ApplicationRef } from '@angular/core';
+import { NgModule, ApplicationRef,OnInit } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
+
+//导入拦截器服务
+import {provideInterceptorService} from 'ng2-interceptors';
+import {ServerURLInterceptor} from './ServerURLInterceptor';
+import {CoreModule} from './core/core.module';
+
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -46,15 +52,19 @@ type StoreType = {
     ReactiveFormsModule,
     NgaModule.forRoot(),
     PagesModule,
-    routing
+    routing,
+    CoreModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    provideInterceptorService([
+      new ServerURLInterceptor()
+    ])
   ]
 })
 
-export class AppModule {
+export class AppModule{
 
   constructor(public appRef: ApplicationRef, public appState: AppState) {
   }
