@@ -9,7 +9,7 @@ export class CurrencyService {
 
   private currences;
 
-  getcurrences(): Observable {
+  getcurrences(){
     if (this.currences) {
       return Observable.of(this.currences);
     } else {

@@ -9,7 +9,7 @@ export class AllProjectService {
 
   private projects;
 
-  getprojects(): Observable {
+  getprojects(){
     if (this.projects) {
       return Observable.of(this.projects);
     } else {

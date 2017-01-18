@@ -9,7 +9,7 @@ export class StatusService {
 
   private status;
 
-  getstatus(): Observable {
+  getstatus(){
     if (this.status) {
       return Observable.of(this.status);
     } else {

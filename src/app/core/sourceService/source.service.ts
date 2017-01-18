@@ -9,7 +9,7 @@ export class SourceService {
 
   private sources;
 
-  getsources(): Observable {
+  getsources(){
     if (this.sources) {
       return Observable.of(this.sources);
     } else {

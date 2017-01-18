@@ -9,7 +9,7 @@ export class SupplierLevelService {
 
   private supplier_levels;
 
-  getsupplier_levels(): Observable {
+  getsupplier_levels(){
     if (this.supplier_levels) {
       return Observable.of(this.supplier_levels);
     } else {

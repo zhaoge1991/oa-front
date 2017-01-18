@@ -9,7 +9,7 @@ export class SupplierRatingService {
 
   private supplier_ratings;
 
-  getsupplier_ratings(): Observable {
+  getsupplier_ratings(){
     if (this.supplier_ratings) {
       return Observable.of(this.supplier_ratings);
     } else {

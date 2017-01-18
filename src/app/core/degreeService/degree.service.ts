@@ -9,7 +9,7 @@ export class DegreeService {
 
   private degrees;
 
-  getdegrees(): Observable {
+  getdegrees(){
     if (this.degrees) {
       return Observable.of(this.degrees);
     } else {

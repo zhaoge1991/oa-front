@@ -9,7 +9,7 @@ export class SupplierDegreeService {
 
   private supplier_degrees;
 
-  getsupplier_degrees(): Observable {
+  getsupplier_degrees(){
     if (this.supplier_degrees) {
       return Observable.of(this.supplier_degrees);
     } else {

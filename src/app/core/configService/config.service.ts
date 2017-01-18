@@ -9,7 +9,7 @@ export class ConfigService {
 
   private configs;
 
-  getconfigs(): Observable {
+  getconfigs(){
     if (this.configs) {
       return Observable.of(this.configs);
     } else {

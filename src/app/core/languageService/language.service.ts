@@ -9,7 +9,7 @@ export class LanguageService {
 
   private languages;
 
-  getlanguages(): Observable {
+  getlanguages(){
     if (this.languages) {
       return Observable.of(this.languages);
     } else {

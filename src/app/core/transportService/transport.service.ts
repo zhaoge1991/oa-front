@@ -9,7 +9,7 @@ export class TransportService {
 
   private transports;
 
-  gettransports(): Observable {
+  gettransports(){
     if (this.transports) {
       return Observable.of(this.transports);
     } else {

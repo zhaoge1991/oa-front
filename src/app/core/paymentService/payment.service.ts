@@ -9,7 +9,7 @@ export class PaymentService {
 
   private payments;
 
-  getpayments(): Observable {
+  getpayments(){
     if (this.payments) {
       return Observable.of(this.payments);
     } else {

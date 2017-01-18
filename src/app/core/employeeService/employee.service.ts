@@ -9,7 +9,7 @@ export class EmployeeService {
 
   private employees;
 
-  getemployees(): Observable {
+  getemployees(){
     if (this.employees) {
       return Observable.of(this.employees);
     } else {

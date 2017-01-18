@@ -9,7 +9,7 @@ export class QuantifierService {
 
   private quantifiers;
 
-  getquantifiers(): Observable {
+  getquantifiers(){
     if (this.quantifiers) {
       return Observable.of(this.quantifiers);
     } else {

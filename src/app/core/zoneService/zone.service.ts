@@ -9,7 +9,7 @@ export class ZoneService {
 
   private zones;
 
-  getzones(): Observable {
+  getzones(){
     if (this.zones) {
       return Observable.of(this.zones);
     } else {

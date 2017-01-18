@@ -9,7 +9,7 @@ export class PositionService {
 
   private positions;
 
-  getpositions(): Observable {
+  getpositions(){
     if (this.positions) {
       return Observable.of(this.positions);
     } else {

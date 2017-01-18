@@ -9,7 +9,7 @@ export class SupplierStatusService {
 
   private supplier_status;
 
-  getsupplier_status(): Observable {
+  getsupplier_status(){
     if (this.supplier_status) {
       return Observable.of(this.supplier_status);
     } else {

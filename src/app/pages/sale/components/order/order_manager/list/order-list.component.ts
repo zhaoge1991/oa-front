@@ -6,6 +6,7 @@ import {TestService} from './test.service';
 import {LocationService} from "../../../../../../core/locationService/location.services";
 import {CountryService} from "../../../../../../core/countryService/country.service";
 import {PositionService} from "../../../../../../core/positionService/position.service";
+import {TransportService} from "../../../../../../core/transportService/transport.service";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class OrderManagerComponent{
   public selectedrowData: any[];
   public isbatches: boolean = false;
 
-  constructor(private router: Router,private testService: PositionService) {
+  constructor(private router: Router,private testService: TransportService) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -38,7 +39,7 @@ export class OrderManagerComponent{
     //this.testService.login('adolph@sopto.com','adph123')
     //  .subscribe(data => {
     //    console.log(data)})
-    this.testService.getpositions()
+    this.testService.gettransports()
     .subscribe(data=>{console.log(data.json())})
   }
 

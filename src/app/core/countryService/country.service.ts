@@ -9,7 +9,7 @@ export class CountryService {
 
   private countries;
 
-  getcountries(): Observable {
+  getcountries(){
     if (this.countries) {
       return Observable.of(this.countries);
     } else {

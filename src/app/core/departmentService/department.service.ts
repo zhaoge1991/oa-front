@@ -9,7 +9,7 @@ export class DepartmentService {
 
   private departments;
 
-  getdepartments(): Observable {
+  getdepartments(){
     if (this.departments) {
       return Observable.of(this.departments);
     } else {

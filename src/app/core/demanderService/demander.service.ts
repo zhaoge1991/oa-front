@@ -9,7 +9,7 @@ export class DemanderService {
 
   private demanders;
 
-  getdemander(): Observable {
+  getdemander(){
     if (this.demanders) {
       return Observable.of(this.demanders);
     } else {

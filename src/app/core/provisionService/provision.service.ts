@@ -9,7 +9,7 @@ export class ProvisionService {
 
   private provisions;
 
-  getprovisions(): Observable {
+  getprovisions(){
     if (this.provisions) {
       return Observable.of(this.provisions);
     } else {
