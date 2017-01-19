@@ -4,7 +4,9 @@ import {TextAlertService} from "../../../core/textAlertService/textAlert.service
 
 @Component({
   selector: 'text-alert',
-  template: `<div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">{{message.text}}</div>`,
+  template: `
+  <div *ngIf="message" [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">{{message.text}}</div>
+  `,
   styles: [require('./textAlert.scss')]
 })
 

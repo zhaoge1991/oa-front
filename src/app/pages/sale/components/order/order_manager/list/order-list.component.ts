@@ -3,9 +3,6 @@ import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
 import {TestService} from './test.service';
-import {LocationService} from "../../../../../../core/locationService/location.services";
-import {CountryService} from "../../../../../../core/countryService/country.service";
-import {PositionService} from "../../../../../../core/positionService/position.service";
 import {TransportService} from "../../../../../../core/transportService/transport.service";
 
 
@@ -25,6 +22,11 @@ export class OrderManagerComponent{
   public selectedcolumnDefs: any[];
   public selectedrowData: any[];
   public isbatches: boolean = false;
+  private nowPage = 3;
+  private lastPage = 200500;
+  pageClick($event){
+    this.nowPage = $event.text;
+  }
 
   constructor(private router: Router,private testService: TransportService) {
     // we pass an empty gridOptions in, so we can grab the api out

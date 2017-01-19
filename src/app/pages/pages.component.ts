@@ -25,6 +25,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
       </div>
     </footer>
     <ba-back-top position="200"></ba-back-top>
+    <text-alert></text-alert>
     `
 })
 export class Pages {

@@ -3,6 +3,7 @@ import { InterceptorService } from 'ng2-interceptors';
 import { Response} from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
+
 @Injectable()
 export class TransportService {
   constructor(private http: InterceptorService){}
@@ -15,7 +16,7 @@ export class TransportService {
     } else {
       return this.http.get('/api/sale/info/transport').map(
         (response:Response)=> {
-          if (response.json()) {
+          if (response.json().status == 'success') {
             this.transports = response;
             return response;
           }

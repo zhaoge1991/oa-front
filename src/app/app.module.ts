@@ -8,8 +8,8 @@ import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularcla
 //导入拦截器服务
 import {provideInterceptorService} from 'ng2-interceptors';
 import {ServerURLInterceptor} from './ServerURLInterceptor';
+//导入核心服务
 import {CoreModule} from './core/core.module';
-
 
 /*
  * Platform and Environment providers/directives/pipes

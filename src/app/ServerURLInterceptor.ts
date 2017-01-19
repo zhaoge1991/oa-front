@@ -1,4 +1,5 @@
 import { Interceptor, InterceptedRequest, InterceptedResponse,InterceptorService  } from 'ng2-interceptors';
+//import {TextAlertService} from "./core/textAlertService/textAlert.service";
 
 /**
  * 自定义拦截器配置
@@ -6,7 +7,6 @@ import { Interceptor, InterceptedRequest, InterceptedResponse,InterceptorService
 //请求链接基地址
 const bacsUrl = 'http://192.168.1.142/crm/oa/public';
 export class ServerURLInterceptor implements Interceptor {
-
   private token;
 
   // 对请求做更改，获取请求信息或者编辑
@@ -33,9 +33,11 @@ export class ServerURLInterceptor implements Interceptor {
 
   // 对响应做更改，获取响应信息或者编辑
   public interceptAfter(response: InterceptedResponse): InterceptedResponse {
-    //console.log(response);
+
     if(response.response.status === 401){
       window.location.href = '#/login';
+    } else if(response.response.status === 404){
+      alert('请求错误')
     }
     return response;
     /*

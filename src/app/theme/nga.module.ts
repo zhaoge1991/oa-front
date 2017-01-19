@@ -29,6 +29,7 @@ import {
   Ng2Tab,
   ActionBar,
   TextAlertComponent,
+  PagesComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -78,7 +79,8 @@ const NGA_COMPONENTS = [
   BaSidebar,
   Ng2Tab,
   ActionBar,
-  TextAlertComponent
+  TextAlertComponent,
+  PagesComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -120,7 +122,7 @@ const NGA_GUARDS = [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ...NGA_PIPES,

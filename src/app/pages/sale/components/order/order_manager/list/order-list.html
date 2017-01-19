@@ -47,6 +47,7 @@
                      (rowSelected)="onRowSelected($event)"
 
         ></ag-grid-ng2>
+        <pages [nowPage]="nowPage" [lastPage]="lastPage" (pageClick)="pageClick($event)"></pages>
       </div>
     </div>
     <div class="row">
