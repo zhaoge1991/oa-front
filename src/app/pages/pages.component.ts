@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
+import {AllConfigService} from "../core/allConfig.service";
 @Component({
   selector: 'pages',
   encapsulation: ViewEncapsulation.None,
@@ -30,7 +31,34 @@ import {Component, ViewEncapsulation} from '@angular/core';
 })
 export class Pages {
 
-  constructor() {
+  constructor(private configservice: AllConfigService) {
+    //加载所有配置
+    configservice.getCurrency();
+    configservice.getCountry();
+    configservice.getLanguage();
+    configservice.getQuantifiers();
+    //configservice.getZone();
+    configservice.getMenu();
+    configservice.getDegree();
+    configservice.getDepartment();
+    configservice.getPosition();
+    configservice.getDemander();
+    configservice.getSupplier_degree();
+    configservice.getSupplier_level();
+    configservice.getSupplier_rating();
+    configservice.getSupplier_status();
+    configservice.getPayment();
+    configservice.getProvision();
+    configservice.getTransport();
+    configservice.getSource();
+    configservice.getStatus();
+    configservice.getPassword_type();
+    configservice.getOpinion_dates();
+    configservice.getOpinion_type();
+    configservice.getMonth_rankings();
+    configservice.getTask_levels();
+    configservice.getTask_statuses();
+    configservice.getTask_types();
   }
 
   ngOnInit() {

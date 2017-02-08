@@ -118,7 +118,7 @@ export class PagesComponent implements OnChanges{
       $event.target.value = this.lastPage;
     } else {$event.target.value = val;}
     let page:number = $event.target.value -0;
-    if($event.keyCode === 13){
+    if($event.keyCode === 13 && page !=0 ){
       this.pageClick.emit({text: page});
       $event.target.value = '';
     }

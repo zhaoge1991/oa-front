@@ -1,4 +1,5 @@
 import { Interceptor, InterceptedRequest, InterceptedResponse,InterceptorService  } from 'ng2-interceptors';
+import { Headers, RequestOptions } from '@angular/http';
 //import {TextAlertService} from "./core/textAlertService/textAlert.service";
 
 /**
@@ -25,7 +26,17 @@ export class ServerURLInterceptor implements Interceptor {
       request.options.url += '?access_token=' +  this.token;
     }
     if(method === 1){
+      request.options.body.access_token = this.token;
+      console.log(request);
+    }
+    if(method === 2){
+      request.options.body.access_token = this.token;
+      console.log(request);
+    }
+    if(method === 3){
 
+      request.options.body.access_token = this.token;
+      console.log(request);
     }
 
     return request;

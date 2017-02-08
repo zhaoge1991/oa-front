@@ -24,4 +24,28 @@ export class DepartmentService {
     }
   }
 
+  adddepartment(name: string){
+    return this.http.post('/api/organization/department',{name: name}).map(
+      (res: Response)=>{
+        if(res.status == 200){
+          this.departments = '';
+          this.getdepartments().subscribe();
+          return res;
+        }
+      }
+    )
+  }
+
+  delete(id: number){
+    return this.http.delete('/api/organization/department/'+id,{body:{department_id: id}}).map(
+      (res: Response)=>{
+        if(res.status == 200){
+          this.departments = '';
+          this.getdepartments().subscribe();
+          return res;
+        }
+      }
+    )
+  }
+
 }

@@ -8,10 +8,10 @@ import { InterceptorService } from 'ng2-interceptors';
 
 export class TestService{
   constructor (private http: InterceptorService) {}
-  login(username: string, password: string){
-    return this.http.get('/api/localisation/config')
+  getOrder(){
+    return this.http.get('/api/sale/table/inquiry')
       .map((response: Response) => {
-        console.log(response);
+        return response.json()
       });
   }
 }

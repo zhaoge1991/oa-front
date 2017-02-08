@@ -23,6 +23,7 @@ import {SupplierRatingService} from "./supplier_ratingService/supplier_rating.se
 import {SupplierStatusService} from "./supplier_statusServices/supplier_status.service";
 import {TransportService} from "./transportService/transport.service";
 import {ZoneService} from "./zoneService/zone.service";
+import {AllConfigService} from "./allConfig.service";
 
 @NgModule({
   providers:    [
@@ -50,7 +51,8 @@ import {ZoneService} from "./zoneService/zone.service";
     SupplierRatingService,
     SupplierStatusService,
     TransportService,
-    ZoneService
+    ZoneService,
+    AllConfigService
   ]
 })
 export class CoreModule {

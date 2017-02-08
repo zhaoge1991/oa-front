@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
 import {TestService} from './test.service';
-import {TransportService} from "../../../../../../core/transportService/transport.service";
+import {AllConfigService} from "../../../../../../core/allConfig.service";
 
 
 @Component({
@@ -28,7 +28,7 @@ export class OrderManagerComponent{
     this.nowPage = $event.text;
   }
 
-  constructor(private router: Router,private testService: TransportService) {
+  constructor(private router: Router,private testService: AllConfigService,private testnelson: TestService) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -41,18 +41,25 @@ export class OrderManagerComponent{
     //this.testService.login('adolph@sopto.com','adph123')
     //  .subscribe(data => {
     //    console.log(data)})
-    this.testService.gettransports()
-    .subscribe(data=>{console.log(data.json())})
+    let config = this.testService.getProvision();
+    console.log(config);
   }
 
   //行配置项(获取数据)
   private createRowData() {
     var rowData:any[] = [];
 
-    //this.testService.getLocation()
-    //  .subscribe(data=>{
-    //    this.rowData = data.json().results.data.inquirys.data;
-    //  })
+    this.testnelson.getOrder()
+      .subscribe(data=>{
+        console.log(data);
+        data = data.results.data.inquirys.data;
+        for(var i=0;i<data.length;i++){
+          if(data[i].currency_id){
+            data[i].currency_id = this.testService.getCurrency()[data[i].currency_id].code;
+          }
+        }
+        this.rowData = data;
+      })
   }
 
   //列配置项
@@ -107,7 +114,7 @@ export class OrderManagerComponent{
       },
       {
         headerName: '货币',
-        field: 'updated_at',
+        field: 'currency_id',
         width: 60,
         editable: true
       },
