@@ -29,7 +29,8 @@ import {
   Ng2Tab,
   ActionBar,
   TextAlertComponent,
-  PagesComponent
+  PagesComponent,
+  CalenderComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -80,7 +81,8 @@ const NGA_COMPONENTS = [
   Ng2Tab,
   ActionBar,
   TextAlertComponent,
-  PagesComponent
+  PagesComponent,
+  CalenderComponent
 ];
 
 const NGA_DIRECTIVES = [

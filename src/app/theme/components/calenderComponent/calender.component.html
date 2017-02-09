@@ -1,0 +1,27 @@
+<div class="calender">
+  <input type="text" class="calinput" placeholder="{{placeholder}}" (keydown)="disableInput($event)" (focus)="showcalender($event)" value="{{isSelected?selectedDate:''}}">
+  <div class="calcontent" *ngIf="showCalender">
+    <div class="calhead">
+      <div class="caltitle">
+        <select id="calmonth" (change)="monthChange($event)"><option *ngFor="let month of monthArr" [selected]="month.en==currentMonth?true:false" value="{{month.en}}">{{month.zn}}</option></select>
+        <select id="calyear" (change)="yearChange($event)"><option *ngFor="let year of yearArr" [selected]="year==currentYear?true:false">{{year}}</option></select>
+        <span class="close ion-android-close" (click)="closeCalender()"></span>
+      </div>
+    </div>
+    <div class="calbody">
+      <div class="caldays">
+        <div>
+          <a class="calprev ion-chevron-left" (click)="tabMonth(-1)"></a>
+          <a class="calnext ion-chevron-right" (click)="tabMonth(1)"></a>
+          <p (click)="gotoToday()" title="点击回到今天">{{currentDate}}</p>
+        </div>
+        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+      </div>
+      <div id="calweeks">
+        <div class="calweek" *ngFor="let result of results">
+          <span *ngFor="let date of result" (click)="onSelect(date.date,date.isCurMonth)" [ngClass]="{'disable': !date.isCurMonth,'highlight': date.isCurDay,'selected': date.date ==selectedIndex&&date.isCurMonth}">{{date.date}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
