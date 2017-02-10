@@ -20,6 +20,7 @@ export class CalenderComponent{
   public selectedDate
   public showCalender:boolean = false
   @Input() placeholder = '默认提示文本';
+  @Input() name
 
   public monthArr = [{zn:'一月',en:1},{zn:'二月',en:2},{zn:'三月',en:3},{zn:'四月',en:4},{zn:'五月',en:5},{zn:'六月',en:6},{zn:'七月',en:7},{zn:'八月',en:8},{zn:'九月',en:9},{zn:'十月',en:10},{zn:'十一月',en:11},{zn:'十二月',en:12}];
   public yearArr = [];

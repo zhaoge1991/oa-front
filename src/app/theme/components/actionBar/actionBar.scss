@@ -1,32 +1,39 @@
+@import '../../sass/conf/conf';
 .actionbar{
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 0;
   button{
     background: none;
-    border: none;
-    color: #fff;
+    border: 1px solid #cccccc;
+    color: $default-text;
     outline:0;
     display: inline-block;
     font-weight: normal;
-    line-height: 1.25;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
+    width: 80px;
+    padding: 0;
   }
   .available:hover{
-    color: #00AAAA;
+    background: #eeeeee;
   }
   .active{
-    color: #00AAAA;
+    background: #eeeeee;
   }
   button:disabled{
     cursor: not-allowed;
-    opacity: .65;
+    color: $disable-text;
   }
   i{
-    font-size: 25px;
+    font-size: 15px;
+    margin-right: 5px;
   }
   span{
-    display: block;
-    width: 3.5rem;
     margin-top: 3px;
   }
 }
