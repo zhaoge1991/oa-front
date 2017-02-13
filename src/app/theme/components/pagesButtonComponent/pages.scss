@@ -1,0 +1,28 @@
+@import '../../sass/conf/conf';
+.pagesbutton{
+  margin: 10px 0 20px 0;
+  .buttons{
+    button{
+      padding: 0;
+      display: inline-block;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+      border-radius: $bootstrap-panel-radius;
+      border: 1px solid $disable-text;
+      background: $input-background;
+      margin-right: 3px;
+    }
+  }
+  .info{
+    input{
+      width: 40px;
+      height: 25px;
+      border-radius: $bootstrap-panel-radius;
+      border: 1px solid $disable-text;
+      background: $input-background;
+      padding: 0 5px;
+    }
+  }
+}

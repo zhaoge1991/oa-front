@@ -49,6 +49,7 @@
 
         ></ag-grid-ng2>
         <pages [nowPage]="nowPage" [lastPage]="lastPage" (pageClick)="pageClick($event)"></pages>
+        <pages-button [pageconfig]="pageconfig" (pageClick)="pageClick($event)"></pages-button>
         <ng-calender></ng-calender>
       </div>
     </div>

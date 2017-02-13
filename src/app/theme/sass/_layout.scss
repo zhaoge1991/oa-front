@@ -18,7 +18,7 @@ html, body {
 main {
   min-height: 100%;
   position: relative;
-  font: 14px/16px $font-family;
+  font: 12px/16px $font-family;
   color: $default-text;
 
   @include body-bg();
@@ -61,7 +61,7 @@ a {
 
 .al-main {
   margin-left: $left-space;
-  padding: 50px 0 34px 0;
+  padding: 50px 0 30px 0;
   min-height: 500px;
   position: relative;
 }

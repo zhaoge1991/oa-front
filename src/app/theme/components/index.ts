@@ -16,4 +16,5 @@ export * from './ng2-tab';
 export * from './actionBar';
 export * from './textAlert';
 export * from './pagesComponent';
+export * from './pagesButtonComponent';
 export * from './calenderComponent';

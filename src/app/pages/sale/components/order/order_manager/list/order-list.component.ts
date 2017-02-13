@@ -22,10 +22,17 @@ export class OrderManagerComponent{
   public selectedcolumnDefs: any[];
   public selectedrowData: any[];
   public isbatches: boolean = false;
-  private nowPage = 3;
-  private lastPage = 200500;
+  //翻页配置
+  private pageconfig = {
+    nowPage : 3,
+    lastPage : 9999,
+    total: 68686868,
+    fromitem: 1,
+    toitem: 59
+  };
   pageClick($event){
-    this.nowPage = $event.text;
+    this.pageconfig.nowPage = $event.text;
+    console.log(this.pageconfig.nowPage);
   }
 
   constructor(private router: Router,private testService: AllConfigService,private testnelson: TestService) {

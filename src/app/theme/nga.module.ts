@@ -30,6 +30,7 @@ import {
   ActionBar,
   TextAlertComponent,
   PagesComponent,
+  PagesButtonComponent,
   CalenderComponent
 } from './components';
 
@@ -82,6 +83,7 @@ const NGA_COMPONENTS = [
   ActionBar,
   TextAlertComponent,
   PagesComponent,
+  PagesButtonComponent,
   CalenderComponent
 ];
 

@@ -5,15 +5,17 @@
   background: $card-bg;
   display: block;
   padding:0 15px;
-  font-size: 0;
+  height: 30px;
+  border-bottom: 1px solid $cozborder;
 }
 .tabs [index] {
-  display: inline-block;
+  float: left;
   font-size: 12px;
-  border: 1px solid #999;
+  border: 1px solid $cozborder;
   padding: 5px 10px;
-  border-radius: 2px 2px 0 0;
+  border-radius: $bootstrap-panel-radius $bootstrap-panel-radius 0 0;
   cursor: pointer;
+  height: 30px;
 }
 .tabs [index].selected {
   border-bottom: 1px solid transparent;
