@@ -31,7 +31,8 @@ import {
   TextAlertComponent,
   PagesComponent,
   PagesButtonComponent,
-  CalenderComponent
+  CalenderComponent,
+  MessageComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -84,7 +85,8 @@ const NGA_COMPONENTS = [
   TextAlertComponent,
   PagesComponent,
   PagesButtonComponent,
-  CalenderComponent
+  CalenderComponent,
+  MessageComponent
 ];
 
 const NGA_DIRECTIVES = [

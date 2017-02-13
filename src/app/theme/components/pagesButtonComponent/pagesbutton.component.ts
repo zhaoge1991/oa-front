@@ -6,11 +6,6 @@ import {Component, EventEmitter, Input, Output} from "@angular/core";
   styles: [require('./pages.scss')]
 })
 export class PagesButtonComponent{
-  //@Input()  nowPage: number;
-  //@Input()  lastPage: number;
-  //@Input()  total: number;
-  //@Input()  fromitem: number;
-  //@Input()  toitem: number;
   @Input()  pageconfig;
   @Output() pageClick = new EventEmitter();
 

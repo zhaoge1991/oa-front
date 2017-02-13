@@ -18,3 +18,4 @@ export * from './textAlert';
 export * from './pagesComponent';
 export * from './pagesButtonComponent';
 export * from './calenderComponent';
+export * from './messageComponent';
