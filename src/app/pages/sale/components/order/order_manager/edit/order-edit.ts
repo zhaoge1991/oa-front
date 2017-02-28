@@ -153,7 +153,7 @@ export class OrderEditComponent implements OnInit{
           provision_id: data.provision_id,
           pi: data.pi,
           order_type_id: data.order_type_id,
-          country_id: data.country_id,
+          country_id: data.customer.country_id,
           payment_id: data.payment_id,
           payment_costs: data.payment_costs,
           product_price: data.product_price,
@@ -178,7 +178,8 @@ export class OrderEditComponent implements OnInit{
         this.customerData = data.customer?data.customer:'';
         this.customer = {
           id: this.data.customer_id,
-          name: this.data.customer
+          name: this.data.customer,
+          country: this.data.country_id
         }
 
         //其他费用数据

@@ -62,7 +62,6 @@ export class NgSelectComponent implements OnInit{
   }
 
   onchange($event){
-    console.log(888,$event);
     this.valueChange.emit($event.target.value-0);
   }
 }

@@ -27,6 +27,12 @@ export class OrderManagerService{
     })
   }
 
+  deleteorder(id:number){
+    return this.http.delete('/api/sale/order/order/'+id).map(res=>{
+      return res.json();
+    })
+  }
+
   getwenjian(id:number){
     return this.http.get('/api/common/annex/download/'+id).map(res=>{
       return res;

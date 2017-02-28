@@ -20,9 +20,9 @@
                 </div>
               </div>
               <div class="ng-form-group row">
-                <label class="col-sm-4 ng-form-control-label">客户ID</label>
+                <label class="col-sm-4 ng-form-control-label">项目</label>
                 <div class="col-sm-8">
-                  <customer-select [(customer)]="customer"></customer-select>
+                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.project_id"></ng-select>
                 </div>
               </div>
               <div class="ng-form-group row">
@@ -58,15 +58,15 @@
             </div>
             <div class="col-md-4 col-xs-12">
               <div class="ng-form-group row">
-                <label for="pi" class="col-sm-4 ng-form-control-label">PI编号</label>
+                <label class="col-sm-4 ng-form-control-label">客户ID</label>
                 <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="pi" [(ngModel)]="data.pi" name="pi">
+                  <customer-select [(customer)]="customer"></customer-select>
                 </div>
               </div>
               <div class="ng-form-group row">
                 <label class="col-sm-4 ng-form-control-label">国家</label>
                 <div class="col-sm-8">
-                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="data.country_id"></ng-select>
+                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="customer.country"></ng-select>
                 </div>
               </div>
               <div class="ng-form-group row">
@@ -102,9 +102,9 @@
                 </div>
               </div>
               <div class="ng-form-group row">
-                <label class="col-sm-4 ng-form-control-label">项目</label>
+                <label for="pi" class="col-sm-4 ng-form-control-label">PI编号</label>
                 <div class="col-sm-8">
-                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.project_id"></ng-select>
+                  <input type="text" class="ng-form-control" id="pi" [(ngModel)]="data.pi" name="pi">
                 </div>
               </div>
               <div class="ng-form-group row">

@@ -45,7 +45,8 @@
     </button>
     <div class="btnmore" aria-labelledby="export-more">
       <ul>
-        <li><button class="available">test</button></li>
+        <li><button class="available" (click)="checkoutExcel()">导出Excel</button></li>
+        <li><button class="available" (click)="checkoutPdf()">导出PDF</button></li>
       </ul>
     </div>
   </div>
@@ -78,17 +79,34 @@
         </button>
         <h4 class="modal-title">{{dialogtext.text}}弹窗</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!(dialogtext.operat=='procurementcheckEmit')">
         确定“{{dialogtext.text}}”吗？
+      </div>
+      <div class="modal-bidy inputdialog" *ngIf="dialogtext.operat=='procurementcheckEmit'">
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">测试结果</label>
+          <div class="col-sm-8">
+            <input type="text" class="ng-form-control"  [(ngModel)]="dialogtext.data.result" name="result">
+          </div>
+        </div>
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">测试详情</label>
+          <div class="col-sm-8">
+            <textarea type="text" class="ng-form-control"  [(ngModel)]="dialogtext.data.description" name="description"></textarea>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button *ngIf="dialogtext.operat=='supauditEmit'" class="btn btn-primary confirm-btn" (click)="supauditEmit(true)">是</button>
         <button *ngIf="dialogtext.operat=='financeauditEmit'" class="btn btn-primary confirm-btn" (click)="financeauditEmit(true)">是</button>
         <button *ngIf="dialogtext.operat=='procurementauditEmit'" class="btn btn-primary confirm-btn" (click)="procurementauditEmit(true)">是</button>
         <button *ngIf="dialogtext.operat=='toshipmentEmit'" class="btn btn-primary confirm-btn" (click)="toshipmentEmit(true)">是</button>
-        <button *ngIf="dialogtext.operat=='cusreciveEmit'" class="btn btn-primary confirm-btn" (click)="toshipmentEmit(true)">是</button>
-        <button *ngIf="dialogtext.operat=='cusreciveEmit'" class="btn btn-primary confirm-btn" (click)="toshipmentEmit(true)">是</button>
-        <button class="btn btn-primary confirm-btn" (click)="textdialog.hide()">否</button>
+        <button *ngIf="dialogtext.operat=='cusreciveEmit'" class="btn btn-primary confirm-btn" (click)="cusreciveEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='isdoneEmit'" class="btn btn-primary confirm-btn" (click)="isdoneEmit(true)">是</button>
+        <button *ngIf="!(dialogtext.operat=='procurementcheckEmit')" class="btn btn-primary confirm-btn" (click)="textdialog.hide()">否</button>
+        <!--输入框弹窗-->
+        <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" [disabled]="!(dialogtext.data.result&&dialogtext.data.description)" (click)="procurementcheckEmit()">提交</button>
+        <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" (click)="textdialog.hide()">取消</button>
       </div>
     </div>
   </div>

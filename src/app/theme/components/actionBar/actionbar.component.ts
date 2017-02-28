@@ -49,12 +49,14 @@ export class ActionBar{
   @Output() cusreciveClick = new EventEmitter();
   @Output() procurementcheckClick = new EventEmitter();
   @Output() isdoneClick = new EventEmitter();
+  @Output() checkoutExcelClick = new EventEmitter();
+  @Output() checkoutPdfClick = new EventEmitter();
 
   constructor(private router:Router,private location:Location){}
 
   private actionshow: boolean = false;
   private exportshow: boolean = false;
-  private dialogtext: {text:string,operat: any} = {text:'请主管审核',
+  private dialogtext: {text:string,operat: any,data?:{}} = {text:'请主管审核',
     operat: ''};
 
   //打开按钮操作
@@ -165,7 +167,19 @@ export class ActionBar{
 
   //请采购核销
   procurementcheckclick(){
-    this.procurementcheckClick.emit();
+    this.dialogtext = {
+      text:'请采购核销',
+      operat: 'procurementcheckEmit',
+      data: {
+        result: null,
+        description: null
+      }
+    };
+    this.textModal.show();
+  }
+  procurementcheckEmit(){
+    this.procurementcheckClick.emit(this.dialogtext.data);
+    this.textModal.hide();
   }
 
   //已完成
@@ -182,5 +196,10 @@ export class ActionBar{
   }
 
   //导出按钮
-
+  checkoutExcel(){
+    this.checkoutExcelClick.emit();
+  }
+  checkoutPdf(){
+    this.checkoutPdfClick.emit();
+  }
 }

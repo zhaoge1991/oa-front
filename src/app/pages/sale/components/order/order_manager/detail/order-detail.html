@@ -1,12 +1,12 @@
 <div *ngIf="data">
   <div class="row">
-    <action-bar [actionsData]="data" [actionConfig]="actionConfig"></action-bar>
+    <action-bar [actionsData]="data" [actionConfig]="actionConfig" [operat]="operat"></action-bar>
   </div>
   <div class="row">
     <ba-card baCardClass="with-scroll">
       <div class="detailcontent" [ngSwitch]="ordertype">
         <div *ngSwitchCase= 0 >
-          <div class="opendetail">
+          <div class="opendetail" (click)="doOperat()">
             <h1 class="title" *ngIf="data.project_id">{{data.project_id | projectpipe}}有限公司</h1>
             <table>
               <caption>免费样品申请单 <span>编号: <em class="orderid">{{data.order_no}}</em></span></caption>
@@ -76,7 +76,7 @@
           </div>
         </div>
         <div *ngSwitchDefault>
-          <div class="opendetail">
+          <div class="opendetail" (click)="doOperat()">
             <h1 class="title" *ngIf="data.project_id">{{data.project_id | projectpipe}}有限公司</h1>
             <table>
               <caption>订单 <span>编号: <em class="orderid">{{data.order_no}}</em></span></caption>

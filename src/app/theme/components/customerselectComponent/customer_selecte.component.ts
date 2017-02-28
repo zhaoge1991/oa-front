@@ -184,7 +184,8 @@ export class CustomerSelectComponent implements OnInit{
     if($event.node.selected){
       this.select_customer = {
         id: $event.node.data.customer_id,
-        name: $event.node.data.firstname
+        name: $event.node.data.firstname,
+        country: $event.node.data.country_id
       }
       this.isselected = true;
     }

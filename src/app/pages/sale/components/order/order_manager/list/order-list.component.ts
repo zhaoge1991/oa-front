@@ -10,6 +10,7 @@ import {PaymentService} from "../../../../../../core/paymentService/payment.serv
 import {QuantifierService} from "../../../../../../core/quantifierService/quantifier.service";
 import {AppconfigService} from "../../../../../../core/appConfigService/appConfigService";
 import {ActionBar} from "../../../../../../theme/components/actionBar/actionBar.component";
+import {MessageService} from "../../../../../../core/messageComponent.service";
 
 
 @Component({
@@ -70,7 +71,8 @@ export class OrderManagerComponent{
     private payment: PaymentService,
     private currency: CurrencyService,
     private quantifier: QuantifierService,
-    private appconfig: AppconfigService
+    private appconfig: AppconfigService,
+    private message: MessageService
   ) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
@@ -461,7 +463,20 @@ export class OrderManagerComponent{
   }
   //删除操作
   deleteData(){
-    console.log(this.configservice.getAppconfig())
-    console.log('删除')
+    let r = confirm('确认删除？')
+    if(r){
+      this.listservice.deleteorder(this.selectedrowData.order_id).subscribe(data=>{
+        if(data.error){
+          this.message.putMessage({
+            severity: 'error',
+            summary: data.error,
+            detail: data.error_description
+          })
+        }
+      })
+      this.selectedrowData = null;
+      console.log('shanchu');
+      this.createRowData(1);
+    }
   }
 }
