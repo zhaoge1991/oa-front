@@ -19,3 +19,8 @@ export * from './pagesComponent';
 export * from './pagesButtonComponent';
 export * from './calenderComponent';
 export * from './messageComponent';
+export * from './scheduleComponent';
+export * from './ng-select';
+export * from './customerselectComponent';
+export * from './productselectComponent';
+export * from './ng2-search';

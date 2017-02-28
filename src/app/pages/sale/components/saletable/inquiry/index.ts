@@ -1,1 +1,1 @@
-export * from './inquiry.component';
+export * from './inquiry.component.ts';

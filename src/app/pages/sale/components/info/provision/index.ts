@@ -1,1 +1,1 @@
-export * from './provision.component';
+export * from './provision.component.ts';

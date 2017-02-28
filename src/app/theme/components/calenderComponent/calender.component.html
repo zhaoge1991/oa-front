@@ -1,5 +1,5 @@
 <div class="calender">
-  <input type="text" class="calinput" placeholder="{{placeholder}}" (keydown)="disableInput($event)" (focus)="showcalender($event)" value="{{isSelected?selectedDate:''}}">
+  <input type="text" class="calinput ng-form-control" placeholder="{{placeholder}}" (keydown)="disableInput($event)" (focus)="showcalender($event)" value="{{isSelected?selectedDate:''}}">
   <div class="calcontent" *ngIf="showCalender">
     <div class="calhead">
       <div class="caltitle">

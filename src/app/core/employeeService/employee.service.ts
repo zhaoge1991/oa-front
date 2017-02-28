@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class EmployeeService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private employees;
-
-  getemployees(){
-    if (this.employees) {
-      return Observable.of(this.employees);
-    } else {
-      return this.http.get('/api/organization/employee').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.employees = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Employee','employee_id','getCurrency')
   }
 
 }

@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class DegreeService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private degrees;
-
-  getdegrees(){
-    if (this.degrees) {
-      return Observable.of(this.degrees);
-    } else {
-      return this.http.get('/api/organization/degree').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.degrees = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Degree','degree_id','getDegree')
   }
 
 }

@@ -1,146 +1,272 @@
 <div class="row">
-  <ba-card>
-    <action-bar >
-      <div class="actionbar">
-        <button type="button"  class="available">
-          <i class="ion-android-folder-open"></i><span>打开</span>
-        </button>
-        <button type="button"  disabled>
-          <i class="ion-plus-circled"></i><span>新建</span>
-        </button>
-        <button type="button"  class="available" (click)="editClick($event)">
-          <i class="ion-compose"></i><span>编辑</span>
-        </button>
-        <button type="button"  class="available" [ngClass]="{'active':isbatches}" (click)="batchesClick($event)">
-          <i class="ion-clipboard"></i><span>批处理</span>
-        </button>
-        <button type="button"  disabled>
-          <i class="ion-settings"></i><span>操作</span>
-        </button>
-        <button type="button"  class="available">
-          <i class="ion-document-text"></i><span>附件</span>
-        </button>
-        <button type="button"  class="available" (click)="goback($event)">
-          <i class="ion-android-arrow-back"></i><span>返回</span>
-        </button>
-      </div>
-    </action-bar>
-  </ba-card>
+  <action-bar
+    [actionsData]="data"
+    [actionConfig]="actionConfig"
+    [operat]="operat"
+  ></action-bar>
 </div>
 
-
-  <div class="row">
-    <ba-card title="编辑订单" baCardClass="with-scroll">
-      <form class="form-horizontal">
-        <div class="row">
-          <div class="col-md-4 col-xs-12">
-            <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-4 form-control-label">订单编号</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="编号" [(ngModel)]="data.num" name="num">
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="num" class="col-sm-4 ng-form-control-label">订单编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="num"  [(ngModel)]="data.order_no" name="num" disabled>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">客户ID</label>
+                <div class="col-sm-8">
+                  <customer-select [(customer)]="customer"></customer-select>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label for="onlineorder" class="col-sm-4 ng-form-control-label">网上订单号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="data.online_order" name="onlineorder">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">货币</label>
+                <div class="col-sm-8">
+                  <ng-select id="curren" [selectfor]="'currency_id'" [showname]="'code'" [(value)]="data.currency_id"></ng-select>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label for="ordercost" class="col-sm-4 ng-form-control-label">其他费用金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="ordercost"  [(ngModel)]="ordercostAll" name="ordercost" disabled>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">价格条款</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'provision_id'" [showname]="'name'" [(value)]="data.provision_id"></ng-select>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">订单类型</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [(value)]="data.order_type_id"></ng-select>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">客户id</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="ID" [(ngModel)]="data.id" name="id">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="pi" class="col-sm-4 ng-form-control-label">PI编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="pi" [(ngModel)]="data.pi" name="pi">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">国家</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="data.country_id"></ng-select>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">支付方式</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'payment_id'" [showname]="'name'" [(value)]="data.payment_id"></ng-select>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label for="payment_costs" class="col-sm-4 ng-form-control-label">手续费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="payment_costs"  [(ngModel)]="data.payment_costs" name="payment_costs">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label for="product_price" class="col-sm-4 ng-form-control-label">商品总金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="product_price" [(ngModel)]="data.product_price" name="product_price" disabled>
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">订单来源</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'order_source_id'" [showname]="'name'" [(value)]="data.order_source_id"></ng-select>
+                </div>
               </div>
             </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">网上订单号</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号" [(ngModel)]="data.state" name="state">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-4 ng-form-control-label">期望发货时间</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.expected_delivery" [placeholder]="'请选择时间'"></ng-calender>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">其他费用</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword5" placeholder="其他" [(ngModel)]="data.pi" name="pi">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">项目</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.project_id"></ng-select>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">价格条款</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword6" placeholder="条款" [(ngModel)]="data.usname" name="usname">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">运输方式</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'transport_id'" [showname]="'name'" [(value)]="data.transport_id"></ng-select>
+                </div>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-4 form-control-label">PI编号</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="编号" [(ngModel)]="data.usid" name="usid">
+              <div class="ng-form-group row">
+                <label for="transport_fee" class="col-sm-4 ng-form-control-label">运费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="transport_fee" [(ngModel)]="data.transport_fee" name="transport_fee">
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">国家</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="ID" [(ngModel)]="data.addname" name="addname">
+              <div class="ng-form-group row">
+                <label for="total_price" class="col-sm-4 ng-form-control-label">订单总金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="total_price" [(ngModel)]="data.total_price" name="total_price" disabled>
+                </div>
               </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">支付方式</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号" [(ngModel)]="data.pay" name="pay">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">商品总金额</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword5" placeholder="其他" [(ngModel)]="data.money" name="money">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">订单来源</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword6" placeholder="条款" [(ngModel)]="data.ormoney" name="ormoney">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-4 form-control-label">期望发货时间</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputEmail3" placeholder="编号">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">项目</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="ID">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">运输方式</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword4" placeholder="订单号">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">订单总金额</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword5" placeholder="其他">
-              </div>
-            </div>
-            <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-4 form-control-label">订单状态</label>
-              <div class="col-sm-8">
-                <input type="text" class="form-control" id="inputPassword6" placeholder="条款">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-xs-12">
-            <div class="form-group row">
-              <label for="textarea01" class="col-sm-4 form-control-label">备注</label>
-              <div class="col-sm-8">
-                <textarea class="form-control" id="textarea01" placeholder="备注信息"></textarea>
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">订单状态</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'order_status_id'" [showname]="'name'" [(value)]="data.order_status_id"></ng-select>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </form>
-      <div class="clearfix"></div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="complaint" class="col-sm-1 ng-form-control-label">客诉</label>
+                <div class="col-sm-11">
+                  <textarea class="ng-form-control" id="complaint" [(ngModel)]="data.complaint" name="complaint"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="demand" class="col-sm-1 ng-form-control-label">订单要求</label>
+                <div class="col-sm-11">
+                  <textarea class="ng-form-control" id="demand" [(ngModel)]="data.demand" name="demand"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="actual_payment" class="col-sm-4 ng-form-control-label">财务已收款</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="actual_payment"  [(ngModel)]="data.actual_payment" name="actual_payment" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="actual_bank_fee" class="col-sm-4 ng-form-control-label">银行手续费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="actual_bank_fee"  [(ngModel)]="data.actual_bank_fee" name="actual_bank_fee" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="money_receipt" class="col-sm-4 ng-form-control-label">欠尾款</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="money_receipt"  [(ngModel)]="data.money_receipt" name="money_receipt" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </ba-card>
+    <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="data">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">商品清单</div>
+          <div index="ordercost">其他费用</div>
+          <div index="customer">客户信息</div>
+          <div index="payment">付款方式</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <ag-grid-ng2  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                          (rowSelected)="onRowSelected($event)"
+                         [columnDefs]="selectedcolumnDefs"
+                         [rowData]="data.product"
+                         [gridOptions]="gridOptions"
+                         enableColResize
+                         enableSorting
+                         enableFilter
+                         groupHeaders
+
+                         rowHeight="22"
+                         rowSelection="multiple"
+            ></ag-grid-ng2>
+            <button (click)="addpbtn()">添加</button>
+            <button (click)="deletepro()" [disabled]="!isproselected">删除</button>
+            <product-select (productChange)="addproduct($event)"></product-select>
+          </div>
+          <div contents="ordercost">
+            <ag-grid-ng2  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="ordercostCol"
+                          [rowData]="ordercostData"
+            >加载其他费用清单</ag-grid-ng2>
+          </div>
+          <div contents="customer">
+            <table *ngIf="customerData">
+              <tr>
+                <th>姓名</th><td>{{customerData?.firstname}}</td>
+                <th>email</th><td>{{customerData?.email}}</td>
+                <th>客户电话</th><td>{{customerData?.telephone}}</td>
+              </tr>
+              <tr>
+                <th>国家</th><td>{{customerData?.country_id | countrypipe}}</td>
+                <th>客户地址</th><td>{{customerData?.address}}</td>
+                <th>客户类型</th><td>{{customerData?.kh_leixing}}</td>
+              </tr>
+              <tr>
+                <th>项目</th><td>{{customerData?.project_id | projectpipe}}</td>
+                <th>公司名称</th><td>{{customerData?.field_company}}</td>
+                <th>公司网站</th><td>{{customerData?.field_company_site}}</td>
+              </tr>
+              <tr>
+                <th>拥有人</th><td>{{customerData?.users | userspipe}}</td>
+                <th>询盘时间</th><td>{{customerData?.date_added}}</td>
+                <th>询盘方式</th><td>{{customerData?.kh_xunpan}}</td>
+              </tr>
+              <tr>
+                <th>客户状态</th><td>{{customerData?.kh_zhuangtai}}</td>
+                <th>原因备注</th><td>{{customerData?.kh_beizhu}}</td>
+                <th>流失原因</th><td>{{customerData?.kh_liushi}}</td>
+              </tr>
+              <tr>
+                <th>其他信息</th><td colspan="5"></td>
+              </tr>
+            </table>
+          </div>
+          <div contents="payment">
+            <table *ngIf="orderpaymentData">
+              <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>说明</th><td>{{orderpaymentData?.content}}</td></tr>
+              <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
+              <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
+            </table>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
   </div>
+  </form>
+</div>
+
 
 

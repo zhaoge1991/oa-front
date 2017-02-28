@@ -23,7 +23,11 @@ export class ServerURLInterceptor implements Interceptor {
     let method = request.options.method;
 
     if(method === 0){
-      request.options.url += '?access_token=' +  this.token;
+      if(request.options.url.indexOf('?')>0){
+        request.options.url += '&access_token=' +  this.token;
+      } else {
+        request.options.url += '?access_token=' +  this.token;
+      }
     }
     if(method === 1){
       request.options.body.access_token = this.token;

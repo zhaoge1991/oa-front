@@ -8,7 +8,7 @@ import {
 @Component({
   selector: 'ng2-tab',
   encapsulation: ViewEncapsulation.None,
-  template: `<ng-content></ng-content>`,
+  template: require('./ng2-tab.component.html'),
   styles: [require('./ng2-tab.scss')],
 })
 export class Ng2Tab {
@@ -17,6 +17,7 @@ export class Ng2Tab {
   selectedIndexClass: string = 'selected';
   @Input('selected-contents-class')
   selectedContentsClass: string = 'selected';
+  @Input() tabconfig: any[];
 
   el: HTMLElement;
   indexEls:  HTMLElement[];

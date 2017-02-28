@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class ZoneService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private zones;
-
-  getzones(){
-    if (this.zones) {
-      return Observable.of(this.zones);
-    } else {
-      return this.http.get('/api/localisation/zone').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.zones = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id: number){
+    return this.getservice.get(id,'Zone','zone_id','getZone')
   }
 
 }

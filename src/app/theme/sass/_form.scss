@@ -1,3 +1,13 @@
+.form-content{
+  max-width: 1000px;
+  height: 560px;
+  padding-top: 30px;
+}
+.form-unite{
+  border-bottom: 1px solid $input-border;
+  margin: 0 15px 15px 15px;
+  padding-bottom: 5px;
+}
 .label {
   border-radius: 0;
 }
@@ -24,32 +34,34 @@
 
 .form-horizontal {
   label {
-    line-height: 34px;
+    line-height: 25px;
     margin-bottom: 0;
     padding-top: 0 !important;
   }
 }
 
-.form-group {
+.ng-form-group {
+  margin-bottom: 10px;
   label {
-    margin-bottom: 5px;
+    margin-bottom: 0;
     color: $content-text;
-    font-weight: $font-normal;
-    font-size: 13px;
+    font-weight: $font-bold;
+    font-size: 12px;
   }
 }
 
-.form-control {
+.ng-form-control {
   color: $content-text;
   @include placeholderStyle($content-text, 0.7);
   border: 1px solid $input-border;
-  border-radius: 5px;
+  border-radius: 0;
   background-color: $input-background;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 12px;
   padding: 0 5px;
-  height: 30px;
-  line-height: 30px;
+  height: 25px;
+  line-height: 25px;
+  outline: none;
   &:focus {
     color: $content-text;
     box-shadow: none;
@@ -58,24 +70,30 @@
   }
 }
 
-select.form-control {
+input.ng-form-control{
+  width: 100%;
+}
+select.ng-form-control {
+  width: 100%;
   padding-left: 8px;
+  height: 25px;
 }
 
-select.form-control:not([multiple]) option {
+select.ng-form-control:not([multiple]) option {
   color: $dropdown-text;
 }
 
-select.form-control[multiple] option {
+select.ng-form-control[multiple] option {
   color: $default-text;
 }
 
-textarea.form-control {
-  height: 96px;
+textarea.ng-form-control {
+  height: 60px;
+  width: 100%;
 }
 
 .form-inline {
-  .form-group {
+  .ng-form-group {
     input {
       width: 100%;
     }
@@ -323,7 +341,7 @@ label.custom-input-danger {
   .control-label {
     color: $content-text;
   }
-  .form-control {
+  .ng-form-control {
     border: 1px solid $color;
     &:focus {
       box-shadow: none;
@@ -343,7 +361,7 @@ label.custom-input-danger {
       }
     }
   }
-  .form-control-feedback {
+  .ng-form-control-feedback {
     color: $color;
   }
   .input-group-addon {
@@ -356,7 +374,7 @@ label.custom-input-danger {
   line-height: inherit;
 }
 
-.form-control-feedback {
+.ng-form-control-feedback {
   position: absolute;
   top: 0;
   right: 0;
@@ -370,10 +388,10 @@ label.custom-input-danger {
 }
 
 .has-feedback {
-  .form-control {
+  .ng-form-control {
     padding-right: 42.5px;
   }
-  label ~ .form-control-feedback {
+  label ~ .ng-form-control-feedback {
     top: 19px;
     font-size: 18px;
   }
@@ -387,14 +405,14 @@ label.custom-input-danger {
   }
 }
 
-.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-  background-color: $input-background;
-  color: $disabled;
+.ng-form-control[disabled], .ng-form-control[readonly], fieldset[disabled] .ng-form-control {
+  background-color: $disabled-bg;
   border-color: $disabled-bg;
+  cursor: not-allowed;
   @include placeholderStyle($default-text, 0.5);
 }
 
-.form-control-rounded {
+.ng-form-control-rounded {
   border-radius: 16px;
 }
 
@@ -474,7 +492,7 @@ label.custom-input-danger {
     }
   }
   &.with-search.open .btn-default + .dropdown-menu {
-    .bs-searchbox .form-control {
+    .bs-searchbox .ng-form-control {
       background-color: $default;
       border: 1px solid $input-border;
     }
@@ -512,7 +530,7 @@ label.custom-input-danger {
   font-size: 14px;
   line-height: 26px;
   width: 100%;
-  &.form-control {
+  &.ng-form-control {
     display: block;
     width: 100%;
   }

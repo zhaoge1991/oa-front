@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class QuantifierService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private quantifiers;
-
-  getquantifiers(){
-    if (this.quantifiers) {
-      return Observable.of(this.quantifiers);
-    } else {
-      return this.http.get('/api/localisation/quantifier').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.quantifiers = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Quantifier','quantifier_id','getQuantifiers')
   }
 
 }

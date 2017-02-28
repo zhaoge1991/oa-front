@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class CurrencyService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private currences;
-
-  getcurrences(){
-    if (this.currences) {
-      return Observable.of(this.currences);
-    } else {
-      return this.http.get('/api/localisation/currency').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.currences = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Currency','currency_id','getCurrency')
   }
 
 }

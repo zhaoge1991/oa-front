@@ -3,6 +3,25 @@
   border-top: 1px solid #cccccc;
   border-bottom: 1px solid #eeeeee;
   font-size: 0;
+  .btnitem{
+    position: relative;
+    display: inline-block;
+  }
+  .btnmore{
+    position: absolute;
+    top: 32px;
+    z-index: 9;
+    display: none;
+    ul{
+      padding: 0;
+      background: #ffffff;
+    }
+  }
+  .open{
+    .btnmore{
+      display: block;
+    }
+  }
   button{
     background: none;
     border: 1px solid #cccccc;
@@ -37,3 +56,39 @@
     margin-top: 3px;
   }
 }
+
+//弹窗部分样式修改
+@import "../../../theme/sass/conf/conf";
+
+.modal {
+  padding-top: 300px;
+
+  .modal-content {
+    border-radius: 0;
+    color: $dropdown-text;
+    .modal-header {
+      padding: 10px 15px;
+    }
+
+    .modal-footer {
+      border: none;
+      button{
+        margin-right: 20px;
+      }
+    }
+
+    .close {
+      outline: none;
+    }
+
+    .modal-title{
+      font-size: 16px;
+    }
+    .modal-body{
+      font-size: 16px;
+    }
+  }
+}
+
+
+

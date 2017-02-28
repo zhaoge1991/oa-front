@@ -1,4 +1,4 @@
-<div class="pagesbutton">
+<div class="pagesbutton" *ngIf="pageconfig">
   <span class="buttons">
     <button (click)="turnpage('first')" [disabled]="pageconfig.nowPage==1"><span class="iconfont icon-fanyezuo"></span></button>
     <button (click)="turnpage(-1)" [disabled]="pageconfig.nowPage==1"><span class="iconfont icon-jiantou-copy-copy"></span></button>

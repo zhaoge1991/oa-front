@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class DemanderService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private demanders;
-
-  getdemander(){
-    if (this.demanders) {
-      return Observable.of(this.demanders);
-    } else {
-      return this.http.get('/api/procurement/demander').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.demanders = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Demander','procurement_demander_id','getDemander')
   }
 
 }

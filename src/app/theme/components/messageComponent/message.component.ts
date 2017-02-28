@@ -1,18 +1,18 @@
-import {Component,Input} from '@angular/core';
+import {Component,Input,trigger,state,style,transition,animate} from '@angular/core';
 import {MessageService} from "./../../../core/messageComponent.service.ts";
 
 @Component({
   selector: 'ng-message',
   template: `
   <div *ngIf="hasMessages()" class="mess-content">
-      <div *ngFor="let msg of value" class="ui-messages ui-widget ui-corner-all" style="display:block"
+      <div *ngFor="let msg of value" class="ui-messages ui-widget ui-corner-all" style="display:block" [@flyInOut]
                   [ngClass]="{'ui-messages-info':(msg.severity === 'info'),
                   'ui-messages-warn':(msg.severity === 'warn'),
                   'ui-messages-error':(msg.severity === 'error'),
                   'ui-messages-success':(msg.severity === 'success')}">
-          <a href="#" class="ui-messages-close" (click)="clear(msg)" *ngIf="closable">
+          <span class="ui-messages-close" (click)="clear(msg)" *ngIf="closable">
               <i class="fa fa-close"></i>
-          </a>
+          </span>
           <span class="{{'ui-messages-icon fa fa-fw fa-2x '+icon(msg)}}"></span>
           <div class="ui-growl-message">
               <div>
@@ -23,7 +23,19 @@ import {MessageService} from "./../../../core/messageComponent.service.ts";
       </div>
   </div>
   `,
-  styles: [require('./message.component.scss')]
+  styles: [require('./message.component.scss')],
+  animations: [
+    trigger('flyInOut',[
+      state('in', style({opacity: 1})),
+      transition('void => *', [
+        style({opacity: 0}),
+        animate(200)
+      ]),
+      transition('* => void', [
+        animate(200, style({opacity: 0}))
+      ])
+    ])
+  ]
 })
 
 export class MessageComponent {
@@ -31,9 +43,11 @@ export class MessageComponent {
   @Input() closable: boolean = true;
 
   constructor(private meService: MessageService){
-    this.meService.message$.subscribe(data=>{
-      for(let i=0;i<data.length;i++){
-        this.value.push(data[i]);
+    this.meService.message$.subscribe((data:any)=>{
+      this.value.push(data);
+      //定时清除消息
+      if(data.life){
+        setTimeout(()=>this.clear(data),data.life);
       }
       this.hasMessages();
     })
@@ -49,7 +63,6 @@ export class MessageComponent {
         this.value.splice(i,1);
       }
     }
-    event.preventDefault();
   }
 
   icon(msg): string {

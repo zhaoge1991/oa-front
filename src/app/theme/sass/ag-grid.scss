@@ -1,3 +1,4 @@
+@import 'conf/conf';
 ag-grid-ng2 {
   display: inline-block;
 }
@@ -20,6 +21,7 @@ ag-grid-ng2 {
   overflow: hidden;
 }
 .ag-font-style {
+  font-size: 12px;
   cursor: default;
 /* disable user mouse selection */
   -webkit-user-select: none;
@@ -425,6 +427,7 @@ ag-grid-ng2 {
   text-overflow: ellipsis;
   overflow: hidden;
   position: absolute;
+  padding: 2px 10px;
 }
 .ag-fade-out {
   opacity: 1;
@@ -675,5 +678,21 @@ ag-grid-ng2 {
   to {
     padding-left: 2px;
     padding-right: 6px;
+  }
+}
+
+.tab-contents table{
+  height: 100%;
+  border: 1px solid $cozborder;
+  tr{
+    line-height: 25px;
+  }
+  th{
+    font-weight: bold;
+    background: $border;
+  }
+  td,th{
+    border: 1px solid $cozborder;
+    padding: 0 10px;
   }
 }

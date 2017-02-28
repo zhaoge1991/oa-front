@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class PositionService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private positions;
-
-  getpositions(){
-    if (this.positions) {
-      return Observable.of(this.positions);
-    } else {
-      return this.http.get('/api/organization/position').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.positions = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'Position','position_id','getPosition')
   }
 
 }

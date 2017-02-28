@@ -1,27 +1,13 @@
 import {Injectable} from '@angular/core';
 import { InterceptorService } from 'ng2-interceptors';
-import { Response} from '@angular/http';
-import { Observable }     from 'rxjs/Observable';
+import {GetService} from "../../common/function/getfunction";
 
 @Injectable()
 export class SupplierLevelService {
-  constructor(private http: InterceptorService){}
+  constructor(private http: InterceptorService,private getservice: GetService){}
 
-  private supplier_levels;
-
-  getsupplier_levels(){
-    if (this.supplier_levels) {
-      return Observable.of(this.supplier_levels);
-    } else {
-      return this.http.get('/api/localisation/language').map(
-        (response:Response)=> {
-          if (response.json()) {
-            this.supplier_levels = response;
-            return response;
-          }
-        }
-      )
-    }
+  get(id?: number){
+    return this.getservice.get(id,'SupplierLevel','supplier_level_id','getSupplier_level')
   }
 
 }

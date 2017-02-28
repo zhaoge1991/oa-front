@@ -2,6 +2,9 @@ import { NgModule, ModuleWithProviders }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {AgGridModule} from 'ag-grid-ng2/main';
+import {TreeModule} from "angular2-tree-component/dist/angular2-tree-component";
+import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import {
   BaThemeConfig
@@ -32,7 +35,12 @@ import {
   PagesComponent,
   PagesButtonComponent,
   CalenderComponent,
-  MessageComponent
+  MessageComponent,
+  ScheduleComponent,
+  NgSelectComponent,
+  CustomerSelectComponent,
+  ProductSelectComponent,
+  SearchComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -46,7 +54,14 @@ import {
 import {
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
+  CountryPipe,
+  ProjectPipe,
+  UsersPipe,
+  PaymentPipe,
+  CurrencyPipe,
+  OrderStatusPipe,
+  TransportPipe
 } from './pipes';
 
 import {
@@ -64,6 +79,7 @@ import {
 import {
   AuthGuard
 } from './guards'
+
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -86,7 +102,12 @@ const NGA_COMPONENTS = [
   PagesComponent,
   PagesButtonComponent,
   CalenderComponent,
-  MessageComponent
+  MessageComponent,
+  ScheduleComponent,
+  NgSelectComponent,
+  CustomerSelectComponent,
+  ProductSelectComponent,
+  SearchComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -99,7 +120,14 @@ const NGA_DIRECTIVES = [
 const NGA_PIPES = [
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
+  CountryPipe,
+  ProjectPipe,
+  UsersPipe,
+  PaymentPipe,
+  CurrencyPipe,
+  OrderStatusPipe,
+  TransportPipe
 ];
 
 const NGA_SERVICES = [
@@ -128,7 +156,10 @@ const NGA_GUARDS = [
     CommonModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    AgGridModule,
+    TreeModule,
+    ReactiveFormsModule,
+    DropdownModule, ModalModule
   ],
   exports: [
     ...NGA_PIPES,
