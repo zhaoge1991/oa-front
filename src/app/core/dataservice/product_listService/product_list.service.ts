@@ -13,7 +13,7 @@ export class ProductListService{
         }
       })
     } else if(catalog){
-      return this.http.get('/api/product/products'+'?filter_name='+catalog+'&page='+page).map(data=>{
+      return this.http.get('/api/product/products'+'?catalog_id='+catalog+'&page='+page).map(data=>{
         if(data.json()){
           return data.json().results.data.products
         }

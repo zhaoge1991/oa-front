@@ -139,9 +139,9 @@ export class ProductSelectComponent implements OnInit{
   //选择分类
   private catalog: number;
   onchanged($event){
-    this.searchtext = '';
+    this.searchtext = null;
     this.catalog = $event.node.data.id;
-    this.init(this.searchtext,$event.text,this.catalog);
+    this.init(this.searchtext,1,this.catalog);
   }
 
   //翻页
@@ -173,7 +173,7 @@ export class ProductSelectComponent implements OnInit{
       model: this.selecteddata.model,
       zh_name: this.getproname('localisation.language.chinese'),
       en_name: this.getproname('localisation.language.english'),
-      quantifier_id: null,
+      quantifier_id: 1,
       quantity: 1,
       price: this.selecteddata.price,
       quote_price: 0,
