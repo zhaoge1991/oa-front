@@ -466,6 +466,7 @@ export class OrderManagerComponent{
     let r = confirm('确认删除？')
     if(r){
       this.listservice.deleteorder(this.selectedrowData.order_id).subscribe(data=>{
+        console.log(565656,data);
         if(data.error){
           this.message.putMessage({
             severity: 'error',
@@ -473,10 +474,11 @@ export class OrderManagerComponent{
             detail: data.error_description
           })
         }
+        this.selectedrowData = null;
+        console.log('shanchu');
+        this.createRowData(1);
       })
-      this.selectedrowData = null;
-      console.log('shanchu');
-      this.createRowData(1);
+
     }
   }
 }

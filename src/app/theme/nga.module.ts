@@ -40,7 +40,8 @@ import {
   NgSelectComponent,
   CustomerSelectComponent,
   ProductSelectComponent,
-  SearchComponent
+  SearchComponent,
+  CostComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -107,7 +108,8 @@ const NGA_COMPONENTS = [
   NgSelectComponent,
   CustomerSelectComponent,
   ProductSelectComponent,
-  SearchComponent
+  SearchComponent,
+  CostComponent
 ];
 
 const NGA_DIRECTIVES = [

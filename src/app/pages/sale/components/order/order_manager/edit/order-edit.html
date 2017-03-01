@@ -3,6 +3,8 @@
     [actionsData]="data"
     [actionConfig]="actionConfig"
     [operat]="operat"
+    (saveClick)="save()"
+    (deleteClick)="selete()"
   ></action-bar>
 </div>
 
@@ -201,7 +203,7 @@
                           (rowSelected)="onRowSelected($event)"
                          [columnDefs]="selectedcolumnDefs"
                          [rowData]="data.product"
-                         [gridOptions]="gridOptions"
+                         [gridOptions]="progridOptions"
                          enableColResize
                          enableSorting
                          enableFilter
@@ -215,10 +217,17 @@
             <product-select (productChange)="addproduct($event)"></product-select>
           </div>
           <div contents="ordercost">
-            <ag-grid-ng2  style="width: 100%;  height: 140px;" class="ag-fresh"
+            <ag-grid-ng2 #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
                           [columnDefs]="ordercostCol"
-                          [rowData]="ordercostData"
+                          [rowData]="data.cost"
+                          [gridOptions]="costgridOptions"
+                          (rowSelected)="oncostRowSelected($event)"
+                          rowSelection="multiple"
             >加载其他费用清单</ag-grid-ng2>
+            <table></table>
+            <button (click)="addcostbtn()">添加</button>
+            <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
+            <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
           </div>
           <div contents="customer">
             <table *ngIf="customerData">

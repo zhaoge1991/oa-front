@@ -6,8 +6,11 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
 //导入拦截器服务
-import {provideInterceptorService} from 'ng2-interceptors';
-import {ServerURLInterceptor} from './ServerURLInterceptor';
+import {InterceptorService} from "ng2-interceptors/index";
+import {HttpInterceptorBackend} from './interceptor/http-interceptor-backend'
+import {HttpInterceptor} from './interceptor/http-interceptor';
+import {httpFactory} from './interceptor/http-factory';
+
 //导入核心服务
 import {CoreModule} from './core/core.module';
 
@@ -58,9 +61,12 @@ type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    provideInterceptorService([
-      new ServerURLInterceptor()
-    ])
+    HttpInterceptorBackend,HttpInterceptor,
+    {
+      provide: InterceptorService,
+      useFactory: httpFactory,
+      deps: [HttpInterceptorBackend,RequestOptions]
+    }
   ]
 })
 

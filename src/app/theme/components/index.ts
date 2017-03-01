@@ -24,3 +24,4 @@ export * from './ng-select';
 export * from './customerselectComponent';
 export * from './productselectComponent';
 export * from './ng2-search';
+export * from './costComponent';

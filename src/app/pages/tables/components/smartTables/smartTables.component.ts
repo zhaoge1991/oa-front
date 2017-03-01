@@ -46,7 +46,7 @@ export class SmartTables {
         //值的管道函数
         valuePrepareFunction: (value) => { return value === 1 ? 'true' : 'false' },
         //是否有筛选框
-        filter: false
+        filter: true
       },
       firstName: {
         title: '签约日期',

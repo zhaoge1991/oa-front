@@ -8,6 +8,7 @@ import {AppconfigService} from "../../../../../../core/appConfigService/appConfi
 import {QuantifierService} from "../../../../../../core/quantifierService/quantifier.service";
 import {OrderEditModel} from "../../../../../../common/models/order_edit.model";
 import {ProductSelectComponent} from "../../../../../../theme/components/productselectComponent/product_select.component";
+import {CostComponent} from "../../../../../../theme/components/costComponent/cost.component";
 
 
 @Component({
@@ -18,7 +19,8 @@ import {ProductSelectComponent} from "../../../../../../theme/components/product
 
 export class OrderEditComponent implements OnInit{
 
-  private gridOptions: GridOptions;
+  private progridOptions: GridOptions;
+  private costgridOptions: GridOptions;
   private id:number;
   private data: OrderEditModel;
   private isEdit:boolean;
@@ -31,7 +33,12 @@ export class OrderEditComponent implements OnInit{
     private appconfig: AppconfigService,
     private quantifier: QuantifierService
   ){
-    this.gridOptions = <GridOptions>{
+    this.progridOptions = <GridOptions>{
+      context: {
+        componentParent: this
+      }
+    };
+    this.costgridOptions = <GridOptions>{
       context: {
         componentParent: this
       }
@@ -58,7 +65,7 @@ export class OrderEditComponent implements OnInit{
 
   //选中行列表行配置
   private customerData;
-  private ordercostData;
+  private ordercostData: any[];
   private ordercostAll: number=0;
   private ordercostCol = [
     {
@@ -258,18 +265,39 @@ export class OrderEditComponent implements OnInit{
   }
   addproduct($event){
     this.data.product.push($event);
-    this.gridOptions.api.addItems([$event]);
-    this.candelete = true;
+    this.progridOptions.api.addItems([$event]);
   }
 
   //删除产品
-  private candelete:boolean = true;
   deletepro(){
-    let selectedNodes = this.gridOptions.api.getSelectedNodes();
-    this.gridOptions.api.removeItems(selectedNodes);
+    let selectedNodes = this.progridOptions.api.getSelectedNodes();
+    this.progridOptions.api.removeItems(selectedNodes);
     this.data.product.splice(selectedNodes[0].childIndex,1);
     this.isproselected = false;
-}
+  }
+
+  //选中费用
+  private iscostselected:boolean = false;
+  oncostRowSelected($event){
+    this.iscostselected = true;
+  }
+  //添加费用
+  @ViewChild(CostComponent) addcostdialog: CostComponent;
+  addcostbtn(){
+    this.addcostdialog.showdialog();
+  }
+  addcost($event){
+    this.data.cost.push($event);
+    this.costgridOptions.api.addItems([$event]);
+  }
+
+  //删除费用
+  deletecost(){
+    let selectedNodes = this.costgridOptions.api.getSelectedNodes();
+    this.costgridOptions.api.removeItems(selectedNodes);
+    this.data.cost.splice(selectedNodes[0].childIndex,1);
+    this.iscostselected = false;
+  }
 
   //单位选择(无法实现数据绑定)
   //quantifierselect(params){
@@ -285,6 +313,11 @@ export class OrderEditComponent implements OnInit{
   //  }
   //  return selectEle;
   //}
+
+  //保存
+  save(){
+    console.log(this.data);
+  }
 
 }
 

@@ -1,0 +1,30 @@
+<div bsModal #textdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="textdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">添加其他费用</h4>
+      </div>
+      <div class="modal-bidy inputdialog">
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">费用名称</label>
+          <div class="col-sm-8">
+            <input type="text" class="ng-form-control"  [(ngModel)]="ordercostData.name" name="name">
+          </div>
+        </div>
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">费用金额</label>
+          <div class="col-sm-8">
+            <input type="text" class="ng-form-control"  [(ngModel)]="ordercostData.price" name="price">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" [disabled]="!(ordercostData.name&&ordercostData.price)" (click)="ordercostEmit()">确定</button>
+        <button class="btn btn-primary confirm-btn" (click)="textdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

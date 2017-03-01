@@ -28,7 +28,10 @@ export class OrderManagerService{
   }
 
   deleteorder(id:number){
-    return this.http.delete('/api/sale/order/order/'+id).map(res=>{
+    let token = JSON.parse(localStorage.getItem('currentUser')).access_token;
+    let body= 'access_token='+ token;
+    let options = new RequestOptions({body: body});
+    return this.http.delete('/api/sale/order/order/'+id,options).map(res=>{
       return res.json();
     })
   }
