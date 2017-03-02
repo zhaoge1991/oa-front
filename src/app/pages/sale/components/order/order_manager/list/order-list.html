@@ -1,0 +1,154 @@
+<div class="row">
+  <action-bar #actionBar
+    [actionsData]="selectedrowData"
+    [actionConfig]="actionConfig"
+    [operat]="operat"
+    (saveClick)="saveData()"
+    (deleteClick)="deleteData()"
+    (supauditClick)="testclick2($event)"
+    (procurementauditClick)="testclick2($event)">
+  </action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入文字'"></ng-search>
+          <!--<div class="search-input">-->
+            <!--<span class="iconfont icon-search"></span>-->
+            <!--<input #search type="text" (keyup)="onQuickFilterEnter($event)" id="quickFilterInput" placeholder="快速搜索" class="form-control" style="width: 180px;display: inline-block"/>-->
+            <!--<button (click)="onQuickFilterChanged(search)" class="btn btn-primary  btn-sm" type="button">搜索</button>-->
+          <!--</div>-->
+        </div>
+        <ag-grid-ng2 #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-ng2>
+        <pages-button [pageconfig]="pageconfig" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">商品清单</div>
+          <div index="ordercost">其他费用</div>
+          <div index="sample_order" [style.display] ="isfreeorder?'block':'none'">样品单信息</div>
+          <div index="test" [style.display] ="isfreeorder?'block':'none'">测试信息</div>
+          <div index="customer">客户信息</div>
+          <div index="payment">付款方式</div>
+          <div index="delivery">发货信息</div>
+          <div index="order_schedule">订单进度</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <ag-grid-ng2 #selectedrow style="width: 100%; height: 180px;" class="ag-fresh"
+
+                         [columnDefs]="selectedcolumnDefs"
+                         [rowData]="proData"
+                         enableColResize
+                         enableSorting
+                         enableFilter
+                         groupHeaders
+
+                         rowHeight="22"
+                         rowSelection="multiple"
+            ></ag-grid-ng2>
+          </div>
+          <div contents="ordercost">
+            <ag-grid-ng2  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="ordercostCol"
+                          [rowData]="ordercostData"
+            >加载其他费用清单</ag-grid-ng2>
+          </div>
+          <div contents="sample_order">
+            <ag-grid-ng2  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="[{headerName: '',field: 'index',width: 60},{headerName: '费用名称',field: 'proname',width: 240},{headerName: '费用金额',field: 'money',width: 240}]"
+                          [rowData]="[{index: 1,proname: 'A',money: '1180'},{index: 2,proname: 'B',money: '1870'},{index: 3,proname: 'C',money: '245'}]"
+            >加载样品单信息</ag-grid-ng2>
+          </div>
+          <div contents="test" >
+            <table>
+              <tr>
+                <th>测试反馈日期</th><td>{{selectedrowData?.test_dete}}</td>
+              </tr>
+              <tr>
+                <th>测试结果</th><td>{{selectedrowData?.test_result}}</td>
+              </tr>
+              <tr>
+                <th>测试详情</th><td>{{selectedrowData?.test_description}}</td>
+              </tr>
+            </table>
+          </div>
+          <div contents="customer">
+            <table *ngIf="customerData">
+              <tr>
+                <th>姓名</th><td>{{customerData?.firstname}}</td>
+                <th>email</th><td>{{customerData?.email}}</td>
+                <th>客户电话</th><td>{{customerData?.telephone}}</td>
+              </tr>
+              <tr>
+                <th>国家</th><td>{{customerData?.country_id | countrypipe}}</td>
+                <th>客户地址</th><td>{{customerData?.address}}</td>
+                <th>客户类型</th><td>{{customerData?.kh_leixing}}</td>
+              </tr>
+              <tr>
+                <th>项目</th><td>{{customerData?.project_id | projectpipe}}</td>
+                <th>公司名称</th><td>{{customerData?.field_company}}</td>
+                <th>公司网站</th><td>{{customerData?.field_company_site}}</td>
+              </tr>
+              <tr>
+                <th>拥有人</th><td>{{customerData?.users | userspipe}}</td>
+                <th>询盘时间</th><td>{{customerData?.date_added}}</td>
+                <th>询盘方式</th><td>{{customerData?.kh_xunpan}}</td>
+              </tr>
+              <tr>
+                <th>客户状态</th><td>{{customerData?.kh_zhuangtai}}</td>
+                <th>原因备注</th><td>{{customerData?.kh_beizhu}}</td>
+                <th>流失原因</th><td>{{customerData?.kh_liushi}}</td>
+              </tr>
+              <tr>
+                <th>其他信息</th><td colspan="5"></td>
+              </tr>
+            </table>
+          </div>
+          <div contents="payment">
+            <table>
+              <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>说明</th><td>{{orderpaymentData?.content}}</td></tr>
+              <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
+              <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
+            </table>
+          </div>
+          <div contents="delivery">
+            <table>
+              <tr><th>实际发货时间</th><td>{{selectedrowData?.ship_date}}</td> <th>快递</th><td>{{selectedrowData?.payment_id | paymentpipe}}</td></tr>
+              <tr><th>预计到达日期</th><td>{{selectedrowData?.estimated_arrival_date}}</td> <th>查询单号</th><td>{{selectedrowData?.delivery_number}}</td></tr>
+              <tr><th>货币</th><td>{{selectedrowData?.currency_id | currencypipe}}</td> <th>支出运费</th><td>{{selectedrowData?.shipping_costs}}</td></tr>
+              <tr><th>描述</th><td>{{selectedrowData?.shipping_description}}</td> <th></th><td></td></tr>
+            </table>
+          </div>
+          <div contents="order_schedule">
+            <ng-schdule [schduleData]="orderscheduleData"></ng-schdule>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

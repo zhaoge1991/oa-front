@@ -1,8 +1,13 @@
 @import '../../sass/conf/conf';
 
 .content-top {
-  padding-top: 13px;
-  padding-bottom: 27px;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 40px;
+  line-height: 40px;
+  span{
+    margin-right: 5px;
+  }
 }
 
 h1.al-title {
@@ -22,10 +27,10 @@ h1.al-title {
   color: $default-text;
   padding: 0;
   margin: 0;
-  float: right;
-  padding-top: 11px;
+  //float: right;
+  padding-top: 0;
   li {
-    font-size: 18px;
+    font-size: 12px;
     font-weight: $font-normal;
     a {
       color: $primary-light;

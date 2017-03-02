@@ -1,0 +1,60 @@
+.content {
+  overflow: hidden;
+  padding: 40px 40px 50px 40px;
+}
+.process-item {
+  font-size: 13px;
+  line-height: 1;
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border: 1px solid green;
+  border-radius: 50%;
+  margin-left: 85px;
+  float: left;
+  text-align: center;
+}
+.process-item p{
+  margin: 0;
+}
+.process-item .process-name {
+  position: absolute;
+  top: -30px;
+  left: -45px;
+  width: 100px;
+  color: green;
+}
+.process-item .process-info {
+  position: absolute;
+  width: 100px;
+  left: -50px;
+  bottom: -40px;
+}
+.process-item .process-timeline {
+  position: absolute;
+  left: -86px;
+  top: -10px;
+  width: 85px;
+  border-bottom: 1px solid green;
+}
+.process-start {
+  margin-left: 0;
+}
+.process-start .process-timeline {
+  display: none;
+}
+.process-branch {
+  float: left;
+  position: relative;
+  border-left: 1px solid green;
+  border-right: 1px solid green;
+}
+.p-done {
+  border-color: red;
+}
+.p-done .process-name {
+  color: red;
+}
+.p-done .process-timeline {
+  border-color: red;
+}

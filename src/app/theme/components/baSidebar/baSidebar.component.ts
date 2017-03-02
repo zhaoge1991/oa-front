@@ -3,6 +3,7 @@ import {GlobalState} from '../../../global.state';
 import {layoutSizes} from '../../../theme';
 import {MENU} from '../../../../app/app.menu';
 import * as _ from 'lodash';
+import {MenuService} from "../../../core/menyService/menuService.service";
 
 @Component({
   selector: 'ba-sidebar',
@@ -11,16 +12,16 @@ import * as _ from 'lodash';
   template: require('./baSidebar.html')
 })
 export class BaSidebar {
-
+  public menu;
   // here we declare which routes we want to use as a menu in our sidebar
-  public routes = _.cloneDeep(MENU); // we're creating a deep copy since we are going to change that object
+  public routes // we're creating a deep copy since we are going to change that object
 
   public menuHeight:number;
   public isMenuCollapsed:boolean = false;
   public isMenuShouldCollapsed:boolean = false;
 
 
-  constructor(private _elementRef:ElementRef, private _state:GlobalState) {
+  constructor(private _elementRef:ElementRef, private _state:GlobalState,private _menuService:MenuService) {
 
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
@@ -28,6 +29,12 @@ export class BaSidebar {
   }
 
   public ngOnInit():void {
+    this.menu = this._menuService.getMenu().subscribe(
+        data => {console.log(data.json());this.routes = _.cloneDeep(MENU)},
+        error => {console.log(error)}
+    );
+    //this.routes = _.cloneDeep(this.menu);
+    //console.log(this.menu);
     if (this._shouldMenuCollapse()) {
       this.menuCollapse();
     }

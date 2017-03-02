@@ -28,19 +28,21 @@ export class App {
               private _imageLoader: BaImageLoaderService,
               private _spinner: BaThemeSpinner,
               private _config: BaThemeConfig,
-              private viewContainerRef: ViewContainerRef) {
+              private viewContainerRef: ViewContainerRef
+  ) {
 
     this._loadImages();
 
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
+
   }
 
   public ngAfterViewInit(): void {
     // hide spinner once all loaders are completed
     BaThemePreloader.load().then((values) => {
-      this._spinner.hide();
+      setTimeout(()=>this._spinner.hide(),5000);
     });
   }
 

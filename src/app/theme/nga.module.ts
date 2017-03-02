@@ -2,6 +2,9 @@ import { NgModule, ModuleWithProviders }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {AgGridModule} from 'ag-grid-ng2/main';
+import {TreeModule} from "angular2-tree-component/dist/angular2-tree-component";
+import { DropdownModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import {
   BaThemeConfig
@@ -25,7 +28,20 @@ import {
   BaMultiCheckbox,
   BaPageTop,
   BaPictureUploader,
-  BaSidebar
+  BaSidebar,
+  Ng2Tab,
+  ActionBar,
+  TextAlertComponent,
+  PagesComponent,
+  PagesButtonComponent,
+  CalenderComponent,
+  MessageComponent,
+  ScheduleComponent,
+  NgSelectComponent,
+  CustomerSelectComponent,
+  ProductSelectComponent,
+  SearchComponent,
+  CostComponent
 } from './components';
 
 import { BaCardBlur } from './components/baCard/baCardBlur.directive';
@@ -39,19 +55,32 @@ import {
 import {
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
+  CountryPipe,
+  ProjectPipe,
+  UsersPipe,
+  PaymentPipe,
+  CurrencyPipe,
+  OrderStatusPipe,
+  TransportPipe
 } from './pipes';
 
 import {
   BaImageLoaderService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
+  TextAlertService
 } from './services';
 
 import {
   EmailValidator,
   EqualPasswordsValidator
 } from './validators';
+
+import {
+  AuthGuard
+} from './guards'
+
 
 const NGA_COMPONENTS = [
   BaAmChart,
@@ -67,7 +96,20 @@ const NGA_COMPONENTS = [
   BaMultiCheckbox,
   BaPageTop,
   BaPictureUploader,
-  BaSidebar
+  BaSidebar,
+  Ng2Tab,
+  ActionBar,
+  TextAlertComponent,
+  PagesComponent,
+  PagesButtonComponent,
+  CalenderComponent,
+  MessageComponent,
+  ScheduleComponent,
+  NgSelectComponent,
+  CustomerSelectComponent,
+  ProductSelectComponent,
+  SearchComponent,
+  CostComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -80,13 +122,21 @@ const NGA_DIRECTIVES = [
 const NGA_PIPES = [
   BaAppPicturePipe,
   BaKameleonPicturePipe,
-  BaProfilePicturePipe
+  BaProfilePicturePipe,
+  CountryPipe,
+  ProjectPipe,
+  UsersPipe,
+  PaymentPipe,
+  CurrencyPipe,
+  OrderStatusPipe,
+  TransportPipe
 ];
 
 const NGA_SERVICES = [
   BaImageLoaderService,
   BaThemePreloader,
-  BaThemeSpinner
+  BaThemeSpinner,
+  TextAlertService
 ];
 
 const NGA_VALIDATORS = [
@@ -94,22 +144,29 @@ const NGA_VALIDATORS = [
   EqualPasswordsValidator
 ];
 
+const NGA_GUARDS = [
+  AuthGuard
+]
+
 @NgModule({
   declarations: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
   ],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    AgGridModule,
+    TreeModule,
     ReactiveFormsModule,
+    DropdownModule, ModalModule
   ],
   exports: [
     ...NGA_PIPES,
     ...NGA_DIRECTIVES,
-    ...NGA_COMPONENTS
+    ...NGA_COMPONENTS,
   ]
 })
 export class NgaModule {

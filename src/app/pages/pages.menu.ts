@@ -10,7 +10,133 @@ export const PAGES_MENU = [
             icon: 'ion-android-home',
             selected: false,
             expanded: false,
-            order: 0
+            order: 50
+          }
+        }
+      },
+      {
+        path: 'work',
+        data: {
+          menu: {
+            title: '工作事项',
+            icon: 'ion-clipboard',
+            selected: false,
+            expanded: false,
+            order: 1
+          }
+        },
+        children: [
+          {
+            path: 'task',
+            data: {
+              menu: {
+                title: '待办事项',
+              }
+            }
+          },
+          {
+            path: 'task_manager',
+            data: {
+              menu: {
+                title: '事项管理',
+              }
+            }
+          },
+          {
+            path: 'report',
+            data: {
+              menu: {
+                title: '工作报表'
+              }
+            },
+            children: [
+              {
+                path: 'week',
+                data: {
+                  menu: {
+                    title: '周报'
+                  }
+                }
+              },
+              {
+                path: 'month',
+                data: {
+                  menu: {
+                    title: '月报'
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'sale',
+        data: {
+          menu: {
+            title: '销售管理',
+            icon: 'ion-ios-cart',
+            selected: false,
+            expanded: false,
+            order: 20,
+          }
+        },
+        children: [
+          {
+            path: 'sale-table',
+            data: {
+              menu: {
+                title: '外销表单'
+              }
+            },
+            children: [
+              {
+                path: 'inquiry',
+                data: {
+                  menu: {
+                    title: '外销报价单'
+                  }
+                }
+              }
+            ]
+          },
+          {
+            path: 'order-manager',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          },
+          {
+            path: 'info',
+            data: {
+              menu: {
+                title: '信息设置'
+              }
+            },
+            children: [
+              {
+                path: 'provision',
+                data:　{
+                  menu: {
+                    title: '条款管理'
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'salescontract',
+        data: {
+          menu: {
+            title: '外销合同',
+            icon: 'ion-ios-paper-outline',
+            selected: false,
+            expanded: false,
+            order: 650,
           }
         }
       },

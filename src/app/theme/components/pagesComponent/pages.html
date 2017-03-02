@@ -1,0 +1,10 @@
+<div>
+  <button *ngFor="let page of pages" class="{{page.class}}" [disabled]="page.disabled" (click)="pageclick(page)">
+    {{page.text}}
+  </button>
+  <span *ngIf="pageInput">
+    跳转到第
+    <input type="text" (keyup)="pageInputUp($event)">/{{lastPage}}
+    页
+  </span>
+</div>
