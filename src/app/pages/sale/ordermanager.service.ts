@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
 import { InterceptorService } from 'ng2-interceptors';
+import {OrderEditModel} from "../../common/models/order_edit.model";
 
 @Injectable()
 
@@ -35,6 +36,18 @@ export class OrderManagerService{
       return res.json();
     })
   }
+
+  addorder(id:number,order){
+    //let token = JSON.parse(localStorage.getItem('currentUser')).access_token;
+    //order.access_token = token;
+    let body = decodeURIComponent(jQuery.param(order));
+    //let headers = new Headers({'Content-type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest'});
+    //let options = new RequestOptions({headers:headers});
+    return this.http.put('/api/sale/order/order/'+id,order).map(res=>{
+      return res.json();
+    });
+  }
+
 
   getwenjian(id:number){
     return this.http.get('/api/common/annex/download/'+id).map(res=>{

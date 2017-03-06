@@ -10,7 +10,6 @@ import {OrderEditModel} from "../../../../../../common/models/order_edit.model";
 import {ProductSelectComponent} from "../../../../../../theme/components/productselectComponent/product_select.component";
 import {CostComponent} from "../../../../../../theme/components/costComponent/cost.component";
 
-
 @Component({
   selector: 'edit',
   template: require('./order-edit.html'),
@@ -81,7 +80,7 @@ export class OrderEditComponent implements OnInit{
   private orderpaymentData;
   private orderscheduleData;
   private currency_id: number;
-  private customer:{};
+  private customer;
   //商品列定义
   private selectedcolumnDefs = [
   {
@@ -159,6 +158,7 @@ export class OrderEditComponent implements OnInit{
           currency_id: data.currency_id,
           provision_id: data.provision_id,
           pi: data.pi,
+          date_added: data.date_added,
           order_type_id: data.order_type_id,
           country_id: data.customer.country_id,
           payment_id: data.payment_id,
@@ -207,6 +207,7 @@ export class OrderEditComponent implements OnInit{
 
       })
     } else {
+      let date = new Date();
       this.data = {
         order_no: '',
         customer_id: null,
@@ -215,6 +216,7 @@ export class OrderEditComponent implements OnInit{
         currency_id: null,
         provision_id: null,
         pi: '',
+        date_added: date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate(),
         order_type_id: null,
         country_id: null,
         payment_id: null,
@@ -316,7 +318,11 @@ export class OrderEditComponent implements OnInit{
 
   //保存
   save(){
-    console.log(this.data);
+    this.data.customer_id = this.customer.id;
+    this.data.customer = this.customer.name;
+    this.orderservice.addorder(this.id,this.data).subscribe(data=>{
+      console.log(data);
+    });
   }
 
 }

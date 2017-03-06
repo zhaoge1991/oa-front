@@ -7,6 +7,7 @@ export interface OrderEditModel{
   provision_id?: number,
   pi?: string,
   order_type_id?: number,
+  date_added?: string,
   country_id?: number,
   payment_id?: number,
   payment_costs?: string,

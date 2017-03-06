@@ -13,7 +13,7 @@ export class HttpInterceptor{
   constructor(private message: MessageService,private router:Router){}
 
   //请求发出前的处理逻辑
-  beforeRequest(request: Request):Request{
+  beforeRequest(request):Request{
     if(!this.token){
       let user = localStorage.getItem('currentUser');
       if(user){
@@ -34,9 +34,16 @@ export class HttpInterceptor{
         request.url += '?access_token=' +  this.token;
       }
     }
+    if(method === 2 || method === 1){
+      let body = request._body;
+      body.access_token = this.token;
+      request._body = decodeURIComponent(jQuery.param(body));
+      request.headers = new Headers({'Content-type':'application/x-www-form-urlencoded','X-Requested-With':'XMLHttpRequest'})
+    }
     if(method === 3){
       request.headers = new Headers({'Content-type':'application/x-www-form-urlencoded'})
     }
+    console.log(request);
     return request;
   }
 
