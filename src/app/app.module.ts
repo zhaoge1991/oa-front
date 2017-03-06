@@ -33,7 +33,7 @@ const APP_PROVIDERS = [
   GlobalState
 ];
 
-type StoreType = {
+export type StoreType = {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
@@ -70,7 +70,7 @@ type StoreType = {
   ]
 })
 
-export class AppModule{
+export class AppModule {
 
   constructor(public appRef: ApplicationRef, public appState: AppState) {
   }

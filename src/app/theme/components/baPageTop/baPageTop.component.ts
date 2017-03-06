@@ -1,26 +1,22 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
 
 import {GlobalState} from '../../../global.state';
-import {CurentUserService} from "../../../core/currentuser.service";
+
+import 'style-loader!./baPageTop.scss';
 
 @Component({
   selector: 'ba-page-top',
-  styles: [require('./baPageTop.scss')],
-  template: require('./baPageTop.html'),
-  encapsulation: ViewEncapsulation.None
+  templateUrl: './baPageTop.html',
 })
 export class BaPageTop {
 
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
-  private username: string;
 
-  constructor(private _state:GlobalState,private router: Router,private userservice: CurentUserService) {
+  constructor(private _state:GlobalState) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
-    this.getcurrentuser();
   }
 
   public toggleMenu() {
@@ -31,17 +27,5 @@ export class BaPageTop {
 
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
-  }
-
-  public getcurrentuser(){
-    this.userservice.getuser().subscribe(data=>{
-      this.username = data.name;
-    })
-  }
-
-  //退出登录按钮
-  public signout($event){
-    localStorage.removeItem('currentUser');
-    this.router.navigate(['/login']);
   }
 }

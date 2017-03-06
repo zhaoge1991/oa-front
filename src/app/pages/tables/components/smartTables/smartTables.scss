@@ -2,9 +2,8 @@
 
 .ng2-smart-table-container table.ng2-smart-table {
   th, td {
-    padding: 0.2rem 0.3rem!important;
     border: 1px solid $border-light !important;
-    line-height: 24px;
+    line-height: 35px;
     vertical-align: middle;
   }
 
@@ -16,7 +15,7 @@
 
   tbody {
     tr:hover {
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.03);
     }
   }
 

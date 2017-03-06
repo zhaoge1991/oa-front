@@ -2,12 +2,7 @@
 
 $text-color: #ffffff;
 
-.loading-gif{
-  width: 2rem;
-}
-.alert{
-  margin-top: 10px;
-}
+
 .auth-main {
   display: flex;
   align-items: center;
@@ -44,8 +39,6 @@ $text-color: #ffffff;
   .control-label {
     padding-top: 11px;
     color: $text-color;
-    text-align: justify;
-    text-align-last: justify;
   }
 
   .form-group {
@@ -73,7 +66,6 @@ a.forgot-pass {
   float: right;
   z-index: 2;
   position: relative;
-  padding:0.344rem 1rem;
 }
 
 .auth-link {
@@ -132,5 +124,4 @@ a.forgot-pass {
 
 .btn-auth {
   color: #ffffff!important;
-  margin-right: 20px;
 }
