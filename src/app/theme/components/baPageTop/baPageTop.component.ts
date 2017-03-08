@@ -2,12 +2,13 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GlobalState} from '../../../global.state';
-import {CurentUserService} from "../../../core/currentuser.service";
+import {CurentUserService} from "../../../services/coreService/currentuser.service";
+
 
 @Component({
   selector: 'ba-page-top',
-  styles: [require('./baPageTop.scss')],
-  template: require('./baPageTop.html'),
+  styleUrls: ['./baPageTop.scss'],
+  templateUrl: './baPageTop.html',
   encapsulation: ViewEncapsulation.None
 })
 export class BaPageTop {

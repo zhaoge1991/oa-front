@@ -1,0 +1,27 @@
+@import '../../../sass/conf/conf';
+.tabs {
+  position: relative;
+  top: 1px;
+  background: $card-bg;
+  display: block;
+  padding:0 15px;
+  height: 30px;
+  border-bottom: 1px solid $cozborder;
+}
+.tabs [index] {
+  float: left;
+  font-size: 12px;
+  border: 1px solid $cozborder;
+  padding: 5px 10px;
+  border-radius: $bootstrap-panel-radius $bootstrap-panel-radius 0 0;
+  cursor: pointer;
+  height: 30px;
+}
+.tabs [index].selected {
+  border-bottom: 1px solid transparent;
+  background: #ffffff;
+}
+.tab-contents {
+  min-height: 3em;
+  padding: 10px 15px;
+}

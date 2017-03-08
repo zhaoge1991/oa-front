@@ -1,0 +1,41 @@
+<div class="customerselect">
+  <input type="text" class="customerinput ng-form-control" (focus)="show()" value="{{customer.name}}">
+  <span>{{customer.id}}</span>
+</div>
+
+<div bsModal #dialog="bs-modal" class="modal fade customer_search-content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="dialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">客户档案</h4>
+      </div>
+      <div class="modal-body">
+        <div class="customer_search">
+          <ng-search (searchtext)="search($event)" [(text)]="_customer.name"></ng-search>
+        </div>
+        <ag-grid-angular #selectedrow style="width: 100%; height: 300px;" class="ag-fresh"
+
+                     [columnDefs]="columnDefs"
+                     [rowData]="customers"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+                     (rowSelected)="onRowSelected($event)"
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+        ></ag-grid-angular>
+        <pages-button [pageconfig]="pageconfig" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="addcustomer()" [disabled]="!_customer.name && !isselected">确定</button>
+        <button class="btn btn-primary confirm-btn" (click)="dialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

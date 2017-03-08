@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Request,Response,Headers} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
-import {MessageService} from "../core/messageComponent.service";
+import {MessageService} from "../services/coreService/messageComponent.service";
+
 
 const bacsUrl = 'http://192.168.1.142/crm/oa/public';
 

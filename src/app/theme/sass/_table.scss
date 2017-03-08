@@ -1,3 +1,20 @@
+
+.tab-contents table{
+  height: 100%;
+  border: 1px solid $cozborder;
+  tr{
+    line-height: 25px;
+  }
+  th{
+    font-weight: bold;
+    background: $border;
+  }
+  td,th{
+    border: 1px solid $cozborder;
+    padding: 0 10px;
+  }
+}
+
 .table {
   margin-bottom: 0px;
   & > thead {

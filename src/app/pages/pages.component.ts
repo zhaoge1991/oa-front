@@ -1,39 +1,42 @@
-import {Component, ViewEncapsulation,OnInit} from '@angular/core';
+import { Component } from '@angular/core';
+import { Routes } from '@angular/router';
 
-import {CountryService} from "../core/countryService/country.service";
-import {StatusService} from "../core/statusService/status.service";
-import {ProjectService} from "../core/projectService/project.service";
-import {LanguageService} from "../core/languageService/language.service";
-import {QuantifierService} from "../core/quantifierService/quantifier.service";
-import {DegreeService} from "../core/degreeService/degree.service";
-import {DepartmentService} from "../core/departmentService/department.service";
-import {PositionService} from "../core/positionService/position.service";
-import {DemanderService} from "../core/demanderService/demander.service";
-import {SupplierDegreeService} from "../core/supplier_degreeService/supplier_degree.service";
-import {SupplierLevelService} from "../core/supplier_levelService/supplier_level.service";
-import {SupplierRatingService} from "../core/supplier_ratingService/supplier_rating.service";
-import {SupplierStatusService} from "../core/supplier_statusServices/supplier_status.service";
-import {PaymentService} from "../core/paymentService/payment.service";
-import {ProvisionService} from "../core/provisionService/provision.service";
-import {TransportService} from "../core/transportService/transport.service";
-import {SourceService} from "../core/sourceService/source.service";
-import {PasswordTypeService} from "../core/password_typeService/password_type.service";
-import {OpinionDateService} from "../core/opinion_dateService/opinion_date.service";
-import {OpinionTypeService} from "../core/opinion_typeService/opinion_type.service";
-import {MonthRankingService} from "../core/month_rankingService/month_ranking.service";
-import {TaskLevelService} from "../core/task_levelService/task_level.service";
-import {TaskStatusService} from "../core/task_statusService/task_statu.service";
-import {TaskTypeService} from "../core/task_typeService/task_type.service";
-import {PermissionService} from "../core/permissionService/permission.service";
-import {RoleService} from "../core/roleService/role.service";
-import {CurrencyService} from "../core/currencyService/currency.service";
-import {OrderTypeService} from "../core/ordertypeService/order_type.service";
+import { BaMenuService } from '../theme';
+import { PAGES_MENU } from './pages.menu';
+
+import {CountryService} from "../services/coreService/countryService/country.service";
+import {StatusService} from "../services/coreService/statusService/status.service";
+import {ProjectService} from "../services/coreService/projectService/project.service";
+import {LanguageService} from "../services/coreService/languageService/language.service";
+import {QuantifierService} from "../services/coreService/quantifierService/quantifier.service";
+import {DegreeService} from "../services/coreService/degreeService/degree.service";
+import {DepartmentService} from "../services/coreService/departmentService/department.service";
+import {PositionService} from "../services/coreService/positionService/position.service";
+import {DemanderService} from "../services/coreService/demanderService/demander.service";
+import {SupplierDegreeService} from "../services/coreService/supplier_degreeService/supplier_degree.service";
+import {SupplierLevelService} from "../services/coreService/supplier_levelService/supplier_level.service";
+import {SupplierRatingService} from "../services/coreService/supplier_ratingService/supplier_rating.service";
+import {SupplierStatusService} from "../services/coreService/supplier_statusServices/supplier_status.service";
+import {PaymentService} from "../services/coreService/paymentService/payment.service";
+import {ProvisionService} from "../services/coreService/provisionService/provision.service";
+import {TransportService} from "../services/coreService/transportService/transport.service";
+import {SourceService} from "../services/coreService/sourceService/source.service";
+import {PasswordTypeService} from "../services/coreService/password_typeService/password_type.service";
+import {OpinionDateService} from "../services/coreService/opinion_dateService/opinion_date.service";
+import {OpinionTypeService} from "../services/coreService/opinion_typeService/opinion_type.service";
+import {MonthRankingService} from "../services/coreService/month_rankingService/month_ranking.service";
+import {TaskLevelService} from "../services/coreService/task_levelService/task_level.service";
+import {TaskStatusService} from "../services/coreService/task_statusService/task_statu.service";
+import {TaskTypeService} from "../services/coreService/task_typeService/task_type.service";
+import {PermissionService} from "../services/coreService/permissionService/permission.service";
+import {RoleService} from "../services/coreService/roleService/role.service";
+import {CurrencyService} from "../services/coreService/currencyService/currency.service";
+import {OrderTypeService} from "../services/coreService/ordertypeService/order_type.service";
+
+
 @Component({
   selector: 'pages',
-  encapsulation: ViewEncapsulation.None,
-  styles: [],
   template: `
-    <ng-message></ng-message>
     <ba-sidebar></ba-sidebar>
     <ba-page-top></ba-page-top>
     <div class="al-main">
@@ -55,11 +58,14 @@ import {OrderTypeService} from "../core/ordertypeService/order_type.service";
       <!--</div>-->
     <!--</footer>-->
     <ba-back-top position="200"></ba-back-top>
-    <text-alert></text-alert>
+    <ng-message></ng-message>
     `
 })
-export class Pages implements OnInit{
+export class Pages {
+
   constructor(
+    private _menuService: BaMenuService,
+
     private countryservice: CountryService,
     private currencysercive: CurrencyService,
     private statusservice: StatusService,
@@ -89,12 +95,10 @@ export class Pages implements OnInit{
     private roleservice: RoleService,
     private ordertypeservice: OrderTypeService
   ) {
-
   }
 
   ngOnInit() {
-    //configservice.getZone();
-    //this.configservice.getMenu();
+    this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
 
     //加载所有配置
     this.countryservice.get();

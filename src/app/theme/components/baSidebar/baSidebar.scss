@@ -83,10 +83,9 @@ a.al-sidebar-list-link {
   overflow: hidden;
   cursor: pointer;
   &:hover {
-    color: $sidebar-text;
-    background-color: $primary;
+    color: $primary;
     b {
-      color: $sidebar-text;
+      color: $primary;
     }
   }
   i {
@@ -145,14 +144,14 @@ a.al-sidebar-list-link {
     a {
       display: block;
       text-shadow: none;
-      font-size: 14px;
+      font-size: 13px;
       text-decoration: none;
       color: $sidebar-text;
       padding-left: 52px;
       height: auto;
       line-height: 29px;
       &:hover {
-        color: $sidebar-text;
+        color: $primary;
       }
     }
     &.selected:not(.with-sub-menu) > a {
@@ -172,7 +171,7 @@ a.al-sidebar-list-link {
 
 .sidebar-hover-elem{
   width: $sidebar-scroll-width;
-  background: $bapagetop;
+  background: $primary;
   position: absolute;
   top: -150px;
   left: $sidebar-width - $sidebar-scroll-width;

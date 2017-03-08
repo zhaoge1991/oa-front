@@ -21,7 +21,8 @@ import {ServerURLInterceptor} from "./ServerURLInterceptor";
 //}
 
 //导入核心服务
-import {CoreModule} from './core/core.module';
+import {CoreModule} from './services/coreService/core.module';
+
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -34,7 +35,9 @@ import { App } from './app.component';
 import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
+import { OaModule } from './theme/oa-them/oa.module';
 import { PagesModule } from './pages/pages.module';
+import {MessageService} from "./services/coreService/messageComponent.service";
 
 
 // Application wide providers
@@ -43,7 +46,7 @@ const APP_PROVIDERS = [
   GlobalState
 ];
 
-type StoreType = {
+export type StoreType = {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
@@ -88,7 +91,7 @@ type StoreType = {
   ]
 })
 
-export class AppModule{
+export class AppModule {
 
   constructor(public appRef: ApplicationRef, public appState: AppState) {
   }

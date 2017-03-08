@@ -2,14 +2,13 @@ import {Component, ViewEncapsulation,OnInit} from '@angular/core';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import {Router,ActivatedRoute} from '@angular/router';
 import {LoginServices} from './login.services';
-import {TextAlertService} from "../../core/textAlertService/textAlert.service";
 
 
 @Component({
   selector: 'login',
   encapsulation: ViewEncapsulation.None,
-  styles: [require('./login.scss')],
-  template: require('./login.html'),
+  styleUrls: ['./login.scss'],
+  templateUrl: './login.html',
   providers: [LoginServices]
 })
 export class Login implements OnInit{
@@ -20,7 +19,7 @@ export class Login implements OnInit{
   public submitted:boolean = false;
   returnUrl: string;
 
-  constructor(fb:FormBuilder,private router:Router,private loginservices: LoginServices,private route: ActivatedRoute,private alertService: TextAlertService) {
+  constructor(fb:FormBuilder,private router:Router,private loginservices: LoginServices,private route: ActivatedRoute) {
     this.form = fb.group({
       'email': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
       'password': ['', Validators.compose([Validators.required, Validators.minLength(4)])]
@@ -42,7 +41,7 @@ export class Login implements OnInit{
         },
         error => {
           console.log(error);
-          this.alertService.error(error.json().error_description);
+          //this.alertService.error(error.json().error_description);
           this.submitted = false;
         });
     }

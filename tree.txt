@@ -1,0 +1,109 @@
+oa-front src目录结构
+
+└─src
+    ├─app ...........................................项目文件
+    │  ├─common
+    │  │  ├─function
+    │  │  └─models
+    │  ├─core
+    │  ├─interceptor
+    │  ├─pages ......................................所有页面
+    │  │  ├─procurement .............................页面大类
+    │  │  │  └─order ................................页面小类
+    │  │  │      └─components .......................所有具体页面
+    │  │  │          ├─edit.component.ts ............编辑页面
+    │  │  │          ├─list.component.ts ............列表页面
+    │  │  │          └─detail.component.ts ..........详情页面
+    │  │  └─work ....................................页面大类
+    │  │      ├─task ................................页面小类1
+    │  │      │   └─components ......................所有小类页面
+    │  │      │       ├─task
+    │  │      │       └─task_manager
+    │  │      └─information .........................页面小类2
+    │  │          └─components ......................所有具体页面
+    │  │              ├─task
+    │  │              └─task_manager
+    │  ├─services ...................................服务
+    │  │  ├─configs .................................配置服务
+    │  │  └─order ...................................订单服务
+    │  └─theme ......................................主题
+    │      ├─components .............................公共组件
+    │      │  ├─actionBar ...........................操作栏组件
+    │      │  ├─ag-table
+    │      │  ├─baAmChart
+    │      │  ├─baBackTop ...........................返回顶部组件
+    │      │  ├─baCard
+    │      │  ├─baChartistChart
+    │      │  ├─baCheckbox
+    │      │  ├─baContentTop
+    │      │  ├─baFullCalendar
+    │      │  ├─baMenu   ............................菜单栏组件
+    │      │  │  └─components
+    │      │  │      └─baMenuItem
+    │      │  ├─baMsgCenter
+    │      │  ├─baMultiCheckbox
+    │      │  ├─baPageTop
+    │      │  ├─baPictureUploader
+    │      │  ├─baSidebar
+    │      │  ├─btnsCompoonent
+    │      │  ├─calenderComponent
+    │      │  ├─costComponent
+    │      │  ├─customerselectComponent
+    │      │  ├─messageComponent
+    │      │  ├─ng-select
+    │      │  ├─ng2-search
+    │      │  ├─ng2-tab
+    │      │  ├─pagesButtonComponent
+    │      │  ├─pagesComponent
+    │      │  ├─productselectComponent
+    │      │  ├─scheduleComponent
+    │      │  └─textAlert
+    │      ├─directives  ............................指令
+    │      │  ├─baScrollPosition
+    │      │  ├─baSlimScroll
+    │      │  └─baThemeRun
+    │      ├─guards .................................守卫
+    │      │  └─auth  ...............................登陆守卫
+    │      ├─pipes ..................................管道
+    │      │  ├─baAppPicture
+    │      │  ├─baKameleonPicture
+    │      │  ├─baProfilePicture
+    │      │  ├─countryPipe .........................国家转换管道
+    │      │  ├─currencyPipe ........................货币转换管道
+    │      │  ├─order_statusPipe ....................订单状态管道
+    │      │  ├─paymentPipe .........................支付方式管道
+    │      │  ├─projectPipe .........................项目管道
+    │      │  ├─transportPipe .......................货运方式管道
+    │      │  └─usersPipe ...........................用户管道
+    │      ├─sass ...................................样式文件
+    │      │  ├─bootstrap-overrides
+    │      │  └─conf
+    │      │      └─colorSchemes
+    │      ├─services
+    │      │  ├─baImageLoader
+    │      │  ├─baMenu
+    │      │  ├─baThemePreloader
+    │      │  ├─baThemeSpinner
+    │      │  └─textAlert
+    │      └─validators
+    ├─assets ........................................静态文件
+    │  ├─fonts ......................................字体文件
+    │  ├─icon .......................................图标
+    │  └─img ........................................图片
+    │      ├─app
+    │      │  ├─browsers
+    │      │  ├─feed
+    │      │  ├─profile
+    │      │  ├─skin-thumbnails
+    │      │  ├─todo
+    │      │  └─typography
+    │      └─theme
+    │          ├─icon
+    │          │  ├─feed
+    │          │  └─kameleon
+    │          └─vendor
+    │              ├─ammap
+    │              └─leaflet
+    └─meta ..........................................信息
+       ├─humans.txt .................................开发人员信息
+       └─robots.txt .................................爬虫信息

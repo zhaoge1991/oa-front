@@ -1,6 +1,6 @@
 import { Interceptor, InterceptedRequest, InterceptedResponse,InterceptorService  } from 'ng2-interceptors';
 import { Headers, RequestOptions } from '@angular/http';
-//import {TextAlertService} from "./core/textAlertService/textAlert.service";
+import {MessageService} from "./services/coreService/messageComponent.service";
 
 /**
  * 自定义拦截器配置
@@ -16,6 +16,7 @@ export class ServerURLInterceptor implements Interceptor {
     if(user){
       this.token = JSON.parse(user).access_token;
     }
+
     //为所有请求加上基地址
     request.options.url = bacsUrl + request.options.url;
 
@@ -38,9 +39,9 @@ export class ServerURLInterceptor implements Interceptor {
       console.log(request);
     }
     if(method === 3){
-
-      request.options.body.access_token = this.token;
       console.log(request);
+      request.options.body = {access_token: this.token};
+
     }
 
     return request;
@@ -53,6 +54,10 @@ export class ServerURLInterceptor implements Interceptor {
       window.location.href = '#/login';
     } else if(response.response.status === 404){
       alert('请求错误')
+    } else if(response.response.status === 200){
+      //this.messageservice.putMessage({
+      //
+      //})
     }
     return response;
     /*

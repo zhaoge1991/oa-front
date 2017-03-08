@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
-import {AllConfigService} from "../../core/allConfig.service";
-
+import {AllConfigService} from "../../services/coreService/allConfig.service";
 
 @Injectable()
 export class GetService {

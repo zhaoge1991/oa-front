@@ -3,10 +3,11 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'sale',
   styles: [],
-  template: `<router-outlet></router-outlet>`
+  template: `<p>sale sale sale</p><router-outlet></router-outlet>`
 })
-export class Sale {
+export class SaleComponent {
 
   constructor() {
+    console.log('sale sale')
   }
 }
