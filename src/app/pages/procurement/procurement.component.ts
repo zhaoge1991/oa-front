@@ -9,7 +9,7 @@ import {OrderService} from '../../services/order/order.service'
 })
 export class ProcurementComponent {
   constructor(private orderservice: OrderService) {
-      console.log(111);
+      console.log('采购组件');
   }
 }
 

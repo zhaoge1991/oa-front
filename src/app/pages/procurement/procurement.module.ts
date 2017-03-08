@@ -4,15 +4,22 @@ import { ProcurementComponent } from './procurement.component';
 import { routing } from './procurement.routing';
 import { OrderModule} from './order/order.module';
 import {OrderService} from '../../services/order/order.service'
+import { ProcurementOrderModule} from './procurementOrder/procurementOrder.module';
+//import {OrderComponent} from './order/order.component';
+//import {ProcurementOrderComponent} from './procurementOrder/procurementOrder.component'
+
 
 @NgModule({
   imports: [
     CommonModule,
     routing,
-    OrderModule
+    OrderModule,
+    ProcurementOrderModule
   ],
   declarations: [
-    ProcurementComponent
+    ProcurementComponent,
+//    OrderComponent,
+//    ProcurementOrderComponent
   ],
   providers:[OrderService]
 })

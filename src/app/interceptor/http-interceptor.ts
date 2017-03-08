@@ -10,7 +10,7 @@ const bacsUrl = 'http://192.168.1.142/crm/oa/public';
 export class HttpInterceptor{
   private token:string;
 
-  constructor(private message: MessageService,private router:Router){}
+  constructor(private message: MessageService){}
 
   //请求发出前的处理逻辑
   beforeRequest(request: Request):Request{

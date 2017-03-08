@@ -13,6 +13,9 @@ import {httpFactory} from './interceptor/http-factory';
 
 //导入核心服务
 import {CoreModule} from './core/core.module';
+import {Router} from '@angular/router';
+import { CustomHttp } from './services/core/http.service';
+import { MessageService } from './services/core/message.service';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -67,6 +70,12 @@ export type StoreType = {
       useFactory: httpFactory,
       deps: [HttpInterceptorBackend,RequestOptions]
     }
+    ,MessageService,
+    { provide: CustomHttp,
+    useFactory:  (backend: XHRBackend, defaultOptions: RequestOptions,router:Router,messageService:MessageService) => new CustomHttp(backend, defaultOptions,router,messageService),
+    deps: [XHRBackend, RequestOptions,Router,MessageService]
+  },
+    
   ]
 })
 
