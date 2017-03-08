@@ -106,7 +106,7 @@
               </tr>
               <tr>
                 <th>商品金额</th> <td>{{data.product_price}}</td>
-                <th>其他费用</th> <td>{{data.ordercost}}</td>
+                <th>其他费用</th> <td>{{data.ordercost | ordercostspipe}}</td>
                 <th>手续费</th> <td>{{data.payment_costs}}</td>
               </tr>
               <tr>

@@ -45,7 +45,8 @@ import {
   PaymentPipe,
   CurrencyPipe,
   OrderStatusPipe,
-  TransportPipe
+  TransportPipe,
+  OrderCostsPipe
 } from './pipes';
 
 import {
@@ -93,7 +94,8 @@ const NGA_PIPES = [
   PaymentPipe,
   CurrencyPipe,
   OrderStatusPipe,
-  TransportPipe
+  TransportPipe,
+  OrderCostsPipe
 ];
 
 const NGA_SERVICES = [

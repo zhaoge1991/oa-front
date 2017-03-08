@@ -5,3 +5,4 @@ export * from './paymentPipe';
 export * from './projectPipe';
 export * from './transportPipe';
 export * from './usersPipe';
+export * from './order_costsPipe';
