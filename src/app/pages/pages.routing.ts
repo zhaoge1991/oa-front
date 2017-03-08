@@ -1,15 +1,19 @@
 import { Routes, RouterModule }  from '@angular/router';
 import { Pages } from './pages.component';
-import {AuthGuard} from '../theme/guards'
+import { ModuleWithProviders } from '@angular/core';
+import {AuthGuard} from '../theme/oa-them/guards/auth/auth.guard'
 // noinspection TypeScriptValidateTypes
-const routes: Routes = [
+
+// export function loadChildren(path) { return System.import(path); };
+
+export const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => System.import('./login/login.module')
+    loadChildren: 'app/pages/login/login.module#LoginModule'
   },
   {
     path: 'register',
-    loadChildren: () => System.import('./register/register.module')
+    loadChildren: 'app/pages/register/register.module#RegisterModule'
   },
   {
     path: 'pages',
@@ -17,19 +21,18 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: () => System.import('./dashboard/dashboard.module') },
-      { path: 'editors', loadChildren: () => System.import('./editors/editors.module') },
-      //{ path: 'components', loadChildren: () => System.import('./components/components.module') }
-      { path: 'charts', loadChildren: () => System.import('./charts/charts.module') },
-      { path: 'ui', loadChildren: () => System.import('./ui/ui.module') },
-      { path: 'forms', loadChildren: () => System.import('./forms/forms.module') },
-      { path: 'tables', loadChildren: () => System.import('./tables/tables.module') },
-      { path: 'maps', loadChildren: () => System.import('./maps/maps.module') },
-      { path: 'salescontract', loadChildren: () => System.import('./salescontract/salescontract.module') },
-      { path: 'work', loadChildren: () => System.import('./work/work.module') },
-      { path: 'sale', loadChildren: () => System.import('./sale/sale.module') }
+      { path: 'dashboard', loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule' },
+      { path: 'editors', loadChildren: 'app/pages/editors/editors.module#EditorsModule' },
+      { path: 'components', loadChildren: 'app/pages/components/components.module#ComponentsModule' },
+      { path: 'charts', loadChildren: 'app/pages/charts/charts.module#ChartsModule' },
+      { path: 'ui', loadChildren: 'app/pages/ui/ui.module#UiModule' },
+      { path: 'forms', loadChildren: 'app/pages/forms/forms.module#FormsModule' },
+      { path: 'tables', loadChildren: 'app/pages/tables/tables.module#TablesModule' },
+      { path: 'maps', loadChildren: 'app/pages/maps/maps.module#MapsModule' },
+      { path: 'procurement', loadChildren:'app/pages/procurement/procurement.module#ProcurementModule' },
+      { path: 'sale', loadChildren:'app/pages/sale/sale.module#SaleModule' }
     ]
   }
 ];
 
-export const routing = RouterModule.forChild(routes);
+export const routing: ModuleWithProviders = RouterModule.forChild(routes);

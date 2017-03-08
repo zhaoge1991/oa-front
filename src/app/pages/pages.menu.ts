@@ -3,74 +3,6 @@ export const PAGES_MENU = [
     path: 'pages',
     children: [
       {
-        path: 'dashboard',
-        data: {
-          menu: {
-            title: 'Dashboard',
-            icon: 'ion-android-home',
-            selected: false,
-            expanded: false,
-            order: 50
-          }
-        }
-      },
-      {
-        path: 'work',
-        data: {
-          menu: {
-            title: '工作事项',
-            icon: 'ion-clipboard',
-            selected: false,
-            expanded: false,
-            order: 1
-          }
-        },
-        children: [
-          {
-            path: 'task',
-            data: {
-              menu: {
-                title: '待办事项',
-              }
-            }
-          },
-          {
-            path: 'task_manager',
-            data: {
-              menu: {
-                title: '事项管理',
-              }
-            }
-          },
-          {
-            path: 'report',
-            data: {
-              menu: {
-                title: '工作报表'
-              }
-            },
-            children: [
-              {
-                path: 'week',
-                data: {
-                  menu: {
-                    title: '周报'
-                  }
-                }
-              },
-              {
-                path: 'month',
-                data: {
-                  menu: {
-                    title: '月报'
-                  }
-                }
-              }
-            ]
-          }
-        ]
-      },
-      {
         path: 'sale',
         data: {
           menu: {
@@ -101,7 +33,7 @@ export const PAGES_MENU = [
             ]
           },
           {
-            path: 'order-manager',
+            path: 'order',
             data: {
               menu: {
                 title: '订单管理'
@@ -128,15 +60,28 @@ export const PAGES_MENU = [
           }
         ]
       },
-      {
-        path: 'salescontract',
+       {
+        path: 'procurement',
         data: {
           menu: {
-            title: '外销合同',
-            icon: 'ion-ios-paper-outline',
+            title: '采购管理',
+            icon: 'ion-android-home',
             selected: false,
             expanded: false,
-            order: 650,
+            order: 0
+          }
+        }
+      },
+
+      {
+        path: 'dashboard',
+        data: {
+          menu: {
+            title: 'Dashboard',
+            icon: 'ion-android-home',
+            selected: false,
+            expanded: false,
+            order: 0
           }
         }
       },
@@ -162,28 +107,28 @@ export const PAGES_MENU = [
           }
         ]
       },
-      //{
-      //  path: 'components',
-      //  data: {
-      //    menu: {
-      //      title: 'Components',
-      //      icon: 'ion-gear-a',
-      //      selected: false,
-      //      expanded: false,
-      //      order: 250,
-      //    }
-      //  },
-      //  children: [
-      //    {
-      //      path: 'treeview',
-      //      data: {
-      //        menu: {
-      //          title: 'Tree View',
-      //        }
-      //      }
-      //    }
-      //  ]
-      //},
+      {
+        path: 'components',
+        data: {
+          menu: {
+            title: 'Components',
+            icon: 'ion-gear-a',
+            selected: false,
+            expanded: false,
+            order: 250,
+          }
+        },
+        children: [
+          {
+            path: 'treeview',
+            data: {
+              menu: {
+                title: 'Tree View',
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'charts',
         data: {

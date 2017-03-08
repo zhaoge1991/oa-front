@@ -1,0 +1,96 @@
+@import '../../../sass/conf/conf';
+.actionbar{
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 0;
+  .btnitem{
+    position: relative;
+    display: inline-block;
+  }
+  .btnmore{
+    position: absolute;
+    top: 32px;
+    z-index: 9;
+    display: none;
+    ul{
+      padding: 0;
+      background: #ffffff;
+    }
+  }
+  .open{
+    .btnmore{
+      display: block;
+    }
+  }
+  button{
+    background: none;
+    border: 1px solid #cccccc;
+    color: $default-text;
+    outline:0;
+    display: inline-block;
+    font-weight: normal;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    width: 80px;
+    padding: 0;
+  }
+  .available:hover{
+    background: #eeeeee;
+  }
+  .active{
+    background: #eeeeee;
+  }
+  button:disabled{
+    cursor: not-allowed;
+    color: $disable-text;
+  }
+  i{
+    font-size: 15px;
+    margin-right: 5px;
+  }
+  span{
+    margin-top: 3px;
+  }
+}
+
+//弹窗部分样式修改
+.modal {
+  padding-top: 300px;
+
+  .modal-content {
+    border-radius: 0;
+    color: $dropdown-text;
+    .modal-header {
+      padding: 10px 15px;
+    }
+
+    .modal-footer {
+      border: none;
+      button{
+        margin-right: 20px;
+      }
+    }
+
+    .close {
+      outline: none;
+    }
+
+    .modal-title{
+      font-size: 16px;
+    }
+    .modal-body{
+      font-size: 16px;
+    }
+  }
+
+  .inputdialog{
+    padding: 20px 10px 0 10px;
+  }
+}
+
+
+

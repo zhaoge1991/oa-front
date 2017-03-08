@@ -3,14 +3,14 @@ import { CommonModule }  from '@angular/common';
 
 import { routing }       from './pages.routing';
 import { NgaModule } from '../theme/nga.module';
+import { OaModule } from '../theme/oa-them/oa.module';
 
 import { Pages } from './pages.component';
-
-import {AuthGuard} from '../theme/guards'
-import {MessageService} from "../core/messageComponent.service.ts";
+import {AuthGuard} from "../theme/oa-them/guards/auth/auth.guard"; 
+import {MessageService} from "../services/coreService/messageComponent.service";
 
 @NgModule({
-  imports: [CommonModule, NgaModule, routing],
+  imports: [CommonModule, NgaModule, OaModule,routing],
   declarations: [Pages],
   providers: [AuthGuard,MessageService]
 })
