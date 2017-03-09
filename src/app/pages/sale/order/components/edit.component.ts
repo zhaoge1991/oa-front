@@ -3,10 +3,10 @@ import { ActivatedRoute, Params,Router } from '@angular/router';
 import {GridOptions} from "ag-grid/main";
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
-import {SaleOrderService} from "../../../../services/sale-orderService/sale-order.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {QuantifierService} from "../../../../services/coreService/quantifierService/quantifier.service";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 

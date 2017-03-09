@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {CurrencyService} from "../../../../services/coreService/currencyService/currency.service";
+import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 
 @Pipe({
   name: 'currencypipe'

@@ -2,7 +2,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GlobalState} from '../../../global.state';
-import {CurentUserService} from "../../../services/coreService/currentuser.service";
+import {CurentUserService} from "../../../services/core/currentuser.service";
 
 
 @Component({

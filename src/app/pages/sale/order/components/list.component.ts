@@ -2,13 +2,13 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {AllConfigService} from "../../../../services/coreService/allConfig.service";
-import {SaleOrderService} from "../../../../services/sale-orderService/sale-order.service";
-import {CurrencyService} from "../../../../services/coreService/currencyService/currency.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {QuantifierService} from "../../../../services/coreService/quantifierService/quantifier.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {MessageService} from "../../../../services/coreService/messageComponent.service";
+import {AllConfigService} from "../../../../services/core/allConfig.service";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {MessageService} from "../../../../services/core/messageComponent.service";
 import {ActionBar} from "../../../../theme/oa-them/components/actionBar/actionBar.component";
 
 @Component({
@@ -451,8 +451,50 @@ export class ListComponent{
   testclick(){
     this.actionbar.supauditclick();
   }
-  testclick2($event){
-    alert($event);
+
+  //生成出运安排
+  toshipClick($event){
+
+  }
+  //
+  orderdemandClick($event){
+
+  }
+  //
+  supauditClick($event){
+
+  }
+  //
+  financeauditClick($event){
+
+  }
+  //
+  toshipmentClick($event){
+
+  }
+  //
+  cusreciveClick($event){
+
+  }
+  //
+  procurementcheckClick($event){
+
+  }
+  //
+  isdoneClick($event){
+
+  }
+  //
+  checkoutExcelClick($event){
+
+  }
+  //
+  checkoutPdfClick($event){
+
+  }
+  //请采购审核操作
+  procurementauditClick($event){
+    console.log($event);
   }
 
   //保存操作
@@ -465,13 +507,6 @@ export class ListComponent{
     if(r){
       this.listservice.deleteorder(this.selectedrowData.order_id).subscribe(data=>{
         console.log(565656,data);
-        if(data.error){
-          this.message.putMessage({
-            severity: 'error',
-            summary: data.error,
-            detail: data.error_description
-          })
-        }
         this.selectedrowData = null;
         console.log('shanchu');
         this.createRowData(1);

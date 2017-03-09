@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {CountryService} from "../../../../services/coreService/countryService/country.service";
+import {CountryService} from "../../../../services/core/countryService/country.service";
 
 @Pipe({
   name: 'countrypipe'

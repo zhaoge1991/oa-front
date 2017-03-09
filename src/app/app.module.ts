@@ -6,22 +6,15 @@ import { RouterModule } from '@angular/router';
 import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularclass/hmr';
 
 //导入拦截器服务
-import { provideInterceptorService } from 'ng2-interceptors';
-import {ServerURLInterceptor} from "./ServerURLInterceptor";
-//import {InterceptorService} from "ng2-interceptors/index";
-//import {HttpInterceptorBackend} from './interceptor/http-interceptor-backend'
-//import {HttpInterceptor} from './interceptor/http-interceptor';
-//import {httpFactory} from './interceptor/http-factory';
+import {Router} from '@angular/router';
+import {HttpInterceptorService} from "./services/interceptor";
+import {MessageService} from "./services/core/messageComponent.service";
 
-//export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions){
-//  let service = new InterceptorService(xhrBackend, requestOptions);
-//  // Add interceptors here with service.addInterceptor(interceptor)
-//  service.addInterceptor(ServerURLInterceptor);
-//  return service;
-//}
+//import { provideInterceptorService } from 'ng2-interceptors';
+//import {ServerURLInterceptor} from "./ServerURLInterceptor";
 
 //导入核心服务
-import {CoreModule} from './services/coreService/core.module';
+import {CoreModule} from "./services/core/core.module";
 
 
 /*
@@ -37,7 +30,6 @@ import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { OaModule } from './theme/oa-them/oa.module';
 import { PagesModule } from './pages/pages.module';
-import {MessageService} from "./services/coreService/messageComponent.service";
 
 
 // Application wide providers
@@ -74,20 +66,11 @@ export type StoreType = {
   providers: [ // expose our Services and Providers into Angular's dependency injection
     ENV_PROVIDERS,
     APP_PROVIDERS,
-    //{
-    //  provide: InterceptorService,
-    //  useFactory: interceptorFactory,
-    //  deps: [XHRBackend, RequestOptions]
-    //}
-    provideInterceptorService([
-      new ServerURLInterceptor()
-    ])
-    //HttpInterceptorBackend,HttpInterceptor,
-    //{
-    //  provide: InterceptorService,
-    //  useFactory: httpFactory,
-    //  deps: [HttpInterceptorBackend,RequestOptions]
-    //}
+    MessageService,
+    { provide: HttpInterceptorService,
+      useFactory:  (backend: XHRBackend, defaultOptions: RequestOptions,router:Router,messageService:MessageService) => new HttpInterceptorService(backend, defaultOptions,router,messageService),
+      deps: [XHRBackend, RequestOptions,Router,MessageService]
+    }
   ]
 })
 

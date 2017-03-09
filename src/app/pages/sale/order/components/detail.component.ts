@@ -1,8 +1,8 @@
 import {Component,OnInit,OnDestroy} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {Location} from '@angular/common';
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {SaleOrderService} from "../../../../services/sale-orderService/sale-order.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
 
 
 @Component({

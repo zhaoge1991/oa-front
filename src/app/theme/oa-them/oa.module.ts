@@ -7,13 +7,6 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { TreeModule } from 'angular-tree-component';
 
-import {
-  BaThemeConfig
-} from './theme.config';
-
-import {
-  BaThemeConfigProvider
-} from './theme.configProvider';
 
 import {
   CalenderComponent,
@@ -142,8 +135,6 @@ export class OaModule {
     return <ModuleWithProviders> {
       ngModule: OaModule,
       providers: [
-        BaThemeConfigProvider,
-        BaThemeConfig,
         ...NGA_VALIDATORS,
         ...NGA_SERVICES
       ],

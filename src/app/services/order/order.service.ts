@@ -3,11 +3,12 @@ import { URLSearchParams,Headers, RequestOptions,Response } from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
-import { InterceptorService } from 'ng2-interceptors';
+import {HttpInterceptorService} from "../interceptor";
+
 
 @Injectable()
 export class OrderService{
-  constructor (private http: InterceptorService) {}
+  constructor (private http: HttpInterceptorService) {}
   getOrders(page?:number){
     return this.http.get('/api/sale/order/order'+'?page='+page).toPromise().then(res=>{
       return res.json();

@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {InterceptorService} from "ng2-interceptors/index";
+import {HttpInterceptorService} from "../../../../services/interceptor";
 
 @Injectable()
 export class CustomerSearchService{
   constructor(
-    private http: InterceptorService
+    private http: HttpInterceptorService
   ){}
 
   getcustomer(key?:string, page?:number){

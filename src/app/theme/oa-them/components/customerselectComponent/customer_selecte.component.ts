@@ -1,8 +1,8 @@
 import {Component,Input,Output,EventEmitter,ViewChild,ViewEncapsulation,OnInit} from '@angular/core';
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 import {CustomerSearchService} from "./customer_select.service";
-import {CountryService} from "../../../../services/coreService/countryService/country.service";
-import {ProjectService} from "../../../../services/coreService/projectService/project.service";
+import {CountryService} from "../../../../services/core/countryService/country.service";
+import {ProjectService} from "../../../../services/core/projectService/project.service";
 
 
 @Component({

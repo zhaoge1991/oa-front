@@ -9,12 +9,14 @@ import {
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
+import {ActionBarService} from "./actionBar.service";
 
 @Component({
   selector: 'action-bar',
   templateUrl: './actionBar.html',
   styleUrls: ['./actionBar.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ActionBarService]
 })
 
 export class ActionBar{
@@ -52,7 +54,7 @@ export class ActionBar{
   @Output() checkoutExcelClick = new EventEmitter();
   @Output() checkoutPdfClick = new EventEmitter();
 
-  constructor(private router:Router,private location:Location){}
+  constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService){}
 
   private actionshow: boolean = false;
   private exportshow: boolean = false;
@@ -92,7 +94,11 @@ export class ActionBar{
   //******操作按钮*****
   //生成出运安排
   toshipclick(){
+    console.log(this.actionsData[this.actionConfig.idname])
     this.toshipClick.emit();
+    //this.actionbarservice.toship(this.actionsData[this.actionConfig.idname]).subscribe(data=>{
+    //  console.log(111111,data);
+    //})
   }
   //生成订单要求
   orderdemandclick(){

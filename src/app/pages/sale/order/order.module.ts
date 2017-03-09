@@ -6,7 +6,7 @@ import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
 
-import {SaleOrderService} from "../../../services/sale-orderService/sale-order.service";
+import {SaleOrderService} from "../../../services/saleOrder/sale-order.service";
 
 import { OrderComponent} from './order.component.ts'
 import { ListComponent } from './components/list.component';

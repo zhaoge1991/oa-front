@@ -2,9 +2,9 @@ import {Component,Input,Output,EventEmitter,ViewChild,ViewEncapsulation,OnInit} 
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 
 import { TREE_ACTIONS, KEYS, IActionMapping } from 'angular-tree-component';
-import {ProductCatalogService} from "../../../../services/productService/product_catalogService/product_catalog.service";
-import {ProductListService} from "../../../../services/productService/product_listService/product_list.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
+import {ProductCatalogService} from "../../../../services/product/productCatalog/product_catalog.service";
+import {ProductListService} from "../../../../services/product/productList/product_list.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 
 
 @Component({
