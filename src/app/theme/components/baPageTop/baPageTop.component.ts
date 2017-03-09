@@ -42,7 +42,6 @@ export class BaPageTop {
 
   //退出登录按钮
   public signout($event){
-    localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
   }
 }

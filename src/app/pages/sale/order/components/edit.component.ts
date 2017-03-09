@@ -149,7 +149,7 @@ export class EditComponent implements OnInit{
   ];
   setData(){
     if(this.id){
-      this.orderservice.getOrderById(this.id).subscribe(data=>{
+      this.orderservice.get(this.id).subscribe(data=>{
         this.data = {
           order_no: data.order_no,
           customer_id: data.customer_id,
@@ -168,11 +168,11 @@ export class EditComponent implements OnInit{
           expected_delivery: data.expected_delivery,
           project_id: data.project_id,
           transport_id: data.transport_id,
-          transport_fee: data.transport_fee,
+          shipping_costs: data.shipping_costs,
           total_price: data.total_price,
           order_status_id: data.order_status_id,
           complaint: data.complaint,
-          demand: data.demand,
+          remark: data.remark,
           actual_payment: data.actual_payment,
           actual_bank_fee: data.actual_bank_fee,
           money_receipt: data.money_receipt,
@@ -226,11 +226,11 @@ export class EditComponent implements OnInit{
         expected_delivery: '',
         project_id: null,
         transport_id: null,
-        transport_fee: '',
+        shipping_costs: '',
         total_price: '',
         order_status_id: null,
         complaint: '',
-        demand: '',
+        remark: '',
         actual_payment: '',
         actual_bank_fee: '',
         money_receipt: '',
@@ -320,9 +320,12 @@ export class EditComponent implements OnInit{
   save(){
     this.data.customer_id = this.customer.id;
     this.data.customer = this.customer.name;
-    this.orderservice.addorder(this.id,this.data).subscribe(data=>{
-      console.log(data);
-    });
+    if(this.isEdit){
+      this.orderservice.put(this.id,this.data).subscribe();
+    } else {
+      this.orderservice.post(this.data).subscribe();
+    }
+
   }
 
 }

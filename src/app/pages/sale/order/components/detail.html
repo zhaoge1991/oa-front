@@ -83,7 +83,7 @@
               <tr>
                 <th>业务员</th> <td>{{data.users|userspipe}}</td>
                 <th>申请日期</th> <td>{{data.created_at}}</td>
-                <th>国家</th> <td>{{data.country.name}}</td>
+                <th>国家</th> <td>{{data?.country?.name}}</td>
               </tr>
               <tr>
                 <th>PI编号</th> <td>{{data.pi}}</td>
@@ -110,7 +110,7 @@
                 <th>手续费</th> <td>{{data.payment_costs}}</td>
               </tr>
               <tr>
-                <th>运费</th> <td colspan="5">{{data.shiping_costs}}</td>
+                <th>运费</th> <td colspan="5">{{data.shipping_costs}}</td>
               </tr>
               <tr>
                 <th>实收款</th> <td>{{data.actual_payment}}</td>

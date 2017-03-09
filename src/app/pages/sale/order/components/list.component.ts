@@ -2,14 +2,11 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {AllConfigService} from "../../../../services/core/allConfig.service";
 import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
-import {MessageService} from "../../../../services/core/messageComponent.service";
-import {ActionBar} from "../../../../theme/oa-them/components/actionBar/actionBar.component";
 
 @Component({
   selector: 'order-manager',
@@ -63,34 +60,25 @@ export class ListComponent{
 
   constructor(
     private router: Router,
-    private configservice: AllConfigService,
     private listservice: SaleOrderService,
     private cus: CurrencyService,
     private payment: PaymentService,
     private currency: CurrencyService,
     private quantifier: QuantifierService,
-    private appconfig: AppconfigService,
-    private message: MessageService
+    private appconfig: AppconfigService
   ) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
     this.createRowData(1);
     this.createColumnDefs();
     this.showGrid = true;
-    this.test();
   }
-
-  //http测试
-  private test(){
-    this.cus.get();
-  }
-
 
   //行配置项(获取数据)
   private createRowData(page) {
     let rowData:any[] = [];
 
-    this.listservice.getOrder(page)
+    this.listservice.getlist(page)
       .then(data=>{
         let orders = data.results.data.orders;
         let order = orders.data;
@@ -348,6 +336,7 @@ export class ListComponent{
       switch (this.selectedrowData.order_type_id){
       /**部分付款和账期订单**/
         case (this.appconfig.get('sale.order.type.part') || this.appconfig.get('sale.order.type.time')):
+          this.isfreeorder = false;
           //订单状态判断
           switch (this.selectedrowData.order_status_id) {
           /**待处理订单**/
@@ -395,6 +384,7 @@ export class ListComponent{
           };
           break;
         default:
+          this.isfreeorder = false;
           switch (this.selectedrowData.order_status_id) {
           /**待处理订单**/
             case this.appconfig.get('sale.order.status.waitpayment'):
@@ -410,7 +400,7 @@ export class ListComponent{
               this.operat.cusrecive = true;break
           /**客户已收货**/
             case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.procurementcheck = true;break
+              this.operat.isdone = true;break
           };
       }
 
@@ -446,72 +436,16 @@ export class ListComponent{
     this.router.navigate(['pages/sale/order/detail/',$event.data.order_id])
   }
 
-  //测试操作
-  @ViewChild('actionBar') actionbar: ActionBar;
-  testclick(){
-    this.actionbar.supauditclick();
-  }
-
-  //生成出运安排
-  toshipClick($event){
-
-  }
-  //
-  orderdemandClick($event){
-
-  }
-  //
-  supauditClick($event){
-
-  }
-  //
-  financeauditClick($event){
-
-  }
-  //
-  toshipmentClick($event){
-
-  }
-  //
-  cusreciveClick($event){
-
-  }
-  //
-  procurementcheckClick($event){
-
-  }
-  //
-  isdoneClick($event){
-
-  }
-  //
-  checkoutExcelClick($event){
-
-  }
-  //
-  checkoutPdfClick($event){
-
-  }
-  //请采购审核操作
-  procurementauditClick($event){
-    console.log($event);
-  }
-
-  //保存操作
-  saveData(){
-    console.log('保存')
-  }
   //删除操作
   deleteData(){
     let r = confirm('确认删除？')
     if(r){
-      this.listservice.deleteorder(this.selectedrowData.order_id).subscribe(data=>{
-        console.log(565656,data);
+      this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
         this.selectedrowData = null;
-        console.log('shanchu');
-        this.createRowData(1);
+        this.createRowData(this.pageconfig.nowPage);
       })
 
     }
   }
+
 }

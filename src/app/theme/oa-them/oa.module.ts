@@ -20,7 +20,8 @@ import {
   PagesButtonComponent,
   PagesComponent,
   ProductSelectComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  DialogComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
@@ -70,7 +71,8 @@ const NGA_COMPONENTS = [
   PagesButtonComponent,
   PagesComponent,
   ProductSelectComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  DialogComponent
 ];
 
 const NGA_DIRECTIVES = [

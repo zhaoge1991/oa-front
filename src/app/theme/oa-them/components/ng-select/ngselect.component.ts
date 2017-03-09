@@ -18,9 +18,9 @@ import {OrderTypeService} from "../../../../services/core/ordertypeService/order
 
 export class NgSelectComponent implements OnInit{
   @Input() value;
-  @Output() valueChange = new EventEmitter();
   @Input() selectfor;
-  @Input() showname
+  @Input() showname;
+  @Output() valueChange = new EventEmitter();
 
   private options: any[];
 
@@ -58,6 +58,12 @@ export class NgSelectComponent implements OnInit{
         this.options = this.ordertypeservice.get();break
       default:
             this.options = [];
+    }
+    if(!this.value){
+      this.options.splice(0,0,{
+        [this.showname]:'---请选择---',
+        [this.selectfor]: ' '
+      })
     }
   }
 

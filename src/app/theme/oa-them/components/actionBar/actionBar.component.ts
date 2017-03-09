@@ -10,6 +10,7 @@ import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import {ActionBarService} from "./actionBar.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 
 @Component({
   selector: 'action-bar',
@@ -42,8 +43,6 @@ export class ActionBar{
 
   @Output() saveClick = new EventEmitter();
   @Output() deleteClick = new EventEmitter();
-  @Output() toshipClick = new EventEmitter();
-  @Output() orderdemandClick = new EventEmitter();
   @Output() supauditClick = new EventEmitter();
   @Output() financeauditClick = new EventEmitter();
   @Output() procurementauditClick = new EventEmitter();
@@ -54,7 +53,7 @@ export class ActionBar{
   @Output() checkoutExcelClick = new EventEmitter();
   @Output() checkoutPdfClick = new EventEmitter();
 
-  constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService){}
+  constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService,private appconfig:AppconfigService){}
 
   private actionshow: boolean = false;
   private exportshow: boolean = false;
@@ -94,15 +93,11 @@ export class ActionBar{
   //******操作按钮*****
   //生成出运安排
   toshipclick(){
-    console.log(this.actionsData[this.actionConfig.idname])
-    this.toshipClick.emit();
-    //this.actionbarservice.toship(this.actionsData[this.actionConfig.idname]).subscribe(data=>{
-    //  console.log(111111,data);
-    //})
+    this.actionbarservice.toship(this.actionsData[this.actionConfig.idname]).subscribe()
   }
   //生成订单要求
   orderdemandclick(){
-    this.orderdemandClick.emit();
+    this.actionbarservice.orderdemand(this.actionsData[this.actionConfig.idname]).subscribe()
   }
 
   //请主管审核
@@ -115,7 +110,13 @@ export class ActionBar{
     this.textModal.show();
   }
   supauditEmit($event){
-    this.supauditClick.emit($event);
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.waitsupervisorcheck')
+      }
+      this.actionbarservice.supaudit(body).subscribe();
+    }
     this.textModal.hide();
   }
 
@@ -128,7 +129,13 @@ export class ActionBar{
     this.textModal.show();
   }
   financeauditEmit($event){
-    this.financeauditClick.emit($event);
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.waitfinancecheck')
+      }
+      this.actionbarservice.financeaudit(body).subscribe();
+    }
     this.textModal.hide();
   }
 
@@ -141,7 +148,13 @@ export class ActionBar{
     this.textModal.show();
   }
   procurementauditEmit($event){
-    this.procurementauditClick.emit($event);
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.waitprocurementcheck')
+      }
+      this.actionbarservice.procurementaudit(body).subscribe();
+    }
     this.textModal.hide();
   }
 
@@ -154,7 +167,13 @@ export class ActionBar{
     this.textModal.show();
   }
   toshipmentEmit($event){
-    this.toshipmentClick.emit($event);
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.waitshipped')
+      }
+      this.actionbarservice.toshipment(body).subscribe();
+    }
     this.textModal.hide();
   }
 
@@ -167,7 +186,32 @@ export class ActionBar{
     this.textModal.show();
   }
   cusreciveEmit($event){
-    this.cusreciveClick.emit($event);
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.customerreceived')
+      }
+      this.actionbarservice.cusrecive(body).subscribe();
+    }
+    this.textModal.hide();
+  }
+
+  //已完成
+  isdoneclick(){
+    this.dialogtext = {
+      text:'已完成',
+      operat: 'isdoneEmit'
+    };
+    this.textModal.show();
+  }
+  isdoneEmit($event){
+    if($event){
+      let body = {
+        order_id: this.actionsData[this.actionConfig.idname],
+        update_status: this.appconfig.get('sale.order.status.complete')
+      }
+      this.actionbarservice.isdone(body).subscribe();
+    }
     this.textModal.hide();
   }
 
@@ -184,22 +228,16 @@ export class ActionBar{
     this.textModal.show();
   }
   procurementcheckEmit(){
-    this.procurementcheckClick.emit(this.dialogtext.data);
+    let body = {
+      order_id: this.actionsData[this.actionConfig.idname],
+      update_status: this.appconfig.get('sale.order.status.waitprocurementverification'),
+      result: this.dialogtext.data.result,
+      test_description: this.dialogtext.data.description
+    }
+    this.actionbarservice.procurementcheck(body).subscribe();
     this.textModal.hide();
   }
 
-  //已完成
-  isdoneclick(){
-    this.dialogtext = {
-      text:'已完成',
-      operat: 'isdoneEmit'
-    };
-    this.textModal.show();
-  }
-  isdoneEmit($event){
-    this.isdoneClick.emit($event);
-    this.textModal.hide();
-  }
 
   //导出按钮
   checkoutExcel(){

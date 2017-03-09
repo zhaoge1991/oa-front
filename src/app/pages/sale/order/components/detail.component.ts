@@ -53,7 +53,7 @@ export class DetailComponent implements OnInit,OnDestroy{
   } = {};
 
   getById(id:number){
-    this.orderservice.getOrderById(id).subscribe(data=>{
+    this.orderservice.get(id).subscribe(data=>{
       //判断是否已完成
       this.isdone = (data.order_status_id===this.appconfig.get('sale.order.status.complete'))? true:false;
       //判断订单是否为免费样品单
@@ -131,7 +131,7 @@ export class DetailComponent implements OnInit,OnDestroy{
               this.operat.cusrecive = true;break
           /**客户已收货**/
             case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.procurementcheck = true;break
+              this.operat.isdone = true;break
           };
       }
     })
