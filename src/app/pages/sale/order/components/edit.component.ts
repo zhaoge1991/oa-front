@@ -153,14 +153,14 @@ export class EditComponent implements OnInit{
         this.data = {
           order_no: data.order_no,
           customer_id: data.customer_id,
-          customer: data.customer.firstname,
+          customer: data.customer?data.customer.firstname:null,
           online_order: data.online_order,
           currency_id: data.currency_id,
           provision_id: data.provision_id,
           pi: data.pi,
           date_added: data.date_added,
           order_type_id: data.order_type_id,
-          country_id: data.customer.country_id,
+          country_id: data.customer?data.customer.country_id:null,
           payment_id: data.payment_id,
           payment_costs: data.payment_costs,
           product_price: data.product_price,
@@ -182,7 +182,7 @@ export class EditComponent implements OnInit{
         this.currency_id = this.data.currency_id;
 
         //用户数据
-        this.customerData = data.customer?data.customer:'';
+        this.customerData = data.customer?data.customer:false;
         this.customer = {
           id: this.data.customer_id,
           name: this.data.customer,
