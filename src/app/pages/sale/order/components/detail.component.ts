@@ -34,7 +34,7 @@ export class DetailComponent implements OnInit,OnDestroy{
 
   //按钮组配置
   private actionConfig={
-    showbtn:{add:true,edit:true,action:true,export:true,annex:true,delete:true,close:true},
+    showbtn:{add:true,edit:true,action:true,export:true,annex:true,close:true},
     openurl: 'pages/sale/order/detail',
     addurl: 'pages/sale/order/edit',
     idname: 'order_id'

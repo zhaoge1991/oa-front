@@ -249,6 +249,7 @@ export class ListComponent{
   private orderpaymentData;
   private orderscheduleData;
   private isfreeorder: boolean = false;
+  private sampleData;
 
   private onRowSelected($event) {
     if($event.node.selected){
@@ -322,6 +323,12 @@ export class ListComponent{
 
       //支付方式数据
       this.orderpaymentData = this.payment.get(this.selectedrowData.payment_id);
+
+      //this.sampleData = {
+      //  sample_fee_info: '免费样品',
+      //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
+      //  disabled: false
+      //}
 
       ////订单进度数据
       //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{

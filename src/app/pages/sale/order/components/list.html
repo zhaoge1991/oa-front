@@ -76,10 +76,7 @@
             >加载其他费用清单</ag-grid-angular>
           </div>
           <div contents="sample_order">
-            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
-                          [columnDefs]="[{headerName: '',field: 'index',width: 60},{headerName: '费用名称',field: 'proname',width: 240},{headerName: '费用金额',field: 'money',width: 240}]"
-                          [rowData]="[{index: 1,proname: 'A',money: '1180'},{index: 2,proname: 'B',money: '1870'},{index: 3,proname: 'C',money: '245'}]"
-            >加载样品单信息</ag-grid-angular>
+            <sample-order  [(sample_fee_info)]="selectedrowData.sample_fee_info" [(sample_shipping_info)]="selectedrowData.sample_shipping_info" [disabled]="true"></sample-order>
           </div>
           <div contents="test" >
             <table>

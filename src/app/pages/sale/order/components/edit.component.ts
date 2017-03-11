@@ -42,7 +42,6 @@ export class EditComponent implements OnInit{
         componentParent: this
       }
     };
-    this.setcurrens();
   }
 
   //按钮组配置
@@ -177,7 +176,9 @@ export class EditComponent implements OnInit{
           actual_bank_fee: data.actual_bank_fee,
           money_receipt: data.money_receipt,
           product: data.products,
-          cost: data.ordercost
+          cost: data.ordercost,
+          sample_fee_info: data.sample_fee_info,
+          sample_shipping_info: data.sample_shipping_info
         }
         this.currency_id = this.data.currency_id;
 
@@ -204,6 +205,9 @@ export class EditComponent implements OnInit{
         //    this.orderscheduleData=res.results.data.order;
         //  }
         //);
+
+        //判断是否为样品单
+        this.isfreeOrder(this.data.order_type_id);
 
       })
     } else {
@@ -235,23 +239,18 @@ export class EditComponent implements OnInit{
         actual_bank_fee: '',
         money_receipt: '',
         product: [],
-        cost: []
+        cost: [],
+        sample_fee_info: '',
+        sample_shipping_info: ''
       }
       this.customer = {
         id: this.data.customer_id,
         name: this.data.customer
       }
+
+      //判断是否为样品单
+      this.isfreeOrder(this.data.order_type_id);
     }
-  }
-
-  private currens:any[] = [];
-  setcurrens(){
-    //this.configservice.getCurrency();
-    //for(let i in data){
-    //
-    //  this.currens.push(data[i]);
-    //}
-
   }
 
   //选中产品
@@ -299,6 +298,19 @@ export class EditComponent implements OnInit{
     this.costgridOptions.api.removeItems(selectedNodes);
     this.data.cost.splice(selectedNodes[0].childIndex,1);
     this.iscostselected = false;
+  }
+
+  //更改订单类型
+  orderTypeChange($event){
+    this.data.order_type_id = $event - 0;
+    this.isfreeOrder(this.data.order_type_id);
+  }
+  //判断是否是样品单
+  private isfreeorder: boolean;
+  isfreeOrder(id:number){
+    if(id == this.appconfig.get('sale.order.type.free') || id == this.appconfig.get('sale.order.type.charge')){
+      this.isfreeorder = true;
+    } else this.isfreeorder = false;
   }
 
   //单位选择(无法实现数据绑定)

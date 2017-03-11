@@ -54,7 +54,7 @@
               <div class="ng-form-group row">
                 <label class="col-sm-4 ng-form-control-label">订单类型</label>
                 <div class="col-sm-8">
-                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [(value)]="data.order_type_id"></ng-select>
+                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [value]="data.order_type_id" (valueChange)="orderTypeChange($event)"></ng-select>
                 </div>
               </div>
             </div>
@@ -194,6 +194,8 @@
           <div class="tabs">
             <div index="pro-list">商品清单</div>
             <div index="ordercost">其他费用</div>
+            <div index="sample_order" [style.display] ="isfreeorder?'block':'none'">样品单信息</div>
+            <div index="test" [style.display] ="isfreeorder?'block':'none'">测试信息</div>
             <div index="customer">客户信息</div>
             <div index="payment">付款方式</div>
           </div>
@@ -228,6 +230,22 @@
               <button (click)="addcostbtn()">添加</button>
               <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
               <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+            </div>
+            <div contents="sample_order">
+              <sample-order  [(sample_fee_info)]="data.sample_fee_info" [(sample_shipping_info)]="data.sample_shipping_info" [disabled]="false"></sample-order>
+            </div>
+            <div contents="test" >
+              <table>
+                <tr>
+                  <th>测试反馈日期</th><td>{{data?.test_dete}}</td>
+                </tr>
+                <tr>
+                  <th>测试结果</th><td>{{data?.test_result}}</td>
+                </tr>
+                <tr>
+                  <th>测试详情</th><td>{{data?.test_description}}</td>
+                </tr>
+              </table>
             </div>
             <div contents="customer">
               <table *ngIf="customerData">

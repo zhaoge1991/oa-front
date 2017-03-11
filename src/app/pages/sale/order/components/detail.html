@@ -44,16 +44,21 @@
             <table>
               <caption>申请样品相关费用</caption>
               <tr>
-                <th>样品费用</th>
-                <td colspan="3"></td>
+                <td colspan="4">
+                  <sample-order [(sample_fee_info)]="data.sample_fee_info" [(sample_shipping_info)]="data.sample_shipping_info" [disabled]="true"></sample-order>
+                </td>
               </tr>
-              <tr>
-                <th rowspan="2">发货方式及费用</th>
-                <td colspan="3"></td>
-              </tr>
-              <tr>
-                <td colspan="3"></td>
-              </tr>
+              <!--<tr>-->
+                <!--<th>样品费用</th>-->
+                <!--<td colspan="3"></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<th rowspan="2">发货方式及费用</th>-->
+                <!--<td colspan="3"></td>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<td colspan="3"></td>-->
+              <!--</tr>-->
               <tr>
                 <th>主管审批</th> <td></td>
                 <th>销售经理审批</th> <td></td>
