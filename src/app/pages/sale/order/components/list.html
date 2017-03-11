@@ -76,7 +76,7 @@
             >加载其他费用清单</ag-grid-angular>
           </div>
           <div contents="sample_order">
-            <sample-order  [(sample_fee_info)]="selectedrowData.sample_fee_info" [(sample_shipping_info)]="selectedrowData.sample_shipping_info" [disabled]="true"></sample-order>
+            <sample-order *ngIf="selectedrowData" [(sample_fee_info)]="selectedrowData.sample_fee_info" [(sample_shipping_info)]="selectedrowData.sample_shipping_info" [disabled]="true"></sample-order>
           </div>
           <div contents="test" >
             <table>

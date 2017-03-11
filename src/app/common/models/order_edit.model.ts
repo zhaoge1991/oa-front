@@ -26,6 +26,7 @@ export interface OrderEditModel{
   money_receipt?: string,
   sample_fee_info?: string,
   sample_shipping_info?: string,
+  annex?: any[],
   product?: {
     product_id?: number,
     order_product_id?: number,

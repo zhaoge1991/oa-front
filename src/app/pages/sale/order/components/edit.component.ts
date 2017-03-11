@@ -1,6 +1,7 @@
 import {Component,OnInit,ViewChild} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {GridOptions} from "ag-grid/main";
+import {Location} from '@angular/common';
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
 import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
@@ -30,7 +31,8 @@ export class EditComponent implements OnInit{
     private orderservice: SaleOrderService,
     private payment: PaymentService,
     private appconfig: AppconfigService,
-    private quantifier: QuantifierService
+    private quantifier: QuantifierService,
+    private location: Location
   ){
     this.progridOptions = <GridOptions>{
       context: {
@@ -46,7 +48,7 @@ export class EditComponent implements OnInit{
 
   //按钮组配置
   private actionConfig:{} = {
-    showbtn: {save:true,annex:true,delete:true,close:true},
+    showbtn: {save:true,annex:true,close:true},
     openurl: 'pages/sale/order-manager/detail',
     addurl: 'pages/sale/order-manager/edit',
     idname: 'order_id'
@@ -178,7 +180,8 @@ export class EditComponent implements OnInit{
           product: data.products,
           cost: data.ordercost,
           sample_fee_info: data.sample_fee_info,
-          sample_shipping_info: data.sample_shipping_info
+          sample_shipping_info: data.sample_shipping_info,
+          annex: data.annex
         }
         this.currency_id = this.data.currency_id;
 
@@ -241,7 +244,8 @@ export class EditComponent implements OnInit{
         product: [],
         cost: [],
         sample_fee_info: '',
-        sample_shipping_info: ''
+        sample_shipping_info: '',
+        annex: []
       }
       this.customer = {
         id: this.data.customer_id,
