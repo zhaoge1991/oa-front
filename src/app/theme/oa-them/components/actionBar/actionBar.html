@@ -52,7 +52,7 @@
   </div>
   <div class="btnitem">
     <button type="button"  class="available" *ngIf="actionConfig.showbtn.annex" [disabled]="!actionsData">
-      <i class="iconfont icon-fujian"></i><span>附件</span><i>(5)</i>
+      <i class="iconfont icon-fujian"></i><span>附件</span><i *ngIf="actionsData">({{annexeslength}})</i>
     </button>
   </div>
   <div class="btnitem">

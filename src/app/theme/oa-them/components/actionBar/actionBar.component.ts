@@ -4,7 +4,8 @@ import {
   EventEmitter,
   Component,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
+  OnChanges
 } from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
@@ -20,7 +21,7 @@ import {AppconfigService} from "../../../../services/core/appConfigService/appCo
   providers: [ActionBarService]
 })
 
-export class ActionBar{
+export class ActionBar implements OnChanges{
   @Input() actionsData: any;
   @Input() actionConfig: {
     showbtn: {},
@@ -55,9 +56,11 @@ export class ActionBar{
 
   constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService,private appconfig:AppconfigService){}
 
-  private actionshow: boolean = false;
-  private exportshow: boolean = false;
-  private dialogtext: {text:string,operat: any,data?:{}} = {text:'请主管审核',
+  ngOnChanges(){
+    this.getAnnexesLength();
+  }
+
+  private dialogtext: {text:string,operat: any,data?:any} = {text:'请主管审核',
     operat: ''};
 
   //打开按钮操作
@@ -238,6 +241,13 @@ export class ActionBar{
     this.textModal.hide();
   }
 
+  //附件按钮
+  private annexeslength
+  getAnnexesLength(){
+    if(this.actionsData){
+      this.annexeslength = this.actionsData.annex?this.actionsData.annex.length:0;
+    }
+  }
 
   //导出按钮
   checkoutExcel(){

@@ -13,10 +13,17 @@ import {MessageService} from "../core/messageComponent.service";
 
 export class SaleOrderService{
   constructor (private http: HttpInterceptorService ,private messageservice: MessageService,private location:Location) {}
-  getlist(page?:number){
-    return this.http.get('/api/sale/order/order'+'?page='+page).toPromise().then(res=>{
-      return res.json();
-    });
+  getlist(page?:number,key?:string){
+    if(key){
+      return this.http.get('/api/sale/order/order'+'?page='+page+'&keyword='+key).toPromise().then(res=>{
+        return res.json();
+      });
+    } else {
+      return this.http.get('/api/sale/order/order'+'?page='+page).toPromise().then(res=>{
+        return res.json();
+      });
+    }
+
   }
 
   get(id:number){

@@ -13,7 +13,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12 table-main">
         <div class="mysearch">
-          <ng-search [placeholder]="'请输入文字'"></ng-search>
+          <ng-search [placeholder]="'请输入客户名'" (searchtext)="search($event)"></ng-search>
           <!--<div class="search-input">-->
           <!--<span class="iconfont icon-search"></span>-->
           <!--<input #search type="text" (keyup)="onQuickFilterEnter($event)" id="quickFilterInput" placeholder="快速搜索" class="form-control" style="width: 180px;display: inline-block"/>-->

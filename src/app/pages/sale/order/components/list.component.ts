@@ -53,7 +53,14 @@ export class ListComponent{
   } = {};
 
   pageClick($event){
-    this.createRowData($event.text-0);
+    this.createRowData($event.text-0,this.searchtext);
+    this.selectedeRow = false;
+    this.selectedrowData = '';
+  }
+  private searchtext:string = '';
+  search($event){
+    this.createRowData(1,$event);
+    this.searchtext = $event;
     this.selectedeRow = false;
     this.selectedrowData = '';
   }
@@ -75,10 +82,10 @@ export class ListComponent{
   }
 
   //行配置项(获取数据)
-  private createRowData(page) {
+  private createRowData(page,key?:string) {
     let rowData:any[] = [];
 
-    this.listservice.getlist(page)
+    this.listservice.getlist(page,key)
       .then(data=>{
         let orders = data.results.data.orders;
         let order = orders.data;
