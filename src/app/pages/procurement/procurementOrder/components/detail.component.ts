@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {ProcurementOrderService} from "../../../../services/procurement/procurementOrder.service";
 
 @Component({

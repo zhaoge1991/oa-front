@@ -2,13 +2,13 @@ import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {AllConfigService} from "../../../../services/coreService/allConfig.service";
+import {AllConfigService} from "../../../../services/core/allConfig.service";
 import {ProcurementOrderService} from "../../../../services/procurement/procurementOrder.service";
-import {CurrencyService} from "../../../../services/coreService/currencyService/currency.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {QuantifierService} from "../../../../services/coreService/quantifierService/quantifier.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {MessageService} from "../../../../services/coreService/messageComponent.service";
+import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {MessageService} from "../../../../services/core/messageComponent.service";
 import {ActionBar} from "../../../../theme/oa-them/components/actionBar/actionBar.component";
 import {Paginate} from "../../../../models/common/paginate";
 

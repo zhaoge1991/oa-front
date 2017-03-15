@@ -4,9 +4,9 @@ import {GridOptions} from "ag-grid/main";
 
 import {ProcurementOrder} from "../../../../models/procurement/procurementOrder";
 import {ProcurementOrderService} from "../../../../services/procurement/procurementOrder.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {QuantifierService} from "../../../../services/coreService/quantifierService/quantifier.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {SupplierSelectComponent} from "../../../../theme/oa-them/components/supplierSelectComponent/supplierSelect.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
