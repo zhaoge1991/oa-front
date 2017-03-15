@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {SupplierRatingService} from "../../../services/coreService/supplier_ratingService/supplier_rating.service";
+import {SupplierRatingService} from "../../../services/core/supplier_ratingService/supplier_rating.service";
 
 @Pipe({
   name: 'supplierRatingPipe'

@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {SupplierDegreeService} from "../../../services/coreService/supplier_degreeService/supplier_degree.service";
+import {SupplierDegreeService} from "../../../services/core/supplier_degreeService/supplier_degree.service";
 
 @Pipe({
     name: 'supplierDegreePipe'

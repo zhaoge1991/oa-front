@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {SupplierLevelService} from "../../../services/coreService/supplier_levelService/supplier_level.service";
+import {SupplierLevelService} from "../../../services/core/supplier_levelService/supplier_level.service";
 
 @Pipe({
   name: 'supplierLevelPipe'

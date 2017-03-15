@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {SupplierStatusService} from "../../../services/coreService/supplier_statusServices/supplier_status.service";
+import {SupplierStatusService} from "../../../services/core/supplier_statusServices/supplier_status.service";
 
 @Pipe({
   name: 'supplierStatusPipe'
