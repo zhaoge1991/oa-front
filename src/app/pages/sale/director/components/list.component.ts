@@ -2,12 +2,13 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {SaleDirectorService} from "../../../../services/directorOrder/sale-director.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {StatusService} from "../../../../services/core/statusService/status.service";
+
 
 @Component({
   selector: 'order-manager',
@@ -35,8 +36,8 @@ export class ListComponent{
   };
   //按钮组配置
   private actionConfig = {
-    showbtn: {open: true,add:true,edit:true,action:true,export:true,annex:true,delete:true},
-    openurl: 'pages/sale/order/detail',
+    showbtn: {open: true,add:true,edit:true,action:true,export:true,annex:true,delete:true,check:true,report:true},
+    openurl: 'pages/sale/director/detail',
     addurl: 'pages/sale/order/edit',
     idname: 'order_id'
   }
@@ -68,11 +69,11 @@ export class ListComponent{
 
   constructor(
     private router: Router,
-    private listservice: SaleOrderService,
+    private listservice: SaleDirectorService,
     private cus: CurrencyService,
     private payment: PaymentService,
-    private currency: CurrencyService,
     private status: StatusService,
+    private currency: CurrencyService,
     private quantifier: QuantifierService,
     private appconfig: AppconfigService
   ) {
@@ -336,18 +337,6 @@ export class ListComponent{
       //支付方式数据
       this.orderpaymentData = this.payment.get(this.selectedrowData.payment_id);
 
-      //this.sampleData = {
-      //  sample_fee_info: '免费样品',
-      //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
-      //  disabled: false
-      //}
-
-      ////订单进度数据
-      //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{
-      //    this.orderscheduleData=res.results.data.order;
-      //  }
-      //);
-
 
       //生成操作配置
       //订单类型判断
@@ -452,7 +441,7 @@ export class ListComponent{
 
   //双击列表单元格操作
   onCellDoubleClicked($event){
-    this.router.navigate(['pages/sale/order/detail/',$event.data.order_id])
+    this.router.navigate(['pages/sale/director/detail/',$event.data.order_id])
   }
 
   //删除操作
@@ -465,5 +454,27 @@ export class ListComponent{
       })
 
     }
+  }
+
+  //审核订单
+  checkorder($event){
+    let result = $event.result;
+    let reson = $event.reson;
+    let body;
+    if(result){
+      body = {
+        order_id: this.selectedrowData.order_id,
+        update_status: this.appconfig.get('sale.order.status.supervisorcheckcomplate')
+      }
+    } else {
+      body = {
+        order_id: this.selectedrowData.order_id,
+        update_status: this.appconfig.get('sale.order.status.waitpayment')
+      }
+    }
+    this.listservice.check(body).subscribe(()=>{
+      this.createRowData(1);
+      this.selectedeRow = null;
+    });
   }
 }

@@ -1,18 +1,16 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { routing } from './order.routing.ts';
+import { routing } from './director.routing.ts';
 import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
 
-import {SaleOrderService} from "../../../services/saleOrder/sale-order.service";
+import {SaleDirectorService} from "../../../services/directorOrder/sale-director.service";
 
-import { OrderComponent} from './order.component.ts'
+import { DirectorComponent} from './director.component.ts'
 import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
-import { EditComponent } from './components/edit.component.ts';
-import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 
 
 @NgModule({
@@ -27,9 +25,8 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
   declarations: [
     ListComponent,
     DetailComponent,
-    EditComponent,
-    OrderComponent
+    DirectorComponent
   ],
-  providers: [SaleOrderService,CanDeactivateGuard]
+  providers: [SaleDirectorService]
 })
-export class OrderModule {}
+export class DirectorModule {}

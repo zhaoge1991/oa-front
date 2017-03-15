@@ -15,28 +15,18 @@ export const PAGES_MENU = [
         },
         children: [
           {
-            path: 'sale-table',
-            data: {
-              menu: {
-                title: '外销表单'
-              }
-            },
-            children: [
-              {
-                path: 'inquiry',
-                data: {
-                  menu: {
-                    title: '外销报价单'
-                  }
-                }
-              }
-            ]
-          },
-          {
             path: 'order',
             data: {
               menu: {
                 title: '订单管理'
+              }
+            }
+          },
+          {
+            path: 'director',
+            data: {
+              menu: {
+                title: '主管审核订单'
               }
             }
           },

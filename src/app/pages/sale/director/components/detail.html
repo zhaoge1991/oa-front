@@ -1,6 +1,6 @@
 <div *ngIf="data">
   <div class="row">
-    <action-bar [actionsData]="data" [actionConfig]="actionConfig" [operat]="operat"></action-bar>
+    <action-bar [actionsData]="data" [actionConfig]="actionConfig" [operat]="operat" (checkClick)="checkorder($event)"></action-bar>
   </div>
   <div class="row">
     <ba-card baCardClass="with-scroll">

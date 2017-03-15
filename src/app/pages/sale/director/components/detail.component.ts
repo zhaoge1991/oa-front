@@ -1,23 +1,25 @@
 import {Component,OnInit,OnDestroy} from '@angular/core';
-import { ActivatedRoute, Params,Router } from '@angular/router';
+import { ActivatedRoute, Params} from '@angular/router';
 import {Location} from '@angular/common';
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
 import {baseUrl} from "../../../../services/interceptor";
+import {SaleDirectorService} from "../../../../services/directorOrder/sale-director.service";
 
 
 @Component({
-  selector:'sale-detai-component',
+  selector:'detai-component',
   templateUrl: './detail.html',
   styleUrls: ['./detail.scss']
 })
 
 export class DetailComponent implements OnInit,OnDestroy{
   constructor(
-    private router:Router,
+    private location:Location,
     private route:ActivatedRoute,
     private orderservice: SaleOrderService,
-    private appconfig: AppconfigService
+    private appconfig: AppconfigService,
+    private listservice: SaleDirectorService
   ){}
 
   private id:number;
@@ -35,8 +37,8 @@ export class DetailComponent implements OnInit,OnDestroy{
 
   //按钮组配置
   private actionConfig={
-    showbtn:{add:true,edit:true,action:true,export:true,annex:true,close:true},
-    openurl: 'pages/sale/order/detail',
+    showbtn:{add:true,edit:true,action:true,export:true,annex:true,close:true,check:true,report:true},
+    openurl: 'pages/sale/director/detail',
     addurl: 'pages/sale/order/edit',
     idname: 'order_id'
   };
@@ -142,6 +144,25 @@ export class DetailComponent implements OnInit,OnDestroy{
     window.location.href = baseUrl+'/api/common/annex/download/'+id+'?access_token='+JSON.parse(localStorage.getItem('currentUser')).access_token
   }
 
+  checkorder($event){
+    let result = $event.result;
+    let reson = $event.reson;
+    let body;
+    if(result){
+      body = {
+        order_id: this.data.order_id,
+        update_status: this.appconfig.get('sale.order.status.supervisorcheckcomplate')
+      }
+    } else {
+      body = {
+        order_id: this.data.order_id,
+        update_status: this.appconfig.get('sale.order.status.waitpayment')
+      }
+    }
+    this.listservice.check(body).subscribe(()=>{
+      this.location.back();
+    });
+  }
 }
 
 

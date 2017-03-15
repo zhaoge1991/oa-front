@@ -97,9 +97,4 @@ export class SaleOrderService{
     });
   }
 
-  getwenjian(id:number){
-    return this.http.get('/api/common/annex/download/'+id).map(res=>{
-      return res;
-    })
-  }
 }

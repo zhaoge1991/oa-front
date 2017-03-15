@@ -56,11 +56,13 @@ export class ActionBar implements OnChanges{
   @Output() checkoutPdfClick = new EventEmitter();
   @Output() uploadfileClick = new EventEmitter();
   @Output() downloadClick = new EventEmitter();
+  @Output() checkClick = new EventEmitter();
 
   constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService,private appconfig:AppconfigService){}
 
   ngOnChanges(){
     this.getAnnexesLength();
+    this.isrefuse = null;
   }
 
   private dialogtext: {text:string,operat: any,data?:any} = {text:'请主管审核',
@@ -270,5 +272,20 @@ export class ActionBar implements OnChanges{
   }
   checkoutPdf(){
     this.checkoutPdfClick.emit();
+  }
+
+  //审核按钮
+  private isrefuse: boolean = null;
+  private reason: string;
+  @ViewChild('checkdialog') checkModal: ModalDirective;
+  chowcheck(){
+    this.checkModal.show();
+  }
+  checkChange(check:boolean){
+    this.isrefuse = !check;
+  }
+  checkEmit(){
+    this.checkClick.emit({result:!this.isrefuse,reason:this.reason});
+    this.checkModal.hide();
   }
 }
