@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import {Router} from '@angular/router';
 import {MessageService} from "./core/messageComponent.service";
 
+export const baseUrl = 'http://192.168.1.142/crm/oa/public';
 
 @Injectable()
 export class HttpInterceptorService extends Http {
@@ -14,7 +15,7 @@ export class HttpInterceptorService extends Http {
   constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private router: Router, private messageservice: MessageService) {
     super(backend, defaultOptions);
 
-    this.baseUrl = 'http://192.168.1.142/crm/oa/public';
+    this.baseUrl = baseUrl;
   }
 
   request(url: string | Request, options?: RequestOptionsArgs): Observable<Response> {
@@ -81,7 +82,6 @@ export class HttpInterceptorService extends Http {
     }
 
     let real_url = this.baseUrl + url;
-
     if(options.body){
       options.body.access_token =  this.token;
     } else {

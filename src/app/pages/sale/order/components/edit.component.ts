@@ -22,6 +22,7 @@ export class EditComponent implements OnInit{
   private progridOptions: GridOptions;
   private costgridOptions: GridOptions;
   private id:number;
+  private olddata: any;
   private data: OrderEditModel;
   private isEdit:boolean;
 
@@ -152,6 +153,7 @@ export class EditComponent implements OnInit{
     if(this.id){
       this.orderservice.get(this.id).subscribe(data=>{
         this.data = {
+          order_id: data.order_id,
           order_no: data.order_no,
           customer_id: data.customer_id,
           customer: data.customer?data.customer.firstname:null,
@@ -185,6 +187,9 @@ export class EditComponent implements OnInit{
         }
         this.currency_id = this.data.currency_id;
 
+        //保存原始数据
+        this.olddata = JSON.parse(JSON.stringify(this.data));
+
         //用户数据
         this.customerData = data.customer?data.customer:false;
         this.customer = {
@@ -216,6 +221,7 @@ export class EditComponent implements OnInit{
     } else {
       let date = new Date();
       this.data = {
+        order_id: null,
         order_no: '',
         customer_id: null,
         customer: '',
@@ -251,6 +257,9 @@ export class EditComponent implements OnInit{
         id: this.data.customer_id,
         name: this.data.customer
       }
+
+      //保存原始数据
+      this.olddata = JSON.parse(JSON.stringify(this.data));
 
       //判断是否为样品单
       this.isfreeOrder(this.data.order_type_id);
@@ -341,9 +350,17 @@ export class EditComponent implements OnInit{
     } else {
       this.orderservice.post(this.data).subscribe();
     }
-
+    this.olddata = this.data;
   }
 
+  //编辑守卫
+  canDeactivate(){
+    if(JSON.stringify(this.olddata) == JSON.stringify(this.data)){
+      return true;
+    } else {
+      return confirm('单据已修改，确认放弃修改并退出吗？');
+    }
+  }
 }
 
 

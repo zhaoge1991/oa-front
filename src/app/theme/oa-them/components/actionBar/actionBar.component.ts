@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 import { ModalDirective } from 'ng2-bootstrap';
 import {ActionBarService} from "./actionBar.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {AnnexesComponent} from "../annexesComponent/annexes.component";
 
 @Component({
   selector: 'action-bar',
@@ -53,6 +54,8 @@ export class ActionBar implements OnChanges{
   @Output() isdoneClick = new EventEmitter();
   @Output() checkoutExcelClick = new EventEmitter();
   @Output() checkoutPdfClick = new EventEmitter();
+  @Output() uploadfileClick = new EventEmitter();
+  @Output() downloadClick = new EventEmitter();
 
   constructor(private router:Router,private location:Location,private actionbarservice: ActionBarService,private appconfig:AppconfigService){}
 
@@ -242,11 +245,23 @@ export class ActionBar implements OnChanges{
   }
 
   //附件按钮
+  @ViewChild('annexesdialog') annexesModal: AnnexesComponent;
   private annexeslength
   getAnnexesLength(){
     if(this.actionsData){
       this.annexeslength = this.actionsData.annex?this.actionsData.annex.length:0;
     }
+  }
+  showAnnexes(){
+    this.annexesModal.show();
+  }
+  uploadfileEmit($event){
+    this.uploadfileClick.emit($event.target.files)
+  }
+
+  //下载按钮
+  downloadEmit(){
+    this.downloadClick.emit();
   }
 
   //导出按钮

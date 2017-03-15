@@ -1,0 +1,45 @@
+
+<div bsModal #dialog="bs-modal" class="modal fade customer_search-content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="dialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">附件</h4>
+      </div>
+      <div class="modal-body">
+        <div class="annexes-action">
+          <action-bar
+            [actionsData]="data"
+            [actionConfig]="actionConfig"
+            (uploadfileClick)="uploadfile($event)"
+            (deleteClick)="delete()"
+            (downloadClick)="download()">
+          </action-bar>
+        </div>
+        <div class="annexs-main tab-contents">
+          <p *ngIf="data.annex.length === 0" class="text-center">没有附件，点击添加按钮上传</p>
+          <table *ngIf="data.annex.length > 0">
+            <tr>
+              <th>附件类型</th>
+              <th>上传人</th>
+            </tr>
+            <tr *ngFor="let annexe of data.annex">
+              <td>
+                <label class="radio-inline custom-radio nowrap">
+                  <input name="annexeitem" type="radio" value="" (change)="selected(annexe)">
+                  <span></span>
+                  <i class="iconfont" [annexeicon]="annexe.original_extension"></i>
+                  {{annexe.name}}
+                </label>
+              </td>
+              <td>{{annexe?.user?.name}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

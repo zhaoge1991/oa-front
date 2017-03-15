@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
+import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
 
 
@@ -22,15 +23,14 @@ import {
   ProductSelectComponent,
   ScheduleComponent,
   DialogComponent,
-  SampleOrderComponent
+  SampleOrderComponent,
+  AnnexesComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
 
 import {
-  //BaScrollPosition,
-  //BaSlimScroll,
-  //BaThemeRun
+  AnnexeIconDirective
 } from './directives';
 
 import {
@@ -57,7 +57,8 @@ import {
 } from './validators';
 
 import {
-  AuthGuard
+  AuthGuard,
+  CanDeactivateGuard
 } from './guards'
 
 const NGA_COMPONENTS = [
@@ -74,14 +75,12 @@ const NGA_COMPONENTS = [
   ProductSelectComponent,
   ScheduleComponent,
   SampleOrderComponent,
-  DialogComponent
+  DialogComponent,
+  AnnexesComponent
 ];
 
 const NGA_DIRECTIVES = [
-  //BaScrollPosition,
-  //BaSlimScroll,
-  //BaThemeRun,
-  //BaCardBlur
+  AnnexeIconDirective
 ];
 
 const NGA_PIPES = [
@@ -108,7 +107,8 @@ const NGA_VALIDATORS = [
 ];
 
 const NGA_GUARDS = [
-  AuthGuard
+  AuthGuard,
+  CanDeactivateGuard
 ]
 
 @NgModule({
@@ -123,6 +123,7 @@ const NGA_GUARDS = [
     FormsModule,
     ReactiveFormsModule,
     NgUploaderModule,
+    FileUploadModule,
     AgGridModule.withComponents([]),
     DropdownModule.forRoot(),
     ModalModule.forRoot(),

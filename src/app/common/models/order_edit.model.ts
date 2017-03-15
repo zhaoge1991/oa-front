@@ -1,4 +1,5 @@
 export interface OrderEditModel{
+  order_id?: number,
   order_no?: string,
   customer_id?: number,
   customer?: any,
