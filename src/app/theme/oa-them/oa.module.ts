@@ -7,7 +7,6 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
-import {Ng2PaginationModule} from 'ng2-pagination';
 import {
   BaThemeConfig
 } from './theme.config';
@@ -160,8 +159,7 @@ const NGA_GUARDS = [
     AgGridModule.withComponents([]),
     DropdownModule.forRoot(),
     ModalModule.forRoot(),
-    TreeModule,
-    Ng2PaginationModule
+    TreeModule
   ],
   exports: [
     ...NGA_PIPES,
