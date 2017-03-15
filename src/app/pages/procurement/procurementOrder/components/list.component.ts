@@ -2,12 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {AllConfigService} from "../../../../services/core/allConfig.service";
 import {ProcurementOrderService} from "../../../../services/procurement/procurementOrder.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
-import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
-import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {MessageService} from "../../../../services/core/messageComponent.service";
 import {ActionBar} from "../../../../theme/oa-them/components/actionBar/actionBar.component";
 import {Paginate} from "../../../../models/common/paginate";
@@ -72,18 +69,15 @@ export class ListComponent {
         {headerName: '费用名称', field: 'name', width: 240},
         {headerName: '费用金额', field: 'price', width: 240}
     ];
-    
-    
-    private commonActionBarConfig:CommonActionBarConfig;
+
+
+    private commonActionBarConfig: CommonActionBarConfig;
 
     constructor(
         private router: Router,
-        private configservice: AllConfigService,
         private listservice: ProcurementOrderService,
-        private payment: PaymentService,
         private currency: CurrencyService,
         private quantifier: QuantifierService,
-        private appconfig: AppconfigService,
         private message: MessageService
     ) {
         // we pass an empty gridOptions in, so we can grab the api out
@@ -96,14 +90,14 @@ export class ListComponent {
         this.commonActionBarConfig.openUrl = 'pages/procurement/procurement_order/detail';
         this.commonActionBarConfig.idName = 'procurement_order_id';
         this.commonActionBarConfig.editUrl = 'pages/procurement/procurement_order/edit';
-        this.commonActionBarConfig.isProcurementOrder=true;
+        this.commonActionBarConfig.isProcurementOrder = true;
     }
 
     pageClick($event) {
         this.createRowData($event.text - 0);
         this.selectedeRow = false;
         this.selectedProcurementOrder = null;
-        
+
     }
 
 
