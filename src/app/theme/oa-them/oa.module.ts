@@ -7,7 +7,14 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
+import {Ng2PaginationModule} from 'ng2-pagination';
+import {
+  BaThemeConfig
+} from './theme.config';
 
+import {
+  BaThemeConfigProvider
+} from './theme.configProvider';
 
 import {
   CalenderComponent,
@@ -22,6 +29,20 @@ import {
   PagesComponent,
   ProductSelectComponent,
   ScheduleComponent,
+  SupplierSelectComponent,
+  TestSelectComponent,
+  FirstSelectComponent,
+  
+  
+  
+  //begin 公共操作栏
+  CommonActionBarComponent,
+  NewActionBarComponent,
+  OpenActionBarComponent,
+  EditActionBarComponent,
+  ProcurementOrderActionBarComponent,
+  //end 公共操作栏
+  
   DialogComponent,
   SampleOrderComponent,
   AnnexesComponent
@@ -74,6 +95,18 @@ const NGA_COMPONENTS = [
   PagesComponent,
   ProductSelectComponent,
   ScheduleComponent,
+  SupplierSelectComponent,
+  TestSelectComponent,
+  FirstSelectComponent,
+  
+  //begin 公共操作栏
+  CommonActionBarComponent,
+  NewActionBarComponent,
+  OpenActionBarComponent,
+  EditActionBarComponent,
+  ProcurementOrderActionBarComponent,
+  //end 公共操作栏
+  
   SampleOrderComponent,
   DialogComponent,
   AnnexesComponent
@@ -127,7 +160,8 @@ const NGA_GUARDS = [
     AgGridModule.withComponents([]),
     DropdownModule.forRoot(),
     ModalModule.forRoot(),
-    TreeModule
+    TreeModule,
+    Ng2PaginationModule
   ],
   exports: [
     ...NGA_PIPES,
