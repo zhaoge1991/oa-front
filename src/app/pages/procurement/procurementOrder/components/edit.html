@@ -1,0 +1,131 @@
+
+
+<div class="row">
+  <action-bar
+    [actionsData]="procuremntOrder"
+    [actionConfig]="actionConfig"
+    [operat]="operat"
+    (saveClick)="save()"
+    (deleteClick)="selete()"
+  ></action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="procurementOrder">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="num" class="col-sm-4 ng-form-control-label">供应商</label>
+                <div class="col-sm-8">
+                    <supplier-select></supplier-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <test-select></test-select>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <customer-select></customer-select>
+            </div>
+          </div>
+        </div>
+        
+        
+      </div>
+    </ba-card>
+    <div class="row">
+      <div class="col-md-12 col-xs-12" *ngIf="data">
+        <ng2-tab selected="pro-list"
+                 selected-contents-class="animated"
+                 selected-index-class="selected">
+          <div class="tabs">
+            <div index="pro-list">商品清单</div>
+            <div index="ordercost">其他费用</div>
+            <div index="customer">客户信息</div>
+            <div index="payment">付款方式</div>
+          </div>
+          <div class="tab-contents">
+            <div contents="pro-list">
+              <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                            (rowSelected)="onRowSelected($event)"
+                            [columnDefs]="selectedcolumnDefs"
+                            [rowData]="procuremntOrder.product"
+                            [gridOptions]="progridOptions"
+                            enableColResize
+                            enableSorting
+                            enableFilter
+                            groupHeaders
+
+                            rowHeight="22"
+                            rowSelection="multiple"
+              ></ag-grid-angular>
+              <button (click)="addpbtn()">添加</button>
+              <button (click)="deletepro()" [disabled]="!isproselected">删除</button>
+              <product-select (productChange)="addproduct($event)"></product-select>
+            </div>
+            <div contents="ordercost">
+              <ag-grid-angular #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
+                           [columnDefs]="ordercostCol"
+                           [rowData]="procuremntOrder.cost"
+                           [gridOptions]="costgridOptions"
+                           (rowSelected)="oncostRowSelected($event)"
+                           rowSelection="multiple"
+              >加载其他费用清单</ag-grid-angular>
+              <table></table>
+              <button (click)="addcostbtn()">添加</button>
+              <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
+              <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+            </div>
+            <div contents="customer">
+              <table *ngIf="customerData">
+                <tr>
+                  <th>姓名</th><td>{{customerData?.firstname}}</td>
+                  <th>email</th><td>{{customerData?.email}}</td>
+                  <th>客户电话</th><td>{{customerData?.telephone}}</td>
+                </tr>
+                <tr>
+                  <th>国家</th><td>{{customerData?.country_id | countrypipe}}</td>
+                  <th>客户地址</th><td>{{customerData?.address}}</td>
+                  <th>客户类型</th><td>{{customerData?.kh_leixing}}</td>
+                </tr>
+                <tr>
+                  <th>项目</th><td>{{customerData?.project_id | projectpipe}}</td>
+                  <th>公司名称</th><td>{{customerData?.field_company}}</td>
+                  <th>公司网站</th><td>{{customerData?.field_company_site}}</td>
+                </tr>
+                <tr>
+                  <th>拥有人</th><td>{{customerData?.users | userspipe}}</td>
+                  <th>询盘时间</th><td>{{customerData?.date_added}}</td>
+                  <th>询盘方式</th><td>{{customerData?.kh_xunpan}}</td>
+                </tr>
+                <tr>
+                  <th>客户状态</th><td>{{customerData?.kh_zhuangtai}}</td>
+                  <th>原因备注</th><td>{{customerData?.kh_beizhu}}</td>
+                  <th>流失原因</th><td>{{customerData?.kh_liushi}}</td>
+                </tr>
+                <tr>
+                  <th>其他信息</th><td colspan="5"></td>
+                </tr>
+              </table>
+            </div>
+            <div contents="payment">
+              <table *ngIf="orderpaymentData">
+                <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
+                <tr><th>说明</th><td>{{orderpaymentData?.content}}</td></tr>
+                <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
+                <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
+                <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
+              </table>
+            </div>
+          </div>
+        </ng2-tab>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

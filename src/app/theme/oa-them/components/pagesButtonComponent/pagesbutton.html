@@ -1,12 +1,12 @@
-<div class="pagesbutton" *ngIf="pageconfig">
-  <span class="buttons">
-    <button (click)="turnpage('first')" [disabled]="pageconfig.nowPage==1"><span class="iconfont icon-fanyezuo"></span></button>
-    <button (click)="turnpage(-1)" [disabled]="pageconfig.nowPage==1"><span class="iconfont icon-jiantou-copy-copy"></span></button>
-    <button (click)="turnpage(1)" [disabled]="pageconfig.nowPage==pageconfig.lastPage"><span class="iconfont icon-jiantou-copy"></span></button>
-    <button (click)="turnpage('last')" [disabled]="pageconfig.nowPage==pageconfig.lastPage"><span class="iconfont icon-fanyeyou"></span></button>
-  </span>
-  <span class="info">
-    第 <input type="text" (keyup)="pageInputUp($event)" value="{{pageconfig.nowPage}}"> 页；共 {{pageconfig.lastPage}} 页 {{pageconfig.total}} 条记录；当前为{{pageconfig.fromitem}}-{{pageconfig.toitem}}条记录
-  </span>
+<div class="pagesbutton" *ngIf="paginate">
+    <span class="buttons">
+        <button (click)="turnpage('first')" [disabled]="paginate.current_page==1"><span class="iconfont icon-fanyezuo"></span></button>
+        <button (click)="turnpage(-1)" [disabled]="paginate.current_page==1"><span class="iconfont icon-jiantou-copy-copy"></span></button>
+        <button (click)="turnpage(1)" [disabled]="paginate.current_page==paginate.last_page"><span class="iconfont icon-jiantou-copy"></span></button>
+        <button (click)="turnpage('last')" [disabled]="paginate.current_page==paginate.last_page"><span class="iconfont icon-fanyeyou"></span></button>
+    </span>
+    <span class="info">
+        第 <input type="text" (keyup)="pageInputUp($event)" value="{{paginate.current_page}}"> 页；共 {{paginate.last_page}} 页 {{paginate.total}} 条记录；当前为{{paginate.from}}-{{paginate.to}}条记录
+    </span>
 
 </div>
