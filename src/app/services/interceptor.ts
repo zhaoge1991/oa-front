@@ -82,6 +82,10 @@ export class HttpInterceptorService extends Http {
     }
 
     let real_url = this.baseUrl + url;
+
+    if(!options){
+      options = new RequestOptions({});
+    }
     if(options.body){
       options.body.access_token =  this.token;
     } else {
