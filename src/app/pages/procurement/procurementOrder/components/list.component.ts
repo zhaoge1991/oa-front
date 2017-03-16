@@ -2,12 +2,9 @@ import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {AllConfigService} from "../../../../services/core/allConfig.service";
 import {ProcurementOrderService} from "../../../../services/procurement/procurementOrder.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
-import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
-import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {MessageService} from "../../../../services/core/messageComponent.service";
 import {ActionBar} from "../../../../theme/oa-them/components/actionBar/actionBar.component";
 import {Paginate} from "../../../../models/common/paginate";
@@ -37,27 +34,9 @@ export class ListComponent {
     public collection: any[] = [1];
     //翻页配置
     private paginate: Paginate;
-    //按钮组配置
-    private actionConfig = {
-        showbtn: {open: true, add: true, edit: true, action: true, export: true, annex: true, delete: true},
-        openurl: 'pages/procurement/procurement_order/detail',
-        addurl: 'pages/procurement/procurement_order/edit',
-        idname: 'procurement_order_id'
-    }
-    //操作组配置
-    private operat: {
-        toship?: boolean,
-        orderdemand?: boolean,
-        supaudit?: boolean,
-        financeaudit?: boolean,
-        procurement?: boolean,
-        toshipment?: boolean,
-        cusrecive?: boolean,
-        procurementcheck?: boolean,
-        isdone?: boolean
-    } = {};
-
-
+    private selectedIndex:number;
+    
+    
     //选中行列表行配置
     private proData;
     private ordercostData;
@@ -72,18 +51,15 @@ export class ListComponent {
         {headerName: '费用名称', field: 'name', width: 240},
         {headerName: '费用金额', field: 'price', width: 240}
     ];
-    
-    
-    private commonActionBarConfig:CommonActionBarConfig;
+
+
+    private commonActionBarConfig: CommonActionBarConfig;
 
     constructor(
         private router: Router,
-        private configservice: AllConfigService,
         private listservice: ProcurementOrderService,
-        private payment: PaymentService,
         private currency: CurrencyService,
         private quantifier: QuantifierService,
-        private appconfig: AppconfigService,
         private message: MessageService
     ) {
         // we pass an empty gridOptions in, so we can grab the api out
@@ -96,14 +72,14 @@ export class ListComponent {
         this.commonActionBarConfig.openUrl = 'pages/procurement/procurement_order/detail';
         this.commonActionBarConfig.idName = 'procurement_order_id';
         this.commonActionBarConfig.editUrl = 'pages/procurement/procurement_order/edit';
-        this.commonActionBarConfig.isProcurementOrder=true;
+        this.commonActionBarConfig.isProcurementOrder = true;
     }
 
     pageClick($event) {
         this.createRowData($event.text - 0);
         this.selectedeRow = false;
         this.selectedProcurementOrder = null;
-        
+
     }
 
 
@@ -238,6 +214,7 @@ export class ListComponent {
     private onRowSelected($event) {
         if ($event.node.selected) {
             this.selectedProcurementOrder = $event.node.data as ProcurementOrder;
+            this.selectedIndex = $event.node.data.index;
             //产品清单数据
             this.proData = this.selectedProcurementOrder.procurement_order_product;
             this.selectedcolumnDefs = [
@@ -298,8 +275,7 @@ export class ListComponent {
                 }
             ];
 
-            //订单类型判断
-            this.operat = {toship: true, orderdemand: true};
+            
 
 
             this.selectedeRow = true;
@@ -354,5 +330,10 @@ export class ListComponent {
             })
 
         }
+    }
+    objectChange(procurementOrder:ProcurementOrder){
+        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridOptions.api.removeItems(selectedNodes)
+        this.gridOptions.api.insertItemsAtIndex(this.selectedIndex, [procurementOrder]);
     }
 }

@@ -3,12 +3,12 @@ import {URLSearchParams, Headers, RequestOptions, Response} from '@angular/http'
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/toPromise';
-import {InterceptorService} from 'ng2-interceptors';
+import {HttpInterceptorService} from "../../services/interceptor"
 import {ProcurementSupplier} from "../../models/procurement/procurementSupplier"
 
 @Injectable()
 export class ProcurementSupplierService {
-    constructor(private http: InterceptorService) {}
+    constructor(private http: HttpInterceptorService) {}
     getList(page?: number) {
         
         return this.http.get('/api/procurement/supplier' + '?page=' + page).map(res => {
