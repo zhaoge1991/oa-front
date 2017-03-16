@@ -34,27 +34,9 @@ export class ListComponent {
     public collection: any[] = [1];
     //翻页配置
     private paginate: Paginate;
-    //按钮组配置
-    private actionConfig = {
-        showbtn: {open: true, add: true, edit: true, action: true, export: true, annex: true, delete: true},
-        openurl: 'pages/procurement/procurement_order/detail',
-        addurl: 'pages/procurement/procurement_order/edit',
-        idname: 'procurement_order_id'
-    }
-    //操作组配置
-    private operat: {
-        toship?: boolean,
-        orderdemand?: boolean,
-        supaudit?: boolean,
-        financeaudit?: boolean,
-        procurement?: boolean,
-        toshipment?: boolean,
-        cusrecive?: boolean,
-        procurementcheck?: boolean,
-        isdone?: boolean
-    } = {};
-
-
+    private selectedIndex:number;
+    
+    
     //选中行列表行配置
     private proData;
     private ordercostData;
@@ -232,6 +214,7 @@ export class ListComponent {
     private onRowSelected($event) {
         if ($event.node.selected) {
             this.selectedProcurementOrder = $event.node.data as ProcurementOrder;
+            this.selectedIndex = $event.node.data.index;
             //产品清单数据
             this.proData = this.selectedProcurementOrder.procurement_order_product;
             this.selectedcolumnDefs = [
@@ -292,8 +275,7 @@ export class ListComponent {
                 }
             ];
 
-            //订单类型判断
-            this.operat = {toship: true, orderdemand: true};
+            
 
 
             this.selectedeRow = true;
@@ -348,5 +330,10 @@ export class ListComponent {
             })
 
         }
+    }
+    objectChange(procurementOrder:ProcurementOrder){
+        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridOptions.api.removeItems(selectedNodes)
+        this.gridOptions.api.insertItemsAtIndex(this.selectedIndex, [procurementOrder]);
     }
 }

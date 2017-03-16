@@ -1,16 +1,8 @@
 <div class="row">
-  <action-bar #actionBar
-              [actionsData]="selectedrowData"
-              [actionConfig]="actionConfig"
-              [operat]="operat"
-              (saveClick)="saveData()"
-              (deleteClick)="deleteData()"
-              (supauditClick)="testclick2($event)"
-              (procurementauditClick)="testclick2($event)">
-  </action-bar>
+  
 </div>
 <div class="row">
-  <bar-common-action-bar [config]="commonActionBarConfig" [object]="selectedProcurementOrder">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="selectedProcurementOrder" (objectChange)="objectChange($event)">
   </bar-common-action-bar>
 </div>
 <div class="row">

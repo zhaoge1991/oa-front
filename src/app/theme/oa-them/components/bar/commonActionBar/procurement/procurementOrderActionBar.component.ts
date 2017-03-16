@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input,Output,EventEmitter} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 
@@ -26,14 +26,16 @@ import {ProcurementOrderService} from "../../../../../../services/procurement/pr
 export class ProcurementOrderActionBarComponent {
     @Input() config: any;
     @Input() object: ProcurementOrder
-    constructor(private router: Router, private procurementOrderService: ProcurementOrderService) {}
+    
+    @Output() objectChange = new EventEmitter<ProcurementOrder>();
+    
+    constructor(private router: Router, private location:Location,private procurementOrderService: ProcurementOrderService) {}
     processing() {
-        console.log(1111111111111);
         this.procurementOrderService.updateStatusProcessing(this.object).subscribe(data => {
-                console.log(333333);
-                
-            })
-        ;
+            this.object.status = 1
+            this.objectChange.emit(this.object);
+        })
+            ;
     }
 
 }

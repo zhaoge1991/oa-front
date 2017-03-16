@@ -38,9 +38,7 @@ export class ProcurementOrderService {
     }
 
     updateStatusProcessing(procurementOrder: ProcurementOrder) {
-        
-        console.log(22222);
-        return this.http.post('/api/procurement/procurement_order/processing_do', JSON.stringify({procurement_orders: [procurementOrder.procurement_order_id]})).map(res => {
+        return this.http.post('/api/procurement/procurement_order/processing_do', {procurement_order_ids: [procurementOrder.procurement_order_id]}).map(res => {
             return res.json();
         });
     }
