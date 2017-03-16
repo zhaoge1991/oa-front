@@ -10,13 +10,14 @@ import {QuantifierService} from "../../../../services/core/quantifierService/qua
 import {SupplierSelectComponent} from "../../../../theme/oa-them/components/supplierSelectComponent/supplierSelect.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig"
 @Component({
     selector: 'procurement-procurement-order-edit',
     templateUrl: './edit.html',
 })
 
 export class EditComponent implements OnInit {
-    
+
     @ViewChild(SupplierSelectComponent) selectSupplier: SupplierSelectComponent;
     @ViewChild(ProductSelectComponent) selectproduct: ProductSelectComponent;
     @ViewChild(CostComponent) addcostdialog: CostComponent;
@@ -25,33 +26,6 @@ export class EditComponent implements OnInit {
     private id: number;
     private procurementOrder: ProcurementOrder;
     private isEdit: boolean;
-
-    //按钮组配置
-    private actionConfig: {} = {
-        showbtn: {save: true, annex: true, delete: true, close: true},
-        openurl: 'pages/sale/order-manager/detail',
-        addurl: 'pages/sale/order-manager/edit',
-        idname: 'order_id'
-    };
-    //选中行列表行配置
-    private customerData;
-    private ordercostData: any[];
-    private ordercostAll: number = 0;
-    private ordercostCol = [
-        {
-            headerName: "#", width: 30, suppressSorting: true,
-            suppressMenu: true, pinned: true,
-            cellRenderer: function (params) {
-                return params.rowIndex + 1
-            }
-        },
-        {headerName: '费用名称', field: 'name', width: 240},
-        {headerName: '费用金额', field: 'price', width: 240}
-    ];
-    private orderpaymentData;
-    private orderscheduleData;
-    private currency_id: number;
-    private customer;
     //商品列定义
     private selectedcolumnDefs = [
         {
@@ -118,6 +92,8 @@ export class EditComponent implements OnInit {
             editable: true
         }
     ];
+    private commonActionBarConfig: CommonActionBarConfig;
+
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -126,6 +102,11 @@ export class EditComponent implements OnInit {
         private appconfig: AppconfigService,
         private quantifier: QuantifierService
     ) {
+
+        this.commonActionBarConfig = new CommonActionBarConfig();
+        this.commonActionBarConfig.addNewUrl = 'pages/procurement/procurement_order/edit';
+        this.commonActionBarConfig.idName = 'procurement_order_id';
+
         this.progridOptions = <GridOptions> {
             context: {
                 componentParent: this

@@ -4,4 +4,5 @@ export class CommonActionBarConfig {
     idName:string;
     editUrl:string;
     isProcurementOrder:boolean;
+    deleteUrl:string;
 }

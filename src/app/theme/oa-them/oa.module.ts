@@ -40,6 +40,8 @@ import {
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  DeleteActionBarComponent,
+  BackActionBarComponent,
   //end 公共操作栏
   
   DialogComponent,
@@ -104,6 +106,8 @@ const NGA_COMPONENTS = [
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  DeleteActionBarComponent,
+  BackActionBarComponent,
   //end 公共操作栏
   
   SampleOrderComponent,

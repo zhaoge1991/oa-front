@@ -31,8 +31,9 @@ export class ProcurementOrderService {
         });
     }
 
-    delete(id: number) {
-        return this.http.delete('/api/procurement/procurement_order/' + id).map(res => {
+    delete(procurementOrder: ProcurementOrder) {
+        let options = new RequestOptions();
+        return this.http.delete('/api/procurement/procurement_order/' + procurementOrder.procurement_order_id,options).map(res => {
             return res.json();
         })
     }

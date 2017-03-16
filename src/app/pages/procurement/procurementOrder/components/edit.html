@@ -1,13 +1,8 @@
 
 
 <div class="row">
-  <action-bar
-    [actionsData]="procuremntOrder"
-    [actionConfig]="actionConfig"
-    [operat]="operat"
-    (saveClick)="save()"
-    (deleteClick)="selete()"
-  ></action-bar>
+  <bar-common-action-bar [config]="commonActionBarConfig">
+  </bar-common-action-bar>
 </div>
 
 <div class="row">

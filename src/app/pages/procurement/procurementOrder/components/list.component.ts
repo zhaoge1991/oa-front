@@ -24,7 +24,6 @@ export class ListComponent {
     public showGrid: boolean;
     public procurementOrders: ProcurementOrder[];
     private columnDefs: any[];
-    private selectedeRow: boolean;
     public selectedcolumnDefs: any[];
     public selectedProcurementOrder: ProcurementOrder;
     public isbatches: boolean = false;
@@ -34,9 +33,9 @@ export class ListComponent {
     public collection: any[] = [1];
     //翻页配置
     private paginate: Paginate;
-    private selectedIndex:number;
-    
-    
+    private selectedIndex: number;
+
+
     //选中行列表行配置
     private proData;
     private ordercostData;
@@ -69,6 +68,7 @@ export class ListComponent {
         this.showGrid = true;
         this.commonActionBarConfig = new CommonActionBarConfig();
         this.commonActionBarConfig.addNewUrl = 'pages/procurement/procurement_order/edit';
+        this.commonActionBarConfig.deleteUrl = 'pages/procurement/procurement_order';
         this.commonActionBarConfig.openUrl = 'pages/procurement/procurement_order/detail';
         this.commonActionBarConfig.idName = 'procurement_order_id';
         this.commonActionBarConfig.editUrl = 'pages/procurement/procurement_order/edit';
@@ -77,7 +77,6 @@ export class ListComponent {
 
     pageClick($event) {
         this.createRowData($event.text - 0);
-        this.selectedeRow = false;
         this.selectedProcurementOrder = null;
 
     }
@@ -214,7 +213,7 @@ export class ListComponent {
     private onRowSelected($event) {
         if ($event.node.selected) {
             this.selectedProcurementOrder = $event.node.data as ProcurementOrder;
-            this.selectedIndex = $event.node.data.index;
+            this.selectedIndex = $event.node.rowIndex;
             //产品清单数据
             this.proData = this.selectedProcurementOrder.procurement_order_product;
             this.selectedcolumnDefs = [
@@ -274,66 +273,27 @@ export class ListComponent {
                     width: 90,
                 }
             ];
-
-            
-
-
-            this.selectedeRow = true;
         }
     }
-
-
-
-    //搜索框搜索和回车事件
-    public onQuickFilterChanged($event) {
-        this.gridOptions.api.setQuickFilter($event.value);
-    }
-    public onQuickFilterEnter($event) {
-        if ($event.keyCode === 13) {
-            this.gridOptions.api.setQuickFilter($event.target.value);
-        }
-    }
-
     //双击列表单元格操作
     onCellDoubleClicked($event) {
         this.router.navigate(['pages/procurement/procurement_order/detail/', $event.data.procurement_order_id])
     }
 
-    //测试操作
-    @ViewChild('actionBar') actionbar: ActionBar;
-    testclick() {
-        this.actionbar.supauditclick();
-    }
-    testclick2($event) {
-        alert($event);
-    }
-
-    //保存操作
-    saveData() {
-        console.log('保存')
-    }
-    //删除操作
-    deleteData() {
-        let r = confirm('确认删除？')
-        if (r) {
-            this.listservice.delete(this.selectedProcurementOrder.procurement_order_id).subscribe(data => {
-                console.log(565656, data);
-                if (data.error) {
-                    this.message.putMessage({
-                        severity: 'error',
-                        summary: data.error,
-                        detail: data.error_description
-                    })
-                }
-                this.selectedProcurementOrder = null;
-                this.createRowData(1);
-            })
-
-        }
-    }
-    objectChange(procurementOrder:ProcurementOrder){
-        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+    objectChange(procurementOrder: ProcurementOrder) {
+        let selectedNodes = this.gridOptions.api.getSelectedNodes();
         this.gridOptions.api.removeItems(selectedNodes)
         this.gridOptions.api.insertItemsAtIndex(this.selectedIndex, [procurementOrder]);
     }
+
+    objectDelete(b: boolean) {
+        this.listservice.delete(this.selectedProcurementOrder).subscribe(data => {
+            let selectedNodes = this.gridOptions.api.getSelectedNodes();
+            this.gridOptions.api.removeItems(selectedNodes);
+            this.selectedProcurementOrder=null;
+        });
+    }
+
+
+
 }
