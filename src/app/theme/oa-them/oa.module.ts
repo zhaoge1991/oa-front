@@ -31,9 +31,10 @@ import {
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
-  
-  
-  
+  PreloaderComponent,
+
+
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
@@ -41,8 +42,8 @@ import {
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
   //end 公共操作栏
-  
-  DialogComponent,
+
+  AlertComponent,
   SampleOrderComponent,
   AnnexesComponent
 } from './components';
@@ -97,7 +98,8 @@ const NGA_COMPONENTS = [
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
-  
+  PreloaderComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
@@ -105,9 +107,9 @@ const NGA_COMPONENTS = [
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
   //end 公共操作栏
-  
+
   SampleOrderComponent,
-  DialogComponent,
+  AlertComponent,
   AnnexesComponent
 ];
 

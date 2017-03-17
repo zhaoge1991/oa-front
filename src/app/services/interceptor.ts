@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import {Router} from '@angular/router';
 import {MessageService} from "./core/messageComponent.service";
+import {PreloaderService} from "./core/preloaderComponent.service";
 
 export const baseUrl = 'http://192.168.1.142/crm/oa/public';
 
@@ -12,7 +13,7 @@ export class HttpInterceptorService extends Http {
   private token: string;
   private baseUrl: string;
 
-  constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private router: Router, private messageservice: MessageService) {
+  constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private router: Router, private messageservice: MessageService,private preloaderservice: PreloaderService) {
     super(backend, defaultOptions);
 
     this.baseUrl = baseUrl;
@@ -23,6 +24,7 @@ export class HttpInterceptorService extends Http {
     return super.request(url, options).map(res => {
       //console.log('返回结果');
       //console.log('http code：' + res.status);
+      this.preloaderservice.putToggle(false);
       return res;
     }).catch(res => {
       console.log('错误处理',res);
@@ -70,6 +72,7 @@ export class HttpInterceptorService extends Http {
       real_url += '?access_token=' + this.token;
     }
 
+    this.preloaderservice.putToggle(true);
     return super.get(real_url, options).map(res => res);
   }
 
@@ -92,6 +95,7 @@ export class HttpInterceptorService extends Http {
       options.body = {access_token: this.token}
     }
 
+    this.preloaderservice.putToggle(true);
     return super.delete(real_url, options).map(res => res);
   }
 
@@ -106,6 +110,7 @@ export class HttpInterceptorService extends Http {
     let real_url = this.baseUrl + url;
     body.access_token =  this.token;
 
+    this.preloaderservice.putToggle(true);
     return super.put(real_url, body,options).map(res => res);
   }
 
@@ -125,6 +130,7 @@ export class HttpInterceptorService extends Http {
       body = {access_token: this.token}
     }
 
+    this.preloaderservice.putToggle(true);
     return super.post(real_url, body,options).map(res => res);
   }
 

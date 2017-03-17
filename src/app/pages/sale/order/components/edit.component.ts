@@ -2,6 +2,7 @@ import {Component,OnInit,ViewChild} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {GridOptions} from "ag-grid/main";
 import {Location} from '@angular/common';
+import { Observable } from 'rxjs/Observable';
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
 import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
@@ -10,6 +11,7 @@ import {AppconfigService} from "../../../../services/core/appConfigService/appCo
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
+import {AlertService} from "../../../../services/core/alert.component.service";
 
 @Component({
   selector: 'sale-order-edit',
@@ -33,7 +35,8 @@ export class EditComponent implements OnInit{
     private payment: PaymentService,
     private appconfig: AppconfigService,
     private quantifier: QuantifierService,
-    private location: Location
+    private location: Location,
+    private alertservice: AlertService
   ){
     this.progridOptions = <GridOptions>{
       context: {
@@ -354,11 +357,17 @@ export class EditComponent implements OnInit{
   }
 
   //编辑守卫
-  canDeactivate(){
+  canDeactivate(): boolean|Observable<boolean>{
     if(JSON.stringify(this.olddata) == JSON.stringify(this.data)){
       return true;
     } else {
-      return confirm('单据已修改，确认放弃修改并退出吗？');
+      return this.alertservice.putMessage({
+        title: '提示弹窗',
+        detail: '单据已修改，确认放弃修改并退出吗？',
+        severity: 'warn'
+      }).map(data=>{
+        return data;
+      });
     }
   }
 }

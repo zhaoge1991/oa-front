@@ -10,6 +10,8 @@ import {AppconfigService} from "../../../../services/core/appConfigService/appCo
 import {StatusService} from "../../../../services/core/statusService/status.service";
 import {AlertService} from "../../../../services/core/alert.component.service";
 
+
+
 @Component({
   selector: 'order-manager',
   templateUrl: './list.html',
@@ -27,7 +29,7 @@ export class ListComponent{
   public isbatches: boolean = false;
   private listdata:any[];
   //翻页配置
-  private paginate : {
+  private pageconfig : {
     nowPage : number,
     lastPage : number,
     total: number,
@@ -36,8 +38,8 @@ export class ListComponent{
   };
   //按钮组配置
   private actionConfig = {
-    showbtn: {open: true,add:true,edit:true,action:true,export:true,annex:true,delete:true},
-    openurl: 'pages/sale/order/detail',
+    showbtn: {open: true,add:true,edit:true,action:true,export:true,annex:true,delete:true,checkpayment:true},
+    openurl: 'pages/sale/balance_payment/detail',
     addurl: 'pages/sale/order/edit',
     idname: 'order_id'
   }
@@ -72,8 +74,8 @@ export class ListComponent{
     private listservice: SaleOrderService,
     private cus: CurrencyService,
     private payment: PaymentService,
-    private currency: CurrencyService,
     private status: StatusService,
+    private currency: CurrencyService,
     private quantifier: QuantifierService,
     private appconfig: AppconfigService,
     private alertservice: AlertService
@@ -96,7 +98,7 @@ export class ListComponent{
         //保存原始数据
         this.listdata = order;
         //设置页码
-        this.paginate = {
+        this.pageconfig = {
           nowPage : orders.current_page-0,
           lastPage : orders.last_page-0,
           total: orders.total-0,
@@ -338,18 +340,6 @@ export class ListComponent{
       //支付方式数据
       this.orderpaymentData = this.payment.get(this.selectedrowData.payment_id);
 
-      //this.sampleData = {
-      //  sample_fee_info: '免费样品',
-      //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
-      //  disabled: false
-      //}
-
-      ////订单进度数据
-      //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{
-      //    this.orderscheduleData=res.results.data.order;
-      //  }
-      //);
-
 
       //生成操作配置
       //订单类型判断
@@ -454,7 +444,7 @@ export class ListComponent{
 
   //双击列表单元格操作
   onCellDoubleClicked($event){
-    this.router.navigate(['pages/sale/order/detail/',$event.data.order_id])
+    this.router.navigate(['pages/sale/balance_payment/detail/',$event.data.order_id])
   }
 
   //删除操作
@@ -467,11 +457,11 @@ export class ListComponent{
       if(data){
         this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
           this.selectedrowData = null;
-          this.createRowData(this.paginate.nowPage);
+          this.createRowData(this.pageconfig.nowPage);
         })
       }
       sub.unsubscribe();
     });
-
   }
+
 }

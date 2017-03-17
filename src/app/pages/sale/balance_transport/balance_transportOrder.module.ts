@@ -1,18 +1,14 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { routing } from './order.routing.ts';
+import { routing } from './balance_transportOrder.routing.ts';
 import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
 
-import {SaleOrderService} from "../../../services/saleOrder/sale-order.service";
-
-import { OrderComponent} from './order.component.ts'
+import { BalanceTransportComponent } from './balance_transportOrder.component'
 import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
-import { EditComponent } from './components/edit.component.ts';
-import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 
 
 @NgModule({
@@ -27,9 +23,7 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
   declarations: [
     ListComponent,
     DetailComponent,
-    EditComponent,
-    OrderComponent
-  ],
-  providers: [CanDeactivateGuard]
+    BalanceTransportComponent
+  ]
 })
-export class OrderModule {}
+export class BalanceTransportModule {}

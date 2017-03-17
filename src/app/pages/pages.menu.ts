@@ -31,22 +31,20 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'info',
+            path: 'balance_payment',
             data: {
               menu: {
-                title: '信息设置'
+                title: '欠尾款订单'
               }
-            },
-            children: [
-              {
-                path: 'provision',
-                data:　{
-                  menu: {
-                    title: '条款管理'
-                  }
-                }
+            }
+          },
+          {
+            path: 'balance_transport',
+            data: {
+              menu: {
+                title: '欠运费订单'
               }
-            ]
+            }
           }
         ]
       },
@@ -60,7 +58,17 @@ export const PAGES_MENU = [
             expanded: false,
             order: 0
           }
-        }
+        },
+        children: [
+          {
+            path: 'procurement_order',
+            data: {
+              menu: {
+                title: '采购单'
+              }
+            }
+          }
+        ]
       },
 
       {

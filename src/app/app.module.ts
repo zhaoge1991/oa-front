@@ -9,6 +9,7 @@ import { removeNgStyles, createNewHosts, createInputTransfer } from '@angularcla
 import {Router} from '@angular/router';
 import {HttpInterceptorService} from "./services/interceptor";
 import {MessageService} from "./services/core/messageComponent.service";
+import {PreloaderService} from "./services/core/preloaderComponent.service";
 
 //import { provideInterceptorService } from 'ng2-interceptors';
 //import {ServerURLInterceptor} from "./ServerURLInterceptor";
@@ -68,8 +69,8 @@ export type StoreType = {
     APP_PROVIDERS,
     MessageService,
     { provide: HttpInterceptorService,
-      useFactory:  (backend: XHRBackend, defaultOptions: RequestOptions,router:Router,messageService:MessageService) => new HttpInterceptorService(backend, defaultOptions,router,messageService),
-      deps: [XHRBackend, RequestOptions,Router,MessageService]
+      useFactory:  (backend: XHRBackend, defaultOptions: RequestOptions,router:Router,messageService:MessageService,preloaderservice: PreloaderService) => new HttpInterceptorService(backend, defaultOptions,router,messageService,preloaderservice),
+      deps: [XHRBackend, RequestOptions,Router,MessageService,PreloaderService]
     }
   ]
 })

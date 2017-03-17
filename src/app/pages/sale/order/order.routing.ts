@@ -6,6 +6,7 @@ import {EditComponent} from './components/edit.component.ts';
 import {DetailComponent} from './components/detail.component';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 
+// noinspection TypeScriptValidateTypes
 const routes: Routes = [
     {
         path: 'order',

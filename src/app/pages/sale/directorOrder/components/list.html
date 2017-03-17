@@ -5,6 +5,7 @@
               [operat]="operat"
               (saveClick)="saveData()"
               (deleteClick)="deleteData()"
+              (checkClick)="checkorder($event)"
   >
   </action-bar>
 </div>
@@ -35,7 +36,7 @@
                      (rowSelected)="onRowSelected($event)"
                      (cellDoubleClicked)="onCellDoubleClicked($event)"
         ></ag-grid-angular>
-        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+        <pages-button [paginate]="pageconfig" (pageClick)="pageClick($event)"></pages-button>
       </div>
     </div>
   </ba-card>

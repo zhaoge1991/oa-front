@@ -4,6 +4,7 @@ import {DirectorComponent} from './director.component';
 import {ListComponent} from './components/list.component';
 import {DetailComponent} from './components/detail.component.ts';
 
+// noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
     path: 'director',
