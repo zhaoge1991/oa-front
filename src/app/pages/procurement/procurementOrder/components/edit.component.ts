@@ -10,48 +10,26 @@ import {QuantifierService} from "../../../../services/core/quantifierService/qua
 import {SupplierSelectComponent} from "../../../../theme/oa-them/components/supplierSelectComponent/supplierSelect.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig"
+import {ProcurementOrderProduct} from "../../../../models/procurement/procurementOrderProduct"
+import {ProcurementOrderCost} from "../../../../models/procurement/procurementOrderCost"
 @Component({
     selector: 'procurement-procurement-order-edit',
     templateUrl: './edit.html',
 })
 
 export class EditComponent implements OnInit {
-    
+
     @ViewChild(SupplierSelectComponent) selectSupplier: SupplierSelectComponent;
-    @ViewChild(ProductSelectComponent) selectproduct: ProductSelectComponent;
+    @ViewChild(ProductSelectComponent) selectProductComponent: ProductSelectComponent;
     @ViewChild(CostComponent) addcostdialog: CostComponent;
     private progridOptions: GridOptions;
     private costgridOptions: GridOptions;
     private id: number;
     private procurementOrder: ProcurementOrder;
     private isEdit: boolean;
-
-    //按钮组配置
-    private actionConfig: {} = {
-        showbtn: {save: true, annex: true, delete: true, close: true},
-        openurl: 'pages/sale/order-manager/detail',
-        addurl: 'pages/sale/order-manager/edit',
-        idname: 'order_id'
-    };
-    //选中行列表行配置
-    private customerData;
-    private ordercostData: any[];
-    private ordercostAll: number = 0;
-    private ordercostCol = [
-        {
-            headerName: "#", width: 30, suppressSorting: true,
-            suppressMenu: true, pinned: true,
-            cellRenderer: function (params) {
-                return params.rowIndex + 1
-            }
-        },
-        {headerName: '费用名称', field: 'name', width: 240},
-        {headerName: '费用金额', field: 'price', width: 240}
-    ];
-    private orderpaymentData;
-    private orderscheduleData;
-    private currency_id: number;
-    private customer;
+    private selectedProduct: ProcurementOrderProduct;
+    private selectedCost: ProcurementOrderCost;
     //商品列定义
     private selectedcolumnDefs = [
         {
@@ -60,10 +38,11 @@ export class EditComponent implements OnInit {
             width: 90
         },
         {
-            headerName: '产品型号',
-            field: 'model',
-            width: 160,
-            editable: true
+            headerName: '工厂货号',
+            field: 'factory_no',
+            width: 480,
+            editable: true,
+            colDef: " "
         },
         {
             headerName: '中文描述',
@@ -118,6 +97,19 @@ export class EditComponent implements OnInit {
             editable: true
         }
     ];
+
+    private ordercostCol = [
+        {
+            headerName: "#", width: 30, suppressSorting: true,
+            suppressMenu: true, pinned: true,
+            cellRenderer: function (params) {
+                return params.rowIndex + 1
+            }
+        },
+        {headerName: '费用名称', field: 'name', width: 240},
+        {headerName: '费用金额', field: 'price', width: 240}
+    ];
+    private commonActionBarConfig: CommonActionBarConfig;
     constructor(
         private router: Router,
         private route: ActivatedRoute,
@@ -126,6 +118,11 @@ export class EditComponent implements OnInit {
         private appconfig: AppconfigService,
         private quantifier: QuantifierService
     ) {
+
+        this.commonActionBarConfig = new CommonActionBarConfig();
+        this.commonActionBarConfig.saveUrl = 'pages/procurement/procurement_order/edit';
+        this.commonActionBarConfig.idName = 'procurement_order_id';
+
         this.progridOptions = <GridOptions> {
             context: {
                 componentParent: this
@@ -136,6 +133,7 @@ export class EditComponent implements OnInit {
                 componentParent: this
             }
         };
+        this.procurementOrder = new ProcurementOrder(null);
     }
     ngOnInit() {
         this.route.params.subscribe((params: Params) => {
@@ -144,27 +142,56 @@ export class EditComponent implements OnInit {
         });
         if (this.id) {
             this.orderservice.getDetail(this.id).subscribe(data => {
-                this.procurementOrder = data;
+                this.procurementOrder = new ProcurementOrder(data);
             })
         } else {
-            this.procurementOrder = new ProcurementOrder();
+            this.procurementOrder = new ProcurementOrder(null);
         }
     }
 
+    //保存
+    onProcurementOrderSave(event: boolean) {
+        if (event) {
+            if (this.id) {
+                this.orderservice.edit(this.id, this.procurementOrder).subscribe(data => {
+                    if (data.status == 'success') {
+                        this.router.navigate(['pages/procurement/procurement_order'])
+                    }
+                });
+            } else {
+                this.orderservice.add(this.procurementOrder).subscribe(data => {
+                    if (data.status == 'success') {
+                        this.router.navigate(['pages/procurement/procurement_order'])
+                    }
+                });
 
-    //选中产品
-    private isproselected: boolean = false;
-    onRowSelected($event) {
-        this.isproselected = true
+            }
+        }
+    }
+    onDemanderChange(id: number) {
+        console.log('采购单组件需求方改变事件：' + id);
+        this.procurementOrder.procurement_demander_id = id;
+    }
+
+
+    onSupplierChange(id: number) {
+        console.log('采购单组件供应商改变事件：' + id);
+        this.procurementOrder.procurement_supplier_id = id;
+    }
+    onSelectedProduct($event) {
+        if (this.progridOptions.api.getSelectedRows().length >= 1) {
+            this.selectedProduct = this.progridOptions.api.getSelectedRows()[0] as ProcurementOrderProduct;
+        }
     }
 
     //添加产品按钮
     addpbtn() {
-        this.selectproduct.show();
+        this.selectProductComponent.show();
     }
     addproduct($event) {
-        this.procurementOrder.addProduct($event);
-        this.progridOptions.api.addItems([$event]);
+        let procurementOrderProduct = new ProcurementOrderProduct($event);
+        this.procurementOrder.addProduct(procurementOrderProduct);
+        this.progridOptions.api.addItems([procurementOrderProduct]);
     }
 
     //删除产品
@@ -172,19 +199,21 @@ export class EditComponent implements OnInit {
         let selectedNodes = this.progridOptions.api.getSelectedNodes();
         this.progridOptions.api.removeItems(selectedNodes);
         this.procurementOrder.deleteProduct(selectedNodes[0].childIndex);
-        this.isproselected = false;
+        this.selectedProduct = null;
     }
 
+
     //选中费用
-    private iscostselected: boolean = false;
-    oncostRowSelected($event) {
-        this.iscostselected = true;
+    onSelectedCostRow($event) {
+        if (this.costgridOptions.api.getSelectedRows().length >= 1) {
+            this.selectedCost = this.costgridOptions.api.getSelectedRows()[0] as ProcurementOrderCost;
+        }
     }
     addcostbtn() {
         this.addcostdialog.showdialog();
     }
     addcost($event) {
-        this.procurementOrder.addCost($event);
+        this.procurementOrder.addCost($event as ProcurementOrderCost);
         this.costgridOptions.api.addItems([$event]);
     }
 
@@ -193,23 +222,12 @@ export class EditComponent implements OnInit {
         let selectedNodes = this.costgridOptions.api.getSelectedNodes();
         this.costgridOptions.api.removeItems(selectedNodes);
         this.procurementOrder.deleteCost(selectedNodes[0].childIndex);
-        this.iscostselected = false;
+        this.selectedCost = null;
     }
 
-    //保存
-    save() {
 
-        if (this.id) {
-            this.orderservice.add(this.procurementOrder).subscribe(data => {
-                console.log(data);
-            });
-        } else {
-            this.orderservice.edit(this.id, this.procurementOrder).subscribe(data => {
-                console.log(data);
-            });
-        }
+    get diagnostic() {return JSON.stringify(this.procurementOrder);}
 
-    }
 
 }
 

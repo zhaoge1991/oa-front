@@ -1,130 +1,250 @@
 
-
+{{diagnostic}}
 <div class="row">
-  <action-bar
-    [actionsData]="procuremntOrder"
-    [actionConfig]="actionConfig"
-    [operat]="operat"
-    (saveClick)="save()"
-    (deleteClick)="selete()"
-  ></action-bar>
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]='procurementOrder' (objectSave)="onProcurementOrderSave($event)">
+    </bar-common-action-bar>
 </div>
 
 <div class="row">
-  <form class="form-horizontal" *ngIf="procurementOrder">
-    <ba-card baCardClass="with-scroll">
-      <div class="row form-content">
-        <div class="col-md-12 form-unite">
-          <div class="row">
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="num" class="col-sm-4 ng-form-control-label">供应商</label>
-                <div class="col-sm-8">
-                    <supplier-select></supplier-select>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <test-select></test-select>
-            </div>
-            <div class="col-md-4 col-xs-12">
-                <customer-select></customer-select>
-            </div>
-          </div>
-        </div>
-        
-        
-      </div>
-    </ba-card>
-    <div class="row">
-      <div class="col-md-12 col-xs-12" *ngIf="data">
-        <ng2-tab selected="pro-list"
-                 selected-contents-class="animated"
-                 selected-index-class="selected">
-          <div class="tabs">
-            <div index="pro-list">商品清单</div>
-            <div index="ordercost">其他费用</div>
-            <div index="customer">客户信息</div>
-            <div index="payment">付款方式</div>
-          </div>
-          <div class="tab-contents">
-            <div contents="pro-list">
-              <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
-                            (rowSelected)="onRowSelected($event)"
-                            [columnDefs]="selectedcolumnDefs"
-                            [rowData]="procuremntOrder.product"
-                            [gridOptions]="progridOptions"
-                            enableColResize
-                            enableSorting
-                            enableFilter
-                            groupHeaders
+    <form class="form-horizontal" *ngIf="procurementOrder">
+        <ba-card baCardClass="with-scroll">
+            <div class="row form-content">
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">供应商</label>
+                                <div class="col-sm-8">
+                                    <supplier-select [procurementSupplier]="procurementOrder.company" (onSupplierChange)="procurementOrder.procurement_supplier_id=$event.procurement_supplier_id;procurementOrder.company=$event"></supplier-select>
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">需求方</label>
+                                <div class="col-sm-8">
+                                    <demander-select [inputProcurementDemander]="procurementOrder.demander" (onDemanderChange)="procurementOrder.procurement_demander_id=$event.procurement_demander_id;procurementOrder.demander=$event"></demander-select>
+                                </div>
+                            </div>  
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">采购日期</label>
+                                <div class="col-sm-8">
+                                    <ng-calender [(value)]="procurementOrder.date_added" [placeholder]="'请选择时间'"></ng-calender>
+                                </div>
+                            </div>  
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">合同地点</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="procurementOrder.order_place" name="order_place">
+                                </div>
+                            </div>  
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">采购商品金额</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="procurementOrder.product_price" name="product_price">
+                                </div>
+                            </div>
 
-                            rowHeight="22"
-                            rowSelection="multiple"
-              ></ag-grid-angular>
-              <button (click)="addpbtn()">添加</button>
-              <button (click)="deletepro()" [disabled]="!isproselected">删除</button>
-              <product-select (productChange)="addproduct($event)"></product-select>
+
+
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">供-收款银行</label>
+                                <div class="col-sm-8">
+                                    <supplier-bank-select [procurementSupplierId]="procurementOrder.procurement_supplier_id" (onBankChange)='procurementOrder.supplier_bank_id=$event?.bank_id;procurementOrder.supplier_bank=$event'  ></supplier-bank-select>
+                                </div>
+                            </div>
+
+                            
+                            
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">需-收款银行</label>
+                                <div class="col-sm-8">
+                                    <demander-bank-select [procurementDemanderId]="procurementOrder.procurement_demander_id" (onBankChange)='procurementOrder.demander_bank_id=$event?.bank_id;procurementOrder.demander_bank=$event'  ></demander-bank-select>
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">期望发货时间</label>
+                                <div class="col-sm-8">
+                                    <ng-calender [(value)]="procurementOrder.date_delivery" [placeholder]="'请选择时间'"></ng-calender>
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">货币</label>
+                                <div class="col-sm-8">
+                                    <ng-select id="curren" [selectfor]="'currency_id'" [showname]="'code'" [(value)]="procurementOrder.currency_id"></ng-select>
+                                </div>
+                            </div>
+
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">其他费用</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control"  [(ngModel)]="procurementOrder.product_price" name="product_price">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">供-代理人</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control" [(ngModel)]="procurementOrder.supplier_agent" name="supplier_agent">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">需-代理人</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control" [(ngModel)]="procurementOrder.demander_agent" name="demander_agent">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">是否含税</label>
+                                <div class="col-sm-8">
+                                    <input autocomplete="off" type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==1" name='tax' value="1">是
+                                    <input autocomplete="off" type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==0" name='tax' value="0">否
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">合同编号</label>
+                                <div class="col-sm-8">
+                                    <input  readonly="readonly" type="text" class="ng-form-control" [(ngModel)]="procurementOrder.procurment_order_no" name="procurment_order_no">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">采购单总金额</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control" [(ngModel)]="procurementOrder.price" name="price">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
-            <div contents="ordercost">
-              <ag-grid-angular #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
-                           [columnDefs]="ordercostCol"
-                           [rowData]="procuremntOrder.cost"
-                           [gridOptions]="costgridOptions"
-                           (rowSelected)="oncostRowSelected($event)"
-                           rowSelection="multiple"
-              >加载其他费用清单</ag-grid-angular>
-              <table></table>
-              <button (click)="addcostbtn()">添加</button>
-              <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
-              <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+        </ba-card>
+        <div class="row">
+            <div class="col-md-12 col-xs-12" *ngIf="procurementOrder">
+                <ng2-tab selected="pro-list"
+                         selected-contents-class="animated"
+                         selected-index-class="selected">
+                    <div class="tabs">
+                        <div index="pro-list">商品清单</div>
+                        <div index="ordercost">其他费用</div>
+                        <div index="company">供应商资料</div>
+                        <div index="demander">需求方资料</div>
+                    </div>
+                    <div class="tab-contents">
+                        <div contents="pro-list">
+                            <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                                (rowSelected)="onSelectedProduct($event)"
+                                [columnDefs]="selectedcolumnDefs"
+                                [rowData]="procurementOrder.procurement_order_product"
+                                [gridOptions]="progridOptions"
+                                enableColResize
+                                enableSorting
+                                enableFilter
+                                groupHeaders
+
+                                rowHeight="22"
+                                rowSelection="multiple"
+                                ></ag-grid-angular>
+                            <button (click)="addpbtn()">添加</button>
+                            <button (click)="deletepro()" [disabled]="!selectedProduct">删除</button>
+                            <product-select (productChange)="addproduct($event)"></product-select>
+                        </div>
+                        <div contents="ordercost">
+                            <ag-grid-angular #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
+                                [columnDefs]="ordercostCol"
+                                [rowData]="procurementOrder.procurement_order_cost"
+                                [gridOptions]="costgridOptions"
+                                (rowSelected)="onSelectedCostRow($event)"
+                                rowSelection="multiple"
+                                >加载其他费用清单</ag-grid-angular>
+                            <table></table>
+                            <button (click)="addcostbtn()">添加</button>
+                            <button (click)="deletecost()" [disabled]="!selectedCost">删除</button>
+                            <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+                        </div>
+                        <div contents="company">
+                            <table *ngIf="procurementOrder.company">
+                                <tr>
+                                    <th>简称</th><td>{{procurementOrder?.company?.simple_name}}</td>
+                                    <th>电话</th><td>{{procurementOrder?.company?.tel}}</td>
+                                    <th>账期</th><td>{{procurementOrder?.company?.account_of}}</td>
+                                </tr>
+                                <tr>
+                                    <th>全称</th><td>{{procurementOrder?.company?.full_name}}</td>
+                                    <th>传真</th><td>{{procurementOrder?.company?.fax}}</td>
+                                    <th>结账日</th><td>{{procurementOrder?.company?.closing_date}}</td>
+                                </tr>
+                                <tr>
+                                    <th>状态</th><td>{{procurementOrder?.company?.supplier_status_id | supplierStatusPipe}}</td>
+                                    <th>城市</th><td>{{procurementOrder?.company?.city}}</td>
+                                    <th>银行账户</th><td>{{procurementOrder?.supplier_bank?.bank_no}}</td>
+                                </tr>
+                                <tr>
+                                    <th>等级</th><td>{{procurementOrder?.company?.supplier_level_id | supplierLevelPipe}}</td>
+                                    <th>地址</th><td>{{procurementOrder?.company?.add}}</td>
+                                    <th>开户行全称</th><td>{{procurementOrder?.supplier_bank?.bank_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>程度</th><td>{{procurementOrder?.company?.supplier_degree_id| supplierDegreePipe}}</td>
+                                    <th>邮编</th><td>{{procurementOrder?.company?.zip_code}}</td>
+                                    <th>收款人</th><td>{{procurementOrder?.supplier_bank?.payee}}</td>
+                                </tr>
+                                <tr>
+                                    <th>评分</th><td>{{procurementOrder?.company?.supplier_rating_id | supplierRatingPipe}}</td>
+                                    <th>纳税登记号</th><td>{{procurementOrder?.company?.tax_registration_no}}</td>
+                                    <th>备注</th><td>{{procurementOrder?.company?.remark}}</td>
+                                </tr>
+                                <tr>
+                                    <th>合同条款</th><td colspan="5"><pre style="white-space: pre-wrap;
+                                                                      word-wrap: break-word;">{{procurementOrder?.company?.contract_terms}}</pre></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div contents="demander">
+                            <table>
+                                <tr>
+                                    <th>简称</th><td>{{procurementOrder?.demander?.simple_name}}</td>
+                                    <th>电话</th><td>{{procurementOrder?.demander?.tel}}</td>
+                                </tr>
+                                <tr>
+                                    <th>全称</th><td>{{procurementOrder?.demander?.full_name}}</td>
+                                    <th>传真</th><td>{{procurementOrder?.demander?.fax}}</td>
+                                </tr>
+                                <tr>
+                                    <th>纳税登记号</th><td>{{procurementOrder?.demander?.tax_registration_no}}</td>
+                                    <th>银行账户</th><td>{{procurementOrder?.demander_bank?.bank_no}}</td>
+                                </tr>
+                                <tr>
+                                    <th>地址</th><td>{{procurementOrder?.demander?.add}}</td>
+                                    <th>开户行全称</th><td>{{procurementOrder?.demander_bank?.bank_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>邮编</th><td>{{procurementOrder?.demander?.zip_code}}</td>
+                                    <th>收款人</th><td>{{procurementOrder?.demander_bank?.payee}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </ng2-tab>
             </div>
-            <div contents="customer">
-              <table *ngIf="customerData">
-                <tr>
-                  <th>姓名</th><td>{{customerData?.firstname}}</td>
-                  <th>email</th><td>{{customerData?.email}}</td>
-                  <th>客户电话</th><td>{{customerData?.telephone}}</td>
-                </tr>
-                <tr>
-                  <th>国家</th><td>{{customerData?.country_id | countrypipe}}</td>
-                  <th>客户地址</th><td>{{customerData?.address}}</td>
-                  <th>客户类型</th><td>{{customerData?.kh_leixing}}</td>
-                </tr>
-                <tr>
-                  <th>项目</th><td>{{customerData?.project_id | projectpipe}}</td>
-                  <th>公司名称</th><td>{{customerData?.field_company}}</td>
-                  <th>公司网站</th><td>{{customerData?.field_company_site}}</td>
-                </tr>
-                <tr>
-                  <th>拥有人</th><td>{{customerData?.users | userspipe}}</td>
-                  <th>询盘时间</th><td>{{customerData?.date_added}}</td>
-                  <th>询盘方式</th><td>{{customerData?.kh_xunpan}}</td>
-                </tr>
-                <tr>
-                  <th>客户状态</th><td>{{customerData?.kh_zhuangtai}}</td>
-                  <th>原因备注</th><td>{{customerData?.kh_beizhu}}</td>
-                  <th>流失原因</th><td>{{customerData?.kh_liushi}}</td>
-                </tr>
-                <tr>
-                  <th>其他信息</th><td colspan="5"></td>
-                </tr>
-              </table>
-            </div>
-            <div contents="payment">
-              <table *ngIf="orderpaymentData">
-                <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
-                <tr><th>说明</th><td>{{orderpaymentData?.content}}</td></tr>
-                <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
-                <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
-                <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
-              </table>
-            </div>
-          </div>
-        </ng2-tab>
-      </div>
-    </div>
-  </form>
+        </div>
+    </form>
 </div>
 
 

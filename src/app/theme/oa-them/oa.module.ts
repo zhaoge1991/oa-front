@@ -35,6 +35,10 @@ import {
 
 
 
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
@@ -99,6 +103,11 @@ const NGA_COMPONENTS = [
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
+
+
   PreloaderComponent,
 
   //begin 公共操作栏

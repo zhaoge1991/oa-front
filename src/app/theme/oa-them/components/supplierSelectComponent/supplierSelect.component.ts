@@ -1,4 +1,4 @@
-import {Component, ViewChild, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewChild, ViewEncapsulation, OnInit,EventEmitter,Output,Input} from '@angular/core';
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 import {ProcurementSupplierService} from "../../../../services/procurement/procurementSupplier.service";
 import {ProcurementSupplier} from "../../../../models/procurement/procurementSupplier";
@@ -8,7 +8,6 @@ import {AgGridRatingPipeComponent} from "../../../../modules/agGrid/procurement/
 import {AgGridStatusPipeComponent} from "../../../../modules/agGrid/procurement/supplier/agGridStatusPipe.component";
 import {GridOptions} from "ag-grid/main";
 import {Paginate} from "../../../../models/common/paginate";
-
 @Component({
     selector: 'supplier-select',
     templateUrl: './supplierSelect.html',
@@ -21,8 +20,9 @@ export class SupplierSelectComponent implements OnInit {
     //弹出列表框
     @ViewChild('supplierDialog') supplierDialog: ModalDirective;
     @ViewChild('selectedrow') selectedrow: GridOptions;
-
-
+    @Output() onSupplierChange = new EventEmitter<ProcurementSupplier>();
+    @Input() procurementSupplier:ProcurementSupplier;
+    
     private selectProcurementSupplier: ProcurementSupplier;
 
     private procurementSuppliers: ProcurementSupplier[]
@@ -111,6 +111,8 @@ export class SupplierSelectComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(999, this.procurementSupplier)
+        
         this.setList('', 1);
     }
 
@@ -155,6 +157,8 @@ export class SupplierSelectComponent implements OnInit {
         if (this.selectedrow.api.getSelectedRows().length >= 1) {
             this.selectProcurementSupplier = this.selectedrow.api.getSelectedRows()[0] as ProcurementSupplier;
         }
+        this.procurementSupplier = this.selectProcurementSupplier ;
+        this.onSupplierChange.emit(this.selectProcurementSupplier);
         this.supplierDialog.hide();
     }
 }

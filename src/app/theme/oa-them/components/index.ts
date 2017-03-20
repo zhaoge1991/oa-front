@@ -18,3 +18,7 @@ export * from './testSelectComponent'
 export * from './firstSelectComponent'
 export * from './bar'
 export * from './preloaderComponent'
+
+export * from './demanderSelectComponent'
+export * from './demanderBankSelectComponent'
+export * from './supplierBankSelectComponent'

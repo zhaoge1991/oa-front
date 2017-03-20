@@ -20,19 +20,20 @@ export class ProcurementOrderService {
         })
     }
     add(procurementOrder: ProcurementOrder) {
-        return this.http.put('/api/procurement/procurement_order', procurementOrder).map(res => {
+        return this.http.post('/api/procurement/procurement_order', procurementOrder).map(res => {
             return res.json();
         });
     }
 
     edit(id: number, procurementOrder: ProcurementOrder) {
-        return this.http.post('/api/procurement/procurement_order/' + id, procurementOrder).map(res => {
+        return this.http.put('/api/procurement/procurement_order/' + id, procurementOrder).map(res => {
             return res.json();
         });
     }
 
-    delete(id: number) {
-        return this.http.delete('/api/procurement/procurement_order/' + id).map(res => {
+    delete(procurementOrder: ProcurementOrder) {
+        let options = new RequestOptions();
+        return this.http.delete('/api/procurement/procurement_order/' + procurementOrder.procurement_order_id,options).map(res => {
             return res.json();
         })
     }
