@@ -5,4 +5,5 @@ export class CommonActionBarConfig {
     editUrl:string;
     isProcurementOrder:boolean;
     deleteUrl:string;
+    saveUrl:string;
 }

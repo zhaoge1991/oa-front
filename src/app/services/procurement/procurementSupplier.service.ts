@@ -17,24 +17,24 @@ export class ProcurementSupplierService {
     }
 
     getDetail(id: number): Observable<ProcurementSupplier> {
-        return this.http.get('/api/procurement/procurement_order/' + id).map(res => {
-            return res.json().results.data.procurement_supplier as ProcurementSupplier;
+        return this.http.get('/api/procurement/supplier/' + id).map(res => {
+            return res.json().results.data.supplier as ProcurementSupplier;
         })
     }
     add(procurementSupplier: ProcurementSupplier) {
-        return this.http.put('/api/procurement/procurement_order', procurementSupplier).map(res => {
+        return this.http.put('/api/procurement/supplier', procurementSupplier).map(res => {
             return res.json();
         });
     }
 
-    edit(id: number, procurementOrder: ProcurementSupplier) {
-        return this.http.post('/api/procurement/procurement_order/' + id, procurementOrder).map(res => {
+    edit(id: number, procurementSupplier: ProcurementSupplier) {
+        return this.http.post('/api/procurement/supplier/' + id, procurementSupplier).map(res => {
             return res.json();
         });
     }
 
     delete(id: number) {
-        return this.http.delete('/api/procurement/procurement_order/' + id).map(res => {
+        return this.http.delete('/api/procurement/supplier/' + id).map(res => {
             return res.json();
         })
     }

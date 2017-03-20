@@ -20,13 +20,13 @@ export class ProcurementOrderService {
         })
     }
     add(procurementOrder: ProcurementOrder) {
-        return this.http.put('/api/procurement/procurement_order', procurementOrder).map(res => {
+        return this.http.post('/api/procurement/procurement_order', procurementOrder).map(res => {
             return res.json();
         });
     }
 
     edit(id: number, procurementOrder: ProcurementOrder) {
-        return this.http.post('/api/procurement/procurement_order/' + id, procurementOrder).map(res => {
+        return this.http.put('/api/procurement/procurement_order/' + id, procurementOrder).map(res => {
             return res.json();
         });
     }

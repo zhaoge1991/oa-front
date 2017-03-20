@@ -31,8 +31,9 @@ import {
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
-  
-  
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
   
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -42,6 +43,7 @@ import {
   ProcurementOrderActionBarComponent,
   DeleteActionBarComponent,
   BackActionBarComponent,
+  SaveActionBarComponent,
   //end 公共操作栏
   
   DialogComponent,
@@ -99,6 +101,10 @@ const NGA_COMPONENTS = [
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
+  
   
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -108,6 +114,7 @@ const NGA_COMPONENTS = [
   ProcurementOrderActionBarComponent,
   DeleteActionBarComponent,
   BackActionBarComponent,
+  SaveActionBarComponent,
   //end 公共操作栏
   
   SampleOrderComponent,
