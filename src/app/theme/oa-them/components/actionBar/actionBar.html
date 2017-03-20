@@ -1,27 +1,37 @@
 <div class="actionbar">
   <ng-content></ng-content>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.open" (click)="goDetail()" [disabled]="!actionsData" [ngClass]="{'active':isopend}">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.open">
+    <button type="button"  class="available" (click)="goDetail()" [disabled]="!actionsData" [ngClass]="{'active':isopend}">
       <i class="iconfont icon-dakai"></i><span>打开</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.add" (click)="addClick($event)">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.add">
+    <button type="button"  class="available" (click)="addClick($event)">
       <i class="iconfont icon-xinzeng"></i><span>新建</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.edit" (click)="editClick($event)" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.check" >
+    <button type="button"  class="available" (click)="chowcheck()" [disabled]="!actionsData">
+      <i class="iconfont icon-shenhe"></i><span>审核</span>
+    </button>
+  </div>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.report" >
+    <button type="button"  class="available" (click)="addClick($event)" [disabled]="!actionsData">
+      <i class="iconfont icon-baobiao"></i><span>销售报表</span>
+    </button>
+  </div>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.edit">
+    <button type="button"  class="available" (click)="editClick($event)" [disabled]="!actionsData">
       <i class="iconfont icon-bianji"></i><span>编辑</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.save" (click)="saveEmit()" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.save">
+    <button type="button"  class="available" (click)="saveEmit()" [disabled]="!actionsData">
       <i class="iconfont icon-baocun"></i><span>保存</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button" class="available" *ngIf="actionConfig.showbtn.action" id="action-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.action">
+    <button type="button" class="available" id="action-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!actionsData">
       <i class="iconfont icon-caozuo"></i><span>操作 <i class="iconfont icon-jiantou"></i></span>
     </button>
     <div class="btnmore" aria-labelledby="action-more">
@@ -39,8 +49,8 @@
       </ul>
     </div>
   </div>
-  <div class="btnitem">
-    <button type="button" class="available" *ngIf="actionConfig.showbtn.export" id="export-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.export">
+    <button type="button" class="available" id="export-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!actionsData">
       <i class="iconfont icon-daochu"></i><span>导出 <i class="iconfont icon-jiantou"></i></span>
     </button>
     <div class="btnmore" aria-labelledby="export-more">
@@ -50,18 +60,30 @@
       </ul>
     </div>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.annex" [disabled]="!actionsData">
-      <i class="iconfont icon-fujian"></i><span>附件</span><i>(5)</i>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.annex" >
+    <button type="button"  class="available" (click)="showAnnexes()" [disabled]="!actionsData">
+      <i class="iconfont icon-fujian"></i><span>附件</span><i *ngIf="actionsData">({{annexeslength}})</i>
+    </button>
+    <annexes #annexesdialog *ngIf="actionsData" [data]="actionsData" [idname]="actionConfig.idname"></annexes>
+  </div>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.new">
+    <button type="button" class="available" (click)="fileinput.click()" [disabled]="!actionsData">
+      <input type="file" hidden="true" #fileinput (change)="uploadfileEmit($event)">
+      <i class="iconfont icon-tianjia"></i><span>添加</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.delete" (click)="deleteEmit()" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.delete">
+    <button type="button"  class="available" (click)="deleteEmit()" [disabled]="!actionsData">
       <i class="iconfont icon-shanchu"></i><span>删除</span>
     </button>
   </div>
-  <div class="btnitem">
-    <button type="button"  class="available" *ngIf="actionConfig.showbtn.close" (click)="close()" [disabled]="!actionsData">
+  <div class="btnitem" *ngIf="actionConfig.showbtn.download">
+    <button type="button"  class="available" (click)="downloadEmit()" [disabled]="!actionsData">
+      <i class="iconfont icon-xiazai-copy"></i><span>下载</span>
+    </button>
+  </div>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.close">
+    <button type="button"  class="available" (click)="close()" [disabled]="!actionsData">
       <i class="iconfont icon-guanbishanchu"></i><span>返回</span>
     </button>
   </div>
@@ -107,6 +129,43 @@
         <!--输入框弹窗-->
         <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" [disabled]="!(dialogtext.data.result&&dialogtext.data.description)" (click)="procurementcheckEmit()">提交</button>
         <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" (click)="textdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--审核按钮弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">审核弹窗</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(true)">
+              <span>同意</span>
+            </label>
+          </div>
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(false)">
+              <span>不同意</span>
+            </label>
+          </div>
+          <div class="col-md-12 reason" *ngIf="isrefuse">
+            <input type="text" class="ng-form-control"  name="reason" [(ngModel)]="reason" placeholder="请说明原因">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="checkEmit()" [disabled]="isrefuse==null">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
       </div>
     </div>
   </div>

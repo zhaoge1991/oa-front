@@ -4,7 +4,6 @@
     [actionConfig]="actionConfig"
     [operat]="operat"
     (saveClick)="save()"
-    (deleteClick)="selete()"
   ></action-bar>
 </div>
 
@@ -54,7 +53,7 @@
               <div class="ng-form-group row">
                 <label class="col-sm-4 ng-form-control-label">订单类型</label>
                 <div class="col-sm-8">
-                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [(value)]="data.order_type_id"></ng-select>
+                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [value]="data.order_type_id" (valueChange)="orderTypeChange($event)"></ng-select>
                 </div>
               </div>
             </div>
@@ -116,9 +115,9 @@
                 </div>
               </div>
               <div class="ng-form-group row">
-                <label for="transport_fee" class="col-sm-4 ng-form-control-label">运费</label>
+                <label for="shipping_costs" class="col-sm-4 ng-form-control-label">运费</label>
                 <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="transport_fee" [(ngModel)]="data.transport_fee" name="transport_fee">
+                  <input type="text" class="ng-form-control" id="shipping_costs" [(ngModel)]="data.shipping_costs" name="shipping_costs">
                 </div>
               </div>
               <div class="ng-form-group row">
@@ -148,10 +147,9 @@
             </div>
             <div class="col-md-12">
               <div class="ng-form-group row">
-                <label for="demand" class="col-sm-1 ng-form-control-label">订单要求</label>
+                <label for="remark" class="col-sm-1 ng-form-control-label">订单要求</label>
                 <div class="col-sm-11">
-                  <textarea class="ng-form-control" id="demand" [(ngModel)]="data.demand" name="demand"></textarea>
-                  {{data.demand}}
+                  <textarea class="ng-form-control" id="remark" [(ngModel)]="data.remark" name="remark"></textarea>
                 </div>
               </div>
             </div>
@@ -195,6 +193,8 @@
           <div class="tabs">
             <div index="pro-list">商品清单</div>
             <div index="ordercost">其他费用</div>
+            <div index="sample_order" [style.display] ="isfreeorder?'block':'none'">样品单信息</div>
+            <div index="test" [style.display] ="isfreeorder?'block':'none'">测试信息</div>
             <div index="customer">客户信息</div>
             <div index="payment">付款方式</div>
           </div>
@@ -229,6 +229,22 @@
               <button (click)="addcostbtn()">添加</button>
               <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
               <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+            </div>
+            <div contents="sample_order">
+              <sample-order  [(sample_fee_info)]="data.sample_fee_info" [(sample_shipping_info)]="data.sample_shipping_info" [disabled]="false"></sample-order>
+            </div>
+            <div contents="test" >
+              <table>
+                <tr>
+                  <th>测试反馈日期</th><td>{{data?.test_dete}}</td>
+                </tr>
+                <tr>
+                  <th>测试结果</th><td>{{data?.test_result}}</td>
+                </tr>
+                <tr>
+                  <th>测试详情</th><td>{{data?.test_description}}</td>
+                </tr>
+              </table>
             </div>
             <div contents="customer">
               <table *ngIf="customerData">

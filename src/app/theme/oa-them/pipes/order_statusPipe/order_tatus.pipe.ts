@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {StatusService} from "../../../../services/coreService/statusService/status.service";
+import {StatusService} from "../../../../services/core/statusService/status.service";
 
 
 @Pipe({

@@ -6,13 +6,15 @@ import {SaleComponent} from './sale.component';
 import { OrderModule} from './order/order.module';
 
 import {routing} from './sale.routing';
+import {DirectorModule} from "./director/director.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     routing,
-    OrderModule
+    OrderModule,
+    DirectorModule
   ],
   declarations: [
     SaleComponent

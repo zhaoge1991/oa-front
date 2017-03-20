@@ -2,9 +2,9 @@ import {Component,Input,Output,EventEmitter,ViewChild,ViewEncapsulation,OnInit} 
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 
 import { TREE_ACTIONS, KEYS, IActionMapping } from 'angular-tree-component';
-import {ProductCatalogService} from "../../../../services/productService/product_catalogService/product_catalog.service";
-import {ProductListService} from "../../../../services/productService/product_listService/product_list.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
+import {ProductCatalogService} from "../../../../services/product/productCatalog/product_catalog.service";
+import {ProductListService} from "../../../../services/product/productList/product_list.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 
 
 @Component({
@@ -63,6 +63,7 @@ export class ProductSelectComponent implements OnInit{
     field: 'catalog',
     cellRenderer: (params)=>{
       let config = this.appconfigservice.get('localisation.language.default');
+      if(!params.value) return '';
       for(let i=0;i<params.value.catalog_description.length;i++){
         if(params.value.catalog_description[i].language_id = config){
           return params.value.catalog_description[i].name;
@@ -154,6 +155,7 @@ export class ProductSelectComponent implements OnInit{
   //搜索
   private searchtext:string;
   search($event){
+    console.log($event);
     this.catalog = null;
     this.searchtext = $event;
     this.init(this.searchtext,1,this.catalog)

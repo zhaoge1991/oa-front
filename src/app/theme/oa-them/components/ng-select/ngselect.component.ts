@@ -1,14 +1,14 @@
 import {Component,Input,Output,EventEmitter,OnInit} from '@angular/core';
 
-import {CurrencyService} from "../../../../services/coreService/currencyService/currency.service";
-import {CountryService} from "../../../../services/coreService/countryService/country.service";
-import {StatusService} from "../../../../services/coreService/statusService/status.service";
-import {ProjectService} from "../../../../services/coreService/projectService/project.service";
-import {TransportService} from "../../../../services/coreService/transportService/transport.service";
-import {SourceService} from "../../../../services/coreService/sourceService/source.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {ProvisionService} from "../../../../services/coreService/provisionService/provision.service";
-import {OrderTypeService} from "../../../../services/coreService/ordertypeService/order_type.service";
+import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
+import {CountryService} from "../../../../services/core/countryService/country.service";
+import {StatusService} from "../../../../services/core/statusService/status.service";
+import {ProjectService} from "../../../../services/core/projectService/project.service";
+import {TransportService} from "../../../../services/core/transportService/transport.service";
+import {SourceService} from "../../../../services/core/sourceService/source.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {ProvisionService} from "../../../../services/core/provisionService/provision.service";
+import {OrderTypeService} from "../../../../services/core/ordertypeService/order_type.service";
 
 @Component({
   selector: 'ng-select',
@@ -18,9 +18,9 @@ import {OrderTypeService} from "../../../../services/coreService/ordertypeServic
 
 export class NgSelectComponent implements OnInit{
   @Input() value;
-  @Output() valueChange = new EventEmitter();
   @Input() selectfor;
-  @Input() showname
+  @Input() showname;
+  @Output() valueChange = new EventEmitter();
 
   private options: any[];
 
@@ -58,6 +58,12 @@ export class NgSelectComponent implements OnInit{
         this.options = this.ordertypeservice.get();break
       default:
             this.options = [];
+    }
+    if(!this.value){
+      this.options.splice(0,0,{
+        [this.showname]:'---请选择---',
+        [this.selectfor]: ' '
+      })
     }
   }
 

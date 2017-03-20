@@ -1,8 +1,9 @@
 import {Component,OnInit,OnDestroy} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {Location} from '@angular/common';
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {SaleOrderService} from "../../../../services/sale-orderService/sale-order.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {baseUrl} from "../../../../services/interceptor";
 
 
 @Component({
@@ -34,7 +35,7 @@ export class DetailComponent implements OnInit,OnDestroy{
 
   //按钮组配置
   private actionConfig={
-    showbtn:{add:true,edit:true,action:true,export:true,annex:true,delete:true,close:true},
+    showbtn:{add:true,edit:true,action:true,export:true,annex:true,close:true},
     openurl: 'pages/sale/order/detail',
     addurl: 'pages/sale/order/edit',
     idname: 'order_id'
@@ -53,7 +54,7 @@ export class DetailComponent implements OnInit,OnDestroy{
   } = {};
 
   getById(id:number){
-    this.orderservice.getOrderById(id).subscribe(data=>{
+    this.orderservice.get(id).subscribe(data=>{
       //判断是否已完成
       this.isdone = (data.order_status_id===this.appconfig.get('sale.order.status.complete'))? true:false;
       //判断订单是否为免费样品单
@@ -131,14 +132,14 @@ export class DetailComponent implements OnInit,OnDestroy{
               this.operat.cusrecive = true;break
           /**客户已收货**/
             case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.procurementcheck = true;break
+              this.operat.isdone = true;break
           };
       }
     })
   }
 
   download(id:number){
-    this.orderservice.getwenjian(id).subscribe();
+    window.location.href = baseUrl+'/api/common/annex/download/'+id+'?access_token='+JSON.parse(localStorage.getItem('currentUser')).access_token
   }
 
 }

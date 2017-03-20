@@ -1,6 +1,6 @@
 import { Interceptor, InterceptedRequest, InterceptedResponse,InterceptorService  } from 'ng2-interceptors';
 import { Headers, RequestOptions } from '@angular/http';
-import {MessageService} from "./services/coreService/messageComponent.service";
+import {MessageService} from "services/core/messageComponent.service";
 
 /**
  * 自定义拦截器配置
@@ -31,8 +31,9 @@ export class ServerURLInterceptor implements Interceptor {
       }
     }
     if(method === 1){
-      request.options.body.access_token = this.token;
       console.log(request);
+      request.options.body.access_token = this.token;
+
     }
     if(method === 2){
       request.options.body.access_token = this.token;

@@ -3,7 +3,7 @@ import {GlobalState} from '../../../global.state';
 import {layoutSizes} from '../../../theme';
 
 import 'style-loader!./baSidebar.scss';
-import {SidebarMenuService} from "../../../services/menuService/sidebarMenu.service";
+import {SidebarMenuService} from "../../../services/menu/sidebarMenu.service";
 import * as _ from 'lodash';
 import {MENU} from "../../../app.menu";
 

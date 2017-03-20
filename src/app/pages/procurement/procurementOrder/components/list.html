@@ -1,0 +1,134 @@
+<div class="row">
+  
+</div>
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="selectedProcurementOrder" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入文字'"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="procurementOrders"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+        
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedProcurementOrder">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">商品清单</div>
+          <div index="ordercost">其他费用</div>
+          <div index="company">供应商资料</div>
+          <div index="demander">需求方资料</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <ag-grid-angular #selectedrow style="width: 100%; height: 180px;" class="ag-fresh"
+
+                         [columnDefs]="selectedcolumnDefs"
+                         [rowData]="proData"
+                         enableColResize
+                         enableSorting
+                         enableFilter
+                         groupHeaders
+
+                         rowHeight="22"
+                         rowSelection="multiple"
+            ></ag-grid-angular>
+          </div>
+          <div contents="ordercost">
+            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="ordercostCol"
+                          [rowData]="selectedProcurementOrder?.procurement_order_cost"
+            >加载其他费用清单</ag-grid-angular>
+          </div>
+          
+          <div contents="company">
+            <table *ngIf="selectedProcurementOrder.company">
+              <tr>
+                <th>简称</th><td>{{selectedProcurementOrder?.company?.simple_name}}</td>
+                <th>电话</th><td>{{selectedProcurementOrder?.company?.tel}}</td>
+                <th>账期</th><td>{{selectedProcurementOrder?.company?.account_of}}</td>
+              </tr>
+              <tr>
+                <th>全称</th><td>{{selectedProcurementOrder?.company?.full_name}}</td>
+                <th>传真</th><td>{{selectedProcurementOrder?.company?.fax}}</td>
+                <th>结账日</th><td>{{selectedProcurementOrder?.company?.closing_date}}</td>
+              </tr>
+              <tr>
+                <th>状态</th><td>{{selectedProcurementOrder?.company?.supplier_status_id | supplierStatusPipe}}</td>
+                <th>城市</th><td>{{selectedProcurementOrder?.company?.city}}</td>
+                <th>银行账户</th><td>{{selectedProcurementOrder?.supplier_bank?.bank_no}}</td>
+              </tr>
+              <tr>
+                <th>等级</th><td>{{selectedProcurementOrder?.company?.supplier_level_id | supplierLevelPipe}}</td>
+                <th>地址</th><td>{{selectedProcurementOrder?.company?.add}}</td>
+                <th>开户行全称</th><td>{{selectedProcurementOrder?.supplier_bank?.bank_name}}</td>
+              </tr>
+              <tr>
+                <th>程度</th><td>{{selectedProcurementOrder?.company?.supplier_degree_id| supplierDegreePipe}}</td>
+                <th>邮编</th><td>{{selectedProcurementOrder?.company?.zip_code}}</td>
+                <th>收款人</th><td>{{selectedProcurementOrder?.supplier_bank?.payee}}</td>
+              </tr>
+              <tr>
+               <th>评分</th><td>{{selectedProcurementOrder?.company?.supplier_rating_id | supplierRatingPipe}}</td>
+               <th>纳税登记号</th><td>{{selectedProcurementOrder?.company?.tax_registration_no}}</td>
+               <th>备注</th><td>{{selectedProcurementOrder?.company?.remark}}</td>
+              </tr>
+              <tr>
+                  <th>合同条款</th><td colspan="5"><pre style="white-space: pre-wrap;
+                                             word-wrap: break-word;">{{selectedProcurementOrder?.company?.contract_terms}}</pre></td>
+              </tr>
+            </table>
+          </div>
+          <div contents="demander">
+            <table>
+              <tr>
+                  <th>简称</th><td>{{selectedProcurementOrder?.demander?.simple_name}}</td>
+                  <th>电话</th><td>{{selectedProcurementOrder?.demander?.tel}}</td>
+              </tr>
+              <tr>
+                  <th>全称</th><td>{{selectedProcurementOrder?.demander?.full_name}}</td>
+                  <th>传真</th><td>{{selectedProcurementOrder?.demander?.fax}}</td>
+              </tr>
+              <tr>
+                  <th>纳税登记号</th><td>{{selectedProcurementOrder?.demander?.tax_registration_no}}</td>
+                  <th>银行账户</th><td>{{selectedProcurementOrder?.demander_bank?.bank_no}}</td>
+              </tr>
+              <tr>
+                  <th>地址</th><td>{{selectedProcurementOrder?.demander?.add}}</td>
+                  <th>开户行全称</th><td>{{selectedProcurementOrder?.demander_bank?.bank_name}}</td>
+              </tr>
+              <tr>
+                  <th>邮编</th><td>{{selectedProcurementOrder?.demander?.zip_code}}</td>
+                  <th>收款人</th><td>{{selectedProcurementOrder?.demander_bank?.payee}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

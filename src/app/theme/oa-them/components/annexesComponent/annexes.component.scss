@@ -1,0 +1,18 @@
+.annexs-main{
+  max-height: 300px;
+  overflow-y: scroll;
+  table{
+    width: 100%;
+  }
+  td{
+    padding: 10px;
+  }
+  .iconfont{
+    font-size: 2rem;
+    vertical-align: middle;
+  }
+
+  label.custom-radio > span{
+    width: auto;
+  }
+}

@@ -1,12 +1,13 @@
 import {Component,OnInit,ViewChild} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {GridOptions} from "ag-grid/main";
+import {Location} from '@angular/common';
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
-import {SaleOrderService} from "../../../../services/sale-orderService/sale-order.service";
-import {PaymentService} from "../../../../services/coreService/paymentService/payment.service";
-import {AppconfigService} from "../../../../services/coreService/appConfigService/appConfigService";
-import {QuantifierService} from "../../../../services/coreService/quantifierService/quantifier.service";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {PaymentService} from "../../../../services/core/paymentService/payment.service";
+import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 
@@ -21,6 +22,7 @@ export class EditComponent implements OnInit{
   private progridOptions: GridOptions;
   private costgridOptions: GridOptions;
   private id:number;
+  private olddata: any;
   private data: OrderEditModel;
   private isEdit:boolean;
 
@@ -30,7 +32,8 @@ export class EditComponent implements OnInit{
     private orderservice: SaleOrderService,
     private payment: PaymentService,
     private appconfig: AppconfigService,
-    private quantifier: QuantifierService
+    private quantifier: QuantifierService,
+    private location: Location
   ){
     this.progridOptions = <GridOptions>{
       context: {
@@ -42,12 +45,11 @@ export class EditComponent implements OnInit{
         componentParent: this
       }
     };
-    this.setcurrens();
   }
 
   //按钮组配置
   private actionConfig:{} = {
-    showbtn: {save:true,annex:true,delete:true,close:true},
+    showbtn: {save:true,annex:true,close:true},
     openurl: 'pages/sale/order-manager/detail',
     addurl: 'pages/sale/order-manager/edit',
     idname: 'order_id'
@@ -149,18 +151,19 @@ export class EditComponent implements OnInit{
   ];
   setData(){
     if(this.id){
-      this.orderservice.getOrderById(this.id).subscribe(data=>{
+      this.orderservice.get(this.id).subscribe(data=>{
         this.data = {
+          order_id: data.order_id,
           order_no: data.order_no,
           customer_id: data.customer_id,
-          customer: data.customer.firstname,
+          customer: data.customer?data.customer.firstname:null,
           online_order: data.online_order,
           currency_id: data.currency_id,
           provision_id: data.provision_id,
           pi: data.pi,
           date_added: data.date_added,
           order_type_id: data.order_type_id,
-          country_id: data.customer.country_id,
+          country_id: data.customer?data.customer.country_id:null,
           payment_id: data.payment_id,
           payment_costs: data.payment_costs,
           product_price: data.product_price,
@@ -168,21 +171,27 @@ export class EditComponent implements OnInit{
           expected_delivery: data.expected_delivery,
           project_id: data.project_id,
           transport_id: data.transport_id,
-          transport_fee: data.transport_fee,
+          shipping_costs: data.shipping_costs,
           total_price: data.total_price,
           order_status_id: data.order_status_id,
           complaint: data.complaint,
-          demand: data.demand,
+          remark: data.remark,
           actual_payment: data.actual_payment,
           actual_bank_fee: data.actual_bank_fee,
           money_receipt: data.money_receipt,
           product: data.products,
-          cost: data.ordercost
+          cost: data.ordercost,
+          sample_fee_info: data.sample_fee_info,
+          sample_shipping_info: data.sample_shipping_info,
+          annex: data.annex
         }
         this.currency_id = this.data.currency_id;
 
+        //保存原始数据
+        this.olddata = JSON.parse(JSON.stringify(this.data));
+
         //用户数据
-        this.customerData = data.customer?data.customer:'';
+        this.customerData = data.customer?data.customer:false;
         this.customer = {
           id: this.data.customer_id,
           name: this.data.customer,
@@ -205,10 +214,14 @@ export class EditComponent implements OnInit{
         //  }
         //);
 
+        //判断是否为样品单
+        this.isfreeOrder(this.data.order_type_id);
+
       })
     } else {
       let date = new Date();
       this.data = {
+        order_id: null,
         order_no: '',
         customer_id: null,
         customer: '',
@@ -226,32 +239,31 @@ export class EditComponent implements OnInit{
         expected_delivery: '',
         project_id: null,
         transport_id: null,
-        transport_fee: '',
+        shipping_costs: '',
         total_price: '',
         order_status_id: null,
         complaint: '',
-        demand: '',
+        remark: '',
         actual_payment: '',
         actual_bank_fee: '',
         money_receipt: '',
         product: [],
-        cost: []
+        cost: [],
+        sample_fee_info: '',
+        sample_shipping_info: '',
+        annex: []
       }
       this.customer = {
         id: this.data.customer_id,
         name: this.data.customer
       }
+
+      //保存原始数据
+      this.olddata = JSON.parse(JSON.stringify(this.data));
+
+      //判断是否为样品单
+      this.isfreeOrder(this.data.order_type_id);
     }
-  }
-
-  private currens:any[] = [];
-  setcurrens(){
-    //this.configservice.getCurrency();
-    //for(let i in data){
-    //
-    //  this.currens.push(data[i]);
-    //}
-
   }
 
   //选中产品
@@ -301,6 +313,19 @@ export class EditComponent implements OnInit{
     this.iscostselected = false;
   }
 
+  //更改订单类型
+  orderTypeChange($event){
+    this.data.order_type_id = $event - 0;
+    this.isfreeOrder(this.data.order_type_id);
+  }
+  //判断是否是样品单
+  private isfreeorder: boolean;
+  isfreeOrder(id:number){
+    if(id == this.appconfig.get('sale.order.type.free') || id == this.appconfig.get('sale.order.type.charge')){
+      this.isfreeorder = true;
+    } else this.isfreeorder = false;
+  }
+
   //单位选择(无法实现数据绑定)
   //quantifierselect(params){
   //  let value = params.value;
@@ -320,11 +345,22 @@ export class EditComponent implements OnInit{
   save(){
     this.data.customer_id = this.customer.id;
     this.data.customer = this.customer.name;
-    this.orderservice.addorder(this.id,this.data).subscribe(data=>{
-      console.log(data);
-    });
+    if(this.isEdit){
+      this.orderservice.put(this.id,this.data).subscribe();
+    } else {
+      this.orderservice.post(this.data).subscribe();
+    }
+    this.olddata = this.data;
   }
 
+  //编辑守卫
+  canDeactivate(){
+    if(JSON.stringify(this.olddata) == JSON.stringify(this.data)){
+      return true;
+    } else {
+      return confirm('单据已修改，确认放弃修改并退出吗？');
+    }
+  }
 }
 
 

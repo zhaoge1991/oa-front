@@ -5,8 +5,7 @@
               [operat]="operat"
               (saveClick)="saveData()"
               (deleteClick)="deleteData()"
-              (supauditClick)="testclick2($event)"
-              (procurementauditClick)="testclick2($event)">
+  >
   </action-bar>
 </div>
 <div class="row">
@@ -14,7 +13,7 @@
     <div class="row">
       <div class="col-md-12 col-xs-12 table-main">
         <div class="mysearch">
-          <ng-search [placeholder]="'请输入文字'"></ng-search>
+          <ng-search [placeholder]="'请输入客户名'" (searchtext)="search($event)"></ng-search>
           <!--<div class="search-input">-->
           <!--<span class="iconfont icon-search"></span>-->
           <!--<input #search type="text" (keyup)="onQuickFilterEnter($event)" id="quickFilterInput" placeholder="快速搜索" class="form-control" style="width: 180px;display: inline-block"/>-->
@@ -77,10 +76,7 @@
             >加载其他费用清单</ag-grid-angular>
           </div>
           <div contents="sample_order">
-            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
-                          [columnDefs]="[{headerName: '',field: 'index',width: 60},{headerName: '费用名称',field: 'proname',width: 240},{headerName: '费用金额',field: 'money',width: 240}]"
-                          [rowData]="[{index: 1,proname: 'A',money: '1180'},{index: 2,proname: 'B',money: '1870'},{index: 3,proname: 'C',money: '245'}]"
-            >加载样品单信息</ag-grid-angular>
+            <sample-order *ngIf="selectedrowData" [(sample_fee_info)]="selectedrowData.sample_fee_info" [(sample_shipping_info)]="selectedrowData.sample_shipping_info" [disabled]="true"></sample-order>
           </div>
           <div contents="test" >
             <table>

@@ -1,0 +1,7 @@
+<select  class="ng-form-control" (change)="change($event.target.selectedIndex)">
+  <option value="">请选择</option>
+  <option *ngFor="let procurementDemander of procurementDemanders" [value]="procurementDemander.procurement_demander_id" [selected]="procurementDemander.procurement_demander_id===inputProcurementDemander.procurement_demander_id">{{procurementDemander.full_name}}</option>
+</select>
+
+
+

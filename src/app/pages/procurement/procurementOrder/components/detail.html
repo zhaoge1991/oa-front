@@ -1,0 +1,94 @@
+<div *ngIf="procurementOrder">
+    <div class="row">
+        <bar-common-action-bar [config]="commonActionBarConfig" [object]="procurementOrder" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+    </div>
+    <div class="row">
+        <ba-card baCardClass="with-scroll">
+            <div class="opendetail">
+                <h1 class="title">采购合同</h1>
+                <table>
+                    <tr>
+                        <th>供方</th> <td>{{procurementOrder?.company?.full_name}}</td>
+                        <th>合同编号</th> <td>{{procurementOrder.procurement_contact_no}}</td>
+                    </tr>
+                    <tr>
+                        <th></th> <td></td>
+                        <th>签订地点</th><td >{{procurementOrder.order_place}}</td>
+                    </tr>
+                    <tr>
+                        <th>需方</th> <td>{{procurementOrder?.demander?.full_name}}</td>
+                        <th>签订时间</th> <td>{{procurementOrder.date_added}}</td>
+                    </tr>
+
+                </table>
+                一、产品名称、型号、数量、金额：
+                <table>
+                    <tr>
+                        <th>序号</th> <th>产品名称</th> <th>产品描述</th> <th>标签型号</th> <th>数量</th> <th>单价({{procurementOrder.currency_id|currencypipe}})</th><th>总金额({{procurementOrder.currency_id|currencypipe}})</th><th>备注</th>
+                    </tr>
+                    <tr *ngFor="let pro of procurementOrder.procurement_order_product,let i=index">
+                        <td>{{i+1}}</td> <td>{{pro.model}}</td> <td>{{pro.zh_name}}</td> <td>{{pro.factory_no}}</td><td>{{pro.quantity}}</td><td>{{pro.price}}</td>  <td>{{pro.price*pro.quantity}}</td><td>{{pro.remark}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="4">合计</th> <td>{{product_total_quantity}}</td><td></td><td>{{procurementOrder.product_price}}</td><td></td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="6">总价</th> <td>{{procurementOrder.price}}</td><td></td>
+                    </tr>
+                    <tr>
+                        <th colspan="7">合计金额（大写）：{{procurementOrder.price|amountOfCapitalPipe}}</th><td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"><pre style="white-space: pre-wrap;
+                                             word-wrap: break-word;">{{procurementOrder.contract_terms}}</pre> </td>
+                    </tr>
+
+                </table>
+                <table>
+                    <tr>
+                        <td>供方：</td>
+                        <td>需方：</td>
+                    </tr>
+                    <tr>
+                        <td>单位名称（章）：{{procurementOrder?.company?.full_name}}</td>
+                        <td>单位名称（章）：{{procurementOrder?.demander?.full_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>单位地址：{{procurementOrder?.company?.add}}</td>
+                        <td>单位地址：{{procurementOrder?.demander?.add}}</td>
+                    </tr>
+                    <tr>
+                        <td>委托代理人：{{procurementOrder.supplier_agent}}</td>
+                        <td>委托代理人：{{procurementOrder.demander_agent}}</td>
+                    </tr>
+                    <tr>
+                        <td>电话：{{procurementOrder?.company?.tel}}</td>
+                        <td>电话：{{procurementOrder?.demander?.tel}}</td>
+                    </tr>
+                    <tr>
+                        <td>传真：{{procurementOrder?.company?.fax}}</td>
+                        <td>传真：{{procurementOrder?.demander?.fax}}</td>
+                    </tr>
+                    <tr>
+                        <td>开户银行：{{procurementOrder?.supplier_bank?.bank_name}}</td>
+                        <td>开户银行：{{procurementOrder?.demander_bank?.bank_name}}</td>
+                    </tr>
+                    <tr>
+                        <td>账号：{{procurementOrder?.supplier_bank?.bank_no}}</td>
+                        <td>账号：{{procurementOrder?.demander_bank?.bank_no}}</td>
+                    </tr>
+                    <tr>
+                        <td>邮政编码：{{procurementOrder?.company?.zip_code}}</td>
+                        <td>邮政编码：{{procurementOrder?.demander?.zip_code}}</td>
+                    </tr>
+                    <tr>
+                        <td>纳税登记号：{{procurementOrder?.company?.tax_registration_no}}</td>
+                        <td>纳税登记号：{{procurementOrder?.demander?.tax_registration_no}}</td>
+                    </tr>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+</div>

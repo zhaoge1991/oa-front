@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
+import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
-
 import {
   BaThemeConfig
 } from './theme.config';
@@ -27,15 +27,34 @@ import {
   PagesButtonComponent,
   PagesComponent,
   ProductSelectComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  SupplierSelectComponent,
+  TestSelectComponent,
+  FirstSelectComponent,
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
+  
+  //begin 公共操作栏
+  CommonActionBarComponent,
+  NewActionBarComponent,
+  OpenActionBarComponent,
+  EditActionBarComponent,
+  ProcurementOrderActionBarComponent,
+  DeleteActionBarComponent,
+  BackActionBarComponent,
+  SaveActionBarComponent,
+  //end 公共操作栏
+  
+  DialogComponent,
+  SampleOrderComponent,
+  AnnexesComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
 
 import {
-  //BaScrollPosition,
-  //BaSlimScroll,
-  //BaThemeRun
+  AnnexeIconDirective
 } from './directives';
 
 import {
@@ -62,7 +81,8 @@ import {
 } from './validators';
 
 import {
-  AuthGuard
+  AuthGuard,
+  CanDeactivateGuard
 } from './guards'
 
 const NGA_COMPONENTS = [
@@ -77,14 +97,33 @@ const NGA_COMPONENTS = [
   PagesButtonComponent,
   PagesComponent,
   ProductSelectComponent,
-  ScheduleComponent
+  ScheduleComponent,
+  SupplierSelectComponent,
+  TestSelectComponent,
+  FirstSelectComponent,
+  DemanderSelectComponent,
+  DemanderBankSelectComponent,
+  SupplierBankSelectComponent,
+  
+  
+  //begin 公共操作栏
+  CommonActionBarComponent,
+  NewActionBarComponent,
+  OpenActionBarComponent,
+  EditActionBarComponent,
+  ProcurementOrderActionBarComponent,
+  DeleteActionBarComponent,
+  BackActionBarComponent,
+  SaveActionBarComponent,
+  //end 公共操作栏
+  
+  SampleOrderComponent,
+  DialogComponent,
+  AnnexesComponent
 ];
 
 const NGA_DIRECTIVES = [
-  //BaScrollPosition,
-  //BaSlimScroll,
-  //BaThemeRun,
-  //BaCardBlur
+  AnnexeIconDirective
 ];
 
 const NGA_PIPES = [
@@ -111,7 +150,8 @@ const NGA_VALIDATORS = [
 ];
 
 const NGA_GUARDS = [
-  AuthGuard
+  AuthGuard,
+  CanDeactivateGuard
 ]
 
 @NgModule({
@@ -126,6 +166,7 @@ const NGA_GUARDS = [
     FormsModule,
     ReactiveFormsModule,
     NgUploaderModule,
+    FileUploadModule,
     AgGridModule.withComponents([]),
     DropdownModule.forRoot(),
     ModalModule.forRoot(),
@@ -142,8 +183,6 @@ export class OaModule {
     return <ModuleWithProviders> {
       ngModule: OaModule,
       providers: [
-        BaThemeConfigProvider,
-        BaThemeConfig,
         ...NGA_VALIDATORS,
         ...NGA_SERVICES
       ],

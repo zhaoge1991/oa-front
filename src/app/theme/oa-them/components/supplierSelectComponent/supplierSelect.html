@@ -1,0 +1,41 @@
+<div class="customerselect">
+  <input type="text" class="customerinput ng-form-control" (focus)="show()" value="{{procurementSupplier?.full_name}}">
+  <span>{{procurementSupplier?.procurement_supplier_id}}</span>
+</div>
+
+<div bsModal #supplierDialog="bs-modal" class="modal fade customer_search-content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="supplierDialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">供应商档案</h4>
+      </div>
+      <div class="modal-body">
+        <div class="customer_search">
+          <ng-search (searchtext)="search($event)" ></ng-search>
+        </div>
+        <ag-grid-angular #selectedrow style="width: 100%; height: 300px;" class="ag-fresh"
+
+                     [columnDefs]="columnDefs"
+                     [rowData]="procurementSuppliers"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+                     (rowSelected)="onRowSelected($event)"
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="selectSupplier()">确定</button>
+        <button class="btn btn-primary confirm-btn" (click)="supplierDialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

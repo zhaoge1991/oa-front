@@ -1,0 +1,57 @@
+
+<div class="sample">
+  <table>
+    <tr>
+      <th>样品费用</th>
+      <th>发货方式及运费</th>
+    </tr>
+    <tr>
+      <td>
+        <div *ngFor="let option of sample_feeOptions">
+          <label class="radio-inline custom-radio nowrap">
+            <input name="sample_fee_info" type="radio" [value]="option" [checked]="fee_checked == option" [disabled]="disabled" (change)="fee_change(option)">
+            <span>{{option}}</span>
+            <input #input type="text" class="other_input" *ngIf="option=='其他'" [(ngModel)]="fee_other" name="fee_other" [disabled]="!fee_otherischecked" (keyup)="fee_inputchange(input.value)">
+          </label>
+        </div>
+      </td>
+      <td>
+        <div class="pull-left cus">
+          <div>
+            <label class="radio-inline custom-radio nowrap">
+              <input name="sample_shipping" type="radio" value="客户付运费" [checked]="isCus" [disabled]="disabled" (change)="cus_change(true)">
+              <span>客户付运费</span>
+            </label>
+          </div>
+          <div class="options">
+            <div *ngFor="let option of sample_shippingCusOptions">
+              <label class="radio-inline custom-radio nowrap">
+                <input name="cus_sample_shipping_info" type="radio" [value]="option" [checked]="(shipping_checked == option)&&isCus" [disabled]="disabled || (!isCus)" (change)="shipping_change(option)">
+                <span>{{option}}</span>
+                <input #cusinput type="text" class="other_input" *ngIf="option=='其他'" [(ngModel)]="shipping_other" name="cus_other" [disabled]="(!shipping_otherischecked)||(!isCus)" (keyup)="shipping_inputchange(cusinput.value)">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="pull-left">
+          <div>
+            <label class="radio-inline custom-radio nowrap">
+              <input name="sample_shipping" type="radio" value="我司付运费" [checked]="!isCus&&sample_shipping_info" [disabled]="disabled" (change)="cus_change(false)">
+              <span>我司付运费</span>
+            </label>
+          </div>
+          <div class="options">
+            <div *ngFor="let option of sample_shippingComOptions">
+              <label class="radio-inline custom-radio nowrap">
+                <input name="com_sample_shipping_info" type="radio" [value]="option" [checked]="(shipping_checked == option)&&(!iscus)" [disabled]="disabled || isCus" (change)="shipping_change(option)">
+                <span>{{option}}</span>
+                <input #cominput type="text" class="other_input" *ngIf="option=='其他'" [(ngModel)]="shipping_other" name="com_other" [disabled]="(!shipping_otherischecked)||(isCus)" (keyup)="shipping_inputchange(cominput.value)">
+              </label>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+

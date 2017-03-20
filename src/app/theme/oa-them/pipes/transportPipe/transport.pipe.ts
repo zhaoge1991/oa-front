@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {TransportService} from "../../../../services/coreService/transportService/transport.service";
+import {TransportService} from "../../../../services/core/transportService/transport.service";
 
 
 @Pipe({

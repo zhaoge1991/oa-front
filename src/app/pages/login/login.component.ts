@@ -47,7 +47,4 @@ export class Login implements OnInit{
     }
   }
 
-  private goregister(){
-    this.router.navigate(['/login']);
-  }
 }
