@@ -1,1 +1,2 @@
-export * from './annexeiconDirective'
+export * from './annexeiconDirective';
+export * from './moveModalDirective';

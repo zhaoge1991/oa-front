@@ -51,7 +51,8 @@ import {
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
 
 import {
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 } from './directives';
 
 import {
@@ -114,7 +115,8 @@ const NGA_COMPONENTS = [
 ];
 
 const NGA_DIRECTIVES = [
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 ];
 
 const NGA_PIPES = [

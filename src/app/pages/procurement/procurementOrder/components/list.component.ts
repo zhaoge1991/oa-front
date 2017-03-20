@@ -35,8 +35,8 @@ export class ListComponent {
     //翻页配置
     private paginate: Paginate;
     private selectedIndex:number;
-    
-    
+
+
     //选中行列表行配置
     private proData;
     private ordercostData;
@@ -275,7 +275,7 @@ export class ListComponent {
                 }
             ];
 
-            
+
 
 
             this.selectedeRow = true;

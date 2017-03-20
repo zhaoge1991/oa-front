@@ -32,14 +32,14 @@ import {agGridComponentModule} from "../../../modules/agGrid/agGridComponent.mod
     ]),
     PipeModule,
     agGridComponentModule
-    
+
   ],
   declarations: [
     ListComponent,
     DetailComponent,
     EditComponent,
     ProcurementOrderComponent
-    
+
   ]
 })
 export class ProcurementOrderModule {}

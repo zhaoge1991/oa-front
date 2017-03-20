@@ -20,7 +20,6 @@ export class PreloaderComponent{
 
   constructor(private preloaderservice: PreloaderService){
     this.preloaderservice.toggle$.subscribe(tog=>{
-      console.log(tog);
       this.isshow = tog;
     })
   }

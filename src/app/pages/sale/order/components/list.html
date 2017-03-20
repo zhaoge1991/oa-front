@@ -1,12 +1,14 @@
 <div class="row">
-  <action-bar #actionBar
-              [actionsData]="selectedrowData"
-              [actionConfig]="actionConfig"
-              [operat]="operat"
-              (saveClick)="saveData()"
-              (deleteClick)="deleteData()"
-  >
-  </action-bar>
+  <!--<action-bar #actionBar-->
+              <!--[actionsData]="selectedrowData"-->
+              <!--[actionConfig]="actionConfig"-->
+              <!--[operat]="operat"-->
+              <!--(saveClick)="saveData()"-->
+              <!--(deleteClick)="deleteData()"-->
+  <!--&gt;-->
+  <!--</action-bar>-->
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)">
+  </bar-common-action-bar>
 </div>
 <div class="row">
   <ba-card baCardClass="with-scroll">

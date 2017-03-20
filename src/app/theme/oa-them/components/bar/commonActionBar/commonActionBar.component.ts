@@ -12,10 +12,10 @@ export class CommonActionBarComponent{
     @Input() config: CommonActionBarConfig;
     @Input() object: any;
     @Output() objectChange = new EventEmitter();
-    
+
     change(object){
         this.objectChange.emit(this.object);
     }
-    
-   
+
+
 }

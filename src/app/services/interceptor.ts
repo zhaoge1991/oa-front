@@ -27,6 +27,7 @@ export class HttpInterceptorService extends Http {
       this.preloaderservice.putToggle(false);
       return res;
     }).catch(res => {
+      this.preloaderservice.putToggle(false);
       console.log('错误处理',res);
       console.log('错误代码：'+res.status);
       this.messageservice.putMessage({
