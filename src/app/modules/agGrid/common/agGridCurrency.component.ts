@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild, AfterViewInit} from '@angular/co
 import {ICellEditorAngularComp} from 'ag-grid-angular/main';
 
 @Component({
-    selector: 'editor-cell',
+    selector: 'ag-grid-editor-cell-currency',
     template: `
         <ng-select [selectfor]="'quantifier_id'" [showname]="'code'" [(value)]="params.value"></ng-select>
     `,

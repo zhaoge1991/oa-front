@@ -17,7 +17,7 @@ import {AgGridRatingPipeComponent} from "../../../modules/agGrid/procurement/sup
 import {AgGridStatusPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridStatusPipe.component";
 import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.module"
 import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
-
+import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMultiLine.component";
 
 @NgModule({
   imports: [
@@ -31,7 +31,8 @@ import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurr
         AgGridLevelPipeComponent,
         AgGridRatingPipeComponent,
         AgGridStatusPipeComponent,
-        AgGridCurrencyComponent
+        AgGridCurrencyComponent,
+        AgGridMultiLineComponent
     ]),
     PipeModule,
     AgGridComponentModule

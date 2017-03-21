@@ -15,6 +15,7 @@ import {ProcurementOrderProduct} from "../../../../models/procurement/procuremen
 import {ProcurementOrderCost} from "../../../../models/procurement/procurementOrderCost"
 
 import {AgGridCurrencyComponent} from "../../../../modules/agGrid/common/agGridCurrency.component"
+import {AgGridMultiLineComponent} from "../../../../modules/agGrid/common/agGridMultiLine.component"
 @Component({
     selector: 'procurement-procurement-order-edit',
     templateUrl: './edit.html',
@@ -42,7 +43,7 @@ export class EditComponent implements OnInit {
         {
             headerName: '工厂货号',
             field: 'factory_no',
-            width: 480,
+            width: 90,
             editable: true,
             colDef: " "
         },
@@ -50,13 +51,15 @@ export class EditComponent implements OnInit {
             headerName: '中文描述',
             field: 'zh_name',
             width: 480,
-            editable: true
+            cellEditorFramework: AgGridMultiLineComponent,
+            editable: true,
         },
         {
             headerName: '英文描述',
             field: 'en_name',
             width: 480,
-            editable: true
+            cellEditorFramework: AgGridMultiLineComponent,
+            editable: true,
         },
         {
             headerName: '单位',
