@@ -33,6 +33,10 @@ export class EditComponent implements OnInit {
     private isEdit: boolean;
     private selectedProduct: ProcurementOrderProduct;
     private selectedCost: ProcurementOrderCost;
+    private otherCost:number;//其他费用
+    
+    
+    
     //商品列定义
     private selectedcolumnDefs = [
         {
@@ -205,7 +209,10 @@ export class EditComponent implements OnInit {
     deletepro() {
         let selectedNodes = this.progridOptions.api.getSelectedNodes();
         this.progridOptions.api.removeItems(selectedNodes);
-        this.procurementOrder.deleteProduct(selectedNodes[0].childIndex);
+        for (let selectedNode of selectedNodes){
+            this.procurementOrder.deleteProduct(selectedNode);
+        }
+        
         this.selectedProduct = null;
     }
 
@@ -228,11 +235,18 @@ export class EditComponent implements OnInit {
     deletecost() {
         let selectedNodes = this.costgridOptions.api.getSelectedNodes();
         this.costgridOptions.api.removeItems(selectedNodes);
-        this.procurementOrder.deleteCost(selectedNodes[0].childIndex);
+        
+        for (let selectedNode of selectedNodes){
+            this.procurementOrder.deleteCost(selectedNode);
+        }
         this.selectedCost = null;
     }
-
-
+    onCellValueChanged(event){
+        if(event.colDef.field=='price'||event.colDef.field=="quantity"){
+            this.procurementOrder.refreshPrice();
+        }
+    }
+ 
     get diagnostic() {return JSON.stringify(this.procurementOrder);}
 
 
