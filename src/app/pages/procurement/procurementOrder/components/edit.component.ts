@@ -241,7 +241,9 @@ export class EditComponent implements OnInit {
         }
         this.selectedCost = null;
     }
+    
     onCellValueChanged(event){
+        //修改价格
         if(event.colDef.field=='price'||event.colDef.field=="quantity"){
             this.procurementOrder.refreshPrice();
         }
