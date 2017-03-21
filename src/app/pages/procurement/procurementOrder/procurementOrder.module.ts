@@ -15,7 +15,9 @@ import {AgGridDegreePipeComponent} from "../../../modules/agGrid/procurement/sup
 import {AgGridLevelPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridLevelPipe.component";
 import {AgGridRatingPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridRatingPipe.component";
 import {AgGridStatusPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridStatusPipe.component";
-import {agGridComponentModule} from "../../../modules/agGrid/agGridComponent.module"
+import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.module"
+import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
+
 
 @NgModule({
   imports: [
@@ -28,10 +30,11 @@ import {agGridComponentModule} from "../../../modules/agGrid/agGridComponent.mod
         AgGridDegreePipeComponent,
         AgGridLevelPipeComponent,
         AgGridRatingPipeComponent,
-        AgGridStatusPipeComponent
+        AgGridStatusPipeComponent,
+        AgGridCurrencyComponent
     ]),
     PipeModule,
-    agGridComponentModule
+    AgGridComponentModule
     
   ],
   declarations: [

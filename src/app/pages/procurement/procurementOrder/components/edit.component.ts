@@ -13,6 +13,8 @@ import {ProductSelectComponent} from "../../../../theme/oa-them/components/produ
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig"
 import {ProcurementOrderProduct} from "../../../../models/procurement/procurementOrderProduct"
 import {ProcurementOrderCost} from "../../../../models/procurement/procurementOrderCost"
+
+import {AgGridCurrencyComponent} from "../../../../modules/agGrid/common/agGridCurrency.component"
 @Component({
     selector: 'procurement-procurement-order-edit',
     templateUrl: './edit.html',
@@ -70,6 +72,8 @@ export class EditComponent implements OnInit {
             cellRendererParams: {
                 property: 'code'
             },
+            cellEditorFramework: AgGridCurrencyComponent,
+            
             editable: true
         },
         {

@@ -5,18 +5,24 @@ import {AgGridLevelPipeComponent} from "./procurement/supplier/agGridLevelPipe.c
 import {AgGridRatingPipeComponent} from "./procurement/supplier/agGridRatingPipe.component"
 import {AgGridStatusPipeComponent} from "./procurement/supplier/agGridStatusPipe.component"
 import {PipeModule} from "../../pipe/pipe.module"
+import {OaModule} from "../../theme/oa-them/oa.module"
+
+import {AgGridCurrencyComponent} from "./common/agGridCurrency.component"
+
 
 const AG_GRID_COMPONENT = [
     AgGridDegreePipeComponent,
     AgGridLevelPipeComponent,
     AgGridRatingPipeComponent,
-    AgGridStatusPipeComponent
+    AgGridStatusPipeComponent,
+    AgGridCurrencyComponent
 ];
 
 @NgModule({
     imports: [
         CommonModule,
-        PipeModule
+        PipeModule,
+        OaModule
     ],
     declarations: [
         ...AG_GRID_COMPONENT,
@@ -26,4 +32,4 @@ const AG_GRID_COMPONENT = [
     ]
 
 })
-export class agGridComponentModule {}
+export class AgGridComponentModule {}

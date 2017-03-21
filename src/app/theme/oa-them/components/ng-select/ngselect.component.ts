@@ -9,7 +9,7 @@ import {SourceService} from "../../../../services/core/sourceService/source.serv
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {ProvisionService} from "../../../../services/core/provisionService/provision.service";
 import {OrderTypeService} from "../../../../services/core/ordertypeService/order_type.service";
-
+import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 @Component({
   selector: 'ng-select',
   templateUrl: './ngselect.component.html',
@@ -33,7 +33,8 @@ export class NgSelectComponent implements OnInit{
     private sourceservice: SourceService,
     private paymentservice: PaymentService,
     private provisionservice: ProvisionService,
-    private ordertypeservice: OrderTypeService
+    private ordertypeservice: OrderTypeService,
+    private quantifierservice: QuantifierService,
   ){}
 
   ngOnInit(){
@@ -56,6 +57,8 @@ export class NgSelectComponent implements OnInit{
         this.options = this.provisionservice.get();break
       case 'order_type_id':
         this.options = this.ordertypeservice.get();break
+      case 'quantifier_id':
+        this.options = this.quantifierservice.get();break
       default:
             this.options = [];
     }
