@@ -6,7 +6,7 @@ export class SaleOrderProduct{
   zh_name: string;
   model: string;
   quantity: number;
-  price: string;
+  price: any;
   total: string;
   reference_price: string;
   remark: string;

@@ -11,8 +11,8 @@ export class SaleOrder{
   order_no: string;
   purchase_order: string;
   online_order: string;
-  product_price: string;
-  total_price: string;
+  product_price: any;
+  total_price: any;
   actual_payment: string;
   actual_bank_fee: string;
   transport_id: number;
@@ -40,8 +40,8 @@ export class SaleOrder{
   actual_shipping_costs: string;
   shipping_description: string;
   order_out_delivery: string;
-  shipping_costs: string;
-  payment_costs: string;
+  shipping_costs: any;
+  payment_costs: any;
   other_customer: string;
   other_country_id: number;
   project_id: number;
@@ -61,8 +61,10 @@ export class SaleOrder{
   products: SaleOrderProduct[];
   ordercost: SaleOrderCost[];
   annex: SaleAnnex[];
+  other_price: number;
 
   constructor(saleorder){
+    this.other_price = 0;
     if(saleorder){
       this.order_id = saleorder.order_id;
       this.customer_id = saleorder.customer_id;
@@ -127,7 +129,8 @@ export class SaleOrder{
         this.products.push(new SaleOrderProduct(product))
       };
       for(let ordercost of saleorder.ordercost){
-        this.ordercost.push(new SaleOrderCost(ordercost))
+        this.ordercost.push(new SaleOrderCost(ordercost));
+        this.other_price = this.other_price * 1 + ordercost.price * 1;
       };
       for(let annex of saleorder.annex){
         this.annex.push(new SaleAnnex(annex))
@@ -194,14 +197,33 @@ export class SaleOrder{
 
   addProduct(saleOrderProduct: SaleOrderProduct) {
     this.products.push(saleOrderProduct);
+    this.refreshPrice();
   }
   deleteProduct(index){
     this.products.splice(index, 1)
+    this.refreshPrice();
   }
   addCost(saleOrderCost: SaleOrderCost) {
     this.ordercost.push(saleOrderCost);
+    this.refreshPrice();
   }
   deleteCost(index){
-    this.ordercost.splice(index, 1)
+    this.ordercost.splice(index, 1);
+    this.refreshPrice();
+  }
+
+  refreshPrice() {
+    let other_price = 0;
+    let product_price = 0;
+    for (let product of this.products) {
+      product_price = product_price*1+product.quantity * product.price;
+    }
+    for (let cost of this.ordercost) {
+      other_price = other_price*1+ cost.price*1;
+    }
+    this.product_price = product_price;
+    this.other_price = other_price;
+    this.total_price = product_price+other_price+this.shipping_costs*1+this.payment_costs*1;
+
   }
 }

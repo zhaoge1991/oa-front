@@ -16,6 +16,8 @@ import {CommonActionBarConfig} from "../../../../models/config/commonActionBarCo
 import {SaleOrder} from "../../../../models/sale/saleOrder";
 import {SaleOrderProduct} from "../../../../models/sale/saleOrderProduct";
 import {SaleOrderCost} from "../../../../models/sale/saleOrderCost";
+import {AgGridMultiLineComponent} from "../../../../modules/agGrid/common/agGridMultiLine.component";
+import {AgGridCurrencyComponent} from "../../../../modules/agGrid/common/agGridCurrency.component";
 
 @Component({
   selector: 'sale-order-edit',
@@ -72,7 +74,6 @@ export class EditComponent implements OnInit{
 
   //选中行列表行配置
   private customerData;
-  private ordercostData: any[];
   private ordercostAll: number=0;
   private ordercostCol = [
     {
@@ -105,13 +106,15 @@ export class EditComponent implements OnInit{
       headerName: '中文描述',
       field: 'zh_name',
       width: 480,
-      editable: true
+      editable: true,
+      cellEditorFramework: AgGridMultiLineComponent,
     },
     {
       headerName: '英文描述',
       field: 'en_name',
       width: 480,
-      editable: true
+      editable: true,
+      cellEditorFramework: AgGridMultiLineComponent,
     },
     {
       headerName: '单位',
@@ -127,7 +130,8 @@ export class EditComponent implements OnInit{
       cellRendererParams: {
         property: 'code'
       },
-      editable: true
+      editable: true,
+      cellEditorFramework: AgGridCurrencyComponent,
     },
     {
       headerName: '数量',
@@ -143,9 +147,9 @@ export class EditComponent implements OnInit{
     },
     {
       headerName: '实际销售金额',
-      field: 'total',
-      width: 120,
-      editable: true
+      valueGetter: 'data.price*1*data.quantity*1',
+      volatile: true,
+      width: 120
     },
     {
       headerName: '指导价',
@@ -160,13 +164,6 @@ export class EditComponent implements OnInit{
         this.data = new SaleOrder(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
-
-        //其他费用数据
-        this.ordercostData = data.ordercost;
-        //计算其他费用总数
-        for(let i=0;i<this.ordercostData.length;i++){
-          this.ordercostAll += (this.ordercostData[i].price-0);
-        }
 
         //支付方式数据
         this.orderpaymentData = this.payment.get(data.payment_id);
@@ -274,6 +271,18 @@ export class EditComponent implements OnInit{
   onPaymentChange(e){
     this.data.payment_id = e;
     this.orderpaymentData = this.payment.get(e);
+  }
+
+  //订单数据修改后
+  onCellValueChanged(event){
+    console.log(event);
+    if(event.colDef.field=='price'||event.colDef.field=="quantity"){
+      this.data.refreshPrice();
+    }
+    this.progridOptions.api.softRefreshView();
+  }
+  onCostChange(){
+    this.data.refreshPrice();
   }
 
   //保存

@@ -13,6 +13,9 @@ import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
 import { EditComponent } from './components/edit.component.ts';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
+import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMultiLine.component";
+import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
+import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.module";
 
 
 @NgModule({
@@ -21,7 +24,11 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
     FormsModule,
     NgaModule,
     OaModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([
+      AgGridMultiLineComponent,
+      AgGridCurrencyComponent
+    ]),
+    AgGridComponentModule,
     routing
   ],
   declarations: [

@@ -37,7 +37,6 @@ import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMul
     PipeModule,
     AgGridComponentModule
 
-    agGridComponentModule
 
   ],
   declarations: [
