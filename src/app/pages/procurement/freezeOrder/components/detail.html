@@ -1,0 +1,40 @@
+<div *ngIf="freezeOrder">
+    <div class="row">
+        <bar-common-action-bar [config]="commonActionBarConfig" [object]="freezeOrder" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+    </div>
+    <div class="row">
+        <ba-card baCardClass="with-scroll">
+            <div class="opendetail">
+                <h1 class="title">冻结库存单</h1>
+                <table>
+                    <tr>
+                        <th>冻结人</th> <td>{{freezeOrder?.user?.name}}</td>
+                        <th>编号</th> <td>{{freezeOrder.procurement_freeze_no}}</td>
+                    </tr>
+                    <tr>
+                        <th>状态</th> <td>{{freezeOrder.status?'已出库':'未出库'}}</td>
+                        <th>冻结时间</th> <td>{{freezeOrder.date_added}}</td>
+                    </tr>
+
+                </table>
+                <table>
+                    <tr>
+                        <th>序号</th> <th>中文描述</th> <th>PI编号</th>  <th>数量</th> 
+                    </tr>
+                    <tr *ngFor="let pro of freezeOrder.products,let i=index">
+                        <td>{{i+1}}</td> <td>{{pro?.product?.product_description[0].name}}</td> <td></td> <td>{{pro.quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td><th >合计</th> <td>{{product_total_quantity}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"><pre style="white-space: pre-wrap;
+                                             word-wrap: break-word;">{{freezeOrder.remark}}</pre> </td>
+                    </tr>
+
+                </table>
+            </div>
+        </ba-card>
+    </div>
+</div>

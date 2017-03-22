@@ -36,7 +36,9 @@ export class ProcurementOrder {
     procurement_demander_id: number;
     procurement_order_product: ProcurementOrderProduct[];
     procurement_order_cost: ProcurementOrderCost[];
+    other_price: number;
     constructor(procurementOrder) {
+        this.other_price = 0;
         if (procurementOrder) {
             this.procurement_order_id = procurementOrder.procurement_order_id;
             this.date_added = procurementOrder.date_added;
@@ -66,14 +68,15 @@ export class ProcurementOrder {
             this.procurement_demander_id = procurementOrder.procurement_demander_id;
             this.procurement_supplier_id = procurementOrder.procurement_supplier_id
             this.procurement_order_product = [];
-            this.procurement_order_cost =[];
+            this.procurement_order_cost = [];
             for (let product of procurementOrder.procurement_order_product) {
                 this.procurement_order_product.push(new ProcurementOrderProduct(product))
             }
             for (let cost of procurementOrder.procurement_order_cost) {
                 this.procurement_order_cost.push(new ProcurementOrderCost(cost))
+                this.other_price = this.other_price * 1 + cost.price * 1;
             }
-        }else{
+        } else {
             this.procurement_order_id = 0;
             this.date_added = '';
             this.price = 0;
@@ -86,7 +89,7 @@ export class ProcurementOrder {
             this.currency_id = 0
             this.currency = 0
             this.contract_terms = ''
-            this.user =''
+            this.user = ''
             this.remark = ''
             this.procurement_order_no = ''
             this.status = 0
@@ -102,24 +105,44 @@ export class ProcurementOrder {
             this.procurement_demander_id = 0;
             this.procurement_supplier_id = 0
             this.procurement_order_product = [];
-            this.procurement_order_cost =[];
+            this.procurement_order_cost = [];
         }
 
 
 
     }
-    
+
     addProduct(procurementOrderProduct: ProcurementOrderProduct) {
         this.procurement_order_product.push(procurementOrderProduct);
+        this.refreshPrice();
+
     }
-    deleteProduct(index) {
-        this.procurement_order_product.splice(index, 1)
+    deleteProduct(selectedNode) {
+        this.procurement_order_product.splice(selectedNode.childIndex, 1)
+        this.refreshPrice();
     }
     addCost(procurementOrderCost: ProcurementOrderCost) {
         this.procurement_order_cost.push(procurementOrderCost);
+        this.refreshPrice();
     }
-    deleteCost(index) {
-        this.procurement_order_cost.splice(index, 1)
+    deleteCost(selectedNode) {
+        this.procurement_order_cost.splice(selectedNode.childIndex, 1)
+        this.refreshPrice();
+    }
+
+    refreshPrice() {
+         let other_price = 0;
+         let product_price = 0;
+        for (let product of this.procurement_order_product) {
+            product_price = product_price*1+product.quantity * product.price;
+        }
+        for (let cost of this.procurement_order_cost) {
+            other_price = other_price*1+ cost.price*1;
+        }
+        this.product_price = product_price;
+        this.other_price = other_price;
+        this.price = product_price+other_price;
+        
     }
 
 }

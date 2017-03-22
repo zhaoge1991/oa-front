@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
     selector: 'bar-common-action-bar-new',
     template: `
     <div class="btnitem">
-    <button type="button"  class="available" (click)="addNew()">
+    <button type="button"  *ngIf="config.addNewUrl" class="available" (click)="addNew()">
       <i class="iconfont icon-dakai"></i><span>新建</span>
     </button>
   </div>
@@ -14,10 +14,10 @@ import {Router} from '@angular/router';
 })
 
 export class NewActionBarComponent {
-    @Input() url = '/';
+    @Input() config:any;
     constructor(private router: Router) {}
     addNew() {
-        this.router.navigate([this.url]);
+        this.router.navigate([this.config.addNewUrl]);
     }
 
 }

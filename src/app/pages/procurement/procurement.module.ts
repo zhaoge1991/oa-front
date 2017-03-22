@@ -7,7 +7,9 @@ import { OrderModule} from './order/order.module';
 import { ProcurementOrderModule} from './procurementOrder/procurementOrder.module';
 import {OrderService} from '../../services/order/order.service'
 import {ProcurementOrderService} from '../../services/procurement/procurementOrder.service'
+import {FreezeOrderService} from '../../services/procurement/freezeOrder.service'
 import {OaModule} from "../../theme/oa-them/oa.module";
+import {FreezeOrderModule} from './freezeOrder/freezeOrder.module';
 
 @NgModule({
   imports: [
@@ -16,12 +18,13 @@ import {OaModule} from "../../theme/oa-them/oa.module";
     FormsModule,
     OrderModule,
     ProcurementOrderModule,
-    OaModule
+    OaModule,
+    FreezeOrderModule
   ],
   declarations: [
     ProcurementComponent
   ],
-  providers:[OrderService,ProcurementOrderService]
+  providers:[OrderService,ProcurementOrderService,FreezeOrderService]
 })
 export class ProcurementModule {}
 

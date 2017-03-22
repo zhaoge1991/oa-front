@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
-import { routing } from './procurementOrder.routing';
-import { ProcurementOrderComponent} from './procurementOrder.component'
+import { routing } from './freezeOrder.routing';
+import { FreezeOrderComponent} from './freezeOrder.component'
 import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
 import { EditComponent } from './components/edit.component';
@@ -11,10 +11,6 @@ import { FormsModule } from '@angular/forms';
 import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
-import {AgGridDegreePipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridDegreePipe.component";
-import {AgGridLevelPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridLevelPipe.component";
-import {AgGridRatingPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridRatingPipe.component";
-import {AgGridStatusPipeComponent} from "../../../modules/agGrid/procurement/supplier/agGridStatusPipe.component";
 import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.module"
 import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
 import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMultiLine.component";
@@ -27,25 +23,19 @@ import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMul
     OaModule,
     FormsModule,
     AgGridModule.withComponents([
-        AgGridDegreePipeComponent,
-        AgGridLevelPipeComponent,
-        AgGridRatingPipeComponent,
-        AgGridStatusPipeComponent,
         AgGridCurrencyComponent,
         AgGridMultiLineComponent
     ]),
     PipeModule,
     AgGridComponentModule
-
-    agGridComponentModule
-
+    
   ],
   declarations: [
     ListComponent,
     DetailComponent,
     EditComponent,
-    ProcurementOrderComponent
-
+    FreezeOrderComponent
+    
   ]
 })
-export class ProcurementOrderModule {}
+export class FreezeOrderModule {}

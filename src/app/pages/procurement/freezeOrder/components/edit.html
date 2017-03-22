@@ -1,0 +1,101 @@
+
+{{diagnostic}}
+<div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]='freezeOrder' (objectSave)="onFreezeOrderSave($event)">
+    </bar-common-action-bar>
+</div>
+
+<div class="row">
+    <form class="form-horizontal" *ngIf="freezeOrder">
+        <ba-card baCardClass="with-scroll">
+            <div class="row form-content">
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">冻结库存单编号</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control" value="{{freezeOrder.procurement_freeze_no}}" name="procurement_freeze_no">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">冻结人</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control" value="{{freezeOrder?.user?.name}}" name="user_name">
+                                </div>
+                            </div>  
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">冻结时间</label>
+                                <div class="col-sm-8">
+                                    <input readonly="readonly" type="text" class="ng-form-control" value="{{freezeOrder.date_added}}" name="date_added">
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">状态</label>
+                                <div class="col-sm-8" >
+
+                                    <input readonly="readonly"  *ngIf="freezeOrder.status==0" type="text" class="ng-form-control" value="未出库" name="procurement_freeze_no">
+                                    <input readonly="readonly" *ngIf="freezeOrder.status==1"  type="text" class="ng-form-control" value="已出库" name="procurement_freeze_no">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ng-form-group row">
+                                <label for="remark" class="col-sm-1 ng-form-control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea class="ng-form-control" id="remark" [(ngModel)]="freezeOrder.remark" name="remark"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ba-card>
+        <div class="row">
+            <div class="col-md-12 col-xs-12" *ngIf="freezeOrder">
+                <ng2-tab selected="pro-list"
+                         selected-contents-class="animated"
+                         selected-index-class="selected">
+                    <div class="tabs">
+                        <div index="pro-list">商品清单</div>
+                    </div>
+                    <div class="tab-contents">
+                        <div contents="pro-list">
+                            <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                                [columnDefs]="selectedcolumnDefs"
+                                [rowData]="freezeOrder.products"
+                                [gridOptions]="progridOptions"
+                                enableColResize
+                                enableSorting
+                                enableFilter
+                                groupHeaders
+                                rowHeight="22"
+                                rowSelection="multiple"
+                                ></ag-grid-angular>
+                        </div>
+                    </div>
+                </ng2-tab>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
