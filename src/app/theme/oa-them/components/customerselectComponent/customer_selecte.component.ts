@@ -3,6 +3,8 @@ import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 import {CustomerSearchService} from "./customer_select.service";
 import {CountryService} from "../../../../services/core/countryService/country.service";
 import {ProjectService} from "../../../../services/core/projectService/project.service";
+import {SaleCustomer} from "../../../../models/sale/saleCustomer";
+import {Paginate} from "../../../../models/common/paginate";
 
 
 @Component({
@@ -20,17 +22,11 @@ export class CustomerSelectComponent implements OnInit{
     private projectservice: ProjectService
   ){}
 
-  @Input() customer:{id:number,name: string} = {id: null,name:''};
+  @Input() customer: SaleCustomer;
   @Output() customerChange = new EventEmitter();
-  private _customer:{id:number,name: string} = JSON.parse(JSON.stringify(this.customer)); //复制未提交时的用户对象
-  private customers: any[];
-  private pageconfig:{
-    nowPage : number,
-    lastPage : number,
-    total: number,
-    fromitem: number,
-    toitem: number
-  }
+  private _customer:SaleCustomer;
+  private customers: SaleCustomer[];
+  private paginate: Paginate
   private isselected: boolean = false;
   //列表列定义
   private columnDefs = [
@@ -141,6 +137,7 @@ export class CustomerSelectComponent implements OnInit{
   ]
 
   ngOnInit(){
+    this._customer = this.customer.customer_id ? new SaleCustomer(this.customer):new SaleCustomer(null); //复制未提交时的用户对象
     this.init('',1);
   }
 
@@ -148,14 +145,8 @@ export class CustomerSelectComponent implements OnInit{
   init(key:string,page:number){
     this.customerservice.getcustomer(key,page).subscribe(data=>{
       let result = data.results.data.customers
-      this.pageconfig = {
-        nowPage : result.current_page,
-        lastPage : result.last_page,
-        total: result.total,
-        fromitem: result.from,
-        toitem: result.to
-      }
-      this.customers = result.data;
+      this.paginate = result;
+      this.customers = this.paginate.data;
     })
   }
 
@@ -183,11 +174,7 @@ export class CustomerSelectComponent implements OnInit{
   private select_customer:{};
   onRowSelected($event){
     if($event.node.selected){
-      this.select_customer = {
-        id: $event.node.data.customer_id,
-        name: $event.node.data.firstname,
-        country: $event.node.data.country_id
-      }
+      this.select_customer = $event.node.data as SaleCustomer;
       this.isselected = true;
     }
   }
@@ -195,13 +182,20 @@ export class CustomerSelectComponent implements OnInit{
   //确定按钮
   addcustomer(){
     if(this.isselected){
-      this.customer = JSON.parse(JSON.stringify(this.select_customer));
-      this.customerChange.emit(this.customer);
+      this.customerChange.emit(this.select_customer);
     } else {
-      this.customer.id = null;
-      this.customer.name = (this._customer.name).toString();
-      this.customerChange.emit(this.customer);
+      let newcustomer = new SaleCustomer(null);
+      newcustomer.customer_id = null;
+      newcustomer.firstname = (this._customer.firstname).toString();
+      this.customerChange.emit(newcustomer);
     }
     this.Modal.hide();
+  }
+
+  //关闭、取消按钮
+  close(){
+    this.Modal.hide();
+    this.select_customer = null;
+    this.isselected = false;
   }
 }

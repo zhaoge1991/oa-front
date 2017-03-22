@@ -38,6 +38,7 @@ import {
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
+  PaymentSelectComponent,
 
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -45,8 +46,11 @@ import {
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
   DeleteActionBarComponent,
+  AnnexActionBarComponent,
   BackActionBarComponent,
   //end 公共操作栏
 
@@ -109,6 +113,7 @@ const NGA_COMPONENTS = [
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
+  PaymentSelectComponent,
 
 
   PreloaderComponent,
@@ -119,8 +124,11 @@ const NGA_COMPONENTS = [
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
   DeleteActionBarComponent,
+  AnnexActionBarComponent,
   BackActionBarComponent,
   //end 公共操作栏
 

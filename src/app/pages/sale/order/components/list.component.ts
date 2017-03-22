@@ -33,18 +33,6 @@ export class ListComponent{
   private paginate : Paginate;
   private selectedIndex:number;
 
-  ////操作组配置
-  //private operat:{
-  //  toship?: boolean,
-  //  orderdemand?: boolean,
-  //  supaudit?: boolean,
-  //  financeaudit?: boolean,
-  //  procurement?: boolean,
-  //  toshipment?: boolean,
-  //  cusrecive?: boolean,
-  //  procurementcheck?: boolean,
-  //  isdone?: boolean
-  //} = {};
 
   pageClick($event){
     this.createRowData($event.text-0,this.searchtext);
@@ -79,11 +67,14 @@ export class ListComponent{
     this.showGrid = true;
     //按钮组配置
     this.actionConfig = new CommonActionBarConfig();
-    this.actionConfig.addNewUrl = 'pages/procurement/procurement_order/edit';
-    this.actionConfig.openUrl = 'pages/procurement/procurement_order/detail';
-    this.actionConfig.idName = 'procurement_order_id';
-    this.actionConfig.editUrl = 'pages/procurement/procurement_order/edit';
-    this.actionConfig.isProcurementOrder = true;
+    this.actionConfig.addNewUrl = 'pages/sale/order/edit';
+    this.actionConfig.deleteUrl = '/api/sale/order/order/';
+    this.actionConfig.openUrl = 'pages/sale/order/detail';
+    this.actionConfig.idName = 'order_id';
+    this.actionConfig.editUrl = 'pages/sale/order/edit';
+    this.actionConfig.isSaleOrder = true;
+    this.actionConfig.annex = true;
+    this.actionConfig.canEexport = true;
   }
 
   //行配置项(获取数据)
@@ -243,12 +234,11 @@ export class ListComponent{
   private orderpaymentData;
   private orderscheduleData;
   private isfreeorder: boolean = false;
-  private sampleData;
 
   private onRowSelected($event) {
     if($event.node.selected){
-      this.selectedrowData = this.listdata[$event.node.data.index];
-
+      this.selectedrowData = $event.node.data as SaleOrder;
+      this.selectedIndex = $event.node.rowIndex;
       //产品清单数据
       this.proData =  this.selectedrowData.products;
       this.selectedcolumnDefs = [
@@ -318,6 +308,14 @@ export class ListComponent{
       //支付方式数据
       this.orderpaymentData = this.payment.get(this.selectedrowData.payment_id);
 
+      //是否为免费样品单
+      switch (this.selectedrowData.order_type_id){
+        case this.appconfig.get('sale.order.type.free'):
+          this.isfreeorder = true;break
+        default:
+          this.isfreeorder = false;
+      }
+
       //this.sampleData = {
       //  sample_fee_info: '免费样品',
       //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
@@ -329,81 +327,6 @@ export class ListComponent{
       //    this.orderscheduleData=res.results.data.order;
       //  }
       //);
-
-
-      //生成操作配置
-      //订单类型判断
-      //this.operat = {toship: true,orderdemand: true};
-      //switch (this.selectedrowData.order_type_id){
-      ///**部分付款和账期订单**/
-      //  case (this.appconfig.get('sale.order.type.part') || this.appconfig.get('sale.order.type.time')):
-      //    this.isfreeorder = false;
-      //    //订单状态判断
-      //    switch (this.selectedrowData.order_status_id) {
-      //    /**待处理订单**/
-      //      case this.appconfig.get('sale.order.status.waitpayment'):
-      //        this.operat.supaudit = true;break
-      //    /**主管审核通过订单**/
-      //      case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-      //        this.operat.financeaudit = true;break
-      //    /**财务审核通过订单**/
-      //      case this.appconfig.get('sale.order.status.paid'):
-      //        this.operat.procurement = true;break
-      //    /**待销售确认订单**/
-      //      case this.appconfig.get('sale.order.status.waitsalecheck'):
-      //        this.operat.toshipment = true;break
-      //    /**已发货订单**/
-      //      case this.appconfig.get('sale.order.status.delivered'):
-      //        this.operat.cusrecive = true;break
-      //    /**客户已收货**/
-      //      case this.appconfig.get('sale.order.status.customerreceived'):
-      //        this.operat.isdone = true;break
-      //    };
-      //    break;
-      ///**免费样品单**/
-      //  case this.appconfig.get('sale.order.type.free'):
-      //    this.isfreeorder = true;
-      //    switch (this.selectedrowData.order_status_id) {
-      //    /**待处理订单**/
-      //      case this.appconfig.get('sale.order.status.waitpayment'):
-      //        this.operat.supaudit = true;break
-      //    /**主管审核通过订单**/
-      //      case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-      //        this.operat.financeaudit = true;break
-      //    /**财务审核通过订单**/
-      //      case this.appconfig.get('sale.order.status.paid'):
-      //        this.operat.procurement = true;break
-      //    /**待销售确认订单**/
-      //      case this.appconfig.get('sale.order.status.waitsalecheck'):
-      //        this.operat.toshipment = true;break
-      //    /**已发货订单**/
-      //      case this.appconfig.get('sale.order.status.delivered'):
-      //        this.operat.cusrecive = true;break
-      //    /**客户已收货**/
-      //      case this.appconfig.get('sale.order.status.customerreceived'):
-      //        this.operat.procurementcheck = true;break
-      //    };
-      //    break;
-      //  default:
-      //    this.isfreeorder = false;
-      //    switch (this.selectedrowData.order_status_id) {
-      //    /**待处理订单**/
-      //      case this.appconfig.get('sale.order.status.waitpayment'):
-      //        this.operat.financeaudit = true;break
-      //    /**财务审核通过订单**/
-      //      case this.appconfig.get('sale.order.status.paid'):
-      //        this.operat.procurement = true;break
-      //    /**待销售确认订单**/
-      //      case this.appconfig.get('sale.order.status.waitsalecheck'):
-      //        this.operat.toshipment = true;break
-      //    /**已发货订单**/
-      //      case this.appconfig.get('sale.order.status.delivered'):
-      //        this.operat.cusrecive = true;break
-      //    /**客户已收货**/
-      //      case this.appconfig.get('sale.order.status.customerreceived'):
-      //        this.operat.isdone = true;break
-      //    };
-      //}
 
       this.selectedeRow = true;
     }
@@ -438,20 +361,12 @@ export class ListComponent{
   }
 
   //删除操作
-  deleteData(){
-    let sub = this.alertservice.putMessage({
-      title: '询问弹窗',
-      detail: '确定要删除订单吗？',
-      severity: 'info'
-    }).subscribe(data=>{
-      if(data){
-        this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
-          this.selectedrowData = null;
-          this.createRowData(this.paginate.current_page);
-        })
-      }
-      sub.unsubscribe();
-    });
-
+  deleteData(e){
+    if(e){
+      this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
+        this.selectedrowData = null;
+        this.createRowData(this.paginate.current_page);
+      })
+    }
   }
 }

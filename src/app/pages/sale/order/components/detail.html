@@ -1,6 +1,7 @@
 <div *ngIf="data">
   <div class="row">
-    <action-bar [actionsData]="data" [actionConfig]="actionConfig" [operat]="operat"></action-bar>
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
   </div>
   <div class="row">
     <ba-card baCardClass="with-scroll">
@@ -15,18 +16,18 @@
                 <th>申请日期</th> <td>{{data.created_at}}</td>
               </tr>
               <tr>
-                <th>客户公司名</th><td colspan="3">{{data.customer.field_company}}</td>
+                <th>客户公司名</th><td colspan="3">{{data?.customer?.field_company}}</td>
               </tr>
               <tr>
-                <th>客户地址</th> <td colspan="3">{{data.customer.address}}</td>
+                <th>客户地址</th> <td colspan="3">{{data?.customer?.address}}</td>
               </tr>
               <tr>
-                <th>客户电话</th> <td>{{data.customer.telephone}}</td>
-                <th>客户邮箱</th> <td>{{data.customer.email}}</td>
+                <th>客户电话</th> <td>{{data?.customer?.telephone}}</td>
+                <th>客户邮箱</th> <td>{{data?.customer?.email}}</td>
               </tr>
               <tr>
-                <th>客户网址</th> <td>{{data.customer.field_company_site}}</td>
-                <th>客户性质</th> <td>{{data.customer.kh_leixing}}</td>
+                <th>客户网址</th> <td>{{data?.customer?.field_company_site}}</td>
+                <th>客户性质</th> <td>{{data?.customer?.kh_leixing}}</td>
               </tr>
             </table>
             <table>

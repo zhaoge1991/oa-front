@@ -1,13 +1,5 @@
 <div class="row">
-  <!--<action-bar #actionBar-->
-              <!--[actionsData]="selectedrowData"-->
-              <!--[actionConfig]="actionConfig"-->
-              <!--[operat]="operat"-->
-              <!--(saveClick)="saveData()"-->
-              <!--(deleteClick)="deleteData()"-->
-  <!--&gt;-->
-  <!--</action-bar>-->
-  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
   </bar-common-action-bar>
 </div>
 <div class="row">
@@ -16,11 +8,6 @@
       <div class="col-md-12 col-xs-12 table-main">
         <div class="mysearch">
           <ng-search [placeholder]="'请输入客户名'" (searchtext)="search($event)"></ng-search>
-          <!--<div class="search-input">-->
-          <!--<span class="iconfont icon-search"></span>-->
-          <!--<input #search type="text" (keyup)="onQuickFilterEnter($event)" id="quickFilterInput" placeholder="快速搜索" class="form-control" style="width: 180px;display: inline-block"/>-->
-          <!--<button (click)="onQuickFilterChanged(search)" class="btn btn-primary  btn-sm" type="button">搜索</button>-->
-          <!--</div>-->
         </div>
         <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
                      [gridOptions]="gridOptions"

@@ -25,7 +25,6 @@
   button{
     background: none;
     border: 1px solid #cccccc;
-    color: $default-text;
     outline:0;
     display: inline-block;
     font-weight: normal;
@@ -71,6 +70,7 @@
     .modal-footer {
       border: none;
       button{
+        color: #ffffff;
         margin-right: 20px;
       }
     }

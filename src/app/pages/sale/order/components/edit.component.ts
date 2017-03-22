@@ -12,6 +12,10 @@ import {QuantifierService} from "../../../../services/core/quantifierService/qua
 import {ProductSelectComponent} from "../../../../theme/oa-them/components/productselectComponent/product_select.component";
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 import {AlertService} from "../../../../services/core/alert.component.service";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
+import {SaleOrder} from "../../../../models/sale/saleOrder";
+import {SaleOrderProduct} from "../../../../models/sale/saleOrderProduct";
+import {SaleOrderCost} from "../../../../models/sale/saleOrderCost";
 
 @Component({
   selector: 'sale-order-edit',
@@ -25,8 +29,9 @@ export class EditComponent implements OnInit{
   private costgridOptions: GridOptions;
   private id:number;
   private olddata: any;
-  private data: OrderEditModel;
+  private data: SaleOrder;
   private isEdit:boolean;
+  private commonActionBarConfig: CommonActionBarConfig;
 
   constructor(
     private router:Router,
@@ -48,15 +53,13 @@ export class EditComponent implements OnInit{
         componentParent: this
       }
     };
+    this.commonActionBarConfig = new CommonActionBarConfig();
+    this.commonActionBarConfig.addNewUrl = 'pages/sale/order/edit';
+    this.commonActionBarConfig.saveUrl = 'pages/sale/order/edit';
+    this.commonActionBarConfig.idName = 'order_id';
+    this.commonActionBarConfig.annex = true;
   }
 
-  //按钮组配置
-  private actionConfig:{} = {
-    showbtn: {save:true,annex:true,close:true},
-    openurl: 'pages/sale/order-manager/detail',
-    addurl: 'pages/sale/order-manager/edit',
-    idname: 'order_id'
-  };
 
   ngOnInit(){
     this.route.params.subscribe((params: Params)=>{
@@ -84,7 +87,6 @@ export class EditComponent implements OnInit{
   ];
   private orderpaymentData;
   private orderscheduleData;
-  private currency_id: number;
   private customer;
   //商品列定义
   private selectedcolumnDefs = [
@@ -136,13 +138,13 @@ export class EditComponent implements OnInit{
     {
       headerName: '实际销售单价',
       field: 'price',
-      width: 90,
+      width: 120,
       editable: true
     },
     {
       headerName: '实际销售金额',
       field: 'total',
-      width: 90,
+      width: 120,
       editable: true
     },
     {
@@ -155,51 +157,9 @@ export class EditComponent implements OnInit{
   setData(){
     if(this.id){
       this.orderservice.get(this.id).subscribe(data=>{
-        this.data = {
-          order_id: data.order_id,
-          order_no: data.order_no,
-          customer_id: data.customer_id,
-          customer: data.customer?data.customer.firstname:null,
-          online_order: data.online_order,
-          currency_id: data.currency_id,
-          provision_id: data.provision_id,
-          pi: data.pi,
-          date_added: data.date_added,
-          order_type_id: data.order_type_id,
-          country_id: data.customer?data.customer.country_id:null,
-          payment_id: data.payment_id,
-          payment_costs: data.payment_costs,
-          product_price: data.product_price,
-          order_source_id: data.order_source_id,
-          expected_delivery: data.expected_delivery,
-          project_id: data.project_id,
-          transport_id: data.transport_id,
-          shipping_costs: data.shipping_costs,
-          total_price: data.total_price,
-          order_status_id: data.order_status_id,
-          complaint: data.complaint,
-          remark: data.remark,
-          actual_payment: data.actual_payment,
-          actual_bank_fee: data.actual_bank_fee,
-          money_receipt: data.money_receipt,
-          product: data.products,
-          cost: data.ordercost,
-          sample_fee_info: data.sample_fee_info,
-          sample_shipping_info: data.sample_shipping_info,
-          annex: data.annex
-        }
-        this.currency_id = this.data.currency_id;
-
+        this.data = new SaleOrder(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
-
-        //用户数据
-        this.customerData = data.customer?data.customer:false;
-        this.customer = {
-          id: this.data.customer_id,
-          name: this.data.customer,
-          country: this.data.country_id
-        }
 
         //其他费用数据
         this.ordercostData = data.ordercost;
@@ -223,43 +183,8 @@ export class EditComponent implements OnInit{
       })
     } else {
       let date = new Date();
-      this.data = {
-        order_id: null,
-        order_no: '',
-        customer_id: null,
-        customer: '',
-        online_order: '',
-        currency_id: null,
-        provision_id: null,
-        pi: '',
-        date_added: date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate(),
-        order_type_id: null,
-        country_id: null,
-        payment_id: null,
-        payment_costs: '',
-        product_price: '',
-        order_source_id: null,
-        expected_delivery: '',
-        project_id: null,
-        transport_id: null,
-        shipping_costs: '',
-        total_price: '',
-        order_status_id: null,
-        complaint: '',
-        remark: '',
-        actual_payment: '',
-        actual_bank_fee: '',
-        money_receipt: '',
-        product: [],
-        cost: [],
-        sample_fee_info: '',
-        sample_shipping_info: '',
-        annex: []
-      }
-      this.customer = {
-        id: this.data.customer_id,
-        name: this.data.customer
-      }
+      this.data = new SaleOrder(null);
+      this.data.date_added = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
 
       //保存原始数据
       this.olddata = JSON.parse(JSON.stringify(this.data));
@@ -281,15 +206,16 @@ export class EditComponent implements OnInit{
     this.selectproduct.show();
   }
   addproduct($event){
-    this.data.product.push($event);
-    this.progridOptions.api.addItems([$event]);
+    let addproduct = new SaleOrderProduct($event);
+    this.data.addProduct(addproduct);
+    this.progridOptions.api.addItems([addproduct]);
   }
 
   //删除产品
   deletepro(){
     let selectedNodes = this.progridOptions.api.getSelectedNodes();
     this.progridOptions.api.removeItems(selectedNodes);
-    this.data.product.splice(selectedNodes[0].childIndex,1);
+    this.data.deleteProduct(selectedNodes[0].childIndex);
     this.isproselected = false;
   }
 
@@ -304,7 +230,7 @@ export class EditComponent implements OnInit{
     this.addcostdialog.showdialog();
   }
   addcost($event){
-    this.data.cost.push($event);
+    this.data.addCost($event as SaleOrderCost);
     this.costgridOptions.api.addItems([$event]);
   }
 
@@ -312,7 +238,7 @@ export class EditComponent implements OnInit{
   deletecost(){
     let selectedNodes = this.costgridOptions.api.getSelectedNodes();
     this.costgridOptions.api.removeItems(selectedNodes);
-    this.data.cost.splice(selectedNodes[0].childIndex,1);
+    this.data.deleteCost(selectedNodes[0].childIndex);
     this.iscostselected = false;
   }
 
@@ -344,10 +270,16 @@ export class EditComponent implements OnInit{
   //  return selectEle;
   //}
 
+  //支付方式修改后
+  onPaymentChange(e){
+    this.data.payment_id = e;
+    this.orderpaymentData = this.payment.get(e);
+  }
+
   //保存
   save(){
-    this.data.customer_id = this.customer.id;
-    this.data.customer = this.customer.name;
+    this.data.customer_id = this.data.customer.customer_id;
+    this.data.other_customer = this.data.customer.firstname;
     if(this.isEdit){
       this.orderservice.put(this.id,this.data).subscribe();
     } else {
@@ -370,6 +302,7 @@ export class EditComponent implements OnInit{
       });
     }
   }
+
 }
 
 
