@@ -2,7 +2,7 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
@@ -50,7 +50,7 @@ export class ListComponent{
   private actionConfig: CommonActionBarConfig;
   constructor(
     private router: Router,
-    private listservice: SaleOrderService,
+    private listservice: OrderService,
     private cus: CurrencyService,
     private payment: PaymentService,
     private currency: CurrencyService,
@@ -80,7 +80,7 @@ export class ListComponent{
   //行配置项(获取数据)
   private createRowData(page,key?:string) {
     this.listservice.getlist(page,key)
-      .then(data=>{
+      .subscribe(data=>{
         this.paginate = data.results.data.orders;
         this.rowData = this.paginate.data;
       })

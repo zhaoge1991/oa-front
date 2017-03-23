@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
@@ -38,7 +38,7 @@ export class EditComponent implements OnInit{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private orderservice: SaleOrderService,
+    private orderservice: OrderService,
     private payment: PaymentService,
     private appconfig: AppconfigService,
     private quantifier: QuantifierService,
