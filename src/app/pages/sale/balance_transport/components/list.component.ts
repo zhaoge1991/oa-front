@@ -9,11 +9,12 @@ import {QuantifierService} from "../../../../services/core/quantifierService/qua
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {StatusService} from "../../../../services/core/statusService/status.service";
 import {AlertService} from "../../../../services/core/alert.component.service";
-
-
+import {Order} from "../../../../models/sale/order/Order";
+import {Paginate} from "../../../../models/common/paginate";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
 @Component({
-  selector: 'order-manager',
+  selector: 'sale-order-list',
   templateUrl: './list.html',
   styleUrls: ['./list.scss']
 })
@@ -21,61 +22,39 @@ import {AlertService} from "../../../../services/core/alert.component.service";
 export class ListComponent{
   private gridOptions:GridOptions;
   public showGrid:boolean;
-  public rowData:any[];
+  public rowData: Order[];
   private columnDefs:any[];
   private selectedeRow: boolean;
   public selectedcolumnDefs: any[];
-  public selectedrowData: any;
+  public selectedrowData: Order;
   public isbatches: boolean = false;
-  private listdata:any[];
   //翻页配置
-  private pageconfig : {
-    nowPage : number,
-    lastPage : number,
-    total: number,
-    fromitem: number,
-    toitem: number
-  };
-  //按钮组配置
-  private actionConfig = {
-    showbtn: {open: true,add:true,edit:true,action:true,export:true,annex:true,delete:true,checkpayment:true},
-    openurl: 'pages/sale/balance_transport/detail',
-    addurl: 'pages/sale/order/edit',
-    idname: 'order_id'
-  }
-  //操作组配置
-  private operat:{
-    toship?: boolean,
-    orderdemand?: boolean,
-    supaudit?: boolean,
-    financeaudit?: boolean,
-    procurement?: boolean,
-    toshipment?: boolean,
-    cusrecive?: boolean,
-    procurementcheck?: boolean,
-    isdone?: boolean
-  } = {};
+  private paginate : Paginate;
+  private selectedIndex:number;
+
 
   pageClick($event){
     this.createRowData($event.text-0,this.searchtext);
     this.selectedeRow = false;
-    this.selectedrowData = '';
+    this.selectedrowData = null;
   }
+
   private searchtext:string = '';
   search($event){
     this.createRowData(1,$event);
     this.searchtext = $event;
     this.selectedeRow = false;
-    this.selectedrowData = '';
+    this.selectedrowData = null;
   }
 
+  private actionConfig: CommonActionBarConfig;
   constructor(
     private router: Router,
     private listservice: SaleOrderService,
     private cus: CurrencyService,
     private payment: PaymentService,
-    private status: StatusService,
     private currency: CurrencyService,
+    private status: StatusService,
     private quantifier: QuantifierService,
     private appconfig: AppconfigService,
     private alertservice: AlertService
@@ -85,36 +64,26 @@ export class ListComponent{
     this.createRowData(1);
     this.createColumnDefs();
     this.showGrid = true;
+    //按钮组配置
+    this.actionConfig = new CommonActionBarConfig();
+    this.actionConfig.addNewUrl = 'pages/sale/order/edit';
+    this.actionConfig.deleteUrl = '/api/sale/order/order/';
+    this.actionConfig.openUrl = 'pages/sale/balance_transport/detail';
+    this.actionConfig.idName = 'order_id';
+    this.actionConfig.editUrl = 'pages/sale/order/edit';
+    this.actionConfig.isSaleOrder = true;
+    this.actionConfig.annex = true;
+    this.actionConfig.canEexport = true;
+    this.actionConfig.paymentTip = true;
   }
 
   //行配置项(获取数据)
   private createRowData(page,key?:string) {
-    let rowData:any[] = [];
-
     this.listservice.getlist(page,key)
       .then(data=>{
-        let orders = data.results.data.orders;
-        let order = orders.data;
-        //保存原始数据
-        this.listdata = order;
-        //设置页码
-        this.pageconfig = {
-          nowPage : orders.current_page-0,
-          lastPage : orders.last_page-0,
-          total: orders.total-0,
-          fromitem: orders.from-0,
-          toitem: orders.to-0
-        }
-        return order
-      }).then(listdata=>{
-      //列表数据
-      let rowdata = JSON.parse( JSON.stringify(listdata) );
-      for(var i=0;i<rowdata.length;i++){
-        //保存原始数据索引
-        rowdata[i].index = i;
-      }
-      this.rowData = rowdata;
-    })
+        this.paginate = data.results.data.orders;
+        this.rowData = this.paginate.data;
+      })
   }
 
   //列配置项
@@ -265,12 +234,11 @@ export class ListComponent{
   private orderpaymentData;
   private orderscheduleData;
   private isfreeorder: boolean = false;
-  private sampleData;
 
   private onRowSelected($event) {
     if($event.node.selected){
-      this.selectedrowData = this.listdata[$event.node.data.index];
-
+      this.selectedrowData = $event.node.data as Order;
+      this.selectedIndex = $event.node.rowIndex;
       //产品清单数据
       this.proData =  this.selectedrowData.products;
       this.selectedcolumnDefs = [
@@ -317,12 +285,12 @@ export class ListComponent{
         {
           headerName: '实际销售单价',
           field: 'price',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '实际销售金额',
           field: 'total',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '指导价',
@@ -340,80 +308,19 @@ export class ListComponent{
       //支付方式数据
       this.orderpaymentData = this.payment.get(this.selectedrowData.payment_id);
 
-
-      //生成操作配置
-      //订单类型判断
-      this.operat = {toship: true,orderdemand: true};
+      //是否为免费样品单
       switch (this.selectedrowData.order_type_id){
-      /**部分付款和账期订单**/
-        case (this.appconfig.get('sale.order.type.part') || this.appconfig.get('sale.order.type.time')):
-          this.isfreeorder = false;
-          //订单状态判断
-          switch (this.selectedrowData.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.supaudit = true;break
-          /**主管审核通过订单**/
-            case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.isdone = true;break
-          };
-          break;
-      /**免费样品单**/
         case this.appconfig.get('sale.order.type.free'):
-          this.isfreeorder = true;
-          switch (this.selectedrowData.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.supaudit = true;break
-          /**主管审核通过订单**/
-            case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.procurementcheck = true;break
-          };
-          break;
+          this.isfreeorder = true;break
         default:
           this.isfreeorder = false;
-          switch (this.selectedrowData.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.isdone = true;break
-          };
       }
+
+      ////订单进度数据
+      //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{
+      //    this.orderscheduleData=res.results.data.order;
+      //  }
+      //);
 
       this.selectedeRow = true;
     }
@@ -433,7 +340,6 @@ export class ListComponent{
 
   //搜索框搜索和回车事件
   public onQuickFilterChanged($event) {
-    console.log(this.gridOptions);
     this.gridOptions.api.setQuickFilter($event.value);
   }
   public onQuickFilterEnter($event){
@@ -448,21 +354,12 @@ export class ListComponent{
   }
 
   //删除操作
-  deleteData(){
-    console.log(8879);
-    let sub = this.alertservice.putMessage({
-      title: '询问弹窗',
-      detail: '确定要删除订单吗？',
-      severity: 'info'
-    }).subscribe(data=>{
-      if(data){
-        this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
-          this.selectedrowData = null;
-          this.createRowData(this.pageconfig.nowPage);
-        })
-      }
-      sub.unsubscribe();
-    });
+  deleteData(e){
+    if(e){
+      this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
+        this.selectedrowData = null;
+        this.createRowData(this.paginate.current_page);
+      })
+    }
   }
-
 }

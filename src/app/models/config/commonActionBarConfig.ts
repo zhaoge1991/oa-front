@@ -9,4 +9,7 @@ export class CommonActionBarConfig {
     saveUrl:string;
     annex:boolean;
     canEexport: boolean;
+    orderCheck: boolean;
+    saleReport: boolean;
+    paymentTip: boolean;
 }

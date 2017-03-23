@@ -1,10 +1,10 @@
-import {SaleCustomer} from "./saleCustomer";
-import {SaleUser} from "./saleUser";
-import {SaleOrderProduct} from "./saleOrderProduct";
-import {SaleOrderCost} from "./saleOrderCost";
-import {SaleAnnex} from "./saleAnnex";
+import {Customer} from "./../Customer";
+import {User} from "./../User";
+import {OrderProduct} from "./OrderProduct";
+import {OrderCost} from "./OrderCost";
+import {OrderAnnex} from "./OrderAnnex";
 
-export class SaleOrder{
+export class Order{
   order_id: number;
   customer_id: number;
   name: string;
@@ -55,12 +55,12 @@ export class SaleOrder{
   sample_fee_info: string;
   sample_shipping_info: string;
   pi: string;
-  customer: SaleCustomer;
-  users: SaleUser[];
+  customer: Customer;
+  users: User[];
   status_name: string;
-  products: SaleOrderProduct[];
-  ordercost: SaleOrderCost[];
-  annex: SaleAnnex[];
+  products: OrderProduct[];
+  ordercost: OrderCost[];
+  annex: OrderAnnex[];
   other_price: number;
 
   constructor(saleorder){
@@ -116,24 +116,24 @@ export class SaleOrder{
       this.sample_fee_info = saleorder.sample_fee_info;
       this.sample_shipping_info = saleorder.sample_shipping_info;
       this.pi = saleorder.pi;
-      this.customer = new SaleCustomer(saleorder.customer);
+      this.customer = new Customer(saleorder.customer);
       this.users = [];
       this.status_name = saleorder.status_name;
       this.products = [];
       this.ordercost = [];
       this.annex = [];
       for (let user of saleorder.users){
-        this.users.push(new SaleUser(user));
+        this.users.push(new User(user));
       }
       for (let product of saleorder.products) {
-        this.products.push(new SaleOrderProduct(product))
+        this.products.push(new OrderProduct(product))
       };
       for(let ordercost of saleorder.ordercost){
-        this.ordercost.push(new SaleOrderCost(ordercost));
+        this.ordercost.push(new OrderCost(ordercost));
         this.other_price = this.other_price * 1 + ordercost.price * 1;
       };
       for(let annex of saleorder.annex){
-        this.annex.push(new SaleAnnex(annex))
+        this.annex.push(new OrderAnnex(annex))
       };
     } else {
       this.order_id = 0;
@@ -186,7 +186,7 @@ export class SaleOrder{
       this.sample_fee_info = '';
       this.sample_shipping_info = '';
       this.pi = '';
-      this.customer = new SaleCustomer(null);
+      this.customer = new Customer(null);
       this.users = [];
       this.status_name = '';
       this.products = [];
@@ -195,7 +195,7 @@ export class SaleOrder{
     }
   }
 
-  addProduct(saleOrderProduct: SaleOrderProduct) {
+  addProduct(saleOrderProduct: OrderProduct) {
     this.products.push(saleOrderProduct);
     this.refreshPrice();
   }
@@ -203,7 +203,7 @@ export class SaleOrder{
     this.products.splice(index, 1)
     this.refreshPrice();
   }
-  addCost(saleOrderCost: SaleOrderCost) {
+  addCost(saleOrderCost: OrderCost) {
     this.ordercost.push(saleOrderCost);
     this.refreshPrice();
   }

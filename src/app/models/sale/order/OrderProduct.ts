@@ -1,4 +1,4 @@
-export class SaleOrderProduct{
+export class OrderProduct{
   order_product_id: number;
   order_id: number;
   product_id: number;
@@ -21,7 +21,7 @@ export class SaleOrderProduct{
   quote_price: string;
   floor_price: string;
 
-  constructor(product: SaleOrderProduct){
+  constructor(product: OrderProduct){
     this.order_product_id = product.order_product_id;
     this.order_id = product.order_id;
     this.product_id = product.product_id;

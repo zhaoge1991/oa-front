@@ -1,4 +1,4 @@
-export class SaleOperat{
+export class OrderOperat{
   toship: boolean;
   orderdemand: boolean;
   supaudit: boolean;

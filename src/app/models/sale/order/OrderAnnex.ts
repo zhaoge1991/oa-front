@@ -1,5 +1,5 @@
-import {SaleUser} from "./saleUser";
-export class SaleAnnex{
+import {User} from "./../User";
+export class OrderAnnex{
   annex_id: number;
   annexable_id: number;
   annexable_type: string;
@@ -9,7 +9,7 @@ export class SaleAnnex{
   created_at: string;
   updated_at: string;
   original_extension: string;
-  user: SaleUser;
+  user: User;
 
   constructor(annex){
     this.annex_id = annex.annex_id;

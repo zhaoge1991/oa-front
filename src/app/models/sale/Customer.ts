@@ -1,6 +1,6 @@
-import {SaleUser} from "./saleUser";
+import {User} from "./User";
 
-export class SaleCustomer{
+export class Customer{
   customer_id: number;
   customer_group_id: number;
   store_id: number;
@@ -33,7 +33,7 @@ export class SaleCustomer{
   kh_beizhu: string;
   kh_liushi: string;
   project_id: number;
-  users: SaleUser[];
+  users: User[];
 
   constructor(customer){
     if(customer){
@@ -71,7 +71,7 @@ export class SaleCustomer{
       this.project_id = customer.project_id;
       this.users = [];
       for(let user of customer.users){
-        this.users.push(new SaleUser(user))
+        this.users.push(new User(user))
       };
     }
   }

@@ -1,4 +1,4 @@
-export class  SaleOrderCost{
+export class  OrderCost{
   order_cost_id: number;
   order_id: number;
   name: string;
@@ -6,7 +6,7 @@ export class  SaleOrderCost{
   fees: string;
   created_at: string;
   updated_at: string;
-  constructor(cost: SaleOrderCost){
+  constructor(cost: OrderCost){
     this.order_cost_id = cost.order_cost_id;
     this.order_id = cost.order_id;
     this.name = cost.name;

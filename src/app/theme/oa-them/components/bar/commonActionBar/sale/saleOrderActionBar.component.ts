@@ -2,7 +2,7 @@ import {Component, Input,Output,EventEmitter,OnChanges,ViewChild} from '@angular
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 
-import {SaleOrder} from "../../../../../../models/sale/saleOrder";
+import {Order} from "../../../../../../models/sale/order/Order";
 import {SaleActionBarService} from "./sale.actionBar.service";
 import {ModalDirective} from "ng2-bootstrap/index";
 import {AppconfigService} from "../../../../../../services/core/appConfigService/appConfigService";
@@ -15,8 +15,8 @@ import {AppconfigService} from "../../../../../../services/core/appConfigService
 
 export class SaleOrderActionBarComponent implements OnChanges{
   @Input() config: any;
-  @Input() object: SaleOrder;
-  @Output() objectChange = new EventEmitter<SaleOrder>();
+  @Input() object: Order;
+  @Output() objectChange = new EventEmitter<Order>();
   private operat: any;
   private dialogtext: {text:string,operat: any,data?:any} = {text:'请主管审核', operat: ''};
   constructor(

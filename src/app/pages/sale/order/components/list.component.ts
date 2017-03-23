@@ -9,7 +9,7 @@ import {QuantifierService} from "../../../../services/core/quantifierService/qua
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {StatusService} from "../../../../services/core/statusService/status.service";
 import {AlertService} from "../../../../services/core/alert.component.service";
-import {SaleOrder} from "../../../../models/sale/saleOrder";
+import {Order} from "../../../../models/sale/order/Order";
 import {Paginate} from "../../../../models/common/paginate";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
@@ -22,13 +22,12 @@ import {CommonActionBarConfig} from "../../../../models/config/commonActionBarCo
 export class ListComponent{
   private gridOptions:GridOptions;
   public showGrid:boolean;
-  public rowData: SaleOrder[];
+  public rowData: Order[];
   private columnDefs:any[];
   private selectedeRow: boolean;
   public selectedcolumnDefs: any[];
-  public selectedrowData: SaleOrder;
+  public selectedrowData: Order;
   public isbatches: boolean = false;
-  private listdata:any[];
   //翻页配置
   private paginate : Paginate;
   private selectedIndex:number;
@@ -237,7 +236,7 @@ export class ListComponent{
 
   private onRowSelected($event) {
     if($event.node.selected){
-      this.selectedrowData = $event.node.data as SaleOrder;
+      this.selectedrowData = $event.node.data as Order;
       this.selectedIndex = $event.node.rowIndex;
       //产品清单数据
       this.proData =  this.selectedrowData.products;
@@ -285,12 +284,12 @@ export class ListComponent{
         {
           headerName: '实际销售单价',
           field: 'price',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '实际销售金额',
           field: 'total',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '指导价',
@@ -315,12 +314,6 @@ export class ListComponent{
         default:
           this.isfreeorder = false;
       }
-
-      //this.sampleData = {
-      //  sample_fee_info: '免费样品',
-      //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
-      //  disabled: false
-      //}
 
       ////订单进度数据
       //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{
