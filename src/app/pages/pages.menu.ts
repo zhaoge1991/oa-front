@@ -60,7 +60,25 @@ export const PAGES_MENU = [
             expanded: false,
             order: 0
           }
-        }
+        },
+        children: [
+          {
+            path: 'procurement_order',
+            data: {
+              menu: {
+                title: '采购单'
+              }
+            }
+          },
+          {
+            path: 'freeze_order',
+            data: {
+              menu: {
+                title: '冻结库存单'
+              }
+            }
+          },
+        ]
       },
 
       {
