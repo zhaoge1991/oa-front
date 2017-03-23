@@ -36,14 +36,15 @@ import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMul
     ]),
     PipeModule,
     AgGridComponentModule
-    
+
+
   ],
   declarations: [
     ListComponent,
     DetailComponent,
     EditComponent,
     ProcurementOrderComponent
-    
+
   ]
 })
 export class ProcurementOrderModule {}

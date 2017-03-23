@@ -31,22 +31,30 @@ import {
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
+  PreloaderComponent,
+
+
+
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
-  
+  PaymentSelectComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
-  DeleteActionBarComponent,
-  BackActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
+  DeleteActionBarComponent,
+  AnnexActionBarComponent,
+  BackActionBarComponent,
   //end 公共操作栏
-  
-  DialogComponent,
+
+  AlertComponent,
   SampleOrderComponent,
   AnnexesComponent
 } from './components';
@@ -54,7 +62,8 @@ import {
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
 
 import {
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 } from './directives';
 
 import {
@@ -104,26 +113,33 @@ const NGA_COMPONENTS = [
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
-  
-  
+  PaymentSelectComponent,
+
+
+  PreloaderComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
-  DeleteActionBarComponent,
-  BackActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
+  DeleteActionBarComponent,
+  AnnexActionBarComponent,
+  BackActionBarComponent,
   //end 公共操作栏
-  
+
   SampleOrderComponent,
-  DialogComponent,
+  AlertComponent,
   AnnexesComponent
 ];
 
 const NGA_DIRECTIVES = [
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 ];
 
 const NGA_PIPES = [

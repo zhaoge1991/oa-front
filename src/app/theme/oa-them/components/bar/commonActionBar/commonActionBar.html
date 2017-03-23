@@ -1,10 +1,13 @@
 <div class="actionbar">
-  
+
   <bar-common-action-bar-open  [config]="config" [(object)]="object"></bar-common-action-bar-open>
   <bar-common-action-bar-new  [config]="config"></bar-common-action-bar-new>
   <bar-common-action-bar-save [config]="config" [(object)]="object"  (objectSave)='save($event)'></bar-common-action-bar-save>
   <bar-common-action-bar-edit  [config]="config" [(object)]="object"></bar-common-action-bar-edit>
   <bar-common-action-bar-procurement-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurement-order>
+  <bar-common-action-bar-sale-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-sale-order>
+  <bar-common-action-bar-export [config]="config" [object]="object" (objectExport)='export($event)'></bar-common-action-bar-export>
+  <bar-common-action-bar-annex [config]="config" [object]="object"></bar-common-action-bar-annex>
   <bar-common-action-bar-delete  [config]="config" [(object)]="object" (objectDelete)='delete($event)' ></bar-common-action-bar-delete>
   <bar-common-action-bar-back  [config]="config" [(object)]="object"></bar-common-action-bar-back>
 </div>

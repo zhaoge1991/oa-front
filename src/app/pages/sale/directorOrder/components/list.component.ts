@@ -2,12 +2,14 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {SaleDirectorService} from "../../../../services/directorOrder/sale-director.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {StatusService} from "../../../../services/core/statusService/status.service";
+import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {SaleDirectorService} from "../../../../services/directorOrder/sale-director.service";
+import {AlertService} from "../../../../services/core/alert.component.service";
 
 
 @Component({
@@ -69,13 +71,15 @@ export class ListComponent{
 
   constructor(
     private router: Router,
-    private listservice: SaleDirectorService,
+    private listservice: SaleOrderService,
+    private directorservice: SaleDirectorService,
     private cus: CurrencyService,
     private payment: PaymentService,
     private status: StatusService,
     private currency: CurrencyService,
     private quantifier: QuantifierService,
-    private appconfig: AppconfigService
+    private appconfig: AppconfigService,
+    private alertservice: AlertService
   ) {
     // we pass an empty gridOptions in, so we can grab the api out
     this.gridOptions = <GridOptions>{};
@@ -88,7 +92,7 @@ export class ListComponent{
   private createRowData(page,key?:string) {
     let rowData:any[] = [];
 
-    this.listservice.getlist(page,key)
+    this.listservice.getDirector(page,key)
       .then(data=>{
         let orders = data.results.data.orders;
         let order = orders.data;
@@ -131,7 +135,7 @@ export class ListComponent{
       {
         headerName: '订单编号',
         field: 'order_no',
-        width: 120,
+        width: 180,
         pinned: true //固定列
       },
       {
@@ -446,14 +450,19 @@ export class ListComponent{
 
   //删除操作
   deleteData(){
-    let r = confirm('确认删除？')
-    if(r){
-      this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
-        this.selectedrowData = null;
-        this.createRowData(this.pageconfig.nowPage);
-      })
-
-    }
+    let sub = this.alertservice.putMessage({
+      title: '询问弹窗',
+      detail: '确定要删除订单吗？',
+      severity: 'info'
+    }).subscribe(data=>{
+      if(data){
+        this.listservice.delete(this.selectedrowData.order_id).subscribe(data=>{
+          this.selectedrowData = null;
+          this.createRowData(this.pageconfig.nowPage);
+        })
+      }
+      sub.unsubscribe();
+    });
   }
 
   //审核订单
@@ -472,7 +481,7 @@ export class ListComponent{
         update_status: this.appconfig.get('sale.order.status.waitpayment')
       }
     }
-    this.listservice.check(body).subscribe(()=>{
+    this.directorservice.check(body).subscribe(()=>{
       this.createRowData(1);
       this.selectedeRow = null;
     });

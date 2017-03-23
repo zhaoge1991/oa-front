@@ -18,8 +18,8 @@ export class DetailComponent implements OnInit,OnDestroy{
     private location:Location,
     private route:ActivatedRoute,
     private orderservice: SaleOrderService,
-    private appconfig: AppconfigService,
-    private listservice: SaleDirectorService
+    private directorservice: SaleDirectorService,
+    private appconfig: AppconfigService
   ){}
 
   private id:number;
@@ -159,7 +159,7 @@ export class DetailComponent implements OnInit,OnDestroy{
         update_status: this.appconfig.get('sale.order.status.waitpayment')
       }
     }
-    this.listservice.check(body).subscribe(()=>{
+    this.directorservice.check(body).subscribe(()=>{
       this.location.back();
     });
   }

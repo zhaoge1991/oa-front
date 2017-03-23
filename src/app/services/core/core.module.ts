@@ -2,7 +2,9 @@ import {NgModule,Optional, SkipSelf }       from '@angular/core';
 
 
 import {MessageService} from "./messageComponent.service";
+import {AlertService} from "./alert.component.service";
 import {CurentUserService} from "./currentuser.service";
+import {PreloaderService} from "./preloaderComponent.service";
 
 import {GetService} from "../../common/function/getfunction";
 import {AllConfigService} from "./allConfig.service";
@@ -38,6 +40,7 @@ import {PermissionService} from "./permissionService/permission.service";
 import {RoleService} from "./roleService/role.service";
 import {OrderTypeService} from "./ordertypeService/order_type.service";
 import {MenuService} from './menuService/menu.service'
+
 
 const CONFIG_SERVICE = [
   AppconfigService,
@@ -78,8 +81,10 @@ const CONFIG_SERVICE = [
     ...CONFIG_SERVICE,
     AllConfigService,
     MessageService,
+    AlertService,
     GetService,
-    CurentUserService
+    CurentUserService,
+    PreloaderService
   ]
 })
 export class CoreModule {

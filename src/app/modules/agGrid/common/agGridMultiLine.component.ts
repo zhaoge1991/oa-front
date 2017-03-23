@@ -37,8 +37,10 @@ export class AgGridMultiLineComponent implements ICellEditorAngularComp,AfterVie
         let key = event.which || event.keyCode;
         console.log(key);
         if(event.ctrlKey&&key == 13){
+            let prefix =  this.container.element.nativeElement.value.substring(0, this.container.element.nativeElement.selectionStart)
+            let suffix = this.container.element.nativeElement.value.substring(this.container.element.nativeElement.selectionEnd); 
             event.stopPropagation();
-            this.params.value+="\n"
+            this.params.value=prefix+"\n"+suffix;
         }
         
         

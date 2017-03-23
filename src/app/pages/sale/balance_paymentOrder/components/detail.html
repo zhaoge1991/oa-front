@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <ba-card baCardClass="with-scroll">
-      <div class="detailcontent" [ngSwitch]="ordertype">
+      <div class="detailcontent" [ngSwitch]="ordertype"> 
         <div *ngSwitchCase= 0 >
           <div class="opendetail">
             <h1 class="title" *ngIf="data.project_id">{{data.project_id | projectpipe}}有限公司</h1>

@@ -59,6 +59,8 @@ import {OrderTypeService} from "../services/core/ordertypeService/order_type.ser
     <!--</footer>-->
     <ba-back-top position="200"></ba-back-top>
     <ng-message></ng-message>
+    <alert></alert>
+    <preloader></preloader>
     `
 })
 export class Pages {

@@ -6,7 +6,10 @@ import {SaleComponent} from './sale.component';
 import { OrderModule} from './order/order.module';
 
 import {routing} from './sale.routing';
-import {DirectorModule} from "./director/director.module";
+import {DirectorModule} from "./directorOrder/director.module";
+import {BalancePaymentModule} from "./balance_paymentOrder/balance_paymentOrder.module";
+import {SaleOrderService} from "../../services/saleOrder/sale-order.service";
+import {BalanceTransportModule} from "./balance_transport/balance_transportOrder.module";
 
 @NgModule({
   imports: [
@@ -14,11 +17,14 @@ import {DirectorModule} from "./director/director.module";
     FormsModule,
     routing,
     OrderModule,
-    DirectorModule
+    DirectorModule,
+    BalancePaymentModule,
+    BalanceTransportModule
   ],
   declarations: [
     SaleComponent
-  ]
+  ],
+  providers: [SaleOrderService]
 })
 
 export class SaleModule{}

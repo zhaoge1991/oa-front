@@ -16,7 +16,7 @@
     </button>
   </div>
   <div class="btnitem" *ngIf="actionConfig.showbtn.report" >
-    <button type="button"  class="available" (click)="addClick($event)" [disabled]="!actionsData">
+    <button type="button"  class="available" [disabled]="!actionsData">
       <i class="iconfont icon-baobiao"></i><span>销售报表</span>
     </button>
   </div>
@@ -80,6 +80,11 @@
   <div class="btnitem" *ngIf="actionConfig.showbtn.download">
     <button type="button"  class="available" (click)="downloadEmit()" [disabled]="!actionsData">
       <i class="iconfont icon-xiazai-copy"></i><span>下载</span>
+    </button>
+  </div>
+  <div class="btnitem" *ngIf="actionConfig.showbtn.checkpayment">
+    <button type="button"  class="available"  [disabled]="!actionsData">
+      <i class="iconfont icon-xiazai-copy"></i><span>提醒查款</span>
     </button>
   </div>
   <div class="btnitem" *ngIf="actionConfig.showbtn.close">

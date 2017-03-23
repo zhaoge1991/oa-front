@@ -1,0 +1,63 @@
+<div class="btnitem" *ngIf="config.isSaleOrder">
+  <button type="button" class="available" id="action-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!object">
+    <i class="iconfont icon-caozuo"></i><span>操作 <i class="iconfont icon-jiantou"></i></span>
+  </button>
+  <div class="btnmore" aria-labelledby="action-more">
+    <ul  *ngIf="operat">
+      <li *ngIf="operat.empty"><button>(无)</button></li>
+      <li *ngIf="operat.toship"><button class="available" (click)="toshipclick()">生成出运安排</button></li>
+      <li *ngIf="operat.orderdemand"><button class="available" (click)="orderdemandclick()">生成订单要求</button></li>
+      <li *ngIf="operat.supaudit"><button class="available" (click)="supauditclick()">请主管审核</button></li>
+      <li *ngIf="operat.financeaudit"><button class="available" (click)="financeauditclick()">请财务审核</button></li>
+      <li *ngIf="operat.procurement"><button class="available" (click)="procurementauditclick()">请采购审核</button></li>
+      <li *ngIf="operat.toshipment"><button class="available" (click)="toshipmentclick()">请货运发货</button></li>
+      <li *ngIf="operat.cusrecive"><button class="available" (click)="cusreciveclick()">客户已收货</button></li>
+      <li *ngIf="operat.procurementcheck"><button class="available" (click)="procurementcheckclick()">请采购核销</button></li>
+      <li *ngIf="operat.isdone"><button class="available" (click)="isdoneclick()">已完成</button></li>
+    </ul>
+  </div>
+</div>
+
+<!--操作按钮弹窗-->
+<!-- control modal from parent component -->
+<div *ngIf="config.isSaleOrder" bsModal #textdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="textdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">{{dialogtext.text}}弹窗</h4>
+      </div>
+      <div class="modal-body" *ngIf="!(dialogtext.operat=='procurementcheckEmit')">
+        确定“{{dialogtext.text}}”吗？
+      </div>
+      <div class="modal-bidy inputdialog" *ngIf="dialogtext.operat=='procurementcheckEmit'">
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">测试结果</label>
+          <div class="col-sm-8">
+            <input type="text" class="ng-form-control"  [(ngModel)]="dialogtext.data.result" name="result">
+          </div>
+        </div>
+        <div class="ng-form-group row">
+          <label class="col-sm-4 ng-form-control-label">测试详情</label>
+          <div class="col-sm-8">
+            <textarea type="text" class="ng-form-control"  [(ngModel)]="dialogtext.data.description" name="description"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="dialogtext.operat=='supauditEmit'" class="btn btn-primary confirm-btn" (click)="supauditEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='financeauditEmit'" class="btn btn-primary confirm-btn" (click)="financeauditEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='procurementauditEmit'" class="btn btn-primary confirm-btn" (click)="procurementauditEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='toshipmentEmit'" class="btn btn-primary confirm-btn" (click)="toshipmentEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='cusreciveEmit'" class="btn btn-primary confirm-btn" (click)="cusreciveEmit(true)">是</button>
+        <button *ngIf="dialogtext.operat=='isdoneEmit'" class="btn btn-primary confirm-btn" (click)="isdoneEmit(true)">是</button>
+        <button *ngIf="!(dialogtext.operat=='procurementcheckEmit')" class="btn btn-primary confirm-btn" (click)="textdialog.hide()">否</button>
+        <!--输入框弹窗-->
+        <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" [disabled]="!(dialogtext.data.result&&dialogtext.data.description)" (click)="procurementcheckEmit()">提交</button>
+        <button *ngIf="dialogtext.operat=='procurementcheckEmit'" class="btn btn-primary confirm-btn" (click)="textdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -23,19 +23,19 @@
                                 <div class="col-sm-8">
                                     <demander-select [inputProcurementDemander]="procurementOrder.demander" (onDemanderChange)="procurementOrder.procurement_demander_id=$event.procurement_demander_id;procurementOrder.demander=$event"></demander-select>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="ng-form-group row">
                                 <label for="num" class="col-sm-4 ng-form-control-label">采购日期</label>
                                 <div class="col-sm-8">
                                     <ng-calender [(value)]="procurementOrder.date_added" [placeholder]="'请选择时间'"></ng-calender>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="ng-form-group row">
                                 <label for="num" class="col-sm-4 ng-form-control-label">合同地点</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="procurementOrder.order_place" name="order_place">
                                 </div>
-                            </div>  
+                            </div>
                             <div class="ng-form-group row">
                                 <label for="num" class="col-sm-4 ng-form-control-label">采购商品金额</label>
                                 <div class="col-sm-8">
@@ -56,8 +56,8 @@
                                 </div>
                             </div>
 
-                            
-                            
+
+
                             <div class="ng-form-group row">
                                 <label for="num" class="col-sm-4 ng-form-control-label">需-收款银行</label>
                                 <div class="col-sm-8">
@@ -106,8 +106,8 @@
                             <div class="ng-form-group row">
                                 <label class="col-sm-4 ng-form-control-label">是否含税</label>
                                 <div class="col-sm-8">
-                                    <input autocomplete="off" type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==1" name='tax' value="1">是
-                                    <input autocomplete="off" type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==0" name='tax' value="0">否
+                                    <input type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==1" name='tax' value="1">是
+                                    <input type='radio' [(ngModel)]="procurementOrder.tax" [checked]="procurementOrder.tax==0" name='tax' value="0">否
                                 </div>
                             </div>
                         </div>
