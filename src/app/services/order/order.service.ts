@@ -118,7 +118,7 @@ export class OrderService{
   }
 
   //获取欠尾款订单
-  getBalancePaymentList(page?:number, key?:string){
+  getBalancePaymentList(page?:number,key?:string){
     if(key){
       return this.http.get('/api/sale/order/order/balance_payment'+'?page='+page+'&keyword='+key).map(res=>{
         return res.json();
@@ -132,7 +132,7 @@ export class OrderService{
   }
 
   //获取财务订单
-  getFinanceList(page?:number, key?:string){
+  getFinanceList(page?:number,key?:string){
     if(key){
       return this.http.get('/api/sale/order/update_order_status/waitfinancecheck'+'?page='+page+'&keyword='+key).map(res=>{
         return res.json();
