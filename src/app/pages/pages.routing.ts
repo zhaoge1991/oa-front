@@ -30,7 +30,8 @@ export const routes: Routes = [
       { path: 'tables', loadChildren: 'app/pages/tables/tables.module#TablesModule' },
       { path: 'maps', loadChildren: 'app/pages/maps/maps.module#MapsModule' },
       { path: 'procurement', loadChildren:'app/pages/procurement/procurement.module#ProcurementModule' },
-      { path: 'sale', loadChildren:'app/pages/sale/sale.module#SaleModule' }
+      { path: 'sale', loadChildren:'app/pages/sale/sale.module#SaleModule' },
+      { path: 'finance', loadChildren:'app/pages/finance/finance.module#FinanceModule' }
     ]
   }
 ];

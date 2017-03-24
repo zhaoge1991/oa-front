@@ -48,6 +48,44 @@ export const PAGES_MENU = [
           }
         ]
       },
+      {
+        path: 'finance',
+        data: {
+          menu: {
+            title: '财务管理',
+            icon: 'ion-android-home',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单'
+              }
+            }
+          },
+          {
+            path: 'balance_payment',
+            data: {
+              menu: {
+                title: '欠尾款订单'
+              }
+            }
+          },
+          {
+            path: 'balance_transport',
+            data: {
+              menu: {
+                title: '欠运费订单'
+              }
+            }
+          }
+        ]
+      },
        {
         path: 'procurement',
         data: {
@@ -60,6 +98,14 @@ export const PAGES_MENU = [
           }
         },
         children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          },
           {
             path: 'procurement_order',
             data: {

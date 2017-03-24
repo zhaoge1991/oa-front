@@ -47,6 +47,10 @@ import {
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
   OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
   PaymentTipActionBarComponent,
   SaleReportActionBarComponent,
   SaleOrderActionBarComponent,
@@ -77,7 +81,8 @@ import {
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 } from './pipes';
 
 import {
@@ -128,6 +133,10 @@ const NGA_COMPONENTS = [
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
   OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
   SaleReportActionBarComponent,
   PaymentTipActionBarComponent,
   SaleOrderActionBarComponent,
@@ -156,7 +165,8 @@ const NGA_PIPES = [
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 ];
 
 const NGA_SERVICES = [

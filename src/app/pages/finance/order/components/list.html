@@ -1,0 +1,57 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入客户名'" (searchtext)="search($event)"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="payment"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="payment">付款方式</div>
+          <div index="order_schedule">订单进度</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="payment">
+            <table>
+              <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>说明</th><td [innerHTML]="orderpaymentData?.content"></td></tr>
+              <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
+              <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
+              <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
+            </table>
+          </div>
+          <div contents="order_schedule">
+            <ng-schdule [schduleData]="orderscheduleData"></ng-schdule>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

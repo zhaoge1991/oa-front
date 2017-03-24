@@ -1,4 +1,5 @@
 export class OrderOperat{
+  empty: boolean;
   toship: boolean;
   orderdemand: boolean;
   supaudit: boolean;
@@ -8,4 +9,5 @@ export class OrderOperat{
   cusrecive: boolean;
   isdone: boolean;
   procurementcheck: boolean;
+  closure: boolean;
 }

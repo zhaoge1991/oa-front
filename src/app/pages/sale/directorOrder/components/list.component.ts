@@ -78,6 +78,7 @@ export class ListComponent{
     this.actionConfig.canEexport = true;
     this.actionConfig.orderCheck = true;
     this.actionConfig.saleReport = true;
+    this.actionConfig.noback = true;
   }
 
   //行配置项(获取数据)

@@ -74,6 +74,7 @@ export class ListComponent{
     this.actionConfig.isSaleOrder = true;
     this.actionConfig.annex = true;
     this.actionConfig.canEexport = true;
+    this.actionConfig.noback = true;
   }
 
   //行配置项(获取数据)
@@ -361,5 +362,11 @@ export class ListComponent{
         this.createRowData(this.paginate.current_page);
       })
     }
+  }
+
+  //选中订单数据改变
+  objectChange(){
+    this.selectedrowData = null;
+    this.createRowData(this.paginate.current_page);
   }
 }

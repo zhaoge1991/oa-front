@@ -3,7 +3,7 @@ import {Location} from '@angular/common';
 @Component({
     selector: 'bar-common-action-bar-back',
     template: `
-    <div class="btnitem">
+    <div class="btnitem" *ngIf="!config.noback">
     <button type="button" class="available" (click)="back()">
       <i class="iconfont icon-guanbishanchu"></i><span>返回</span>
     </button>

@@ -10,6 +10,11 @@ export class CommonActionBarConfig {
     annex:boolean;
     canEexport: boolean;
     orderCheck: boolean;
+    financeCheck: boolean;
     saleReport: boolean;
     paymentTip: boolean;
+    noback: boolean;
+    isFinance: string;
+    procurementCheck: boolean;
+    isprocurmentOrder: boolean;
 }

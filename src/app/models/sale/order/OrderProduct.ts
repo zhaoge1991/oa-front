@@ -20,6 +20,10 @@ export class OrderProduct{
   discount_price: string;
   quote_price: string;
   floor_price: string;
+  processing_quantity: number;
+  purchaseing_quantity: number;
+  purchased_quantity: number;
+  freeze_quantity: number;
 
   constructor(product: OrderProduct){
     this.order_product_id = product.order_product_id;
@@ -43,5 +47,9 @@ export class OrderProduct{
     this.discount_price = product.discount_price;
     this.quote_price = product.quote_price;
     this.floor_price = product.floor_price;
+    this.processing_quantity = product.processing_quantity;
+    this.purchaseing_quantity = product.purchaseing_quantity;
+    this.purchased_quantity = product.purchased_quantity;
+    this.freeze_quantity = product.freeze_quantity;
   }
 }

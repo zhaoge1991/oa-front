@@ -75,6 +75,7 @@ export class ListComponent{
     this.actionConfig.annex = true;
     this.actionConfig.canEexport = true;
     this.actionConfig.paymentTip = true;
+    this.actionConfig.noback = true;
   }
 
   //行配置项(获取数据)
