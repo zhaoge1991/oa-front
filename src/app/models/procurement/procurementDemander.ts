@@ -12,7 +12,7 @@ export class ProcurementDemander {
     created_at: string;
     updated_at: string;
     banks: Bank[]
-    constructor(procurementDemander: ProcurementDemander) {
+    constructor(procurementDemander) {
         if (procurementDemander) {
             this.procurement_demander_id = procurementDemander.procurement_demander_id;
             this.full_name = procurementDemander.full_name;

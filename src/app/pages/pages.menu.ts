@@ -113,7 +113,16 @@ export const PAGES_MENU = [
                 title: '采购单'
               }
             }
-          }
+          },
+          {
+            path: 'freeze_order',
+            data: {
+              menu: {
+                title: '冻结库存单'
+              }
+            }
+          },
+          
         ]
       },
 
