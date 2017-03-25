@@ -122,10 +122,31 @@ export const PAGES_MENU = [
               }
             }
           },
-          
+
         ]
       },
-
+      {
+        path: 'depot',
+        data: {
+          menu: {
+            title: '仓库管理',
+            icon: 'ion-android-home',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'dashboard',
         data: {

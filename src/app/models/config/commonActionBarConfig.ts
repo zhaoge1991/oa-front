@@ -17,4 +17,5 @@ export class CommonActionBarConfig {
     isFinance: string;
     procurementCheck: boolean;
     isprocurmentOrder: boolean;
+    depotUrl: string;
 }

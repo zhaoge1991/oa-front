@@ -15,6 +15,9 @@
   <bar-common-action-bar-procurmentOrder [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurmentOrder>
   <!--销售报表按钮-->
   <bar-common-action-bar-saleReport [config]="config" [object]="object"></bar-common-action-bar-saleReport>
+  <!--仓库订单管理操作-->
+  <bar-common-action-bar-depot [config]="config" [object]="object"
+                               (objectChange)='change($event)'></bar-common-action-bar-depot>
   <!--保存按钮-->
   <bar-common-action-bar-save [config]="config" [(object)]="object"  (objectSave)='save($event)'></bar-common-action-bar-save>
   <!--编辑按钮-->

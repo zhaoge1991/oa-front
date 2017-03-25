@@ -1,0 +1,106 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入客户名'" (searchtext)="search($event)"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                         [gridOptions]="gridOptions"
+                         [columnDefs]="columnDefs"
+                         [rowData]="rowData"
+                         enableColResize
+                         enableSorting
+                         enableFilter
+                         groupHeaders
+
+                         rowHeight="22"
+                         rowSelection="multiple"
+
+                         (rowSelected)="onRowSelected($event)"
+                         (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">商品清单</div>
+          <div index="base_info">基本信息</div>
+          <div index="sample_order" [style.display]="isfreeorder?'block':'none'">样品单信息</div>
+          <div index="test" [style.display]="isfreeorder?'block':'none'">测试信息</div>
+          <div index="order_schedule">订单进度</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <ag-grid-angular #selectedrow style="width: 100%; height: 180px;" class="ag-fresh"
+
+                             [columnDefs]="selectedcolumnDefs"
+                             [rowData]="proData"
+                             enableColResize
+                             enableSorting
+                             enableFilter
+                             groupHeaders
+
+                             rowHeight="22"
+                             rowSelection="multiple"
+            ></ag-grid-angular>
+          </div>
+          <div contents="sample_order">
+            <sample-order *ngIf="selectedrowData" [(sample_fee_info)]="selectedrowData.sample_fee_info"
+                          [(sample_shipping_info)]="selectedrowData.sample_shipping_info"
+                          [disabled]="true"></sample-order>
+          </div>
+          <div contents="test">
+            <table>
+              <tr>
+                <th>测试反馈日期</th>
+                <td>{{selectedrowData?.test_dete}}</td>
+              </tr>
+              <tr>
+                <th>测试结果</th>
+                <td>{{selectedrowData?.test_result}}</td>
+              </tr>
+              <tr>
+                <th>测试详情</th>
+                <td>{{selectedrowData?.test_description}}</td>
+              </tr>
+            </table>
+          </div>
+          <div contents="base_info">
+            <table>
+              <tr>
+                <th>期望发货时间</th>
+                <td>{{selectedrowData?.test_dete}}</td>
+              </tr>
+              <tr>
+                <th>订单分类</th>
+                <td>{{selectedrowData?.order_type_id | ordertypepipe}}</td>
+              </tr>
+              <tr>
+                <th>项目</th>
+                <td>{{selectedrowData?.project_id | projectpipe}}</td>
+              </tr>
+              <tr>
+                <th>订单要求</th>
+                <td>{{selectedrowData?.remark}}</td>
+              </tr>
+            </table>
+          </div>
+          <div contents="order_schedule">
+            <ng-schdule [schduleData]="orderscheduleData"></ng-schdule>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>
