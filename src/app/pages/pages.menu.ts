@@ -53,7 +53,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: '财务管理',
-            icon: 'ion-android-home',
+            icon: 'ion-cash',
             selected: false,
             expanded: false,
             order: 0
@@ -91,7 +91,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: '采购管理',
-            icon: 'ion-android-home',
+            icon: 'ion-ios-bookmarks',
             selected: false,
             expanded: false,
             order: 0
@@ -130,7 +130,29 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: '仓库管理',
-            icon: 'ion-android-home',
+            icon: 'ion-cube',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'shipping',
+        data: {
+          menu: {
+            title: '货运管理',
+            icon: 'ion-plane',
             selected: false,
             expanded: false,
             order: 0

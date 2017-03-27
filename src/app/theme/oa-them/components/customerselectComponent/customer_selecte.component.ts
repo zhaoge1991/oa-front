@@ -23,6 +23,7 @@ export class CustomerSelectComponent implements OnInit{
   ){}
 
   @Input() customer: Customer;
+  @Input() disabled:boolean;
   @Output() customerChange = new EventEmitter();
   private _customer:Customer;
   private customers: Customer[];

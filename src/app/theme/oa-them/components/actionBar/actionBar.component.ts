@@ -25,7 +25,7 @@ import {AnnexesComponent} from "../annexesComponent/annexes.component";
 export class ActionBar implements OnChanges{
   @Input() actionsData: any;
   @Input() actionConfig: {
-    showbtn: {},
+    showbtn: any,
     openurl?: string,
     addurl?: string,
     idname?: string

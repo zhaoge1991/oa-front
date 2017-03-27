@@ -1,12 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'work',
-  styles: [],
+  selector: 'sale-order',
   template: `<router-outlet></router-outlet>`
 })
-export class Work {
-
+export class OrderComponent {
   constructor() {
   }
 }
+

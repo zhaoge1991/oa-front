@@ -158,4 +158,17 @@ export class OrderService {
       });
     }
   }
+
+  //获取货运订单
+  getShippingList(page?:number, key?:string) {
+    if (key) {
+      return this.http.get('/api/shipping/order' + '?page=' + page + '&keyword=' + key).map(res=> {
+        return res.json();
+      });
+    } else {
+      return this.http.get('/api/shipping/order' + '?page=' + page).map(res=> {
+        return res.json();
+      });
+    }
+  }
 }

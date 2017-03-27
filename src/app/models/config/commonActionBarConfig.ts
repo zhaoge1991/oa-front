@@ -18,4 +18,5 @@ export class CommonActionBarConfig {
     procurementCheck: boolean;
     isprocurmentOrder: boolean;
     depotUrl: string;
+    isShipping: boolean;
 }

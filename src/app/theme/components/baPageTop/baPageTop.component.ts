@@ -15,7 +15,7 @@ export class BaPageTop {
 
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
-  private username: string;
+  public username:string;
 
   constructor(private _state:GlobalState,private router: Router,private userservice: CurentUserService) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {

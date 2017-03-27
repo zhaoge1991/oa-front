@@ -18,6 +18,9 @@
   <!--仓库订单管理操作-->
   <bar-common-action-bar-depot [config]="config" [object]="object"
                                (objectChange)='change($event)'></bar-common-action-bar-depot>
+  <!--货运订单管理操作-->
+  <bar-common-action-bar-shipping [config]="config" [object]="object"
+                                  (objectChange)='change($event)'></bar-common-action-bar-shipping>
   <!--保存按钮-->
   <bar-common-action-bar-save [config]="config" [(object)]="object"  (objectSave)='save($event)'></bar-common-action-bar-save>
   <!--编辑按钮-->

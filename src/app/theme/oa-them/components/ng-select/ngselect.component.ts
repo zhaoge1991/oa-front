@@ -20,6 +20,7 @@ export class NgSelectComponent implements OnInit{
   @Input() value;
   @Input() selectfor;
   @Input() showname;
+  @Input() disabled;
   @Output() valueChange = new EventEmitter();
 
   private options: any[];

@@ -60,6 +60,7 @@ import {
   AnnexActionBarComponent,
   BackActionBarComponent,
   DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -147,6 +148,7 @@ const NGA_COMPONENTS = [
   AnnexActionBarComponent,
   BackActionBarComponent,
   DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,

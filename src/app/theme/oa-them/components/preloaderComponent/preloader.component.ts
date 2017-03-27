@@ -16,7 +16,7 @@ import {PreloaderService} from "../../../../services/core/preloaderComponent.ser
 })
 
 export class PreloaderComponent{
-  private isshow: boolean = false;
+  public isshow:boolean = false;
 
   constructor(private preloaderservice: PreloaderService){
     this.preloaderservice.toggle$.subscribe(tog=>{

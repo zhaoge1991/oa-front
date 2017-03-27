@@ -1,0 +1,45 @@
+<div class="btnitem" *ngIf="config.isShipping">
+  <button type="button" class="available" id="action-more" data-toggle="dropdown" aria-expanded="false"
+          [disabled]="!object">
+    <i class="iconfont icon-caozuo"></i><span>操作 <i class="iconfont icon-jiantou"></i></span>
+  </button>
+  <div class="btnmore" aria-labelledby="action-more">
+    <ul>
+      <li *ngIf="orderSatatus == 0">
+        <button class="available">无</button>
+      </li>
+      <li *ngIf="orderSatatus == 1">
+        <button class="available" (click)="salecheck()">请销售确认</button>
+      </li>
+      <li *ngIf="orderSatatus == 2">
+        <button class="available" (click)="shipping()">已发货</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!--已发货弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">操作弹窗</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            确认已发货？
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="putshipping()">确认</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
