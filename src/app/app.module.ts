@@ -11,17 +11,6 @@ import {HttpInterceptorService} from "./services/interceptor";
 import {MessageService} from "./services/core/messageComponent.service";
 import {PreloaderService} from "./services/core/preloaderComponent.service";
 
-export function interceptorFactory(backend:XHRBackend,
-                                   defaultOptions:RequestOptions,
-                                   router:Router,
-                                   messageService:MessageService,
-                                   preloaderservice:PreloaderService) {
-  return new HttpInterceptorService(backend, defaultOptions, router, messageService, preloaderservice)
-};
-
-//import { provideInterceptorService } from 'ng2-interceptors';
-//import {ServerURLInterceptor} from "./ServerURLInterceptor";
-
 //导入核心服务
 import {CoreModule} from "./services/core/core.module";
 
