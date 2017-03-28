@@ -1,0 +1,173 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent" [ngSwitch]="ordertype">
+        <div *ngSwitchCase= 0 >
+          <div class="opendetail">
+            <h1 class="title" *ngIf="data.project_id">{{data.project_id | projectpipe}}有限公司</h1>
+            <table>
+              <caption>免费样品申请单 <span>编号: <em class="orderid">{{data.order_no}}</em></span></caption>
+              <tr>
+                <th>业务员</th> <td>{{data.users|userspipe}}</td>
+                <th>申请日期</th> <td>{{data.created_at}}</td>
+              </tr>
+              <tr>
+                <th>客户公司名</th><td colspan="3">{{data?.customer?.field_company}}</td>
+              </tr>
+              <tr>
+                <th>客户地址</th> <td colspan="3">{{data?.customer?.address}}</td>
+              </tr>
+              <tr>
+                <th>客户电话</th> <td>{{data?.customer?.telephone}}</td>
+                <th>客户邮箱</th> <td>{{data?.customer?.email}}</td>
+              </tr>
+              <tr>
+                <th>客户网址</th> <td>{{data?.customer?.field_company_site}}</td>
+                <th>客户性质</th> <td>{{data?.customer?.kh_leixing}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>申请样品内容</caption>
+              <tr>
+                <th>序号</th> <th>型号</th> <th>产品描述</th> <th>单价</th> <th>数量</th> <th>金额</th>
+              </tr>
+              <tr *ngFor="let pro of data.products,let i=index">
+                <td>{{i+1}}</td> <td>{{pro.model}}</td> <td>{{pro.zh_name}}</td> <td>{{pro.price}}</td> <td>{{pro.quantity}}</td> <td>{{pro.total}}</td>
+              </tr>
+              <tr>
+                <th colspan="5">总价</th> <td>{{data.product_price}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>申请样品相关费用</caption>
+              <tr>
+                <td colspan="4">
+                  <sample-order [(sample_fee_info)]="data.sample_fee_info" [(sample_shipping_info)]="data.sample_shipping_info" [disabled]="true"></sample-order>
+                </td>
+              </tr>
+              <tr>
+                <th>主管审批</th> <td></td>
+                <th>销售经理审批</th> <td></td>
+              </tr>
+            </table>
+            <table>
+              <caption>测试反馈</caption>
+              <tr>
+                <th>测试反馈日期</th> <td>{{data.test_date}}</td>
+                <th>测试结果</th> <td>{{data.test_result}}</td>
+              </tr>
+              <tr>
+                <th>测试详情</th> <td colspan="3">{{data.test_description}}</td>
+              </tr>
+              <tr>
+                <th>核销日期</th> <td><span *ngIf="isdone">{{data.updated_at}}</span></td>
+                <th>确认签字</th> <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div *ngSwitchDefault>
+          <div class="opendetail">
+            <h1 class="title" *ngIf="data.project_id">{{data.project_id | projectpipe}}有限公司</h1>
+            <table>
+              <caption>订单 <span>编号: <em class="orderid">{{data.order_no}}</em></span></caption>
+              <tr>
+                <th>业务员</th> <td>{{data.users|userspipe}}</td>
+                <th>客户</th> <td>{{data?.customer?.firstname}}</td>
+                <th>国家</th> <td>{{data?.country?.name}}</td>
+              </tr>
+              <tr>
+                <th>PI编号</th> <td>{{data.pi}}</td>
+                <th>网上单号</th> <td>{{data.online_order}}</td>
+                <th>订单状态</th> <td>{{data.order_status_id | orderstatuspipe}}</td>
+              </tr>
+              <tr>
+                <th>客诉</th> <td colspan="5">{{data.complaint}}</td>
+              </tr>
+              <tr>
+                <th>订单要求</th> <td colspan="5">{{data.remark}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>财务信息</caption>
+              <tr>
+                <th>总金额</th> <td>{{data.total_price}}</td>
+                <th>货币</th> <td>{{data.currency_id | currencypipe}}</td>
+                <th>支付方式</th> <td>{{data.payment_id | paymentpipe}}</td>
+              </tr>
+              <tr>
+                <th>商品金额</th> <td>{{data.product_price}}</td>
+                <th>其他费用</th> <td>{{data.ordercost | ordercostspipe}}</td>
+                <th>手续费</th> <td>{{data.payment_costs}}</td>
+              </tr>
+              <tr>
+                <th>运费</th> <td >{{data.shipping_costs}}</td>
+                <th>应收账款</th> <td>{{data.payable_cost}}</td>
+                <th></th> <td></td>
+              </tr>
+              <tr>
+                <th>实收款</th> <td>{{data.actual_payment}}</td>
+                <th>银行手续费</th> <td>{{data.actual_bank_fee}}</td>
+                <th>支出运费</th> <td>{{data.actual_shipping_costs}}</td>
+              </tr>
+              <tr>
+                <th>采购支出款</th> <td>{{data.procurement_price}}</td>
+                <th>欠尾款</th> <td>{{data.balance_payment}}</td>
+                <th>欠运费</th> <td>{{data.balance_shipping}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>商品信息</caption>
+              <tr>
+                <th>序号</th> <th>型号</th> <th>产品描述</th> <th>数量</th>
+              </tr>
+              <tr *ngFor="let pro of data.products,let i=index">
+                <td>{{i+1}}</td> <td>{{pro.model}}</td> <td>{{pro.zh_name}}</td> <td>{{pro.quantity}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>货运信息</caption>
+              <tr>
+                <th>期望发货时间</th> <td>{{data.demand?data.demand.expect_shipment:''}}</td>
+                <th>期望快递</th> <td>{{data.demand?data.expect_transport:''}}</td>
+                <th>客户</th> <td>{{data.customer?.firstname}}</td>
+              </tr>
+              <tr>
+                <th>电话</th> <td>{{data.customer?.telephone}}</td>
+                <th>邮编</th> <td></td>
+                <th>地址</th> <td>{{data.customer?.address}}</td>
+              </tr>
+              <tr>
+                <th>实际发货时间</th> <td>{{data.ship_date}}</td>
+                <th>发货快递</th> <td>{{data.transport_id | transportpipe}}</td>
+                <th>查询单号</th> <td>{{data.delivery_number}}</td>
+              </tr>
+              <tr>
+                <th>预计到达时间</th> <td colspan="5">{{data.estimated_arrival_date}}</td>
+              </tr>
+            </table>
+            <table>
+              <caption>附件信息</caption>
+              <tr>
+                <th>上传人</th> <th>内容</th>
+              </tr>
+              <tr *ngFor="let annexe of data.annex" class="annexe">
+                <td>{{annexe?.user?.name}}</td>
+                <td>
+                  <span class="download" (click)="download(annexe.annex_id)">
+                    <i class="iconfont" [annexeicon]="annexe.original_extension"></i>
+                    {{annexe?.name}}
+                  </span>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

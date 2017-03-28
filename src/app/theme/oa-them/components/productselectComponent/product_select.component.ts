@@ -25,11 +25,11 @@ export class ProductSelectComponent implements OnInit{
   private productnodes: any[] = [];
   private productdata: any[];
   private pageconfig:{
-    nowPage : number,
-    lastPage : number,
+    current_page : number,
+    last_page : number,
     total: number,
-    fromitem: number,
-    toitem: number
+    from: number,
+    to: number
   }
   @Output() productChange = new EventEmitter();
   ngOnInit(){
@@ -129,11 +129,11 @@ export class ProductSelectComponent implements OnInit{
   init(key:string,page:number,catalog: number){
     this.productsservice.get(key,page,catalog).subscribe(data=>{
       this.pageconfig = {
-        nowPage : data.current_page,
-        lastPage : data.last_page,
+        current_page : data.current_page,
+        last_page : data.last_page,
         total: data.total,
-        fromitem: data.from,
-        toitem: data.to
+        from: data.from,
+        to: data.to
       }
       this.productdata = data.data;
     })

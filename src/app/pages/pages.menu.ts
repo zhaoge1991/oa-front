@@ -31,22 +31,58 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'info',
+            path: 'balance_payment',
             data: {
               menu: {
-                title: '信息设置'
+                title: '欠尾款订单'
               }
-            },
-            children: [
-              {
-                path: 'provision',
-                data:　{
-                  menu: {
-                    title: '条款管理'
-                  }
-                }
+            }
+          },
+          {
+            path: 'balance_transport',
+            data: {
+              menu: {
+                title: '欠运费订单'
               }
-            ]
+            }
+          }
+        ]
+      },
+      {
+        path: 'finance',
+        data: {
+          menu: {
+            title: '财务管理',
+            icon: 'ion-cash',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单'
+              }
+            }
+          },
+          {
+            path: 'balance_payment',
+            data: {
+              menu: {
+                title: '欠尾款订单'
+              }
+            }
+          },
+          {
+            path: 'balance_transport',
+            data: {
+              menu: {
+                title: '欠运费订单'
+              }
+            }
           }
         ]
       },
@@ -55,14 +91,84 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: '采购管理',
-            icon: 'ion-android-home',
+            icon: 'ion-ios-bookmarks',
             selected: false,
             expanded: false,
             order: 0
           }
-        }
-      },
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          },
+          {
+            path: 'procurement_order',
+            data: {
+              menu: {
+                title: '采购单'
+              }
+            }
+          },
+          {
+            path: 'freeze_order',
+            data: {
+              menu: {
+                title: '冻结库存单'
+              }
+            }
+          },
 
+        ]
+      },
+      {
+        path: 'depot',
+        data: {
+          menu: {
+            title: '仓库管理',
+            icon: 'ion-cube',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'shipping',
+        data: {
+          menu: {
+            title: '货运管理',
+            icon: 'ion-plane',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'dashboard',
         data: {

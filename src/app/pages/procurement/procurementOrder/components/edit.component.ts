@@ -13,6 +13,9 @@ import {ProductSelectComponent} from "../../../../theme/oa-them/components/produ
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig"
 import {ProcurementOrderProduct} from "../../../../models/procurement/procurementOrderProduct"
 import {ProcurementOrderCost} from "../../../../models/procurement/procurementOrderCost"
+
+import {AgGridCurrencyComponent} from "../../../../modules/agGrid/common/agGridCurrency.component"
+import {AgGridMultiLineComponent} from "../../../../modules/agGrid/common/agGridMultiLine.component"
 @Component({
     selector: 'procurement-procurement-order-edit',
     templateUrl: './edit.html',
@@ -30,6 +33,10 @@ export class EditComponent implements OnInit {
     private isEdit: boolean;
     private selectedProduct: ProcurementOrderProduct;
     private selectedCost: ProcurementOrderCost;
+    private otherCost:number;//其他费用
+    
+    
+    
     //商品列定义
     private selectedcolumnDefs = [
         {
@@ -40,7 +47,7 @@ export class EditComponent implements OnInit {
         {
             headerName: '工厂货号',
             field: 'factory_no',
-            width: 480,
+            width: 90,
             editable: true,
             colDef: " "
         },
@@ -48,13 +55,15 @@ export class EditComponent implements OnInit {
             headerName: '中文描述',
             field: 'zh_name',
             width: 480,
-            editable: true
+            cellEditorFramework: AgGridMultiLineComponent,
+            editable: true,
         },
         {
             headerName: '英文描述',
             field: 'en_name',
             width: 480,
-            editable: true
+            cellEditorFramework: AgGridMultiLineComponent,
+            editable: true,
         },
         {
             headerName: '单位',
@@ -70,6 +79,8 @@ export class EditComponent implements OnInit {
             cellRendererParams: {
                 property: 'code'
             },
+            cellEditorFramework: AgGridCurrencyComponent,
+            
             editable: true
         },
         {
@@ -198,7 +209,10 @@ export class EditComponent implements OnInit {
     deletepro() {
         let selectedNodes = this.progridOptions.api.getSelectedNodes();
         this.progridOptions.api.removeItems(selectedNodes);
-        this.procurementOrder.deleteProduct(selectedNodes[0].childIndex);
+        for (let selectedNode of selectedNodes){
+            this.procurementOrder.deleteProduct(selectedNode);
+        }
+        
         this.selectedProduct = null;
     }
 
@@ -221,11 +235,20 @@ export class EditComponent implements OnInit {
     deletecost() {
         let selectedNodes = this.costgridOptions.api.getSelectedNodes();
         this.costgridOptions.api.removeItems(selectedNodes);
-        this.procurementOrder.deleteCost(selectedNodes[0].childIndex);
+        
+        for (let selectedNode of selectedNodes){
+            this.procurementOrder.deleteCost(selectedNode);
+        }
         this.selectedCost = null;
     }
-
-
+    
+    onCellValueChanged(event){
+        //修改价格
+        if(event.colDef.field=='price'||event.colDef.field=="quantity"){
+            this.procurementOrder.refreshPrice();
+        }
+    }
+ 
     get diagnostic() {return JSON.stringify(this.procurementOrder);}
 
 

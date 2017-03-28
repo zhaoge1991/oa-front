@@ -4,7 +4,7 @@ export class ProcurementOrderProduct {
     product_id:number;
     procurement_order: ProcurementOrder;
     catagory: string;
-    price: string;
+    price: number;
     zh_name: string;
     en_name: string;
     product: any;

@@ -1,0 +1,87 @@
+<div class="btnitem" *ngIf="config.isFinance">
+  <button type="button" class="available" id="action-more" data-toggle="dropdown" aria-expanded="false" [disabled]="!object">
+    <i class="iconfont icon-caozuo"></i><span>操作 <i class="iconfont icon-jiantou"></i></span>
+  </button>
+  <div class="btnmore" aria-labelledby="action-more">
+    <ul>
+      <li><button class="available"  (click)="showcheck()">到款录入</button></li>
+      <li><button class="available" (click)="showTip()">提醒催款</button></li>
+    </ul>
+  </div>
+</div>
+
+<!--到款录入按钮弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">到款录入弹窗</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(true)" [checked]="!isrefuse">
+              <span>到款</span>
+            </label>
+          </div>
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(false)" [checked]="isrefuse">
+              <span>未到款</span>
+            </label>
+          </div>
+          <div class="col-md-12 reason" *ngIf="!isrefuse">
+            <div class="col-md-6">
+              <label class="radio-inline nowrap">
+                <span>到款：</span>
+              </label>
+              <input type="text" class="ng-form-control"  name="price" [(ngModel)]="price">
+            </div>
+            <div class="col-md-6" *ngIf="config.isFinance == 'payment'">
+              <label class="radio-inline nowrap">
+                <span>手续费：</span>
+              </label>
+              <input type="text" class="ng-form-control"  name="payment_fee" [(ngModel)]="payment_fee">
+            </div>
+          </div>
+          <div class="col-md-12 reason" *ngIf="isrefuse">
+            <input type="text" class="ng-form-control"  name="reason" [(ngModel)]="reason" placeholder="请说明原因">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="checkorder()" [disabled]="isrefuse==null">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--提醒催款按钮弹窗-->
+<div bsModal #tipdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="tipdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">提醒催款</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <textarea class="ng-form-control" name="message" [(ngModel)]="message"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="putTip()" [disabled]="!message">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="tipdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

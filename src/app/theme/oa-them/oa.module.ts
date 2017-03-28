@@ -31,22 +31,39 @@ import {
   SupplierSelectComponent,
   TestSelectComponent,
   FirstSelectComponent,
+  PreloaderComponent,
+
+
+
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
-  
+  PaymentSelectComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
-  DeleteActionBarComponent,
-  BackActionBarComponent,
+  OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
+  PaymentTipActionBarComponent,
+  SaleReportActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
+  DeleteActionBarComponent,
+  AnnexActionBarComponent,
+  BackActionBarComponent,
+  DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
-  
-  DialogComponent,
+
+  AlertComponent,
   SampleOrderComponent,
   AnnexesComponent
 } from './components';
@@ -54,7 +71,8 @@ import {
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
 
 import {
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 } from './directives';
 
 import {
@@ -65,7 +83,8 @@ import {
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 } from './pipes';
 
 import {
@@ -104,26 +123,42 @@ const NGA_COMPONENTS = [
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
-  
-  
+  PaymentSelectComponent,
+
+
+  PreloaderComponent,
+
   //begin 公共操作栏
   CommonActionBarComponent,
   NewActionBarComponent,
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
-  DeleteActionBarComponent,
-  BackActionBarComponent,
+  OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
+  SaleReportActionBarComponent,
+  PaymentTipActionBarComponent,
+  SaleOrderActionBarComponent,
+  ExportActionBarComponent,
   SaveActionBarComponent,
+  DeleteActionBarComponent,
+  AnnexActionBarComponent,
+  BackActionBarComponent,
+  DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
-  
+
   SampleOrderComponent,
-  DialogComponent,
+  AlertComponent,
   AnnexesComponent
 ];
 
 const NGA_DIRECTIVES = [
-  AnnexeIconDirective
+  AnnexeIconDirective,
+  MoveModalDirective
 ];
 
 const NGA_PIPES = [
@@ -134,7 +169,8 @@ const NGA_PIPES = [
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 ];
 
 const NGA_SERVICES = [

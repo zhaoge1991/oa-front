@@ -6,13 +6,16 @@ import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
 
-import {SaleOrderService} from "../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../services/order/order.service.ts";
 
 import { OrderComponent} from './order.component.ts'
 import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
 import { EditComponent } from './components/edit.component.ts';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
+import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMultiLine.component";
+import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
+import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.module";
 
 
 @NgModule({
@@ -21,7 +24,11 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
     FormsModule,
     NgaModule,
     OaModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([
+      AgGridMultiLineComponent,
+      AgGridCurrencyComponent
+    ]),
+    AgGridComponentModule,
     routing
   ],
   declarations: [
@@ -30,6 +37,6 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
     EditComponent,
     OrderComponent
   ],
-  providers: [SaleOrderService,CanDeactivateGuard]
+  providers: [CanDeactivateGuard]
 })
 export class OrderModule {}

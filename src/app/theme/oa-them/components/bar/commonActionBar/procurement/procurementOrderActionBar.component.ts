@@ -19,16 +19,17 @@ import {ProcurementOrderService} from "../../../../../../services/procurement/pr
       </ul>
     </div>
   </div>
-  
+
   `,
+  providers: [ProcurementOrderService]
 })
 
 export class ProcurementOrderActionBarComponent {
     @Input() config: any;
     @Input() object: ProcurementOrder
-    
+
     @Output() objectChange = new EventEmitter<ProcurementOrder>();
-    
+
     constructor(private router: Router, private location:Location,private procurementOrderService: ProcurementOrderService) {}
     processing() {
         this.procurementOrderService.updateStatusProcessing(this.object).subscribe(data => {

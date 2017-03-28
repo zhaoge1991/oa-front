@@ -1,4 +1,4 @@
-import {Component,Input,ViewChild,OnChanges} from '@angular/core';
+import {Component,Input,ViewChild,OnChanges,Output,EventEmitter} from '@angular/core';
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 import { NgUploaderOptions } from 'ngx-uploader';
 import {HttpInterceptorService,baseUrl} from "../../../../services/interceptor";
@@ -16,6 +16,7 @@ import {AnneexesService} from "./annexes.service";
 export class AnnexesComponent implements OnChanges{
   @Input() data: any;
   @Input() idname: string;
+  @Output() annexChange = new EventEmitter();
 
   constructor(private http: HttpInterceptorService,private messageservice: MessageService,private annexesservice:AnneexesService){}
 
@@ -37,6 +38,7 @@ export class AnnexesComponent implements OnChanges{
   uploadfile($event){
     this.annexesservice.upload($event,this.data[this.idname]).subscribe(data=>{
       this.data.annex.push(data);
+      this.annexChange.emit();
     })
   }
 
@@ -53,6 +55,7 @@ export class AnnexesComponent implements OnChanges{
         let index = this.data.annex.indexOf(this.selectedAnnexe);
         this.data.annex.splice(index,1);
         this.selectedAnnexe = null;
+        this.annexChange.emit();
       })
     } else {
       alert('请选中文件');

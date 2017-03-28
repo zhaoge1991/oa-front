@@ -13,12 +13,13 @@ export class CommonActionBarComponent{
     @Output() objectChange = new EventEmitter();
     @Output() objectDelete = new EventEmitter();
     @Output() objectSave = new EventEmitter();
+    @Output() objectExport = new EventEmitter();
     change(object){
         this.objectChange.emit(this.object);
     }
     delete(b:boolean){
         if(b){
-            this.objectDelete.emit(1);
+            this.objectDelete.emit(true);
         }
     }
     save(e:boolean){
@@ -26,6 +27,9 @@ export class CommonActionBarComponent{
             this.objectSave.emit(true);
         }
     }
-    
-   
+    export(e:string){
+        this.objectExport.emit(e);
+    }
+
+
 }

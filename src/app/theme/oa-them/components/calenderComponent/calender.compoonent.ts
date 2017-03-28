@@ -20,6 +20,7 @@ export class CalenderComponent{
   public selectedDate
   public showCalender:boolean = false
   @Input() placeholder = '默认提示文本';
+  @Input() disabled;
   @Input() value;
   @Output() valueChange = new EventEmitter();
   @Input() name
