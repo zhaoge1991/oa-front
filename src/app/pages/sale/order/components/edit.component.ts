@@ -5,7 +5,7 @@ import {Location} from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
 import {OrderEditModel} from "../../../../common/models/order_edit.model";
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
@@ -13,9 +13,9 @@ import {ProductSelectComponent} from "../../../../theme/oa-them/components/produ
 import {CostComponent} from "../../../../theme/oa-them/components/costComponent/cost.component";
 import {AlertService} from "../../../../services/core/alert.component.service";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
-import {SaleOrder} from "../../../../models/sale/saleOrder";
-import {SaleOrderProduct} from "../../../../models/sale/saleOrderProduct";
-import {SaleOrderCost} from "../../../../models/sale/saleOrderCost";
+import {Order} from "../../../../models/sale/order/Order";
+import {OrderProduct} from "../../../../models/sale/order/OrderProduct";
+import {OrderCost} from "../../../../models/sale/order/OrderCost";
 import {AgGridMultiLineComponent} from "../../../../modules/agGrid/common/agGridMultiLine.component";
 import {AgGridCurrencyComponent} from "../../../../modules/agGrid/common/agGridCurrency.component";
 
@@ -31,14 +31,14 @@ export class EditComponent implements OnInit{
   private costgridOptions: GridOptions;
   private id:number;
   private olddata: any;
-  private data: SaleOrder;
+  private data: Order;
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private orderservice: SaleOrderService,
+    private orderservice: OrderService,
     private payment: PaymentService,
     private appconfig: AppconfigService,
     private quantifier: QuantifierService,
@@ -161,7 +161,7 @@ export class EditComponent implements OnInit{
   setData(){
     if(this.id){
       this.orderservice.get(this.id).subscribe(data=>{
-        this.data = new SaleOrder(data);
+        this.data = new Order(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
 
@@ -180,7 +180,7 @@ export class EditComponent implements OnInit{
       })
     } else {
       let date = new Date();
-      this.data = new SaleOrder(null);
+      this.data = new Order(null);
       this.data.date_added = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate();
 
       //保存原始数据
@@ -203,7 +203,7 @@ export class EditComponent implements OnInit{
     this.selectproduct.show();
   }
   addproduct($event){
-    let addproduct = new SaleOrderProduct($event);
+    let addproduct = new OrderProduct($event);
     this.data.addProduct(addproduct);
     this.progridOptions.api.addItems([addproduct]);
   }
@@ -227,7 +227,7 @@ export class EditComponent implements OnInit{
     this.addcostdialog.showdialog();
   }
   addcost($event){
-    this.data.addCost($event as SaleOrderCost);
+    this.data.addCost($event as OrderCost);
     this.costgridOptions.api.addItems([$event]);
   }
 
@@ -306,9 +306,7 @@ export class EditComponent implements OnInit{
         title: '提示弹窗',
         detail: '单据已修改，确认放弃修改并退出吗？',
         severity: 'warn'
-      }).map(data=>{
-        return data;
-      });
+      })
     }
   }
 

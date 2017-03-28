@@ -46,12 +46,21 @@ import {
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
+  PaymentTipActionBarComponent,
+  SaleReportActionBarComponent,
   SaleOrderActionBarComponent,
   ExportActionBarComponent,
   SaveActionBarComponent,
   DeleteActionBarComponent,
   AnnexActionBarComponent,
   BackActionBarComponent,
+  DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -74,7 +83,8 @@ import {
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 } from './pipes';
 
 import {
@@ -124,12 +134,21 @@ const NGA_COMPONENTS = [
   OpenActionBarComponent,
   EditActionBarComponent,
   ProcurementOrderActionBarComponent,
+  OrderCheckActionBarComponent,
+  ProcurementCheckActionBarComponent,
+  ProcurmentOrderActionBarComponent,
+  FinanceCheckActionBarComponent,
+  FinanceActionBarComponent,
+  SaleReportActionBarComponent,
+  PaymentTipActionBarComponent,
   SaleOrderActionBarComponent,
   ExportActionBarComponent,
   SaveActionBarComponent,
   DeleteActionBarComponent,
   AnnexActionBarComponent,
   BackActionBarComponent,
+  DepotActionBarComponent,
+  ShippingActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
@@ -150,7 +169,8 @@ const NGA_PIPES = [
   CurrencyPipe,
   OrderStatusPipe,
   TransportPipe,
-  OrderCostsPipe
+  OrderCostsPipe,
+  OrderTypePipe
 ];
 
 const NGA_SERVICES = [

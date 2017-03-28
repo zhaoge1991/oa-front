@@ -3,7 +3,7 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'sale',
   styles: [],
-  template: `<p>sale sale sale</p><router-outlet></router-outlet>`
+  template: `<p>sale sale sale111111</p><router-outlet></router-outlet>`
 })
 export class SaleComponent {
 

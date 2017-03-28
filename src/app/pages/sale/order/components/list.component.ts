@@ -2,14 +2,14 @@ import {Component,ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {PaymentService} from "../../../../services/core/paymentService/payment.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
 import {StatusService} from "../../../../services/core/statusService/status.service";
 import {AlertService} from "../../../../services/core/alert.component.service";
-import {SaleOrder} from "../../../../models/sale/saleOrder";
+import {Order} from "../../../../models/sale/order/Order";
 import {Paginate} from "../../../../models/common/paginate";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
@@ -22,13 +22,12 @@ import {CommonActionBarConfig} from "../../../../models/config/commonActionBarCo
 export class ListComponent{
   private gridOptions:GridOptions;
   public showGrid:boolean;
-  public rowData: SaleOrder[];
+  public rowData: Order[];
   private columnDefs:any[];
   private selectedeRow: boolean;
   public selectedcolumnDefs: any[];
-  public selectedrowData: SaleOrder;
+  public selectedrowData: Order;
   public isbatches: boolean = false;
-  private listdata:any[];
   //翻页配置
   private paginate : Paginate;
   private selectedIndex:number;
@@ -48,10 +47,10 @@ export class ListComponent{
     this.selectedrowData = null;
   }
 
-  private actionConfig: CommonActionBarConfig;
+  actionConfig:CommonActionBarConfig;
   constructor(
     private router: Router,
-    private listservice: SaleOrderService,
+    private listservice: OrderService,
     private cus: CurrencyService,
     private payment: PaymentService,
     private currency: CurrencyService,
@@ -75,12 +74,13 @@ export class ListComponent{
     this.actionConfig.isSaleOrder = true;
     this.actionConfig.annex = true;
     this.actionConfig.canEexport = true;
+    this.actionConfig.noback = true;
   }
 
   //行配置项(获取数据)
   private createRowData(page,key?:string) {
     this.listservice.getlist(page,key)
-      .then(data=>{
+      .subscribe(data=>{
         this.paginate = data.results.data.orders;
         this.rowData = this.paginate.data;
     })
@@ -237,7 +237,7 @@ export class ListComponent{
 
   private onRowSelected($event) {
     if($event.node.selected){
-      this.selectedrowData = $event.node.data as SaleOrder;
+      this.selectedrowData = $event.node.data as Order;
       this.selectedIndex = $event.node.rowIndex;
       //产品清单数据
       this.proData =  this.selectedrowData.products;
@@ -285,12 +285,12 @@ export class ListComponent{
         {
           headerName: '实际销售单价',
           field: 'price',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '实际销售金额',
           field: 'total',
-          width: 90,
+          width: 120,
         },
         {
           headerName: '指导价',
@@ -315,12 +315,6 @@ export class ListComponent{
         default:
           this.isfreeorder = false;
       }
-
-      //this.sampleData = {
-      //  sample_fee_info: '免费样品',
-      //  sample_shipping_info: this.selectedrowData.sample_shipping_info,
-      //  disabled: false
-      //}
 
       ////订单进度数据
       //this.listservice.getSchedule(this.selectedrowData.order_id).then(res=>{
@@ -368,5 +362,11 @@ export class ListComponent{
         this.createRowData(this.paginate.current_page);
       })
     }
+  }
+
+  //选中订单数据改变
+  objectChange(){
+    this.selectedrowData = null;
+    this.createRowData(this.paginate.current_page);
   }
 }

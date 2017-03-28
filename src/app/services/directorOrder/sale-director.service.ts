@@ -3,7 +3,6 @@ import {Location} from '@angular/common';
 import { URLSearchParams,Headers, RequestOptions,Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
-import 'rxjs/add/operator/toPromise';
 import {OrderEditModel} from "../../common/models/order_edit.model";
 import {HttpInterceptorService} from "../interceptor";
 import {MessageService} from "../core/messageComponent.service";
@@ -15,11 +14,11 @@ export class SaleDirectorService{
   constructor (private http: HttpInterceptorService ,private messageservice: MessageService,private location:Location) {}
   getlist(page?:number,key?:string){
     if(key){
-      return this.http.get('/api/sale/order/update_order_status/waitsupervisorcheck'+'?page='+page+'&keyword='+key).toPromise().then(res=>{
+      return this.http.get('/api/sale/order/update_order_status/waitsupervisorcheck'+'?page='+page+'&keyword='+key).map(res=>{
         return res.json();
       });
     } else {
-      return this.http.get('/api/sale/order/update_order_status/waitsupervisorcheck'+'?page='+page).toPromise().then(res=>{
+      return this.http.get('/api/sale/order/update_order_status/waitsupervisorcheck'+'?page='+page).map(res=>{
         return res.json();
       });
     }
@@ -42,7 +41,7 @@ export class SaleDirectorService{
   }
 
   getSchedule(id:string){
-    return this.http.get('/api/sale/order/order/'+id+'/order_schedule').toPromise().then(res=>{
+    return this.http.get('/api/sale/order/order/'+id+'/order_schedule').map(res=>{
       return res.json();
     });
   }

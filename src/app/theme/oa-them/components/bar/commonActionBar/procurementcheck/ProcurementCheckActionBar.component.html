@@ -1,0 +1,43 @@
+<div class="btnitem" *ngIf="config.procurementCheck">
+  <button type="button" class="available" (click)="chowcheck()" [disabled]="!object">
+    <i class="iconfont icon-shenhe"></i><span>审核</span>
+  </button>
+</div>
+
+<!--审核按钮弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">审核弹窗</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(true)">
+              <span>通过</span>
+            </label>
+          </div>
+          <div class="col-md-6 text-center">
+            <label class="radio-inline custom-radio nowrap">
+              <input name="check" type="radio" (change)="checkChange(false)">
+              <span>不通过</span>
+            </label>
+          </div>
+          <div class="col-md-12 reason" *ngIf="isrefuse">
+            <input type="text" class="ng-form-control" name="reason" [(ngModel)]="reason" placeholder="请说明原因">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="checkorder()" [disabled]="isrefuse==null">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

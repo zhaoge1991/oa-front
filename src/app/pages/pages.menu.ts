@@ -48,18 +48,64 @@ export const PAGES_MENU = [
           }
         ]
       },
-       {
-        path: 'procurement',
+      {
+        path: 'finance',
         data: {
           menu: {
-            title: '采购管理',
-            icon: 'ion-android-home',
+            title: '财务管理',
+            icon: 'ion-cash',
             selected: false,
             expanded: false,
             order: 0
           }
         },
         children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单'
+              }
+            }
+          },
+          {
+            path: 'balance_payment',
+            data: {
+              menu: {
+                title: '欠尾款订单'
+              }
+            }
+          },
+          {
+            path: 'balance_transport',
+            data: {
+              menu: {
+                title: '欠运费订单'
+              }
+            }
+          }
+        ]
+      },
+       {
+        path: 'procurement',
+        data: {
+          menu: {
+            title: '采购管理',
+            icon: 'ion-ios-bookmarks',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          },
           {
             path: 'procurement_order',
             data: {
@@ -76,10 +122,53 @@ export const PAGES_MENU = [
               }
             }
           },
-          
+
         ]
       },
-
+      {
+        path: 'depot',
+        data: {
+          menu: {
+            title: '仓库管理',
+            icon: 'ion-cube',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'shipping',
+        data: {
+          menu: {
+            title: '货运管理',
+            icon: 'ion-plane',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'order',
+            data: {
+              menu: {
+                title: '订单管理'
+              }
+            }
+          }
+        ]
+      },
       {
         path: 'dashboard',
         data: {

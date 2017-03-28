@@ -3,9 +3,9 @@ import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import {HttpInterceptorService} from "../../../../../../services/interceptor";
 import {MessageService} from "../../../../../../services/core/messageComponent.service";
-import {SaleOrder} from "../../../../../../models/sale/saleOrder";
+import {Order} from "../../../../../../models/sale/order/Order";
 import {AppconfigService} from "../../../../../../services/core/appConfigService/appConfigService";
-import {SaleOperat} from "../../../../../../models/sale/saleOperat";
+import {OrderOperat} from "../../../../../../models/sale/order/OrderOperat";
 
 
 @Injectable()
@@ -138,8 +138,8 @@ export class SaleActionBarService{
     })
   }
 
-  getOperat(object:SaleOrder){
-    let operat: SaleOperat = new SaleOperat();
+  getOperat(object:Order){
+    let operat: OrderOperat = new OrderOperat();
     operat.toship = true;
     operat.orderdemand = true;
     switch (object.order_type_id){

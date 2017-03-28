@@ -2,7 +2,7 @@ import {Component,OnInit,OnDestroy} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {Location} from '@angular/common';
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {baseUrl} from "../../../../services/interceptor";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
@@ -17,7 +17,7 @@ export class DetailComponent implements OnInit,OnDestroy{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private orderservice: SaleOrderService,
+    private orderservice: OrderService,
     private appconfig: AppconfigService
   ){
     this.commonActionBarConfig.idName = 'order_id';

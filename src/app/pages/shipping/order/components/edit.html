@@ -1,0 +1,240 @@
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="num" class="col-sm-4 ng-form-control-label">订单编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="num" [(ngModel)]="data.order_no" name="num" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="pi" class="col-sm-4 ng-form-control-label">PI编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="pi" [(ngModel)]="data.pi" name="pi" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">期望发货时间</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.expected_delivery" [placeholder]="'请选择时间'"
+                               [disabled]="true"></ng-calender>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">客户ID</label>
+                <div class="col-sm-8">
+                  <customer-select [(customer)]="data.customer" [disabled]="true"></customer-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">国家</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="data.customer.country_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">项目</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.customer.project_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="cus_company" class="col-sm-4 ng-form-control-label">客户公司</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="cus_company" [(ngModel)]="data.customer.company"
+                         name="cus_company" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="cus_tel" class="col-sm-4 ng-form-control-label">客户电话</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="cus_tel" [(ngModel)]="data.customer.telephone"
+                         name="cus_tel" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">订单状态</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'order_status_id'" [showname]="'name'" [(value)]="data.order_status_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">运输方式</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'transport_id'" [showname]="'name'" [(value)]="data.transport_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">货币</label>
+                <div class="col-sm-8">
+                  <ng-select id="curren" [selectfor]="'currency_id'" [showname]="'code'" [(value)]="data.currency_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="shipping_costs" class="col-sm-4 ng-form-control-label">运费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="shipping_costs" [(ngModel)]="data.shipping_costs"
+                         name="shipping_costs" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="cus_address" class="col-sm-1 ng-form-control-label">客户地址</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="cus_address" [(ngModel)]="data.customer.address"
+                         name="cus_address" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="remark" class="col-sm-1 ng-form-control-label">订单要求</label>
+                <div class="col-sm-11">
+                  <textarea class="ng-form-control" id="remark" [(ngModel)]="data.remark" name="remark"
+                            disabled></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">发货快递</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'transport_id'" [showname]="'name'" [(value)]="data.transport_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">货币</label>
+                <div class="col-sm-8">
+                  <ng-select id="curren" [selectfor]="'currency_id'" [showname]="'code'"
+                             [(value)]="data.currency_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="actual_shipping_costs" class="col-sm-4 ng-form-control-label">支出运费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="actual_shipping_costs"
+                         [(ngModel)]="data.actual_shipping_costs" name="actual_shipping_costs">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="delivery_number" class="col-sm-4 ng-form-control-label">查询单号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="delivery_number" [(ngModel)]="data.delivery_number"
+                         name="delivery_number">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">预计到时日期</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.estimated_arrival_date" [placeholder]="'请选择日期'"></ng-calender>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">实际发货时间</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.ship_date" [placeholder]="'请选择日期'"></ng-calender>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="shipping_description" class="col-sm-1 ng-form-control-label">描述</label>
+                <div class="col-sm-11">
+                  <textarea class="ng-form-control" id="shipping_description" [(ngModel)]="data.shipping_description"
+                            name="shipping_description"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+    <div class="row">
+      <div class="col-md-12 col-xs-12" *ngIf="data">
+        <ng2-tab selected="pro-list"
+                 selected-contents-class="animated"
+                 selected-index-class="selected">
+          <div class="tabs">
+            <div index="pro-list">商品清单</div>
+          </div>
+          <div class="tab-contents">
+            <div contents="pro-list">
+              <ag-grid-angular #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                               (rowSelected)="onRowSelected($event)"
+                               (cellValueChanged)="onCellValueChanged($event)"
+                               [columnDefs]="selectedcolumnDefs"
+                               [rowData]="data.products"
+                               [gridOptions]="progridOptions"
+                               enableColResize
+                               enableSorting
+                               enableFilter
+                               groupHeaders
+
+                               rowHeight="22"
+                               rowSelection="multiple"
+              ></ag-grid-angular>
+            </div>
+          </div>
+        </ng2-tab>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

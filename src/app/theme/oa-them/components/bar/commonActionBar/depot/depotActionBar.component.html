@@ -1,0 +1,13 @@
+<div class="btnitem" *ngIf="config.depotUrl">
+  <button type="button" class="available" id="action-more" data-toggle="dropdown" aria-expanded="false"
+          [disabled]="!object">
+    <i class="iconfont icon-caozuo"></i><span>操作 <i class="iconfont icon-jiantou"></i></span>
+  </button>
+  <div class="btnmore" aria-labelledby="action-more">
+    <ul>
+      <li>
+        <button class="available" (click)="outbound()">生成出库单</button>
+      </li>
+    </ul>
+  </div>
+</div>

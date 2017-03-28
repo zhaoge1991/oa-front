@@ -11,6 +11,14 @@ import {HttpInterceptorService} from "./services/interceptor";
 import {MessageService} from "./services/core/messageComponent.service";
 import {PreloaderService} from "./services/core/preloaderComponent.service";
 
+export function interceptorFactory(backend:XHRBackend,
+                                   defaultOptions:RequestOptions,
+                                   router:Router,
+                                   messageService:MessageService,
+                                   preloaderservice:PreloaderService) {
+  return new HttpInterceptorService(backend, defaultOptions, router, messageService, preloaderservice)
+};
+
 //import { provideInterceptorService } from 'ng2-interceptors';
 //import {ServerURLInterceptor} from "./ServerURLInterceptor";
 
@@ -56,31 +64,30 @@ export type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-    bootstrap: [App],
-    declarations: [
-        App
-    ],
-    imports: [ // import Angular's modules
-        BrowserModule,
-        HttpModule,
-        RouterModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgaModule.forRoot(),
-        PagesModule,
-        routing,
-        CoreModule
-    ],
-    providers: [ // expose our Services and Providers into Angular's dependency injection
-        ENV_PROVIDERS,
-        APP_PROVIDERS,
-        MessageService,
-        {
-            provide: HttpInterceptorService,
-            useFactory: interceptorFactory,
-            deps: [XHRBackend, RequestOptions, Router, MessageService, PreloaderService]
-        }
-    ]
+  bootstrap: [App],
+  declarations: [
+    App
+  ],
+  imports: [ // import Angular's modules
+    BrowserModule,
+    HttpModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgaModule.forRoot(),
+    PagesModule,
+    routing,
+    CoreModule
+  ],
+  providers: [ // expose our Services and Providers into Angular's dependency injection
+    ENV_PROVIDERS,
+    APP_PROVIDERS,
+    MessageService,
+    { provide: HttpInterceptorService,
+      useFactory: interceptorFactory,
+      deps: [XHRBackend, RequestOptions,Router,MessageService,PreloaderService]
+    }
+  ]
 })
 
 export class AppModule {

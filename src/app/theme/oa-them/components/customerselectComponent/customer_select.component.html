@@ -1,5 +1,6 @@
 <div class="customerselect">
-  <input type="text" class="customerinput ng-form-control" (focus)="show()" value="{{customer.firstname}}">
+  <input type="text" class="customerinput ng-form-control" (focus)="show()" value="{{customer.firstname}}"
+         [disabled]="disabled">
   <span>{{customer.customer_id}}</span>
 </div>
 

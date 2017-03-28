@@ -1,13 +1,42 @@
 <div class="actionbar">
-
+  <!--打开按钮-->
   <bar-common-action-bar-open  [config]="config" [(object)]="object"></bar-common-action-bar-open>
+  <!--新建按钮-->
   <bar-common-action-bar-new  [config]="config"></bar-common-action-bar-new>
+  <!--订单审核按钮-->
+  <bar-common-action-bar-orderCheck [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-orderCheck>
+  <!--财务审核按钮-->
+  <bar-common-action-bar-financeCheck [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-financeCheck>
+  <!--财务操作按钮-->
+  <bar-common-action-bar-finance [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-finance>
+  <!--采购审核按钮-->
+  <bar-common-action-bar-procurementCheck [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurementCheck>
+  <!--采购订单操作-->
+  <bar-common-action-bar-procurmentOrder [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurmentOrder>
+  <!--销售报表按钮-->
+  <bar-common-action-bar-saleReport [config]="config" [object]="object"></bar-common-action-bar-saleReport>
+  <!--仓库订单管理操作-->
+  <bar-common-action-bar-depot [config]="config" [object]="object"
+                               (objectChange)='change($event)'></bar-common-action-bar-depot>
+  <!--货运订单管理操作-->
+  <bar-common-action-bar-shipping [config]="config" [object]="object"
+                                  (objectChange)='change($event)'></bar-common-action-bar-shipping>
+  <!--保存按钮-->
   <bar-common-action-bar-save [config]="config" [(object)]="object"  (objectSave)='save($event)'></bar-common-action-bar-save>
+  <!--编辑按钮-->
   <bar-common-action-bar-edit  [config]="config" [(object)]="object"></bar-common-action-bar-edit>
+  <!--采购单操作按钮-->
   <bar-common-action-bar-procurement-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurement-order>
+  <!--销售操作按钮-->
   <bar-common-action-bar-sale-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-sale-order>
+  <!--导出按钮-->
   <bar-common-action-bar-export [config]="config" [object]="object" (objectExport)='export($event)'></bar-common-action-bar-export>
+  <!--附件按钮-->
   <bar-common-action-bar-annex [config]="config" [object]="object"></bar-common-action-bar-annex>
+  <!--删除按钮-->
   <bar-common-action-bar-delete  [config]="config" [(object)]="object" (objectDelete)='delete($event)' ></bar-common-action-bar-delete>
+  <!--返回按钮-->
   <bar-common-action-bar-back  [config]="config" [(object)]="object"></bar-common-action-bar-back>
+  <!--催款提醒按钮-->
+  <bar-common-action-bar-paymentTip [config]="config" [(object)]="object"></bar-common-action-bar-paymentTip>
 </div>

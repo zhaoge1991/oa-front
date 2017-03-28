@@ -115,7 +115,7 @@
           <div contents="payment">
             <table>
               <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
-              <tr><th>说明</th><td>{{orderpaymentData?.content}}</td></tr>
+              <tr><th>说明</th><td [innerHTML]="orderpaymentData?.content"></td></tr>
               <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
               <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
               <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>

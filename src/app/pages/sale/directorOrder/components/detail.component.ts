@@ -1,27 +1,35 @@
 import {Component,OnInit,OnDestroy} from '@angular/core';
-import { ActivatedRoute, Params} from '@angular/router';
+import { ActivatedRoute, Params,Router } from '@angular/router';
 import {Location} from '@angular/common';
 import {AppconfigService} from "../../../../services/core/appConfigService/appConfigService";
-import {SaleOrderService} from "../../../../services/saleOrder/sale-order.service";
+import {OrderService} from "../../../../services/order/order.service";
 import {baseUrl} from "../../../../services/interceptor";
-import {SaleDirectorService} from "../../../../services/directorOrder/sale-director.service";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
 
 @Component({
-  selector:'detai-component',
+  selector:'sale-detai-component',
   templateUrl: './detail.html',
   styleUrls: ['./detail.scss']
 })
 
 export class DetailComponent implements OnInit,OnDestroy{
   constructor(
-    private location:Location,
+    private router:Router,
     private route:ActivatedRoute,
-    private orderservice: SaleOrderService,
-    private directorservice: SaleDirectorService,
+    private orderservice: OrderService,
     private appconfig: AppconfigService
-  ){}
-
+  ){
+    this.commonActionBarConfig.addNewUrl = 'pages/sale/order/edit';
+    this.commonActionBarConfig.idName = 'order_id';
+    this.commonActionBarConfig.editUrl = 'pages/sale/order/edit';
+    this.commonActionBarConfig.isSaleOrder = true;
+    this.commonActionBarConfig.annex = true;
+    this.commonActionBarConfig.canEexport = true;
+    this.commonActionBarConfig.orderCheck = true;
+    this.commonActionBarConfig.saleReport = true;
+  }
+  private commonActionBarConfig: CommonActionBarConfig = new CommonActionBarConfig();
   private id:number;
   private data: any;
   private sub:any;
@@ -35,26 +43,6 @@ export class DetailComponent implements OnInit,OnDestroy{
   }
   ngOnDestroy(){this.sub.unsubscribe();}
 
-  //按钮组配置
-  private actionConfig={
-    showbtn:{add:true,edit:true,action:true,export:true,annex:true,close:true,check:true,report:true},
-    openurl: 'pages/sale/director/detail',
-    addurl: 'pages/sale/order/edit',
-    idname: 'order_id'
-  };
-  //操作组配置
-  private operat:{
-    toship?: boolean,
-    orderdemand?: boolean,
-    supaudit?: boolean,
-    financeaudit?: boolean,
-    procurement?: boolean,
-    toshipment?: boolean,
-    cusrecive?: boolean,
-    procurementcheck?: boolean,
-    isdone?: boolean
-  } = {};
-
   getById(id:number){
     this.orderservice.get(id).subscribe(data=>{
       //判断是否已完成
@@ -66,77 +54,6 @@ export class DetailComponent implements OnInit,OnDestroy{
         this.ordertype = 1; //其他单为1
       };
       this.data = data;
-
-      //生成操作配置
-      //订单类型判断
-      this.operat = {toship: true,orderdemand: true};
-      switch (this.data.order_type_id){
-      /**部分付款和账期订单**/
-        case (this.appconfig.get('sale.order.type.part') || this.appconfig.get('sale.order.type.time')):
-          //订单状态判断
-          switch (this.data.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.supaudit = true;break
-          /**主管审核通过订单**/
-            case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.isdone = true;break
-          };
-          break;
-      /**免费样品单**/
-        case this.appconfig.get('sale.order.type.free'):
-          switch (this.data.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.supaudit = true;break
-          /**主管审核通过订单**/
-            case this.appconfig.get('sale.order.status.supervisorcheckcomplate'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.procurementcheck = true;break
-          };
-          break;
-        default:
-          switch (this.data.order_status_id) {
-          /**待处理订单**/
-            case this.appconfig.get('sale.order.status.waitpayment'):
-              this.operat.financeaudit = true;break
-          /**财务审核通过订单**/
-            case this.appconfig.get('sale.order.status.paid'):
-              this.operat.procurement = true;break
-          /**待销售确认订单**/
-            case this.appconfig.get('sale.order.status.waitsalecheck'):
-              this.operat.toshipment = true;break
-          /**已发货订单**/
-            case this.appconfig.get('sale.order.status.delivered'):
-              this.operat.cusrecive = true;break
-          /**客户已收货**/
-            case this.appconfig.get('sale.order.status.customerreceived'):
-              this.operat.isdone = true;break
-          };
-      }
     })
   }
 
@@ -144,24 +61,8 @@ export class DetailComponent implements OnInit,OnDestroy{
     window.location.href = baseUrl+'/api/common/annex/download/'+id+'?access_token='+JSON.parse(localStorage.getItem('currentUser')).access_token
   }
 
-  checkorder($event){
-    let result = $event.result;
-    let reson = $event.reson;
-    let body;
-    if(result){
-      body = {
-        order_id: this.data.order_id,
-        update_status: this.appconfig.get('sale.order.status.supervisorcheckcomplate')
-      }
-    } else {
-      body = {
-        order_id: this.data.order_id,
-        update_status: this.appconfig.get('sale.order.status.waitpayment')
-      }
-    }
-    this.directorservice.check(body).subscribe(()=>{
-      this.location.back();
-    });
+  objectChange(){
+    this.getById(this.id);
   }
 }
 

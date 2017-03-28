@@ -3,7 +3,7 @@ import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
 import {CustomerSearchService} from "./customer_select.service";
 import {CountryService} from "../../../../services/core/countryService/country.service";
 import {ProjectService} from "../../../../services/core/projectService/project.service";
-import {SaleCustomer} from "../../../../models/sale/saleCustomer";
+import {Customer} from "../../../../models/sale/Customer";
 import {Paginate} from "../../../../models/common/paginate";
 
 
@@ -22,10 +22,11 @@ export class CustomerSelectComponent implements OnInit{
     private projectservice: ProjectService
   ){}
 
-  @Input() customer: SaleCustomer;
+  @Input() customer: Customer;
+  @Input() disabled:boolean;
   @Output() customerChange = new EventEmitter();
-  private _customer:SaleCustomer;
-  private customers: SaleCustomer[];
+  private _customer:Customer;
+  private customers: Customer[];
   private paginate: Paginate
   private isselected: boolean = false;
   //列表列定义
@@ -137,7 +138,7 @@ export class CustomerSelectComponent implements OnInit{
   ]
 
   ngOnInit(){
-    this._customer = this.customer.customer_id ? new SaleCustomer(this.customer):new SaleCustomer(null); //复制未提交时的用户对象
+    this._customer = this.customer.customer_id ? new Customer(this.customer):new Customer(null); //复制未提交时的用户对象
     this.init('',1);
   }
 
@@ -174,7 +175,7 @@ export class CustomerSelectComponent implements OnInit{
   private select_customer:{};
   onRowSelected($event){
     if($event.node.selected){
-      this.select_customer = $event.node.data as SaleCustomer;
+      this.select_customer = $event.node.data as Customer;
       this.isselected = true;
     }
   }
@@ -184,7 +185,7 @@ export class CustomerSelectComponent implements OnInit{
     if(this.isselected){
       this.customerChange.emit(this.select_customer);
     } else {
-      let newcustomer = new SaleCustomer(null);
+      let newcustomer = new Customer(null);
       newcustomer.customer_id = null;
       newcustomer.firstname = (this._customer.firstname).toString();
       this.customerChange.emit(newcustomer);

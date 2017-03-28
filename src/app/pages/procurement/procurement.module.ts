@@ -5,11 +5,11 @@ import { ProcurementComponent } from './procurement.component';
 import { routing } from './procurement.routing';
 import { OrderModule} from './order/order.module';
 import { ProcurementOrderModule} from './procurementOrder/procurementOrder.module';
-import {OrderService} from '../../services/order/order.service'
 import {ProcurementOrderService} from '../../services/procurement/procurementOrder.service'
 import {FreezeOrderService} from '../../services/procurement/freezeOrder.service'
 import {OaModule} from "../../theme/oa-them/oa.module";
 import {FreezeOrderModule} from './freezeOrder/freezeOrder.module';
+import {OrderService} from "../../services/order/order.service";
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import {FreezeOrderModule} from './freezeOrder/freezeOrder.module';
   declarations: [
     ProcurementComponent
   ],
-  providers:[OrderService,ProcurementOrderService,FreezeOrderService]
+  providers:[ProcurementOrderService,FreezeOrderService,OrderService]
 })
 export class ProcurementModule {}
 
