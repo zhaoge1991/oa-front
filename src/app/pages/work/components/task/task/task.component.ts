@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 @Component({
   selector: 'task',
-  template: require('./task.html'),
+  template: './task.html',
   styles: []
 })
 

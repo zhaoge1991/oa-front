@@ -10,7 +10,7 @@ import RefData from '../../../refData';
 @Component({
   moduleId: module.id,
   selector: 'month',
-  template: require('./month.html')
+  template: './month.html'
 })
 
 export class MonthComponent {

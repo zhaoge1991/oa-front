@@ -12,7 +12,7 @@ import {MonthComponent} from './components/report/month/month.component';
 import {WeekComponent} from './components/report/week/week.component';
 
 @NgModule({
-  imports: [CommonModule,NgaModule,routing,AgGridModule.withAotSupport()],
+  imports: [CommonModule,NgaModule,routing],
   declarations: [
     TaskComponent,
     TaskManagerComponent,
