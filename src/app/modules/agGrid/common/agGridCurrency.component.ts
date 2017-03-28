@@ -9,7 +9,7 @@ import {ICellEditorAngularComp} from 'ag-grid-angular/main';
    
 })
 export class AgGridCurrencyComponent implements ICellEditorAngularComp {
-    private params: any;
+    public params: any;
     agInit(params: any): void {
         this.params = params;
     }
