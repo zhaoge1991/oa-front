@@ -13,7 +13,7 @@ import {Location} from '@angular/common';
 export class DetailComponent implements OnInit {
 
 
-    private freezeOrder: FreezeOrder;
+    public freezeOrder: FreezeOrder;
     private sub: any;
     private product_total_quantity = 0;
     private commonActionBarConfig: CommonActionBarConfig;
