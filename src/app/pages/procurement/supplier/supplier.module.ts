@@ -7,7 +7,7 @@ import { ListComponent } from './components/list.component';
 import { EditComponent } from './components/edit.component';
 import {PipeModule} from "../../../pipe/pipe.module"
 import { FormsModule } from '@angular/forms';
-
+import { AnalysisComponent } from './components/analysis.component';
 import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
@@ -43,7 +43,8 @@ import { ProcurementShareModule } from "../share/procurementShare.module";
     ListComponent,
 //    DetailComponent,
     EditComponent,
-    SupplierComponent
+    SupplierComponent,
+    AnalysisComponent
 
   ]
 })

@@ -33,7 +33,11 @@ export class ProcurementSupplier {
     supplier_degree: SupplierDegree;
     banks: Bank[];
     contacts: SupplierContact[];
-    product:SupplierProduct[]
+    product:SupplierProduct[];
+    //可选属性
+    procurement_order_count:number;
+    procurement_price:number;
+    delay_count:number;
     constructor(procurementSupplier) {
         if (procurementSupplier) {
             this.procurement_supplier_id = procurementSupplier.procurement_supplier_id;
@@ -58,6 +62,7 @@ export class ProcurementSupplier {
             this.supplier_status_id = procurementSupplier.supplier_status_id;
             this.supplier_rating_id = procurementSupplier.supplier_rating_id;
             this.supplier_degree_id = procurementSupplier.supplier_degree_id;
+            
             if(procurementSupplier.supplier_level){
                 this.supplier_level = new SupplierLevel(procurementSupplier.supplier_level);
             }
@@ -88,6 +93,18 @@ export class ProcurementSupplier {
                     this.product.push(new SupplierProduct(product)) 
                  }
             }
+            
+            if(procurementSupplier.procurement_order_count){
+                this.procurement_order_count = procurementSupplier.procurement_order_count;
+            }
+            if(procurementSupplier.procurement_price){
+                this.procurement_price = procurementSupplier.procurement_price;
+            }
+            if(procurementSupplier.delay_count){
+                this.delay_count = procurementSupplier.delay_count;
+            }
+            
+            
             
         } else {
             this.procurement_supplier_id = 0;
