@@ -82,7 +82,7 @@ export class ProcurementOrder {
             this.price = 0;
             this.product_price = 0
             this.input_vat = 0
-            this.company = new ProcurementSupplier();
+            this.company = new ProcurementSupplier(null);
             this.date_delivery = ''
             this.date_real = ''
             this.order_place = ''
