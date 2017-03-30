@@ -62,7 +62,8 @@ export class ListComponent {
         {
             headerName: '账户',
             field: 'bank_no',
-            width: 150,
+            width: 180,
+            editable: true,
         },
         {
             headerName: '开户银行全称',

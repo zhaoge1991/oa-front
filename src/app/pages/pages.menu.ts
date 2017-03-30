@@ -138,6 +138,14 @@ export const PAGES_MENU = [
                             },]
                     },
                     {
+                        path: 'demander',
+                        data: {
+                            menu: {
+                                title: '需求方'
+                            }
+                        }
+                    },
+                    {
                         path: 'freeze_order',
                         data: {
                             menu: {
