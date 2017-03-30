@@ -2,17 +2,15 @@ import {Component, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 
 import {GridOptions} from 'ag-grid/main';
-import {ProcurementSupplierService} from "../../../../services/procurement/procurementSupplier.service";
+import {ProcurementDemanderService} from "../../../../services/procurement/procurementDemander.service";
 import {CurrencyService} from "../../../../services/core/currencyService/currency.service";
 import {Paginate} from "../../../../models/common/paginate";
 
-import {ProcurementSupplier} from "../../../../models/procurement/procurementSupplier"
+import {ProcurementDemander} from "../../../../models/procurement/procurementDemander"
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig"
-import {AgGridLevelPipeComponent} from "../../../../modules/agGrid/procurement/supplier/agGridLevelPipe.component";
-import {AgGridStatusPipeComponent} from "../../../../modules/agGrid/procurement/supplier/agGridStatusPipe.component";
 
 @Component({
-    selector: 'procurement-supplier-list',
+    selector: 'procurement-demander-list',
     templateUrl: './list.html',
     styleUrls: ['./list.scss']
 })
@@ -20,9 +18,9 @@ import {AgGridStatusPipeComponent} from "../../../../modules/agGrid/procurement/
 export class ListComponent {
     private gridOptions: GridOptions;
     public showGrid: boolean;
-    public suppliers: ProcurementSupplier[];
+    public demanders: ProcurementDemander[];
     private columnDefs: any[];
-    public selectedProcurementSupplier: ProcurementSupplier;
+    public selectedProcurementDemander: ProcurementDemander;
     public isbatches: boolean = false;
     private listdata: any[];
     public companyData: any;
@@ -149,7 +147,7 @@ export class ListComponent {
     ];
     constructor(
         private router: Router,
-        private listservice: ProcurementSupplierService,
+        private listservice: ProcurementDemanderService,
         private currency: CurrencyService,
     ) {
         // we pass an empty gridOptions in, so we can grab the api out
@@ -158,15 +156,15 @@ export class ListComponent {
         this.createColumnDefs();
         this.showGrid = true;
         this.commonActionBarConfig = new CommonActionBarConfig();
-        this.commonActionBarConfig.addNewUrl = 'pages/procurement/supplier/edit';
+        this.commonActionBarConfig.addNewUrl = 'pages/procurement/demander/edit';
         this.commonActionBarConfig.deleteUrl = 'pages/procurement/upplier';
-        this.commonActionBarConfig.idName = 'procurement_supplier_id';
-        this.commonActionBarConfig.editUrl = 'pages/procurement/supplier/edit';
+        this.commonActionBarConfig.idName = 'procurement_demander_id';
+        this.commonActionBarConfig.editUrl = 'pages/procurement/demander/edit';
     }
 
     pageClick($event) {
         this.createRowData($event.text - 0);
-        this.selectedProcurementSupplier = null;
+        this.selectedProcurementDemander = null;
 
     }
 
@@ -175,8 +173,7 @@ export class ListComponent {
     private createRowData(page) {
         this.listservice.getList(page)
             .subscribe(data => {
-                this.paginate = data
-                this.suppliers = this.paginate.data;
+                this.demanders = data;
             })
     }
 
@@ -195,86 +192,64 @@ export class ListComponent {
                 }
             },
             {
-                headerName: '供应商全称',
+                headerName: '需求方全称',
                 field: 'full_name',
                 width: 120,
                 pinned: true //固定列
             },
             {
-                headerName: '供应商简称',
+                headerName: '需求方简称',
                 field: 'simple_name',
                 width: 120,
                 pinned: true //固定列
             },
             {
-                headerName: '供应商状态',
-                field: 'supplier_status_id',
-                width: 120,
-                cellRendererFramework: AgGridStatusPipeComponent,
-               
-            },
-            {
-                headerName: '供应商等级',
-                field: 'supplier_level_id',
-                cellRendererFramework: AgGridLevelPipeComponent,
-                width: 120,
-            },
-            {
-                headerName: '供应商账期',
-                field: 'account_of',
-                width: 120,
-                editable: false, //是否可双击编辑
-            },
-            {
-                headerName: '城市',
-                field: 'city',
-                width: 80,
-            },
-            {
                 headerName: '地址',
                 field: 'add',
-                width: 240
+                width: 240,
+               
             },
             {
                 headerName: '电话',
                 field: 'tel',
-                width: 120
+                width: 120,
             },
             {
                 headerName: '传真',
                 field: 'fax',
-                width: 120
+                width: 120,
+                editable: false, //是否可双击编辑
             },
             {
                 headerName: '备注',
                 field: 'remark',
-                width: 240
+                width: 240,
             }
         ];
     }
     private onRowSelected($event) {
         if ($event.node.selected) {
-            this.selectedProcurementSupplier = $event.node.data as ProcurementSupplier;
+            this.selectedProcurementDemander = $event.node.data as ProcurementDemander;
             this.selectedIndex = $event.node.rowIndex;
 
         }
     }
-    //双击列表单元格操作
+   //双击列表单元格操作
     onCellDoubleClicked($event) {
-        this.router.navigate(['pages/procurement/procurement_order/edit/', $event.data.procurement_supplier_id])
+        this.router.navigate(['pages/procurement/demander/edit/', $event.data.procurement_demander_id])
     }
 
-    objectChange(procurementSupplier: ProcurementSupplier) {
+    objectChange(procurementDemander: ProcurementDemander) {
         let selectedNodes = this.gridOptions.api.getSelectedNodes();
         this.gridOptions.api.removeItems(selectedNodes)
-        this.gridOptions.api.insertItemsAtIndex(this.selectedIndex, [procurementSupplier]);
+        this.gridOptions.api.insertItemsAtIndex(this.selectedIndex, [procurementDemander]);
     }
 
     objectDelete(b: boolean) {
-        this.listservice.delete(this.selectedProcurementSupplier).subscribe(data => {
+        this.listservice.delete(this.selectedProcurementDemander).subscribe(data => {
             let selectedNodes = this.gridOptions.api.getSelectedNodes();
             this.gridOptions.api.removeItems(selectedNodes);
-            this.selectedProcurementSupplier = null;
+            this.selectedProcurementDemander = null;
         });
     }
 

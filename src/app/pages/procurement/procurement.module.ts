@@ -13,6 +13,8 @@ import {OrderService} from "../../services/order/order.service";
 import {SupplierModule} from './supplier/supplier.module';
 import {ProcurementSupplierService} from "../../services/procurement/procurementSupplier.service"
 import { ProcurementShareModule } from "./share/procurementShare.module"
+import {DemanderModule} from './demander/demander.module';
+import {ProcurementDemanderService} from "../../services/procurement/procurementDemander.service"
 @NgModule({
     imports: [
         CommonModule,
@@ -23,12 +25,13 @@ import { ProcurementShareModule } from "./share/procurementShare.module"
         OaModule,
         FreezeOrderModule,
         SupplierModule,
-        ProcurementShareModule
+        ProcurementShareModule,
+        DemanderModule
     ],
     declarations: [
         ProcurementComponent
     ],
-    providers: [ProcurementOrderService, FreezeOrderService, OrderService, ProcurementSupplierService]
+    providers: [ProcurementOrderService, FreezeOrderService, OrderService, ProcurementSupplierService,ProcurementDemanderService]
 })
 export class ProcurementModule {}
 
