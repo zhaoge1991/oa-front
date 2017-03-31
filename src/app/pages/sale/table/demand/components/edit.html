@@ -1,0 +1,258 @@
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="num" class="col-sm-4 ng-form-control-label">DE编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="demand_no" [(ngModel)]="data.demand_no" name="demand_no" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="num" class="col-sm-4 ng-form-control-label">关联订单ID</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="num" [(ngModel)]="data.demand_no" name="num" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-4 ng-form-control-label">期望发货时间</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.expect_shipment" [placeholder]="'请选择时间'"></ng-calender>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">客户ID</label>
+                <div class="col-sm-8">
+                  <customer-select [(customer)]="data.customer"></customer-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">国家</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="data.customer.country_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">项目</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.customer.project_id"
+                             [disabled]="true"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-4 ng-form-control-label">PI编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="pi" [(ngModel)]="data.pi" name="pi" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">支付方式</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'payment_id'" [showname]="'name'" [value]="data.table_order.payment_id" (valueChange)="onPaymentChange($event)"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">运输方式</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'transport_id'" [showname]="'name'" [(value)]="data.table_order.transport_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">货币</label>
+                <div class="col-sm-8">
+                  <ng-select id="curren" [selectfor]="'currency_id'" [showname]="'code'" [(value)]="data.currency_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="payment_costs" class="col-sm-4 ng-form-control-label">手续费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="payment_costs"  [(ngModel)]="data.table_order.payment_costs" name="payment_costs" (keyup)="onCostChange()">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="shipping_costs" class="col-sm-4 ng-form-control-label">运费</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="shipping_costs" [(ngModel)]="data.table_order.shipping_costs" name="shipping_costs" (keyup)="onCostChange()">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="ordercost" class="col-sm-4 ng-form-control-label">其他费用金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="ordercost"  [value]="data.table_order.other_price" name="ordercost" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="product_price" class="col-sm-4 ng-form-control-label">商品总金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="product_price" [(ngModel)]="data.table_order.product_price" name="product_price" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="total_price" class="col-sm-4 ng-form-control-label">订单总金额</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="total_price" [(ngModel)]="data.table_order.total_price" name="total_price" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">价格条款</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'provision_id'" [showname]="'name'" [value]="data.table_order.provision_id" (valueChange)="onProvisionChange($event)"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="remark" class="col-sm-1 ng-form-control-label">备注</label>
+                <div class="col-sm-11">
+                  <textarea class="ng-form-control" id="remark" [(ngModel)]="data.remark" name="remark"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+    <div class="row">
+      <div class="col-md-12 col-xs-12" *ngIf="data">
+        <ng2-tab selected="pro-list"
+                 selected-contents-class="animated"
+                 selected-index-class="selected">
+          <div class="tabs">
+            <div index="pro-list">商品清单</div>
+            <div index="ordercost">其他费用</div>
+            <div index="customer">客户信息</div>
+            <div index="payment">付款方式</div>
+            <div index="provision">价格条款</div>
+          </div>
+          <div class="tab-contents">
+            <div contents="pro-list">
+              <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                            (rowSelected)="onRowSelected($event)"
+                            (cellValueChanged)="onCellValueChanged($event)"
+                            [columnDefs]="selectedcolumnDefs"
+                            [rowData]="data.table_order_product"
+                            [gridOptions]="progridOptions"
+                            enableColResize
+                            enableSorting
+                            enableFilter
+                            groupHeaders
+
+                            rowHeight="22"
+                            rowSelection="multiple"
+              ></ag-grid-angular>
+              <button (click)="addpbtn()">添加</button>
+              <button (click)="deletepro()" [disabled]="!isproselected">删除</button>
+              <product-select (productChange)="addproduct($event)"></product-select>
+            </div>
+            <div contents="ordercost">
+              <ag-grid-angular #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
+                           [columnDefs]="ordercostCol"
+                           [rowData]="data.table_order_cost"
+                           [gridOptions]="costgridOptions"
+                           (rowSelected)="oncostRowSelected($event)"
+                           rowSelection="multiple"
+              >加载其他费用清单</ag-grid-angular>
+              <table></table>
+              <button (click)="addcostbtn()">添加</button>
+              <button (click)="deletecost()" [disabled]="!iscostselected">删除</button>
+              <cost-component (ordercostDataChange)="addcost($event)"></cost-component>
+            </div>
+            <div contents="customer">
+              <table *ngIf="data.customer">
+                <tr>
+                  <th>姓名</th><td>{{data.customer?.firstname}}</td>
+                  <th>email</th><td>{{data.customer?.email}}</td>
+                  <th>客户电话</th><td>{{data.customer?.telephone}}</td>
+                </tr>
+                <tr>
+                  <th>国家</th><td>{{data.customer?.country_id | countrypipe}}</td>
+                  <th>客户地址</th><td>{{data.customer?.address}}</td>
+                  <th>客户类型</th><td>{{data.customer?.kh_leixing}}</td>
+                </tr>
+                <tr>
+                  <th>项目</th><td>{{data.customer?.project_id | projectpipe}}</td>
+                  <th>公司名称</th><td>{{data.customer?.field_company}}</td>
+                  <th>公司网站</th><td>{{data.customer?.field_company_site}}</td>
+                </tr>
+                <tr>
+                  <th>拥有人</th><td>{{data.customer?.users | userspipe}}</td>
+                  <th>询盘时间</th><td>{{data.customer?.date_added}}</td>
+                  <th>询盘方式</th><td>{{data.customer?.kh_xunpan}}</td>
+                </tr>
+                <tr>
+                  <th>客户状态</th><td>{{data.customer?.kh_zhuangtai}}</td>
+                  <th>原因备注</th><td>{{data.customer?.kh_beizhu}}</td>
+                  <th>流失原因</th><td>{{data.customer?.kh_liushi}}</td>
+                </tr>
+                <tr>
+                  <th>其他信息</th><td colspan="5"></td>
+                </tr>
+              </table>
+            </div>
+            <div contents="payment">
+              <table *ngIf="orderpaymentData">
+                <tr><th>支付方式</th><td>{{orderpaymentData?.name}}</td></tr>
+                <tr><th>说明</th><td [innerHTML]="orderpaymentData?.content"></td></tr>
+                <tr><th>支付名称</th><td>{{orderpaymentData?.name}}</td></tr>
+                <tr><th>支付费用名称</th><td>{{orderpaymentData?.fee_name}}</td></tr>
+                <tr><th>支付信息</th><td>{{orderpaymentData?.info}}</td></tr>
+              </table>
+            </div>
+            <div contents="provision">
+              <table>
+                <tr>
+                  <th>条款名称</th> <td>{{provisionData?.name}}</td>
+                </tr>
+                <tr>
+                  <th>条款内容</th> <td>{{provisionData?.content}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </ng2-tab>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

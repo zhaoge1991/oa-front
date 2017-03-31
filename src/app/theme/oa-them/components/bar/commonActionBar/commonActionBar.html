@@ -29,6 +29,10 @@
   <bar-common-action-bar-procurement-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-procurement-order>
   <!--销售操作按钮-->
   <bar-common-action-bar-sale-order [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-sale-order>
+  <!--生成合同按钮-->
+  <bar-common-action-bar-exportContract [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-exportContract>
+  <!--生成订单按钮-->
+  <bar-common-action-bar-exportOrder [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-exportOrder>
   <!--导出按钮-->
   <bar-common-action-bar-export [config]="config" [object]="object" (objectExport)='export($event)'></bar-common-action-bar-export>
   <!--附件按钮-->
