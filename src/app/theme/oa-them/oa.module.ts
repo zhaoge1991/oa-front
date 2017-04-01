@@ -7,6 +7,7 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
+
 import {
   BaThemeConfig
 } from './theme.config';
@@ -39,6 +40,7 @@ import {
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
+  UserSelectComponent,
 
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -127,7 +129,7 @@ const NGA_COMPONENTS = [
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
-
+  UserSelectComponent,
 
   PreloaderComponent,
 

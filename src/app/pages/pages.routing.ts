@@ -33,7 +33,8 @@ export const routes: Routes = [
       { path: 'sale', loadChildren:'app/pages/sale/sale.module#SaleModule' },
       {path: 'finance', loadChildren: 'app/pages/finance/finance.module#FinanceModule'},
       {path: 'depot', loadChildren: 'app/pages/depot/depot.module#DepotModule'},
-      {path: 'shipping', loadChildren: 'app/pages/shipping/shipping.module#ShippingModule'}
+      {path: 'shipping', loadChildren: 'app/pages/shipping/shipping.module#ShippingModule'},
+      {path: 'customer', loadChildren: 'app/pages/customer/customer.module#CustomerModule'}
     ]
   }
 ];

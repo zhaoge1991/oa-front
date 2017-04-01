@@ -72,6 +72,40 @@ export class Customer{
       for(let user of customer.users){
         this.users.push(new User(user))
       };
+    } else {
+      this.customer_id = null;
+      this.customer_group_id = null;
+      this.store_id = null;
+      this.firstname = '';
+      this.lastname = '';
+      this.email = '';
+      this.telephone = '';
+      this.fax = '';
+      this.password = '';
+      this.salt = '';
+      this.company = '';
+      this.website = '';
+      this.newsletter = '';
+      this.address = '';
+      this.status = null;
+      this.approved = null;
+      this.token = '';
+      this.date_added = '';
+      this.created_at = '';
+      this.updated_at = '';
+      this.country_id = null;
+      this.remarks = '';
+      this.field_company = '';
+      this.field_company_site = '';
+      this.kh_zhuangtai = '';
+      this.kh_dianhua = '';
+      this.kh_dizhi = '';
+      this.kh_leixing = '';
+      this.kh_xunpan = '';
+      this.kh_beizhu = '';
+      this.kh_liushi = '';
+      this.project_id = null;
+      this.users = [];
     }
   }
 }
