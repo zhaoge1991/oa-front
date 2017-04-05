@@ -19,4 +19,5 @@ export class CommonActionBarConfig {
     isprocurmentOrder: boolean;
     depotUrl: string;
     isShipping: boolean;
+    generateEnterOrderUrl:string;
 }

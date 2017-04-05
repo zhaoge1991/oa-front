@@ -22,7 +22,7 @@ export class SupplierSelectComponent implements OnInit {
     @ViewChild('selectedrow') selectedrow: GridOptions;
     @Output() onSupplierChange = new EventEmitter<ProcurementSupplier>();
     @Input() procurementSupplier:ProcurementSupplier;
-    
+    @Input() disabled;
     private selectProcurementSupplier: ProcurementSupplier;
 
     private procurementSuppliers: ProcurementSupplier[]

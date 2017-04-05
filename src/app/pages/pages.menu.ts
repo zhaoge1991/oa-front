@@ -175,6 +175,40 @@ export const PAGES_MENU = [
                                 title: '订单管理'
                             }
                         }
+                    },
+                    {
+                        path: 'procurement_order',
+                        data: {
+                            menu: {
+                                title: '采购单管理'
+                            }
+                        }
+                    },
+                    {
+                        path: '',
+                        data: {
+                            menu: {
+                                title: '仓库清单'
+                            }
+                        },
+                        children: [
+                            {
+                                path: 'enter_order',
+                                data: {
+                                    menu: {
+                                        title: '入库单'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'out_order',
+                                data: {
+                                    menu: {
+                                        title: '出库单'
+                                    }
+                                }
+                            }
+                        ]
                     }
                 ]
             },

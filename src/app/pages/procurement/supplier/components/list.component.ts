@@ -262,7 +262,7 @@ export class ListComponent {
     }
     //双击列表单元格操作
     onCellDoubleClicked($event) {
-        this.router.navigate(['pages/procurement/procurement_order/edit/', $event.data.procurement_supplier_id])
+        this.router.navigate(['pages/procurement/supplier/edit/', $event.data.procurement_supplier_id])
     }
 
     objectChange(procurementSupplier: ProcurementSupplier) {

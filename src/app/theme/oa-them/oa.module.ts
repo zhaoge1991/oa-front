@@ -29,8 +29,6 @@ import {
   ProductSelectComponent,
   ScheduleComponent,
   SupplierSelectComponent,
-  TestSelectComponent,
-  FirstSelectComponent,
   PreloaderComponent,
 
 
@@ -61,6 +59,7 @@ import {
   BackActionBarComponent,
   DepotActionBarComponent,
   ShippingActionBarComponent,
+  GenerateEnterOrderActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -118,8 +117,6 @@ const NGA_COMPONENTS = [
   ProductSelectComponent,
   ScheduleComponent,
   SupplierSelectComponent,
-  TestSelectComponent,
-  FirstSelectComponent,
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
@@ -149,6 +146,7 @@ const NGA_COMPONENTS = [
   BackActionBarComponent,
   DepotActionBarComponent,
   ShippingActionBarComponent,
+  GenerateEnterOrderActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,

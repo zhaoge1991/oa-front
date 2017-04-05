@@ -1,0 +1,39 @@
+<div *ngIf="warehouseOut">
+    <div class="row">
+        <bar-common-action-bar [config]="commonActionBarConfig" [object]="warehouseOut" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+    </div>
+    <div class="row">
+        <ba-card baCardClass="with-scroll">
+            <div class="opendetail">
+                <h1 class="title">出库单</h1>
+                <table>
+                    <tr>
+                        <th>出库单编号</th> <td>{{warehouseOut?.warehouse_out_no}}</td>
+                        <th>出库时间</th> <td>{{warehouseOut?.out_date}}</td>
+                        <th>出库人</th> <td>{{warehouseOut?.user?.name}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <th>订单编号</th> <td>{{warehouseOut?.order_no}}</td>
+                        <th>PI</th> <td>{{warehouseOut?.contract_no}}</td>
+                        <th>领料人</th><td >{{warehouseOut?.re_user_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>备注</th> <td colspan="5">{{warehouseOut?.remark}}</td>
+                        
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>序号</th> <th>产品名称</th> <th>产品描述</th> <th>数量</th><th>备注</th>
+                    </tr>
+                    <tr *ngFor="let pro of warehouseOut.products,let i=index">
+                        <td>{{i+1}}</td> <td>{{pro.model}}</td> <td>{{pro.zh_name}}</td><td>{{pro.quantity}}</td><td>{{pro.remark}}</td>
+                    </tr>
+                </table>
+                
+            </div>
+        </ba-card>
+    </div>
+</div>

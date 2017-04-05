@@ -1,5 +1,5 @@
 <div class="customerselect">
-  <input type="text" class="customerinput ng-form-control" (focus)="show()" value="{{procurementSupplier?.full_name}}">
+  <input [disabled]="disabled" type="text" class="customerinput ng-form-control" (focus)="show()" value="{{procurementSupplier?.full_name}}">
   <span>{{procurementSupplier?.procurement_supplier_id}}</span>
 </div>
 
