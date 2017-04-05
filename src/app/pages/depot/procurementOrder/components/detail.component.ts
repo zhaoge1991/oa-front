@@ -26,7 +26,7 @@ export class DetailComponent implements OnInit {
     ) {
         this.commonActionBarConfig = new CommonActionBarConfig();
         this.commonActionBarConfig.idName = 'procurement_order_id';
-
+        this.commonActionBarConfig.generateEnterOrderUrl = 'pages/depot/procurement_order/edit';
     }
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
