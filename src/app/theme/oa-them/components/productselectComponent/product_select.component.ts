@@ -116,6 +116,7 @@ export class ProductSelectComponent implements OnInit{
   getTrreNodes(){
     this.catalogservice.get().subscribe(data=>{
       this.catalogservice.getdataTrre(data,this.productnodes)
+      console.log(this.productnodes);
     })
   }
   customTemplateStringOptions = {

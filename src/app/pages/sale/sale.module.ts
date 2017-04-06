@@ -10,6 +10,7 @@ import {DirectorModule} from "./directorOrder/director.module";
 import {BalancePaymentModule} from "./balance_paymentOrder/balance_paymentOrder.module";
 import {OrderService} from "../../services/order/order.service";
 import {BalanceTransportModule} from "./balance_transport/balance_transportOrder.module";
+import {TableModule} from "./table/table.module";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {BalanceTransportModule} from "./balance_transport/balance_transportOrder
     OrderModule,
     DirectorModule,
     BalancePaymentModule,
-    BalanceTransportModule
+    BalanceTransportModule,
+    TableModule
   ],
   declarations: [
     SaleComponent
@@ -27,4 +29,6 @@ import {BalanceTransportModule} from "./balance_transport/balance_transportOrder
   providers: [OrderService]
 })
 
-export class SaleModule{}
+export class SaleModule{
+
+}

@@ -7,3 +7,4 @@ export * from './transportPipe';
 export * from './usersPipe';
 export * from './order_costsPipe';
 export * from './order_typePipe';
+export * from './quantifierPipe';

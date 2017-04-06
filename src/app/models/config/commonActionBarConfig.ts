@@ -8,7 +8,7 @@ export class CommonActionBarConfig {
     deleteUrl:string;
     saveUrl:string;
     annex:boolean;
-    canEexport: boolean;
+    canEexport: {};
     orderCheck: boolean;
     financeCheck: boolean;
     saleReport: boolean;
@@ -22,4 +22,6 @@ export class CommonActionBarConfig {
     generateEnterOrderUrl:string;
     generateProcurementOrder:boolean;
     generateFreezeOrder:boolean;
+    exportContract: boolean;
+    exportOrder: boolean;
 }

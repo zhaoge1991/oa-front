@@ -16,6 +16,8 @@ export * from './alertComponent'
 export * from './supplierSelectComponent'
 export * from './bar'
 export * from './preloaderComponent'
+export * from './userSelectComponent'
+
 export * from './demanderSelectComponent'
 export * from './demanderBankSelectComponent'
 export * from './supplierBankSelectComponent'

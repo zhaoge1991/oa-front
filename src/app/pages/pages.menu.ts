@@ -173,6 +173,28 @@ export const PAGES_MENU = [
                 ]
             },
             {
+                path: 'customer',
+                data: {
+                    menu: {
+                        title: '客户管理',
+                        icon: 'ion-ios-people',
+                        selected: false,
+                        expanded: false,
+                        order: 0
+                    }
+                },
+                children: [
+                    {
+                        path: 'customers',
+                        data: {
+                            menu: {
+                                title: '客户资料'
+                            }
+                        }
+                    }
+                ]
+            },
+            {
                 path: 'depot',
                 data: {
                     menu: {

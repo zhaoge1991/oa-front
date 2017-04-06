@@ -1,10 +1,10 @@
 import {Component,Input,Output,EventEmitter,ViewChild,ViewEncapsulation,OnInit} from '@angular/core';
 import {ModalDirective} from "ng2-bootstrap/ng2-bootstrap";
-import {CustomerSearchService} from "./customer_select.service";
 import {CountryService} from "../../../../services/core/countryService/country.service";
 import {ProjectService} from "../../../../services/core/projectService/project.service";
 import {Customer} from "../../../../models/sale/Customer";
 import {Paginate} from "../../../../models/common/paginate";
+import {CustomersService} from "../../../../services/customer/customers.service";
 
 
 @Component({
@@ -12,12 +12,12 @@ import {Paginate} from "../../../../models/common/paginate";
   templateUrl: './customer_select.component.html',
   styleUrls: ['./customer_select.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [CustomerSearchService]
+  providers: [CustomersService]
 })
 
 export class CustomerSelectComponent implements OnInit{
   constructor(
-    private customerservice: CustomerSearchService,
+    private customerservice: CustomersService,
     private countryservice:CountryService,
     private projectservice: ProjectService
   ){}
@@ -47,7 +47,7 @@ export class CustomerSelectComponent implements OnInit{
     {
       headerName: '客户姓名',
       field: 'firstname',
-      width: 60,
+      width: 90,
       pinned: true
     },
     {
@@ -73,7 +73,7 @@ export class CustomerSelectComponent implements OnInit{
     {
       headerName: '询盘时间',
       field: 'date_added',
-      width: 60
+      width: 120
     },
     {
       headerName: '项目',
@@ -92,8 +92,25 @@ export class CustomerSelectComponent implements OnInit{
     },
     {
       headerName: '拥有人',
-      field: 'total',
+      field: 'users',
       width: 90,
+      cellRenderer: (params)=>{
+        let data = params.value;
+        let users:string = '';
+        if(data&&data.length){
+          for(let i=0;i<data.length;i++){
+            if(data.length<=1){
+              users += data[i][params.property]
+            } else {
+              users += data[i][params.property]+'、'
+            }
+          }
+          return users;
+        } else return '';
+      },
+      cellRendererParams: {
+        property: 'name'
+      }
     },
     {
       headerName: '公司名称',
@@ -112,7 +129,7 @@ export class CustomerSelectComponent implements OnInit{
     },
     {
       headerName: '客户电话',
-      field: 'telephone',
+      field: 'kh_dianhua',
       width: 90
     },
     {
@@ -122,7 +139,7 @@ export class CustomerSelectComponent implements OnInit{
     },
     {
       headerName: '客户地址',
-      field: 'address',
+      field: 'kh_dizhi',
       width: 120
     },
     {
@@ -139,12 +156,12 @@ export class CustomerSelectComponent implements OnInit{
 
   ngOnInit(){
     this._customer = this.customer.customer_id ? new Customer(this.customer):new Customer(null); //复制未提交时的用户对象
-    this.init('',1);
+    this.init(1,'');
   }
 
   //初始化列表数据
-  init(key:string,page:number){
-    this.customerservice.getcustomer(key,page).subscribe(data=>{
+  init(page:number,key:string){
+    this.customerservice.getlist(page,key).subscribe(data=>{
       let result = data.results.data.customers
       this.paginate = result;
       this.customers = this.paginate.data;
@@ -160,7 +177,7 @@ export class CustomerSelectComponent implements OnInit{
   //点击翻页
   pageClick($event){
     this.isselected = false;
-    this.init(this.searchtext,$event.text);
+    this.init($event.text,this.searchtext);
   }
 
   //搜索
@@ -168,7 +185,7 @@ export class CustomerSelectComponent implements OnInit{
   search($event){
     this.isselected = false;
     this.searchtext = $event;
-    this.init(this.searchtext,1);
+    this.init(1,this.searchtext);
   }
 
   //选中行

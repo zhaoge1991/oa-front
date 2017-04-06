@@ -7,6 +7,7 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
+
 import {
   BaThemeConfig
 } from './theme.config';
@@ -37,6 +38,7 @@ import {
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
+  UserSelectComponent,
 
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -62,6 +64,8 @@ import {
   GenerateEnterOrderActionBarComponent,
   GenerateProcurementOrderActionBarComponent,
   GenerateFreezeOrderActionBarComponent,
+  ExportContractActionBarComponent,
+  ExportOrderActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -85,7 +89,8 @@ import {
   OrderStatusPipe,
   TransportPipe,
   OrderCostsPipe,
-  OrderTypePipe
+  OrderTypePipe,
+  QuantifierPipe
 } from './pipes';
 
 import {
@@ -123,7 +128,7 @@ const NGA_COMPONENTS = [
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
-
+  UserSelectComponent,
 
   PreloaderComponent,
 
@@ -151,6 +156,8 @@ const NGA_COMPONENTS = [
   GenerateEnterOrderActionBarComponent,
   GenerateProcurementOrderActionBarComponent,
   GenerateFreezeOrderActionBarComponent,
+  ExportContractActionBarComponent,
+  ExportOrderActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
@@ -172,7 +179,8 @@ const NGA_PIPES = [
   OrderStatusPipe,
   TransportPipe,
   OrderCostsPipe,
-  OrderTypePipe
+  OrderTypePipe,
+  QuantifierPipe
 ];
 
 const NGA_SERVICES = [

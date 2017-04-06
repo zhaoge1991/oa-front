@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
     </button>
     <div class="btnmore" aria-labelledby="export-more">
       <ul>
-        <li><button class="available" (click)="export('excel')">导出Excel</button></li>
-        <li><button class="available" (click)="export('pdf')">导出PDF</button></li>
+        <li *ngIf="config.canEexport.excel"><button class="available" (click)="export('excel')">导出Excel</button></li>
+        <li *ngIf="config.canEexport.pdf"><button class="available" (click)="export('pdf')">导出PDF</button></li>
       </ul>
     </div>
   </div>

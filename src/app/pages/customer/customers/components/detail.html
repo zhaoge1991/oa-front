@@ -1,0 +1,72 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div class="col-md-6">
+              <h1 class="title"><img src="assets/img/logo.png" alt="logo"></h1>
+            </div>
+            <div class="col-md-6">
+              <h1 class="title">客户详情</h1>
+            </div>
+            <div class="col-md-12">
+              <p>客户信息</p>
+              <table>
+                <tr>
+                  <th>客户编号</th> <td>{{data?.customer_id}}</td>
+                  <th>客户名称</th> <td>{{data?.firstname}}</td>
+                  <th>Email</th> <td>{{data?.email}}</td>
+                </tr>
+                <tr>
+                  <th>拥有人</th> <td>{{data?.users | userspipe}}</td>
+                  <th>国家</th> <td>{{data?.country_id | countrypipe}}</td>
+                  <th>项目</th> <td>{{data?.project_id | projectpipe}}</td>
+                </tr>
+                <tr>
+                  <th>状态</th> <td>{{data?.kh_zhuangtai}}</td>
+                  <th>客户电话</th> <td>{{data?.kh_dianhua}}</td>
+                  <th>客户类型</th> <td>{{data?.kh_leixing}}</td>
+                </tr>
+                <tr>
+                  <th>询盘方式</th> <td>{{data?.kh_xunpan}}</td>
+                  <th>询盘时间</th> <td>{{data?.date_added}}</td>
+                  <th>流失原因</th> <td>{{data?.kh_liushi}}</td>
+                </tr>
+                <tr>
+                  <th>原因备注</th> <td colspan="5">{{data?.kh_beizhu}}</td>
+                </tr>
+                <tr>
+                  <th>公司名称</th> <td colspan="5">{{data?.field_company}}</td>
+                </tr>
+                <tr>
+                  <th>公司网站</th> <td colspan="5">{{data?.field_company_site}}</td>
+                </tr>
+                <tr>
+                  <th>客户地址</th> <td colspan="5">{{data?.kh_dizhi}}</td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-12">
+              <p>订单记录</p>
+              <table class="no-border">
+                <tr>
+                  <th>编号</th>
+                  <th>订单编号</th>
+                  <th>订单分类</th>
+                  <th>成交时间</th>
+                  <th>商品数量</th>
+                  <th>订单金额</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

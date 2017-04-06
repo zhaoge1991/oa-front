@@ -43,6 +43,7 @@ export class CalenderComponent{
 
     //没有传入日期则显示系统日期
     if (dateTime) {
+      dateTime=='0000-00-00'?dateTime='1949-10-01':'';
       date = new Date(dateTime);
       [year, month, day] = dateTime.split('-');
       this.selectedIndex = +day;
