@@ -107,6 +107,22 @@ export const PAGES_MENU = [
                         }
                     },
                     {
+                        path: 'order',
+                        data: {
+                            menu: {
+                                title: '产品'
+                            }
+                        }, children: [
+                            {
+                                path: 'product',
+                                data: {
+                                    menu: {
+                                        title: '待处理产品'
+                                    }
+                                }
+                            },]
+                    },
+                    {
                         path: 'procurement_order',
                         data: {
                             menu: {

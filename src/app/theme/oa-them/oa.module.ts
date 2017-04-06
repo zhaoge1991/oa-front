@@ -60,6 +60,8 @@ import {
   DepotActionBarComponent,
   ShippingActionBarComponent,
   GenerateEnterOrderActionBarComponent,
+  GenerateProcurementOrderActionBarComponent,
+  GenerateFreezeOrderActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -147,6 +149,8 @@ const NGA_COMPONENTS = [
   DepotActionBarComponent,
   ShippingActionBarComponent,
   GenerateEnterOrderActionBarComponent,
+  GenerateProcurementOrderActionBarComponent,
+  GenerateFreezeOrderActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,

@@ -1,0 +1,60 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)" [objects]="selectedRows" (onComplete)='onBarComplete($event)'> 
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'暂无搜索'" (searchtext)="search($event)"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="base_info"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="base_info">基本信息</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="base_info">
+            <table>
+              <tr>
+                <th>期望发货时间</th><td>{{selectedrowData?.p_order?.test_dete}}</td>
+              </tr>
+              <tr>
+                <th>订单分类</th><td>{{selectedrowData?.p_order?.order_type_id | ordertypepipe}}</td>
+              </tr>
+              <tr>
+                <th>项目</th><td>{{selectedrowData?.p_order?.project_id | projectpipe}}</td>
+              </tr>
+              <tr>
+                <th>订单要求</th><td>{{selectedrowData?.p_order?.remark}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

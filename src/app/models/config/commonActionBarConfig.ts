@@ -20,4 +20,6 @@ export class CommonActionBarConfig {
     depotUrl: string;
     isShipping: boolean;
     generateEnterOrderUrl:string;
+    generateProcurementOrder:boolean;
+    generateFreezeOrder:boolean;
 }

@@ -10,10 +10,12 @@ import {CommonActionBarConfig} from "../../../../../models/config/commonActionBa
 export class CommonActionBarComponent{
     @Input() config: CommonActionBarConfig;
     @Input() object: any;
+    @Input() objects: any;
     @Output() objectChange = new EventEmitter();
     @Output() objectDelete = new EventEmitter();
     @Output() objectSave = new EventEmitter();
     @Output() objectExport = new EventEmitter();
+    @Output() onComplete = new EventEmitter();
     change(object){
         this.objectChange.emit(this.object);
     }
@@ -29,6 +31,9 @@ export class CommonActionBarComponent{
     }
     export(e:string){
         this.objectExport.emit(e);
+    }
+    complete(event:boolean){
+        this.onComplete.emit(true);
     }
 
 
