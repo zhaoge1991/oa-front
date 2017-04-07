@@ -113,6 +113,28 @@ export const PAGES_MENU = [
         ]
       },
       {
+        path: 'product',
+        data: {
+          menu: {
+            title: '产品管理',
+            icon: 'ion-grid',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'products',
+            data: {
+              menu: {
+                title: '产品目录'
+              }
+            }
+          }
+        ]
+      },
+      {
         path: 'finance',
         data: {
           menu: {

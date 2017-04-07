@@ -128,7 +128,7 @@ export class ProductSelectComponent implements OnInit{
 
   //加载列表数据
   init(key:string,page:number,catalog: number){
-    this.productsservice.get(key,page,catalog).subscribe(data=>{
+    this.productsservice.getlist(key,page,catalog).subscribe(data=>{
       this.pageconfig = {
         current_page : data.current_page,
         last_page : data.last_page,

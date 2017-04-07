@@ -129,8 +129,8 @@ export class ListComponent{
         cellRenderer: (params)=>{
           let data = params.value;
           if(data){
-            let status = this.country.get(data)
-            return status[params.property];
+            let status = this.country.get(data);
+            if(status) return status[params.property];
           } else return '';
         },
         cellRendererParams: {

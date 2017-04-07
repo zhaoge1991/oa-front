@@ -21,4 +21,5 @@ export class CommonActionBarConfig {
     isShipping: boolean;
     exportContract: boolean;
     exportOrder: boolean;
+    isproduct: boolean;
 }

@@ -63,7 +63,9 @@ export class CustomerSelectComponent implements OnInit{
         let data = params.value;
         if(data){
           let country=this.countryservice.get(data);
-          return country[params.property];
+          if(country){
+            return country[params.property];
+          } else return '';
         } else return '';
       },
       cellRendererParams: {

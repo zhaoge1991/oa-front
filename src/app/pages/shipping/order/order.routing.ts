@@ -9,7 +9,7 @@ import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/ca
 // noinspection TypeScriptValidateTypes
 const routes:Routes = [
   {
-    path: '',
+    path: 'order',
     component: OrderComponent,
     children: [
       {path: '', component: ListComponent},
