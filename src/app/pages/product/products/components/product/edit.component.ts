@@ -83,7 +83,9 @@ export class EditComponent implements OnInit,DoCheck{
   //获取分类筛选组
   getFilters(id:number){
     this.catalogservice.getcatalog(id).subscribe(data=>{
-      this.filter_groups = data.filter_groups;
+      if(data){
+        this.filter_groups = data.filter_groups;
+      }
     })
   }
 
@@ -116,7 +118,6 @@ export class EditComponent implements OnInit,DoCheck{
     if(length == 0){
       this.data.filters.push(filter);
     }
-    console.log(this.data.filters);
   }
 
   catalogids: string = ''; //所有分类id字符串
