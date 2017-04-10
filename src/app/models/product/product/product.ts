@@ -1,6 +1,7 @@
 import {Catalog} from "../catalog/catalog";
 import {Language} from "../../localisation/language";
 import {ProductDescription} from "./productDescription";
+import {Filter} from "../filter/filter";
 export class Product {
     product_id: number;
     model: string;
@@ -48,6 +49,7 @@ export class Product {
     updated_at: string;
     catalogs: Catalog[];
     product_description: ProductDescription[];
+    filters: Filter[];
     constructor(product,languages:Language[]) {
         if (product) {
             this.product_id = product.product_id;
@@ -96,9 +98,13 @@ export class Product {
             this.updated_at = product.updated_at;
             this.catalogs = [];
             this.product_description = [];
+            this.filters = [];
             for (let catalog of product.catalogs){
               this.catalogs.push(new Catalog(catalog,languages));
-            }
+            };
+            for (let filter of product.filters){
+              this.filters.push(new Filter(filter,languages));
+            };
         } else {
             this.product_id = 0;
             this.model = '';
@@ -146,6 +152,7 @@ export class Product {
             this.updated_at = '';
             this.catalogs = [];
             this.product_description = [];
+            this.filters = [];
         }
         //先循环语言生成所有语言描述数组
         for(let i=0;i<languages.length;i++){

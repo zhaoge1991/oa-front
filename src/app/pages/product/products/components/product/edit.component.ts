@@ -13,6 +13,7 @@ import {Language} from "../../../../../models/localisation/language";
 import {ProductListService} from "../../../../../services/product/productList/product_list.service";
 import {ProductCatalogService} from "../../../../../services/product/productCatalog/product_catalog.service";
 import {Product} from "../../../../../models/product/product/product";
+import {Filter} from "../../../../../models/product/filter/filter";
 
 @Component({
   selector: 'product-catalog-edit',
@@ -29,6 +30,7 @@ export class EditComponent implements OnInit,DoCheck{
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
   public languages: Language[];
+  public filter_groups;
 
   constructor(
     private route:ActivatedRoute,
@@ -65,18 +67,57 @@ export class EditComponent implements OnInit,DoCheck{
       this.productservice.get(this.id).subscribe(data=>{
         this.data = new Product(data,this.languages);
         this.refreshPrice();
-        console.log(this.data);
+        this.getFilters(this.data.catalog_id);
+        //保存原始数据
+        this.olddata = JSON.stringify(this.data);
       })
     } else {
       this.data = new Product(null,this.languages);
       this.refreshPrice();
+      this.getFilters(this.catalog_id);
+      this.olddata = JSON.stringify(this.data);
     }
-    //保存原始数据
-    this.olddata = JSON.stringify(this.data);
 
   }
 
-  get descriptionsstring(){return JSON.stringify(this.data)};
+  //获取分类筛选组
+  getFilters(id:number){
+    this.catalogservice.getcatalog(id).subscribe(data=>{
+      this.filter_groups = data.filter_groups;
+    })
+  }
+
+  //初始化被选中的筛选
+  isfilterChecked(id:number){
+    let productFilters = this.data.filters;
+    for(let i in productFilters){
+      if(id == productFilters[i].filter_id){
+        return true;
+      }
+    }
+  }
+
+  //筛选项更改
+  filterChange(filter:Filter){
+    let productFilters = this.data.filters;
+    let length = productFilters.length.toString()-0;
+    let x:number = 0;
+    for(let i=0;i<length;i++){
+      if(filter.filter_group_id == productFilters[i].filter_group_id){
+        this.data.filters.splice(i,1,filter);
+      } else {
+        x++;
+        //如果在所有筛选项中都没有filter则push上去
+        if(x==length){
+          this.data.filters.push(filter);
+        }
+      }
+    }
+    if(length == 0){
+      this.data.filters.push(filter);
+    }
+    console.log(this.data.filters);
+  }
 
   catalogids: string = ''; //所有分类id字符串
   getUsersName(){
@@ -107,20 +148,15 @@ export class EditComponent implements OnInit,DoCheck{
     this.discount = price*_discount;
   }
 
-  //筛选组类别更改
-  filterGroupsChange($event){
-    //this.data.filter_groups = JSON.parse(JSON.stringify($event))
-  }
-
   //保存
   save(){
     if(this.catalog_id){
       this.data.catalog_id = this.catalog_id;
     }
     if(this.isEdit){
-      this.catalogservice.put(this.id,this.data).subscribe();
+      this.productservice.put(this.id,this.data).subscribe();
     } else {
-      this.catalogservice.post(this.data).subscribe();
+      this.productservice.post(this.data).subscribe();
     }
     this.olddata = JSON.stringify(this.data);
   }

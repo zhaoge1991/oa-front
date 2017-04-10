@@ -61,12 +61,14 @@ export class EditComponent implements OnInit,DoCheck{
     if(this.id){
       this.catalogservice.getcatalog(this.id).subscribe(data=>{
         this.data = new Catalog(data,this.languages);
+        //保存原始数据
+        this.olddata = JSON.stringify(this.data);
       })
     } else {
       this.data = new Catalog(null,this.languages);
+      //保存原始数据
+      this.olddata = JSON.stringify(this.data);
     }
-    //保存原始数据
-    this.olddata = JSON.stringify(this.data);
   }
 
   usersName: string = ''; //所有用户名字符串

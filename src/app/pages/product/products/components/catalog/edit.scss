@@ -4,12 +4,13 @@
 .filter-info{
   span{
     display: inline-block;
-    padding: 0 10px;
+    padding: 0 25px 0 10px;
     height: 30px;
     line-height: 30px;
     margin-right: 10px;
     margin-bottom: 10px;
     border: 1px solid #e5e5e5;
+    position: relative;
     &:hover{
       background: #e5e5e5;
       .icon-guanbishanchu{
@@ -19,5 +20,9 @@
   }
   .icon-guanbishanchu{
     display: none;
+
+    position: absolute;
+    right: 6px;
+    top: 8px;
   }
 }

@@ -6,108 +6,130 @@
 <div class="row">
   <form class="form-horizontal" *ngIf="data">
     <ba-card baCardClass="with-scroll">
-      <div class="row form-content">
-        <div class="col-md-12 form-unite">
-          <div class="row">
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="model" class="col-sm-4 ng-form-control-label">型号</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="model" [(ngModel)]="data.model" name="model">
+      <div class="edit-content">
+        <div class="row form-content">
+          <div class="col-md-12 form-unite">
+            <div class="row">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="model" class="col-sm-4 ng-form-control-label">型号</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="model" [(ngModel)]="data.model" name="model">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="price" class="col-sm-4 ng-form-control-label">价格</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="price" [(ngModel)]="data.price" name="price" (keyup)="refreshPrice()">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="price" class="col-sm-4 ng-form-control-label">价格</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="price" [(ngModel)]="data.price" name="price" (keyup)="refreshPrice()">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="catalog" class="col-sm-4 ng-form-control-label">所属分类</label>
-                <div class="col-sm-8">
-                  <input type="text" id="catalog" class="ng-form-control" [value]="catalogids" (focus)="catalogSelect.show()">
-                  <product-catalog-select #catalogSelect [(catalogArr)]="data.catalogs"></product-catalog-select>
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="catalog" class="col-sm-4 ng-form-control-label">所属分类</label>
+                  <div class="col-sm-8">
+                    <input type="text" id="catalog" class="ng-form-control" [value]="catalogids" (focus)="catalogSelect.show()">
+                    <product-catalog-select #catalogSelect [(catalogArr)]="data.catalogs"></product-catalog-select>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="coefficient_quotation" class="col-sm-4 ng-form-control-label">初次报价系数</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="coefficient_quotation" [(ngModel)]="data.coefficient_quotation" name="coefficient_quotation" (keyup)="refreshPrice()">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="coefficient_quotation" class="col-sm-4 ng-form-control-label">初次报价系数</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="coefficient_quotation" [(ngModel)]="data.coefficient_quotation" name="coefficient_quotation" (keyup)="refreshPrice()">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="coefficient_floor_price" class="col-sm-4 ng-form-control-label">销售底价系数</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="coefficient_floor_price" [(ngModel)]="data.coefficient_floor_price" name="coefficient_floor_price" (keyup)="refreshPrice()">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="coefficient_floor_price" class="col-sm-4 ng-form-control-label">销售底价系数</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="coefficient_floor_price" [(ngModel)]="data.coefficient_floor_price" name="coefficient_floor_price" (keyup)="refreshPrice()">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="coefficient_discount" class="col-sm-4 ng-form-control-label">折扣系数</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="coefficient_discount" [(ngModel)]="data.coefficient_discount" name="coefficient_discount" (keyup)="refreshPrice()">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="coefficient_discount" class="col-sm-4 ng-form-control-label">折扣系数</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="coefficient_discount" [(ngModel)]="data.coefficient_discount" name="coefficient_discount" (keyup)="refreshPrice()">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="quotation" class="col-sm-4 ng-form-control-label">初次报价</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="quotation" [value]="quotation" name="quotation" disabled>
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="quotation" class="col-sm-4 ng-form-control-label">初次报价</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="quotation" [value]="quotation" name="quotation" disabled>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="floor_price" class="col-sm-4 ng-form-control-label">销售底价</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="floor_price" [value]="floor_price" name="floor_price" disabled>
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="floor_price" class="col-sm-4 ng-form-control-label">销售底价</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="floor_price" [value]="floor_price" name="floor_price" disabled>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="discount" class="col-sm-4 ng-form-control-label">折扣价</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="discount" [value]="discount" name="discount" disabled>
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="discount" class="col-sm-4 ng-form-control-label">折扣价</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="discount" [value]="discount" name="discount" disabled>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="sort_order" class="col-sm-4 ng-form-control-label">分类中的排序</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="sort_order" [(ngModel)]="data.sort_order" name="sort_order">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="sort_order" class="col-sm-4 ng-form-control-label">分类中的排序</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="sort_order" [(ngModel)]="data.sort_order" name="sort_order">
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4 col-xs-12">
-              <div class="ng-form-group row">
-                <label for="minimum" class="col-sm-4 ng-form-control-label">最小起订量</label>
-                <div class="col-sm-8">
-                  <input type="text" class="ng-form-control" id="minimum" [(ngModel)]="data.minimum" name="minimum">
+              <div class="col-md-4 col-xs-12">
+                <div class="ng-form-group row">
+                  <label for="minimum" class="col-sm-4 ng-form-control-label">最小起订量</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="ng-form-control" id="minimum" [(ngModel)]="data.minimum" name="minimum">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-md-12 form-unite">
-          <div class="row">
-            <h5>规格</h5>
-            <div class="col-md-12" *ngFor="let description of data.product_description">
-              <div class="ng-form-group row">
-                <label for="minimum" class="col-sm-1 ng-form-control-label">{{description?.language_id | languagepipe}}</label>
-                <div class="col-sm-11">
-                  <input type="text" class="ng-form-control" [(ngModel)]="description.name" name="name_{{description.language_id}}">
+          <div class="col-md-12 form-unite">
+            <div class="row">
+              <h5>规格</h5>
+              <div class="col-md-12" *ngFor="let description of data.product_description">
+                <div class="ng-form-group row">
+                  <label for="minimum" class="col-sm-1 ng-form-control-label">{{description?.language_id | languagepipe}}</label>
+                  <div class="col-sm-11">
+                    <input type="text" class="ng-form-control" [(ngModel)]="description.name" name="name_{{description.language_id}}">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 form-unite" *ngIf="filter_groups">
+            <div class="row">
+              <h5>筛选</h5>
+              <div class="col-md-12" *ngFor="let filter_group of filter_groups">
+                <div class="ng-form-group row">
+                  <label class="col-sm-1 ng-form-control-label">{{filter_group?.filter_group_description | descriptionpipe}}</label>
+                  <div class="col-sm-11">
+                    <div class="row">
+                    <span *ngFor="let filter of filter_group.filters" class="col-md-3">
+                      <label class="radio-inline custom-radio nowrap">
+                        <input type="radio" name="filter_{{filter?.filter_group_id}}" value="{{filter?.filter_id}}" [checked]="isfilterChecked(filter.filter_id)" (change)="filterChange(filter)">
+                        <span>{{filter?.filter_description | descriptionpipe}}</span>
+                      </label>
+                    </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
