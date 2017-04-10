@@ -24,4 +24,5 @@ export class CommonActionBarConfig {
     generateFreezeOrder:boolean;
     exportContract: boolean;
     exportOrder: boolean;
+    isproduct: boolean;
 }

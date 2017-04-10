@@ -16,11 +16,9 @@
   <!--销售报表按钮-->
   <bar-common-action-bar-saleReport [config]="config" [object]="object"></bar-common-action-bar-saleReport>
   <!--仓库订单管理操作-->
-  <bar-common-action-bar-depot [config]="config" [object]="object"
-                               (objectChange)='change($event)'></bar-common-action-bar-depot>
+  <bar-common-action-bar-depot [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-depot>
   <!--货运订单管理操作-->
-  <bar-common-action-bar-shipping [config]="config" [object]="object"
-                                  (objectChange)='change($event)'></bar-common-action-bar-shipping>
+  <bar-common-action-bar-shipping [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-shipping>
   <!--保存按钮-->
   <bar-common-action-bar-save [config]="config" [(object)]="object"  (objectSave)='save($event)'></bar-common-action-bar-save>
   <!--编辑按钮-->
@@ -43,6 +41,21 @@
   <bar-common-action-bar-back  [config]="config" [(object)]="object"></bar-common-action-bar-back>
   <!--催款提醒按钮-->
   <bar-common-action-bar-paymentTip [config]="config" [(object)]="object"></bar-common-action-bar-paymentTip>
+
+  <!--产品列表添加分类按钮-->
+  <bar-common-action-bar-productCatalogAddParent [config]="config" [(object)]="object"></bar-common-action-bar-productCatalogAddParent>
+  <!--产品列表添加子类按钮-->
+  <bar-common-action-bar-productCatalogAddChild [config]="config" [(object)]="object"></bar-common-action-bar-productCatalogAddChild>
+  <!--产品列表编辑分类按钮-->
+  <bar-common-action-bar-productCatalogEdit [config]="config" [(object)]="object"></bar-common-action-bar-productCatalogEdit>
+  <!--产品列表删除分类按钮-->
+  <bar-common-action-bar-productCatalogDelete [config]="config" [(object)]="object" (objectDelete)='delete($event)'></bar-common-action-bar-productCatalogDelete>
+  <!--产品列表添加产品按钮-->
+  <bar-common-action-bar-productAdd [config]="config" [(object)]="object"></bar-common-action-bar-productAdd>
+  <!--产品列表编辑产品按钮-->
+  <bar-common-action-bar-productEdit [config]="config" [(object)]="object"></bar-common-action-bar-productEdit>
+  <!--产品列表删除产品按钮-->
+  <bar-common-action-bar-productDelete [config]="config" [(object)]="object" (objectDelete)='delete($event)'></bar-common-action-bar-productDelete>
   
   <!--生成入库单按钮-->
   <bar-common-action-bar-depot-generate-enter-order [config]="config" [(object)]="object"></bar-common-action-bar-depot-generate-enter-order>

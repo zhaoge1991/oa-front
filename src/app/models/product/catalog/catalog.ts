@@ -1,3 +1,4 @@
+import {CatalogDescription} from "./catalogDescription";
 export class Catalog {
     catalog_id: number;
     sort_order: number;
@@ -16,6 +17,7 @@ export class Catalog {
     packing_spec_id: number;
     created_at: string;
     updated_at: string;
+    catalog_description: CatalogDescription[];
     constructor(catalog) {
         if (catalog) {
             this.catalog_id = catalog.catalog_id;
@@ -35,6 +37,10 @@ export class Catalog {
             this.packing_spec_id = catalog.packing_spec_id;
             this.created_at = catalog.created_at;
             this.updated_at = catalog.updated_at;
+            this.catalog_description = [];
+            for (let catalog_description of catalog.catalog_description){
+              this.catalog_description.push(new CatalogDescription(catalog_description));
+            }
         } else {
             this.catalog_id = 0;
             this.sort_order = 0;
@@ -53,6 +59,7 @@ export class Catalog {
             this.packing_spec_id = 0;
             this.created_at = '';
             this.updated_at = '';
+            this.catalog_description = [];
         }
 
     }

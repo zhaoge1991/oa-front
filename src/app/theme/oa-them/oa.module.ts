@@ -66,6 +66,13 @@ import {
   GenerateFreezeOrderActionBarComponent,
   ExportContractActionBarComponent,
   ExportOrderActionBarComponent,
+  ProductCatalogAddChildActionBarComponent,
+  ProductCatalogAddParentActionBarComponent,
+  ProductCatalogEditActionBarComponent,
+  ProductCatalogDeleteActionBarComponent,
+  ProductDeleteActionBarComponent,
+  ProductAddActionBarComponent,
+  ProductEditActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -90,7 +97,8 @@ import {
   TransportPipe,
   OrderCostsPipe,
   OrderTypePipe,
-  QuantifierPipe
+  QuantifierPipe,
+  LanguagePipe
 } from './pipes';
 
 import {
@@ -158,6 +166,13 @@ const NGA_COMPONENTS = [
   GenerateFreezeOrderActionBarComponent,
   ExportContractActionBarComponent,
   ExportOrderActionBarComponent,
+  ProductCatalogAddChildActionBarComponent,
+  ProductCatalogAddParentActionBarComponent,
+  ProductCatalogEditActionBarComponent,
+  ProductCatalogDeleteActionBarComponent,
+  ProductDeleteActionBarComponent,
+  ProductAddActionBarComponent,
+  ProductEditActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
@@ -180,7 +195,8 @@ const NGA_PIPES = [
   TransportPipe,
   OrderCostsPipe,
   OrderTypePipe,
-  QuantifierPipe
+  QuantifierPipe,
+  LanguagePipe
 ];
 
 const NGA_SERVICES = [

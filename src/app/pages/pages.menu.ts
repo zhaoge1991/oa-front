@@ -15,6 +15,48 @@ export const PAGES_MENU = [
                 },
                 children: [
                     {
+                        path: 'table',
+                        data: {
+                            menu: {
+                                title: '外销表单'
+                            }
+                        },
+                        children: [
+                            {
+                                path: 'inquiry',
+                                data: {
+                                    menu: {
+                                        title: '外销报价单'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'contract',
+                                data: {
+                                    menu: {
+                                        title: '外销合同'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'demand',
+                                data: {
+                                    menu: {
+                                        title: '外销订单要求'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'shipment',
+                                data: {
+                                    menu: {
+                                        title: '外销出运安排'
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    {
                         path: 'order',
                         data: {
                             menu: {
@@ -170,28 +212,6 @@ export const PAGES_MENU = [
                         }
                     },
 
-                ]
-            },
-            {
-                path: 'customer',
-                data: {
-                    menu: {
-                        title: '客户管理',
-                        icon: 'ion-ios-people',
-                        selected: false,
-                        expanded: false,
-                        order: 0
-                    }
-                },
-                children: [
-                    {
-                        path: 'customers',
-                        data: {
-                            menu: {
-                                title: '客户资料'
-                            }
-                        }
-                    }
                 ]
             },
             {
