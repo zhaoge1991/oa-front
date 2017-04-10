@@ -1,9 +1,12 @@
+import {Catalog} from "../catalog/catalog";
+import {Language} from "../../localisation/language";
+import {ProductDescription} from "./productDescription";
 export class Product {
     product_id: number;
     model: string;
     sku: string;
     upc: string;
-    
+
     ean: string;
     jan: string;
     isbn: string;
@@ -43,13 +46,15 @@ export class Product {
     coefficient_discount: number;
     created_at: string;
     updated_at: string;
-    constructor(product) {
+    catalogs: Catalog[];
+    product_description: ProductDescription[];
+    constructor(product,languages:Language[]) {
         if (product) {
             this.product_id = product.product_id;
             this.model = product.model;
             this.sku = product.sku;
             this.upc = product.upc;
-            
+
             this.ean = product.ean;
             this.jan = product.jan;
             this.isbn = product.isbn;
@@ -89,12 +94,17 @@ export class Product {
             this.coefficient_discount = product.coefficient_discount;
             this.created_at = product.created_at;
             this.updated_at = product.updated_at;
+            this.catalogs = [];
+            this.product_description = [];
+            for (let catalog of product.catalogs){
+              this.catalogs.push(new Catalog(catalog,languages));
+            }
         } else {
             this.product_id = 0;
             this.model = '';
             this.sku = '';
             this.upc = '';
-            
+
             this.ean = '';
             this.jan = '';
             this.isbn = '';
@@ -134,7 +144,27 @@ export class Product {
             this.coefficient_discount = 0;
             this.created_at = '';
             this.updated_at = '';
+            this.catalogs = [];
+            this.product_description = [];
         }
-
+        //先循环语言生成所有语言描述数组
+        for(let i=0;i<languages.length;i++){
+          this.product_description.push(new ProductDescription(null));
+          //给每一个语言的描述加上对应语言id
+          this.product_description[this.product_description.length-1].language_id = languages[i].language_id;
+        }
+        //如果处于编辑状态则遍历数据对象的描述并与描述数组语言id对比，若一样则将数据的描述赋给相应语言描述
+        if(product){
+          let des = product.product_description;
+          if(des){
+            for(let i=0;i<des.length;i++){
+              for(let j=0;j<this.product_description.length;j++){
+                if(des[i].language_id == this.product_description[j].language_id){
+                  this.product_description[j] = des[i];
+                }
+              }
+            }
+          }
+        }
     }
 }

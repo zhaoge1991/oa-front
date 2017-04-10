@@ -1,0 +1,42 @@
+<div bsModal #dialog="bs-modal" class="modal fade user_search-content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">选择产品分类</h4>
+      </div>
+      <div class="modal-body">
+        <div class="userselect-content clearfix">
+          <div class="pull-left treecontent" *ngIf="catalognodes.length>0">
+            <tree-root
+              [nodes]="catalognodes"
+              [options]="customTemplateStringOptions"
+              (onActivate)="onchanged($event)"
+            >
+              <template #treeNodeTemplate let-node="node" let-index="index">
+                <span>{{ node.data.name }}</span>
+              </template>
+            </tree-root>
+          </div>
+          <div class="pull-right usersconent">
+            <div class="row" class="selecteduser">
+              <p>已选分类：</p>
+              <div *ngIf="catalogObj">
+                <span>{{catalogObj.catalog_id}} <i class="iconfont icon-guanbishanchu" (click)="deleteCatalogObj()"></i></span>
+              </div>
+              <div *ngIf="catalogArr">
+                <span *ngFor="let catalog of catalogArr,let i = index">{{catalog.catalog_description | descriptionpipe}} <i class="iconfont icon-guanbishanchu" (click)="deleteCatalogArr(i)"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="add()">确定</button>
+        <button class="btn btn-primary confirm-btn" (click)="hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,15 @@ export class ProductListService{
     }
   }
 
+  //获取单个产品
+  get(id:number){
+    return this.http.get('/api/product/products/'+id).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.product;
+      }
+    })
+  }
+
   delete(id:number){
     return this.http.delete('/api/product/products/' + id).map(res=> {
       if (res.status == 200) {
