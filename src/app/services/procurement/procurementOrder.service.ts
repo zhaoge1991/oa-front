@@ -43,5 +43,32 @@ export class ProcurementOrderService {
             return res.json();
         });
     }
+    
+    //获取仓库采购单
+  getDepotList(page?:number, key?:string) {
+    if (key) {
+      return this.http.get('/api/depot/procurement_order' + '?page=' + page + '&keyword=' + key).map(res=> {
+        return res.json().results.data.procurement_orders;
+      });
+    } else {
+      return this.http.get('/api/depot/procurement_order' + '?page=' + page).map(res=> {
+        return res.json().results.data.procurement_orders;
+      });
+    }
+
+  }
+  
+  getDepotDetail(id: number): Observable<ProcurementOrder> {
+        return this.http.get('/api/depot/procurement_order/enter/' + id).map(res => {
+            return res.json().results.data.procurement_order as ProcurementOrder;
+        })
+    }
+   generateEnterOrder(id: number, procurementOrder: ProcurementOrder){
+       return this.http.post('/api/depot/procurement_order/enter/'+id, procurementOrder).map(res => {
+            return res.json();
+        });
+   }
+  
+    
 
 }

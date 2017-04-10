@@ -1,0 +1,75 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <h1 class="title"><img src="assets/img/logo.png" alt="logo"></h1>
+            <table class="no-border">
+              <tr>
+                <th></th><td></td>
+                <th>CustomerId:</th><td>{{data?.quote_no}}</td>
+              </tr>
+              <tr>
+                <th>Attn:</th><td>Mr.{{data?.customer?.firstname}}</td>
+                <th>Date:</th><td>{{data.quote_date}}</td>
+              </tr>
+              <tr>
+                <th>Tel:</th><td>{{data?.customer?.telephone}}</td>
+                <th>ValidPeriod:</th><td>{{data.validity_days}}</td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <th>Sale</th> <th>Trade Term</th> <th>Payment Term</th> <th>Shipment By</th> <th>Country of Origin</th>
+              </tr>
+              <tr>
+                <td>{{data?.user?.name}}</td>
+                <td>{{data?.table_order?.provision?.name}}</td>
+                <td>{{data?.table_order?.payment_id | paymentpipe}}</td>
+                <td>{{data?.table_order?.transport_id | transportpipe}}</td>
+                <td>China</td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <th>Item</th>
+                <th>Part No./Description</th>
+                <th>Model</th>
+                <th>Qty</th>
+                <th>Unit</th>
+                <th>Unit Price(CNY)</th>
+                <th>Total Price(CNY)</th>
+              </tr>
+              <tr *ngFor="let pro of data.table_order_product,let i=index">
+                <td>{{i+1}}</td>
+                <td>{{pro.en_name}}</td>
+                <td>{{pro.model}}</td>
+                <td>{{pro.quantity}}</td>
+                <td>{{pro.quantifier_id | quantifierpipe}}</td>
+                <td>{{pro.price}}</td>
+                <td>{{pro.total}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">Freight charge by {{data?.table_order?.transport_id | transportpipe}}</td>
+                <td>{{data?.table_order?.shipping_costs}}</td>
+              </tr>
+              <tr>
+                <td colspan="6">Total</td>
+                <td>{{data?.table_order?.total_price}}</td>
+              </tr>
+            </table>
+            <div>
+              <strong>Remark</strong>
+              <p [innerHTML]="data.remark"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

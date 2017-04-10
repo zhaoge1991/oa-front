@@ -1,0 +1,63 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div class="col-md-6">
+              <h1 class="title"><img src="assets/img/logo.png" alt="logo"></h1>
+            </div>
+            <div class="col-md-6">
+              <h1 class="title">出运安排</h1>
+            </div>
+            <table class="no-border">
+              <tr>
+                <th></th><td></td>
+                <th>CustomerId:</th><td>{{data?.quote_no}}</td>
+              </tr>
+              <tr>
+                <th>Attn:</th><td>Mr.{{data?.customer?.firstname}}</td>
+                <th>Date:</th><td>{{data.quote_date}}</td>
+              </tr>
+              <tr>
+                <th>Tel:</th><td>{{data?.customer?.telephone}}</td>
+                <th>ValidPeriod:</th><td>{{data.validity_days}}</td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <th>序号</th>
+                <th>商品描述</th>
+                <th>型号</th>
+                <th>数量</th>
+                <th>单位</th>
+                <th>单价</th>
+                <th>总价</th>
+              </tr>
+              <tr *ngFor="let pro of data.table_order_product,let i=index">
+                <td>{{i+1}}</td>
+                <td>{{pro.en_name}}</td>
+                <td>{{pro.model}}</td>
+                <td>{{pro.quantity}}</td>
+                <td>{{pro.quantifier_id | quantifierpipe}}</td>
+                <td>{{pro.price}}</td>
+                <td>{{pro.total}}</td>
+              </tr>
+            </table>
+            <div>
+              <strong>备注</strong>
+              <div class="row">
+                <p class="col-md-3">制单人： <span>{{data?.user?.name}}</span></p>
+                <p class="col-md-3">审核人： <span></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

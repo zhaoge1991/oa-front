@@ -18,6 +18,9 @@ export class ProcurementOrderProduct {
     factory_no: string;
     created_at: string;
     updated_at: string;
+    order_product_id:number;
+    enter_order_product_number:number;
+    
     constructor(procurementOrderProduct) {
         if (procurementOrderProduct) {
             if (procurementOrderProduct.procurement_order_product_id !== undefined) {
@@ -83,7 +86,12 @@ export class ProcurementOrderProduct {
             if (procurementOrderProduct.updated_at !== undefined) {
                 this.updated_at = procurementOrderProduct.updated_at
             }
-
+            if (procurementOrderProduct.order_product_id !== undefined) {
+                this.order_product_id = procurementOrderProduct.order_product_id
+            }
+            if (procurementOrderProduct.enter_order_product_number !== undefined) {
+                this.enter_order_product_number = procurementOrderProduct.enter_order_product_number
+            }
         }
     }
 }

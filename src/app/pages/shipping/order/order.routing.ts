@@ -14,7 +14,8 @@ const routes:Routes = [
     children: [
       {path: '', component: ListComponent},
       {path: 'detail/:id', component: DetailComponent},
-      {path: 'edit/:id', component: EditComponent, canDeactivate: [CanDeactivateGuard]}
+      {path: 'edit/:id', component: EditComponent, canDeactivate: [CanDeactivateGuard]},
+      {path: 'edit', component: EditComponent, canDeactivate: [CanDeactivateGuard]}
     ]
   }
 ];

@@ -1,0 +1,60 @@
+<div bsModal #dialog="bs-modal" class="modal fade user_search-content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button class="close" aria-label="Close" (click)="hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">用户档案</h4>
+      </div>
+      <div class="modal-body">
+        <div class="userselect-content clearfix">
+          <div class="pull-left treecontent" *ngIf="usernodes.length>0">
+            <tree-root
+              [nodes]="usernodes"
+              [options]="customTemplateStringOptions"
+              (onActivate)="onchanged($event)"
+            >
+              <template #treeNodeTemplate let-node="node" let-index="index">
+                <span>{{ node.data.name }}</span>
+              </template>
+            </tree-root>
+          </div>
+          <div class="pull-right usersconent" *ngIf="usersdata">
+            <div class="user_search">
+              <ng-search (searchtext)="search($event)"></ng-search>
+            </div>
+            <div class="row" class="selecteduser">
+              <p>已选用户：</p>
+              <div *ngIf="userObj">
+                <span>{{userObj.name}} <i class="iconfont icon-guanbishanchu" (click)="deleteUserobj()"></i></span>
+              </div>
+              <div *ngIf="userArr">
+                <span *ngFor="let user of userArr,let i = index">{{user.name}} <i class="iconfont icon-guanbishanchu" (click)="deleteUserArr(i)"></i></span>
+              </div>
+            </div>
+            <ag-grid-angular #usersrow style="width: 100%; height: 350px;" class="ag-fresh"
+
+            [columnDefs]="columnDefs"
+            [rowData]="usersdata"
+            [gridOptions]="selectedrow"
+            enableColResize
+            enableSorting
+            enableFilter
+            groupHeaders
+            (selectionChanged)="onselectionChanged()"
+
+            rowHeight="22"
+            rowSelection="multiple"
+            ></ag-grid-angular>
+            <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="adduser()">确定</button>
+        <button class="btn btn-primary confirm-btn" (click)="hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

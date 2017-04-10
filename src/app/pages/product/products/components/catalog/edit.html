@@ -1,0 +1,83 @@
+{{descriptionsstring}}
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <h5>编辑项目</h5>
+            <div class="col-md-3">
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label">项目名称</label>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label title-sm">分类名称</label>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label title-sm">Title</label>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label title-sm">Meta Description</label>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label title-sm">Meta Keyword</label>
+              </div>
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label title-sm">Description</label>
+              </div>
+
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">订单类型</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [value]="data.order_type_id" (valueChange)="orderTypeChange($event)"></ng-select>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3" *ngFor="let description of descriptions">
+              <div class="ng-form-group row">
+                <label class="col-sm-12 ng-form-control-label">{{description?.language_id | languagepipe}}</label>
+              </div>
+              <div class="ng-form-group row">
+                <div class="col-sm-12">
+                  <input type="text" class="col-sm-12 ng-form-control-label" [(ngModel)]="description.name" name="name_{{description.language_id}}">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <div class="col-sm-12">
+                  <input type="text" class="col-sm-12 ng-form-control-label" [(ngModel)]="description.title" name="title_{{description.language_id}}">
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </ba-card>
+    <div class="row">
+      <div class="col-md-12 col-xs-12" *ngIf="data">
+        <ng2-tab selected="filter-info"
+                 selected-contents-class="animated"
+                 selected-index-class="selected">
+          <div class="tabs">
+            <div index="filter-info">筛选组信息</div>
+          </div>
+          <div class="tab-contents">
+            <div contents="filter-info">
+
+
+            </div>
+          </div>
+        </ng2-tab>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+

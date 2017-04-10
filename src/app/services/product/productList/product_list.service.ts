@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpInterceptorService} from "../../interceptor";
+import {MessageService} from "../../core/messageComponent.service";
 
 
 @Injectable()
 export class ProductListService{
-  constructor(private http: HttpInterceptorService){}
+  constructor(private http: HttpInterceptorService,private messageservice:MessageService){}
 
-  get(key:string,page:number,catalog: number){
+  getlist(key:string, page:number, catalog: number){
     console.log(key,page,catalog);
     if(key){
       return this.http.get('/api/product/products'+'?filter_name='+key+'&page='+page).map(data=>{
@@ -27,5 +28,19 @@ export class ProductListService{
         }
       })
     }
+  }
+
+  delete(id:number){
+    return this.http.delete('/api/product/products/' + id).map(res=> {
+      if (res.status == 200) {
+        this.messageservice.putMessage({
+          summary: '成功',
+          detail: '删除产品成功',
+          severity: 'success',
+          life: 3000
+        });
+      }
+      return res;
+    })
   }
 }

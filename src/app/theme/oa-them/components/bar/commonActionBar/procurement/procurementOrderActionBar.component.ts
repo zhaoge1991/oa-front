@@ -14,7 +14,7 @@ import {ProcurementOrderService} from "../../../../../../services/procurement/pr
     </button>
     <div class="btnmore" aria-labelledby="action-more">
       <ul>
-        <li *ngIf="object?.status==0"><button class="available" (click)="processing()">处理中</button></li>
+        <li *ngIf="object?.status==0"><button class="available" [disabled]="object?.procurement_supplier_id==0" (click)="processing()">处理中</button></li>
         <li *ngIf="object?.status==2"><button class="available" (click)="complete()">已完成</button></li>
       </ul>
     </div>

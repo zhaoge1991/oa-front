@@ -1,0 +1,78 @@
+<div class="row">
+  
+</div>
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="selectedProcurementSupplier" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入文字'"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="suppliers"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+        
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedProcurementSupplier">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">供应商品清单</div>
+          <div index="banks">银行信息</div>
+          <div index="contacts">联系人</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <ag-grid-angular #selectedrow style="width: 100%; height: 180px;" class="ag-fresh"
+
+                         [columnDefs]="selectedcolumnProductDefs"
+                         [rowData]="selectedProcurementSupplier.product"
+                         enableColResize
+                         enableSorting
+                         enableFilter
+                         groupHeaders
+
+                         rowHeight="22"
+                         rowSelection="multiple"
+            ></ag-grid-angular>
+          </div>
+          <div contents="banks">
+            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="selectedcolumnBankDefs"
+                          [rowData]="selectedProcurementSupplier?.banks"
+            >加载其他费用清单</ag-grid-angular>
+          </div>
+          
+          <div contents="contacts">
+            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="selectedcolumnContactDefs"
+                          [rowData]="selectedProcurementSupplier?.contacts"
+            >加载其他费用清单</ag-grid-angular>
+          </div>
+          
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

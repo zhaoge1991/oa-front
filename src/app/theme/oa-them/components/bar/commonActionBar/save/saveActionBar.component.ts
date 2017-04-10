@@ -18,6 +18,7 @@ export class SaveActionBarComponent {
     @Output() objectSave = new EventEmitter();
     constructor() {}
     save() {
+        this.object=null;
         this.objectSave.emit(true)
     }
 

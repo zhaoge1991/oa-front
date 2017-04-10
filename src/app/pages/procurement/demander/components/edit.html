@@ -1,0 +1,113 @@
+<div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]='procurementDemander' (objectSave)="onDemanderSave($event)">
+    </bar-common-action-bar>
+</div>
+
+<div class="row">
+    <form class="form-horizontal" *ngIf="procurementDemander">
+        <ba-card baCardClass="with-scroll">
+            <div class="row form-content">
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">需求方全称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.full_name" name="full_name">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">电话</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.tel" name="tel">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">传真</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.fax" name="fax">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">地址</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.add" name="add">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">需求方简称</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.simple_name" name="simple_name">
+                                </div>
+                            </div>
+
+
+
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">邮政编码</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.zip_code" name="zip_code">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">纳税登记号</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="ng-form-control"  [(ngModel)]="procurementDemander.tax_registration_no" name="tax_registration_no">
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                        
+
+
+                    </div>
+                </div>
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ng-form-group row">
+                                <label for="remark" class="col-sm-1 ng-form-control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea class="ng-form-control" id="remark" [(ngModel)]="procurementDemander.remark" name="remark"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ba-card>
+        <div class="row">
+            <div class="col-md-12 col-xs-12" *ngIf="procurementDemander">
+                <ng2-tab selected="banks"
+                         selected-contents-class="animated"
+                         selected-index-class="selected">
+                    <div class="tabs">
+                        <div index="banks">银行账户</div>
+                    </div>
+                    <div class="tab-contents">
+                        <div contents="banks">
+                            <ag-grid-angular #costGrid style="width: 100%;  height: 140px;" class="ag-fresh"
+                                [columnDefs]="bankColumnDefs"
+                                [rowData]="procurementDemander.banks"
+                                [gridOptions]="bankGridOptions"
+                                (rowSelected)="onSelectedBank($event)"
+                                rowSelection="multiple"
+                                >加载银行</ag-grid-angular>
+                            <table></table>
+                            <button (click)="addBank()">添加</button>
+                            <button (click)="deleteBank()" [disabled]="!selectedBank">删除</button>
+                        </div>
+                    </div>
+                </ng2-tab>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

@@ -7,6 +7,7 @@ import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
+
 import {
   BaThemeConfig
 } from './theme.config';
@@ -29,8 +30,6 @@ import {
   ProductSelectComponent,
   ScheduleComponent,
   SupplierSelectComponent,
-  TestSelectComponent,
-  FirstSelectComponent,
   PreloaderComponent,
 
 
@@ -39,6 +38,7 @@ import {
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
+  UserSelectComponent,
 
   //begin 公共操作栏
   CommonActionBarComponent,
@@ -61,6 +61,18 @@ import {
   BackActionBarComponent,
   DepotActionBarComponent,
   ShippingActionBarComponent,
+  GenerateEnterOrderActionBarComponent,
+  GenerateProcurementOrderActionBarComponent,
+  GenerateFreezeOrderActionBarComponent,
+  ExportContractActionBarComponent,
+  ExportOrderActionBarComponent,
+  ProductCatalogAddChildActionBarComponent,
+  ProductCatalogAddParentActionBarComponent,
+  ProductCatalogEditActionBarComponent,
+  ProductCatalogDeleteActionBarComponent,
+  ProductDeleteActionBarComponent,
+  ProductAddActionBarComponent,
+  ProductEditActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -84,7 +96,9 @@ import {
   OrderStatusPipe,
   TransportPipe,
   OrderCostsPipe,
-  OrderTypePipe
+  OrderTypePipe,
+  QuantifierPipe,
+  LanguagePipe
 } from './pipes';
 
 import {
@@ -118,13 +132,11 @@ const NGA_COMPONENTS = [
   ProductSelectComponent,
   ScheduleComponent,
   SupplierSelectComponent,
-  TestSelectComponent,
-  FirstSelectComponent,
   DemanderSelectComponent,
   DemanderBankSelectComponent,
   SupplierBankSelectComponent,
   PaymentSelectComponent,
-
+  UserSelectComponent,
 
   PreloaderComponent,
 
@@ -149,6 +161,18 @@ const NGA_COMPONENTS = [
   BackActionBarComponent,
   DepotActionBarComponent,
   ShippingActionBarComponent,
+  GenerateEnterOrderActionBarComponent,
+  GenerateProcurementOrderActionBarComponent,
+  GenerateFreezeOrderActionBarComponent,
+  ExportContractActionBarComponent,
+  ExportOrderActionBarComponent,
+  ProductCatalogAddChildActionBarComponent,
+  ProductCatalogAddParentActionBarComponent,
+  ProductCatalogEditActionBarComponent,
+  ProductCatalogDeleteActionBarComponent,
+  ProductDeleteActionBarComponent,
+  ProductAddActionBarComponent,
+  ProductEditActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
@@ -170,7 +194,9 @@ const NGA_PIPES = [
   OrderStatusPipe,
   TransportPipe,
   OrderCostsPipe,
-  OrderTypePipe
+  OrderTypePipe,
+  QuantifierPipe,
+  LanguagePipe
 ];
 
 const NGA_SERVICES = [

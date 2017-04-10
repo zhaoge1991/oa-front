@@ -26,10 +26,22 @@ export class ProcurementDemander {
             this.created_at = procurementDemander.created_at
             this.updated_at = procurementDemander.updated_at
             this.banks = [];
-            for (let bank in procurementDemander.banks) {
-                this.banks.push(new Bank(bank));
+            if (procurementDemander.banks) {
+                for (let bank of procurementDemander.banks) {
+                    this.banks.push(new Bank(bank));
+                }
             }
         }
 
+
     }
+
+    addBank(demanderBank: Bank) {
+        this.banks.push(demanderBank);
+
+    }
+    deleteBank(index) {
+        this.banks.splice(index, 1)
+    }
+
 }

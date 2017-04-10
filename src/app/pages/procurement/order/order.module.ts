@@ -9,6 +9,7 @@ import {AgGridModule} from 'ag-grid-angular/main';
 import { OrderComponent} from './order.component'
 import { ListComponent } from './components/list.component';
 import { DetailComponent } from './components/detail.component';
+import { ProductComponent } from './components/product.component';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 import {AgGridMultiLineComponent} from "../../../modules/agGrid/common/agGridMultiLine.component";
 import {AgGridCurrencyComponent} from "../../../modules/agGrid/common/agGridCurrency.component";
@@ -31,7 +32,8 @@ import {AgGridComponentModule} from "../../../modules/agGrid/agGridComponent.mod
   declarations: [
     ListComponent,
     DetailComponent,
-    OrderComponent
+    OrderComponent,
+    ProductComponent
   ],
   providers: [CanDeactivateGuard]
 })

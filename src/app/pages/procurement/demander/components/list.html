@@ -1,0 +1,55 @@
+<div class="row">
+  
+</div>
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="selectedProcurementDemander" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <ng-search [placeholder]="'请输入文字'"></ng-search>
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="demanders"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+        
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedProcurementDemander">
+      <ng2-tab selected="banks"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="banks">银行信息</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="banks">
+            <ag-grid-angular  style="width: 100%;  height: 140px;" class="ag-fresh"
+                          [columnDefs]="selectedcolumnBankDefs"
+                          [rowData]="selectedProcurementDemander?.banks"
+            >加载其他费用清单</ag-grid-angular>
+          </div>
+          
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>
