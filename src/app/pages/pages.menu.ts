@@ -243,6 +243,49 @@ export const PAGES_MENU = [
                         }
                     },
                     {
+                        path: 'inventory',
+                        data: {
+                            menu: {
+                                title: '库存信息'
+                            }
+                        },
+                        children: [
+                            {
+                                path: 'warning',
+                                data: {
+                                    menu: {
+                                        title: '缺料预警'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'dailiao',
+                                data: {
+                                    menu: {
+                                        title: '呆料库存'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'turnover',
+                                data: {
+                                    menu: {
+                                        title: '产品周转'
+                                    }
+                                }
+                            },
+                            {
+                                path: 'inventory',
+                                data: {
+                                    menu: {
+                                        title: '库存列表'
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                    ,
+                    {
                         path: '',
                         data: {
                             menu: {

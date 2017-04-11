@@ -43,4 +43,38 @@ export class ProductListService{
       return res;
     })
   }
+  
+  getWarningList(page:number){
+      return this.http.get('/api/depot/inventory/warning'+'?page='+page).map(data=>{
+        if(data.json()){
+          return data.json().results.data.products
+        }
+      })
+  }
+  
+  getDailiaoList(page:number){
+      return this.http.get('/api/depot/inventory/dailiao'+'?page='+page).map(data=>{
+        if(data.json()){
+          return data.json().results.data.products
+        }
+      })
+  }
+  
+  getTurnoverList(page:number){
+      return this.http.get('/api/depot/inventory/turnover'+'?page='+page).map(data=>{
+        if(data.json()){
+          return data.json().results.data.products
+        }
+      })
+  }
+  
+  getInventoryList(page:number){
+      return this.http.get('/api/depot/inventory/inventory'+'?page='+page).map(data=>{
+        if(data.json()){
+          return data.json().results.data.products
+        }
+      })
+  }
+  
+  
 }

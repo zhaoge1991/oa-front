@@ -89,7 +89,7 @@ export class EditComponent implements OnInit{
     }
     console.log(this.descriptions);
   }
-  get descriptionsstring(){JSON.stringify(this.descriptions)};
+  
 
   //保存
   save(){
