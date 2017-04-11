@@ -1,0 +1,30 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save()">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div class="opendetail">
+          <h1 class="title">数量词详情</h1>
+          <table>
+
+            <tr>
+              <th>名称</th>
+              <td colspan="3">
+                <input [(ngModel)]="data.code" type="text">
+              </td>
+            </tr>
+            <tr>
+              <th>描述</th>
+              <td colspan="3">
+                <input [(ngModel)]="data.description" type="text">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

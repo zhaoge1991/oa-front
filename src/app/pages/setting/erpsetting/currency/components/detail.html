@@ -1,0 +1,30 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+          <div class="opendetail">
+            <h1 class="title">货币详情</h1>
+            <table>
+              <tr>
+                <th>名称</th>
+                <td colspan="3">{{data?.name}}
+                </td>
+              </tr>
+              <tr>
+                <th>代码</th>
+                <td colspan="3">{{data?.code}}</td>
+              </tr>
+              <tr>
+                <th>值</th>
+                <td colspan="3">{{data?.value}}</td>
+              </tr>
+            </table>
+          </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

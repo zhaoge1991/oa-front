@@ -102,6 +102,8 @@ import {
   AuthGuard,
   CanDeactivateGuard
 } from './guards'
+import {LanguagePipe} from "./pipes/languagePipe/language.pipe";
+import {RolePipe} from "./pipes/rolePipe/role.pipe";
 
 const NGA_COMPONENTS = [
   CalenderComponent,
@@ -168,7 +170,9 @@ const NGA_PIPES = [
   OrderStatusPipe,
   TransportPipe,
   OrderCostsPipe,
-  OrderTypePipe
+  OrderTypePipe,
+  LanguagePipe,
+  RolePipe
 ];
 
 const NGA_SERVICES = [

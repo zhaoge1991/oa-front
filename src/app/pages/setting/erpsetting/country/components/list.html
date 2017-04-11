@@ -1,0 +1,28 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectDelete)="deleteData($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <div class="col-md-12 col-xs-12 table-main">
+        <div class="mysearch">
+          <h6>国家</h6>
+          <!--<ng-search [placeholder]="'请输入国家名'" (searchtext)="search($event)"></ng-search>-->
+        </div>
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                         [gridOptions]="gridOptions"
+                         [columnDefs]="columnDefs"
+                         [rowData]="rowData"
+                         rowHeight="22"
+                         rowSelection="multiple"
+
+                         (rowSelected)="onRowSelected($event)"
+                         (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+
+      </div>
+    </div>
+  </ba-card>
+
+</div>
