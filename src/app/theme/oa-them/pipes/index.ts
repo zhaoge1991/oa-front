@@ -11,3 +11,4 @@ export * from './quantifierPipe';
 export * from './languagePipe';
 export * from './filter_groupPipe';
 export * from './descriptionPipe';
+export * from './rolePipe';

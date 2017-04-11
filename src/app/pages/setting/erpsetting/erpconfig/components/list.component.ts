@@ -22,13 +22,12 @@ export class ListComponent{
   //构造函数，初始化
   constructor(
     private router: Router,
-    private erpconfigservice: AppconfigService,
+    private erpconfigservice: AppconfigService
   ){
     this.gridOptions = <GridOptions>{};
     this.createRowData();
     //按钮组配置
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.openUrl = 'pages/setting/erpsetting/erpconfig/edit';
     this.commonActionBarConfig.editUrl = 'pages/setting/erpsetting/erpconfig/edit';
     this.commonActionBarConfig.noback = true;
   }

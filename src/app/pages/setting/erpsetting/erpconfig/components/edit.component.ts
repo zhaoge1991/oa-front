@@ -25,12 +25,10 @@ export class EditComponent {
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private erpconfigservice: AppconfigService,
+    private erpconfigservice: AppconfigService
   ){
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.openUrl = 'pages/setting/erpsetting/erpconfig/edit';
     this.commonActionBarConfig.saveUrl = 'pages/setting/erpsetting/erpconfig/edit';
-    this.commonActionBarConfig.editUrl = 'pages/setting/erpsetting/erpconfig/edit';
   }
 
   ngOnInit(){

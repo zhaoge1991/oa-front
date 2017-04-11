@@ -22,7 +22,7 @@ export class DeleteActionBarComponent {
     delete() {
       let sub = this.alertservice.putMessage({
         title: '询问弹窗',
-        detail: '确定要删除订单吗？',
+        detail: '确定要删除吗？',
         severity: 'info'
       }).subscribe(data=>{
         this.objectDelete.emit(data)

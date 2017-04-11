@@ -102,7 +102,6 @@ import {
   LanguagePipe,
   FilterGroupPipe,
   DescriptionPipe,
-  LanguagePipe,
   RolePipe
 } from './pipes';
 
@@ -204,7 +203,7 @@ const NGA_PIPES = [
   QuantifierPipe,
   LanguagePipe,
   FilterGroupPipe,
-  DescriptionPipe
+  DescriptionPipe,
   RolePipe
 ];
 

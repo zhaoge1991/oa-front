@@ -7,7 +7,6 @@ import { routing } from './erpconfig.routing';
 import {ListComponent} from "./components/list.component";
 import {OaModule} from "../../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../../theme/nga.module";
-import {DetailComponent} from "./components/detail.component";
 import {EditComponent} from "./components/edit.component";
 import {ErpconfigComponent} from "./erpconfig.component";
 
@@ -26,7 +25,6 @@ import {ErpconfigComponent} from "./erpconfig.component";
   declarations: [
     ErpconfigComponent,
     ListComponent,
-    DetailComponent,
     EditComponent
   ],
 })
