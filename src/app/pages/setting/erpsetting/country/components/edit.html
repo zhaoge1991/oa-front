@@ -1,0 +1,42 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save()">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div class="opendetail">
+          <h1 class="title">国家详情</h1>
+          <table>
+
+            <tr>
+              <th>国家名称</th>
+              <td colspan="3">
+                <input [(ngModel)]="data.name" type="text">
+              </td>
+            </tr>
+            <tr>
+              <th>ISO Code（2）</th>
+              <td colspan="3">
+                <input [(ngModel)]="data.iso_code_2" type="text">
+              </td>
+            </tr>
+            <tr>
+              <th>ISO Code（3）</th>
+              <td colspan="3">
+                <input type="text" [(ngModel)]="data.iso_code_3">
+              </td>
+            </tr>
+            <tr>
+              <th>地址格式</th>
+              <td colspan="3">
+              <input type="text" [(ngModel)]="data.address_format">
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>
