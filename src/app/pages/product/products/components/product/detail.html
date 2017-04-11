@@ -1,0 +1,64 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div class="col-md-6">
+              <h1 class="title"><img src="assets/img/logo.png" alt="logo"></h1>
+            </div>
+            <div class="col-md-6">
+              <h1 class="title">产品详情</h1>
+            </div>
+            <table class="no-border">
+              <tr>
+                <th>型号</th><td colspan="2">{{data?.model}}</td>
+                <th>价格</th><td colspan="2">{{data?.price}}</td>
+              </tr>
+              <tr>
+                <th>初次报价系数</th><td>{{data?.coefficient_quotation}}</td>
+                <th>销售底价系数</th><td>{{data?.coefficient_floor_price}}</td>
+                <th>折扣系数</th><td>{{data?.coefficient_discount}}</td>
+              </tr>
+              <tr>
+                <th>分类中的排序</th><td colspan="2">{{data?.sort_order}}</td>
+                <th>最小起订量</th><td colspan="2">{{data?.minimum}}</td>
+              </tr>
+            </table>
+            <table>
+              <tr *ngFor="let description of data.product_description">
+                <th>{{description?.language_id | languagepipe}}</th>
+                <td colspan="5">{{description?.name}}</td>
+              </tr>
+            </table>
+            <div>
+              <h5>筛选</h5>
+              <p *ngIf="!filter_groups">无</p>
+              <div class="row" *ngIf="filter_groups">
+                <div class="col-md-12" *ngFor="let filter_group of filter_groups">
+                  <div class="ng-form-group row">
+                    <label class="col-sm-1 ng-form-control-label">{{filter_group?.filter_group_description | descriptionpipe}}</label>
+                    <div class="col-sm-11">
+                      <div class="row">
+                    <span *ngFor="let filter of filter_group.filters" class="col-md-3">
+                      <label class="radio-inline custom-radio nowrap">
+                        <input type="radio" name="filter_{{filter?.filter_group_id}}" value="{{filter?.filter_id}}" [checked]="isfilterChecked(filter.filter_id)" disabled>
+                        <span>{{filter?.filter_description | descriptionpipe}}</span>
+                      </label>
+                    </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

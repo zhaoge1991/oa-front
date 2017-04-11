@@ -176,7 +176,7 @@ export class ListComponent {
 
   //双击列表单元格操作
   onCellDoubleClicked($event) {
-    this.router.navigate(['pages/depot/order/detail', $event.data.order_id])
+    this.router.navigate(['pages/product/products/product/detail', $event.data.product_id])
   }
 
   //删除按钮点击后重新加载数据
