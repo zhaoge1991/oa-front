@@ -10,7 +10,7 @@ export class QuantifierService {
     private getservice: GetService,
     private http:HttpInterceptorService,
     private messageservice:MessageService,
-    private location:Location,
+    private location:Location
   ){}
 
   get(id?: number){
@@ -29,8 +29,9 @@ export class QuantifierService {
           life: 3000
         });
         sessionStorage.removeItem('Quantifier');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Quantifier','quantifier_id','getQuantifiers').subscribe(()=>{
+          this.location.back();
+        })
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',
@@ -43,7 +44,7 @@ export class QuantifierService {
     });
   }
 
-  //删除货币
+  //删除数量词
   delete(id:number) {
     return this.http.delete('/api/localisation/quantifier/' + id).map(res=> {
       if (res.status == 200) {
@@ -60,7 +61,7 @@ export class QuantifierService {
     })
   }
 
-  //新增货币
+  //新增数量词
   post(body) {
     return this.http.post('/api/localisation/quantifier', body).map(res=> {
       if (res.status == 200) {
@@ -71,8 +72,9 @@ export class QuantifierService {
           life: 3000
         });
         sessionStorage.removeItem('Quantifier');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Quantifier','quantifier_id','getQuantifiers').subscribe(()=>{
+          this.location.back();
+        })
       } else {
         this.messageservice.putMessage({
           summary: '新建失败',

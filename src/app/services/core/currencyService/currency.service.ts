@@ -10,7 +10,7 @@ export class CurrencyService {
     private getservice: GetService,
     private http:HttpInterceptorService,
     private messageservice:MessageService,
-    private location:Location,
+    private location:Location
   ){}
 
   get(id?: number){
@@ -29,8 +29,9 @@ export class CurrencyService {
           life: 3000
         });
         sessionStorage.removeItem('Currency');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Currency','currency_id','getCurrency').subscribe(data=>{
+          this.location.back();
+        });
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',
@@ -71,8 +72,9 @@ export class CurrencyService {
           life: 3000
         });
         sessionStorage.removeItem('Currency');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Currency','currency_id','getCurrency').subscribe(data=>{
+          this.location.back();
+        });
       } else {
         this.messageservice.putMessage({
           summary: '新建失败',

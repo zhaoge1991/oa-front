@@ -25,7 +25,7 @@ export class ListComponent{
   //构造函数，初始化
   constructor(
     private router: Router,
-    private countryservice: CountryService,
+    private countryservice: CountryService
   ){
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -45,8 +45,6 @@ export class ListComponent{
   //行配置项(获取数据)
   private createRowData() {
     this.rowData =this.countryservice.get();
-    console.log(this.rowData);
-
   }
 
   //列配置项
@@ -95,6 +93,8 @@ export class ListComponent{
   deleteData(e){
     if(e){
       this.countryservice.delete(this.selectedrowData.country_id).subscribe(data=>{
+        let selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridOptions.api.removeItems(selectedNodes);
         this.selectedrowData = null;
       })
     }

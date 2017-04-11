@@ -25,7 +25,7 @@ export class EditComponent {
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private countryservice: CountryService,
+    private countryservice: CountryService
   ){
 
     this.commonActionBarConfig = new CommonActionBarConfig();

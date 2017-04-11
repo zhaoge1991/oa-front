@@ -18,7 +18,7 @@ export class DetailComponent  implements OnInit,OnDestroy{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private zoneservice: ZoneService,
+    private zoneservice: ZoneService
   ){
     this.commonActionBarConfig.idName = 'zone_id';
     this.commonActionBarConfig.addNewUrl = 'pages/setting/erpsetting/zone/edit';

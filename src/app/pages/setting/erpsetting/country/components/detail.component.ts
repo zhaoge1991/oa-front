@@ -18,7 +18,7 @@ export class DetailComponent  implements OnInit,OnDestroy{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private countryservice: CountryService,
+    private countryservice: CountryService
   ){
     this.commonActionBarConfig.idName = 'country_id';
     this.commonActionBarConfig.addNewUrl = 'pages/setting/erpsetting/country/edit';

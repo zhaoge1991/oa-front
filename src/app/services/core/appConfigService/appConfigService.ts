@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { Response} from '@angular/http';
 import {AllConfigService} from "../allConfig.service";
-import {GetService} from "../../../common/function/getfunction";
 import {HttpInterceptorService} from "../../interceptor";
 import {MessageService} from "../messageComponent.service";
 import {Location} from '@angular/common';
@@ -10,10 +9,9 @@ import {Location} from '@angular/common';
 export class AppconfigService {
   constructor(
     private configservice: AllConfigService,
-    private getservice: GetService,
     private http:HttpInterceptorService,
     private messageservice:MessageService,
-    private location:Location,
+    private location:Location
   ){}
 
   get(per?:string){
@@ -29,6 +27,12 @@ export class AppconfigService {
       return per?data[per]:data;
     }
   }
+  getObs(per?:string){
+    return this.configservice.getAppconfig().map(data => {
+      sessionStorage.setItem('appconfig',JSON.stringify(data));
+      return per?data[per]:data;
+    });
+  }
 
 
   //修改配置
@@ -42,8 +46,9 @@ export class AppconfigService {
           life: 3000
         });
         sessionStorage.removeItem('appconfig');
-        this.get();
-        this.location.back();
+        this.getObs().subscribe(()=>{
+          this.location.back();
+        })
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',

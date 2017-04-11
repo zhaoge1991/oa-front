@@ -18,7 +18,7 @@ export class DetailComponent  implements OnInit,OnDestroy{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private quantifierservice: QuantifierService,
+    private quantifierservice: QuantifierService
   ){
     this.commonActionBarConfig.idName = 'quantifier_id';
     this.commonActionBarConfig.addNewUrl = 'pages/setting/erpsetting/quantifier/edit';

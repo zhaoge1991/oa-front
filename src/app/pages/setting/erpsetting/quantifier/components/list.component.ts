@@ -25,7 +25,7 @@ export class ListComponent{
   //构造函数，初始化
   constructor(
     private router: Router,
-    private quantifierservice: QuantifierService,
+    private quantifierservice: QuantifierService
   ){
     this.gridOptions = <GridOptions>{};
     this.createRowData();
@@ -88,6 +88,8 @@ export class ListComponent{
   deleteData(e){
     if(e){
       this.quantifierservice.delete(this.selectedrowData.quantifier_id).subscribe(data=>{
+        let selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridOptions.api.removeItems(selectedNodes);
         this.selectedrowData = null;
       })
     }

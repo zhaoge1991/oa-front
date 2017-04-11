@@ -46,7 +46,9 @@ export class ListComponent{
 
   //行配置项(获取数据)
   private createRowData() {
-    this.rowData =this.zoneservice.get();
+    this.zoneservice.getObs().subscribe(data=>{
+      this.rowData = data;
+    });
   }
 
   //列配置项
@@ -105,6 +107,8 @@ export class ListComponent{
   deleteData(e){
     if(e){
       this.zoneservice.delete(this.selectedrowData.zone_id).subscribe(data=>{
+        let selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.gridOptions.api.removeItems(selectedNodes);
         this.selectedrowData = null;
       })
     }

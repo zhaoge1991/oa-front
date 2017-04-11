@@ -10,7 +10,7 @@ export class CountryService {
     private getservice: GetService,
     private http:HttpInterceptorService,
     private messageservice:MessageService,
-    private location:Location,
+    private location:Location
 ){}
 
   get(id?:number){
@@ -28,8 +28,9 @@ export class CountryService {
           life: 3000
         });
         sessionStorage.removeItem('Country');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Country','country_id','getCountry').subscribe(data=>{
+          this.location.back();
+        });
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',
@@ -53,7 +54,7 @@ export class CountryService {
           life: 3000
         });
         sessionStorage.removeItem('Country');
-        this.get();
+        this.getservice.getObs('Country','country_id','getCountry').subscribe(data=>{})
       }
       return res;
     })
@@ -70,8 +71,9 @@ export class CountryService {
           life: 3000
         });
         sessionStorage.removeItem('Country');
-        this.get();
-        this.location.back();
+        this.getservice.getObs(null,'Country','country_id','getCountry').subscribe(data=>{
+          this.location.back();
+        });
       } else {
         this.messageservice.putMessage({
           summary: '新建失败',

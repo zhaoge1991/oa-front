@@ -10,11 +10,15 @@ export class ZoneService {
     private getservice: GetService,
     private http:HttpInterceptorService,
     private messageservice:MessageService,
-    private location:Location,
+    private location:Location
   ){}
 
   get(id?: number){
     return this.getservice.get(id,'Zone','zone_id','getZone')
+  }
+
+  getObs(){
+    return this.getservice.getObs(null,'Zone','zone_id','getZone')
   }
 
 
@@ -29,8 +33,9 @@ export class ZoneService {
           life: 3000
         });
         sessionStorage.removeItem('Zone');
-        this.get();
-        this.location.back();
+        this.getObs().subscribe(()=>{
+          this.location.back();
+        })
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',
@@ -55,7 +60,9 @@ export class ZoneService {
         });
         sessionStorage.removeItem('Zone');
         this.get();
-        this.location.back();
+        this.location.back();this.getObs().subscribe(()=>{
+          this.location.back();
+        })
       } else {
         this.messageservice.putMessage({
           summary: '新建失败',
