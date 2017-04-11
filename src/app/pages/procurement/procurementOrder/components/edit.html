@@ -150,7 +150,7 @@
                         <div contents="pro-list">
                             <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
                                 (rowSelected)="onSelectedProduct($event)"
-                                (cellValueChanged)="onCellValueChanged($event)"   
+                                (cellValueChanged)="onCellValueChanged($event)"
                                 [columnDefs]="selectedcolumnDefs"
                                 [rowData]="procurementOrder.procurement_order_product"
                                 [gridOptions]="progridOptions"

@@ -102,7 +102,7 @@ export class EditComponent implements OnInit,DoCheck{
   //筛选项更改
   filterChange(filter:Filter){
     let productFilters = this.data.filters;
-    let length = productFilters.length.toString()-0;
+    let length:number = productFilters.length;
     let x:number = 0;
     for(let i=0;i<length;i++){
       if(filter.filter_group_id == productFilters[i].filter_group_id){
