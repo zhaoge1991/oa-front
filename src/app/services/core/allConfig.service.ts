@@ -27,37 +27,37 @@ export class AllConfigService{
 
   //全局配置接口
   getAppconfig(){
-    return this.get('/api/localisation/config');
+    return this.get('/api/localisation/config','settings');
   }
 
   //国家接口
   getCountry(){
-    return this.get('/api/localisation/country');
+    return this.get('/api/localisation/country','countries');
   }
 
   //集团项目接口
   getProject(){
-    return this.get('/api/group/project');
+    return this.get('/api/group/project','projects');
   }
 
   //货币接口
   getCurrency(){
-    return this.get('/api/localisation/currency');
+    return this.get('/api/localisation/currency','currencies');
   }
 
   //语言接口
   getLanguage(){
-    return this.get('/api/localisation/language');
+    return this.get('/api/localisation/language','languages');
   }
 
   //数量词接口
   getQuantifiers(){
-    return this.get('/api/localisation/quantifier');
+    return this.get('/api/localisation/quantifier','quantifiers');
   }
 
   //地区接口
   getZone(){
-    return this.get('/api/localisation/zone');
+    return this.get('/api/localisation/zone','zones');
   }
 
   //菜单接口

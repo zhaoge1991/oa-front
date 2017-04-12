@@ -3,6 +3,70 @@ export const PAGES_MENU = [
     path: 'pages',
     children: [
       {
+        path: 'work',
+        data: {
+          menu: {
+            title: '工作事项',
+            icon: 'ion-clipboard',
+            selected: false,
+            expanded: false,
+            order: 20,
+          }
+        },
+        children:[
+          {
+            path: 'task',
+            data: {
+              menu: {
+                title: '待办事项'
+              }
+            },
+            children: [
+              {
+                path: 'tasks',
+                data: {
+                  menu: {
+                    title: '待办事项'
+                  }
+                },
+              },
+              {
+                path: 'my_source_tasks',
+                data: {
+                  menu: {
+                    title: '我指派的事项'
+                  }
+                },
+              },
+              {
+                path: 'my_tasks',
+                data: {
+                  menu: {
+                    title: '我发起的事项'
+                  }
+                },
+              },
+              {
+                path: 'cc_tasks',
+                data: {
+                  menu: {
+                    title: '抄送我的事项'
+                  }
+                },
+              },
+              {
+                path: 'complete_tasks',
+                data: {
+                  menu: {
+                    title: '完成事项'
+                  }
+                },
+              }
+            ]
+          }
+        ]
+      },
+      {
         path: 'sale',
         data: {
           menu: {
@@ -302,7 +366,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: '货运管理',
-            icon: 'ion-plane',
+            icon: 'ion-android-boat',
             selected: false,
             expanded: false,
             order: 0

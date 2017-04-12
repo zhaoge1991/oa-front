@@ -1,0 +1,45 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <h4 class="col-md-12">待办事项</h4>
+      <div class="col-md-12 col-xs-12 table-main">
+        <ag-grid-angular #agGrid style="width: 100%; height: 400px;" class="ag-fresh"
+                     [gridOptions]="gridOptions"
+                     [columnDefs]="columnDefs"
+                     [rowData]="rowData"
+                     enableColResize
+                     enableSorting
+                     enableFilter
+                     groupHeaders
+
+                     rowHeight="22"
+                     rowSelection="multiple"
+
+                     (rowSelected)="onRowSelected($event)"
+                     (cellDoubleClicked)="onCellDoubleClicked($event)"
+        ></ag-grid-angular>
+        <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
+      </div>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">任务进度</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <task-progress [progress]="selectedrowData.user_status"></task-progress>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

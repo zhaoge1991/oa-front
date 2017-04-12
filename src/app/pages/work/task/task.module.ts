@@ -1,9 +1,9 @@
 import { NgModule }      from '@angular/core';
 import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { routing } from './table.routing.ts';
+import { routing } from './task.routing.ts';
 
-import { TableComponent} from './table.component.ts'
+import { TaskComponent} from './task.component.ts'
 
 @NgModule({
   imports: [
@@ -12,7 +12,7 @@ import { TableComponent} from './table.component.ts'
     routing
   ],
   declarations: [
-    TableComponent
+    TaskComponent
   ]
 })
-export class TableModule {}
+export class TaskModule {}

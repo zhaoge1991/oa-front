@@ -9,17 +9,46 @@ export class TaskService{
   constructor(private http: HttpInterceptorService,private messageservice:MessageService,private location:Location){}
 
   getTasks(page:number){
-    return this.http.get('/api/work/task/task' + '?page=' + page).map(res=> {
-        return res.json();
+    return this.http.get('/api/work/task/task' + '?page=' + page).map(data=> {
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
       }
     )
   }
 
-  //获取单个产品
-  get(id:number){
-    return this.http.get('/api/product/products/'+id).map(data=>{
+  //获取我指派的事项
+  getMySourceTasks(page:number){
+    return this.http.get('/api/work/task/task/my_source_task' + '?page=' + page).map(data=>{
       if(data.status == 200){
-        return data.json().results.data.product;
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
+  //获取我发起的事项
+  getMyTasks(page:number){
+    return this.http.get('/api/work/task/task/my_task' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
+  //获取抄送我的事项
+  getCcTasks(page:number){
+    return this.http.get('/api/work/task/task/cc' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
+  //获取完成事项
+  getCompleteTasks(page:number){
+    return this.http.get('/api/work/task/task/complete' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
       }
     })
   }
@@ -45,6 +74,16 @@ export class TaskService{
       }
       return res.json();
     });
+  }
+
+  //通过id获取事项
+  getById(id:number){
+    return this.http.get('/api/work/task/task/' + id).map(data=> {
+        if(data.status == 200){
+          return data.json().results.data.task;
+        }
+      }
+    )
   }
 
   //新增

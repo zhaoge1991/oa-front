@@ -1,0 +1,187 @@
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="customer_id" class="col-sm-4 ng-form-control-label">客户编号</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="customer_id" [(ngModel)]="data.customer_id" name="customer_id" disabled>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="firstname" class="col-sm-4 ng-form-control-label">客户名称</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="firstname" [(ngModel)]="data.firstname" name="firstname">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="email" class="col-sm-4 ng-form-control-label">Email</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="email" [(ngModel)]="data.email" name="email">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">拥有人</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="user" [value]="usersName" name="user" (focus)="userSelect.show()">
+                  <user-select #userSelect [(userArr)]="data.users"></user-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">国家</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'country_id'" [showname]="'name'" [(value)]="data.country_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">项目</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'project_id'" [showname]="'project_name'" [(value)]="data.project_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="kh_zhuangtai" class="col-sm-4 ng-form-control-label">状态</label>
+                <div class="col-sm-8">
+                  <!--<input type="text" class="ng-form-control" id="kh_zhuangtai" [(ngModel)]="data.kh_zhuangtai" name="kh_zhuangtai">-->
+                  <select name="kh_zhuangtai" id="kh_zhuangtai" [(ngModel)]="data.kh_zhuangtai" class="ng-form-control">
+                    <option value="停用">停用</option>
+                    <option value="意向">意向</option>
+                    <option value="线索">线索</option>
+                    <option value="成交">成交</option>
+                    <option value="返单">返单</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="kh_dianhua" class="col-sm-4 ng-form-control-label">客户电话</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="kh_dianhua" [(ngModel)]="data.kh_dianhua" name="kh_dianhua">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="kh_leixing" class="col-sm-4 ng-form-control-label">客户类型</label>
+                <div class="col-sm-8">
+                  <!--<input type="text" class="ng-form-control" id="kh_leixing" [(ngModel)]="data.kh_leixing" name="kh_leixing">-->
+                  <select name="kh_leixing" id="kh_leixing" [(ngModel)]="data.kh_leixing" class="ng-form-control">
+                    <option value="网店">网店</option>
+                    <option value="设备制造商">设备制造商</option>
+                    <option value="系统集成商">系统集成商</option>
+                    <option value="分销商">分销商</option>
+                    <option value="维护人员">维护人员</option>
+                    <option value="运营商">运营商</option>
+                    <option value="贸易商">贸易商</option>
+                    <option value="其他">其他</option>
+                    <option value="项目工程商">项目工程商</option>
+                    <option value="终端用户">终端用户</option>
+                    <option value="教育机构">教育机构</option>
+                    <option value="政府部门">政府部门</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="kh_xunpan" class="col-sm-4 ng-form-control-label">询盘方式</label>
+                <div class="col-sm-8">
+                  <!--<input type="text" class="ng-form-control" id="kh_xunpan" [(ngModel)]="data.kh_xunpan" name="kh_xunpan">-->
+                  <select name="kh_xunpan" id="kh_xunpan" [(ngModel)]="data.kh_xunpan" class="ng-form-control">
+                    <option value="电话">电话</option>
+                    <option value="EC询盘">EC询盘</option>
+                    <option value="邮件询盘">邮件询盘</option>
+                    <option value="快速下单">快速下单</option>
+                    <option value="注册用户">注册用户</option>
+                    <option value="开发信">开发信</option>
+                    <option value="客户推荐">客户推荐</option>
+                    <option value="直接询盘">直接询盘</option>
+                    <option value="Skype">Skype</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-4 ng-form-control-label">询盘时间</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.date_added" [placeholder]="'请选择时间'"></ng-calender>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="kh_liushi" class="col-sm-4 ng-form-control-label">流失原因</label>
+                <div class="col-sm-8">
+                  <!--<input type="text" class="ng-form-control" id="kh_liushi" [(ngModel)]="data.kh_liushi" name="kh_liushi">-->
+                  <select name="kh_liushi" id="kh_liushi" [(ngModel)]="data.kh_liushi" class="ng-form-control">
+                    <option value="价格问题">价格问题</option>
+                    <option value="快递不支持">快递不支持</option>
+                    <option value="支付方式问题">支付方式问题</option>
+                    <option value="公司资质">公司资质</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="kh_beizhu" class="col-sm-1 ng-form-control-label">原因备注</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="kh_beizhu" [(ngModel)]="data.kh_beizhu" name="kh_beizhu">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="field_company" class="col-sm-1 ng-form-control-label">公司名称</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="field_company" [(ngModel)]="data.field_company" name="field_company">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="field_company_site" class="col-sm-1 ng-form-control-label">公司网站</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="field_company_site" [(ngModel)]="data.field_company_site" name="field_company_site">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="kh_dizhi" class="col-sm-1 ng-form-control-label">客户地址</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="kh_dizhi" [(ngModel)]="data.kh_dizhi" name="kh_dizhi">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </form>
+</div>
+
+
+
