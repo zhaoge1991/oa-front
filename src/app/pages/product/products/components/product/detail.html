@@ -25,8 +25,9 @@
                 <th>折扣系数</th><td>{{data?.coefficient_discount}}</td>
               </tr>
               <tr>
-                <th>分类中的排序</th><td colspan="2">{{data?.sort_order}}</td>
-                <th>最小起订量</th><td colspan="2">{{data?.minimum}}</td>
+                <th>分类中的排序</th><td>{{data?.sort_order}}</td>
+                <th>最小起订量</th><td>{{data?.minimum}}</td>
+                <th>所属分类</th><td><span *ngFor="let catalog of data.catalogs">{{catalog.catalog_description | descriptionpipe}}、</span></td>
               </tr>
             </table>
             <table>
