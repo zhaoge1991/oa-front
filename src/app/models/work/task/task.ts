@@ -17,6 +17,7 @@ export class Task {
     updated_at: string;
     users: User[];
     source_user: User;
+    user_ccs: User[];
     user_status: UserStatu[];
     constructor(task) {
         if (task) {
@@ -36,8 +37,12 @@ export class Task {
             this.updated_at = task.updated_at;
             this.source_user = new User(task.source_user);
             this.users = [];
+            this.user_ccs = [];
             this.user_status = [];
             for (let user of task.users){
+              this.users.push(new User(user));
+            }
+            for (let user of task.user_ccs){
               this.users.push(new User(user));
             }
             for (let user_statu of task.user_status){
@@ -60,6 +65,7 @@ export class Task {
             this.updated_at = '';
             this.source_user = new User(null);
             this.users = [];
+            this.user_ccs = [];
             this.user_status = [];
         }
 
