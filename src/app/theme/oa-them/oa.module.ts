@@ -77,7 +77,9 @@ import {
 
   AlertComponent,
   SampleOrderComponent,
-  AnnexesComponent
+  AnnexesComponent,
+  FilterGroupSelectComponent,
+  ProductCatalogSelectComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
@@ -98,7 +100,10 @@ import {
   OrderCostsPipe,
   OrderTypePipe,
   QuantifierPipe,
-  LanguagePipe
+  LanguagePipe,
+  FilterGroupPipe,
+  DescriptionPipe,
+  RolePipe
 } from './pipes';
 
 import {
@@ -177,7 +182,9 @@ const NGA_COMPONENTS = [
 
   SampleOrderComponent,
   AlertComponent,
-  AnnexesComponent
+  AnnexesComponent,
+  FilterGroupSelectComponent,
+  ProductCatalogSelectComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -196,7 +203,10 @@ const NGA_PIPES = [
   OrderCostsPipe,
   OrderTypePipe,
   QuantifierPipe,
-  LanguagePipe
+  LanguagePipe,
+  FilterGroupPipe,
+  DescriptionPipe,
+  RolePipe
 ];
 
 const NGA_SERVICES = [

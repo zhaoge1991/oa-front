@@ -10,6 +10,8 @@ import {PaymentService} from "../../../../services/core/paymentService/payment.s
 import {ProvisionService} from "../../../../services/core/provisionService/provision.service";
 import {OrderTypeService} from "../../../../services/core/ordertypeService/order_type.service";
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
+import {LanguageService} from "../../../../services/core/languageService/language.service";
+import {RoleService} from "../../../../services/core/roleService/role.service";
 @Component({
   selector: 'ng-select',
   templateUrl: './ngselect.component.html',
@@ -36,30 +38,36 @@ export class NgSelectComponent implements OnInit{
     private provisionservice: ProvisionService,
     private ordertypeservice: OrderTypeService,
     private quantifierservice: QuantifierService,
+    private languageservice: LanguageService,
+    private roleservice: RoleService
   ){}
 
   ngOnInit(){
     switch(this.selectfor) {
       case 'currency_id':
-        this.options = this.currencysercive.get();break
+        this.options = this.currencysercive.get();break;
       case 'country_id':
-        this.options = this.countryservice.get();break
+        this.options = this.countryservice.get();break;
       case 'order_status_id':
-        this.options = this.statusservice.get();break
+        this.options = this.statusservice.get();break;
       case 'project_id':
-        this.options = this.projectservice.get();break
+        this.options = this.projectservice.get();break;
       case 'transport_id':
-        this.options = this.transportservice.get();break
+        this.options = this.transportservice.get();break;
       case 'order_source_id':
-        this.options = this.sourceservice.get();break
+        this.options = this.sourceservice.get();break;
       case 'payment_id':
-        this.options = this.paymentservice.get();break
+        this.options = this.paymentservice.get();break;
       case 'provision_id':
-        this.options = this.provisionservice.get();break
+        this.options = this.provisionservice.get();break;
       case 'order_type_id':
-        this.options = this.ordertypeservice.get();break
+        this.options = this.ordertypeservice.get();break;
       case 'quantifier_id':
-        this.options = this.quantifierservice.get();break
+        this.options = this.quantifierservice.get();break;
+      case 'language_id':
+        this.options = this.languageservice.get();break;
+      case 'id':
+        this.options = this.roleservice.get();break;
       default:
             this.options = [];
     }

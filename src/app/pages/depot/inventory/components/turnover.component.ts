@@ -55,9 +55,11 @@ export class TurnoverComponent {
             cellRenderer: (params) => {
                 let config = this.appconfig.get('localisation.language.default');
                 if (!params.value) return '';
-                for (let i = 0; i < params.value.catalog_description.length; i++) {
-                    if (params.value.catalog_description[i].language_id = config) {
-                        return params.value.catalog_description[i].name;
+                if(params.value.catalog_description){
+                    for (let i = 0; i < params.value.catalog_description.length; i++) {
+                        if (params.value.catalog_description[i].language_id = config) {
+                            return params.value.catalog_description[i].name;
+                        }
                     }
                 }
             },

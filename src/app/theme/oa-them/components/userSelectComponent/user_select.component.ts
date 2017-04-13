@@ -94,7 +94,6 @@ export class UserSelectComponent implements OnInit{
   getTrreNodes(){
     this.departmentservice.get().subscribe(data=>{
       this.departmentservice.getdataTrre(data,this.usernodes)
-      console.log(this.usernodes);
     })
   }
   customTemplateStringOptions = {

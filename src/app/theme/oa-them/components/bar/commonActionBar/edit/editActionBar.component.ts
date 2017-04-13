@@ -18,7 +18,12 @@ export class EditActionBarComponent {
     @Input() object:any
     constructor(private router: Router) {}
     edit() {
+      if(this.object[this.config.idName]){
         this.router.navigate([this.config.editUrl,this.object[this.config.idName]]);
+      } else {
+        this.router.navigate([this.config.editUrl]);
+      }
+
     }
 
 }

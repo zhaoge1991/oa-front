@@ -34,9 +34,13 @@ export class EditComponent implements OnInit {
     private selectedProduct: ProcurementOrderProduct;
     private selectedCost: ProcurementOrderCost;
     private otherCost:number;//其他费用
-    
-    
-    
+
+    ischecked(e){
+      if(e == this.procurementOrder.tax){
+        return true;
+      }
+    }
+
     //商品列定义
     private selectedcolumnDefs = [
         {
@@ -80,7 +84,7 @@ export class EditComponent implements OnInit {
                 property: 'code'
             },
             cellEditorFramework: AgGridCurrencyComponent,
-            
+
             editable: true
         },
         {
@@ -212,7 +216,7 @@ export class EditComponent implements OnInit {
         for (let selectedNode of selectedNodes){
             this.procurementOrder.deleteProduct(selectedNode);
         }
-        
+
         this.selectedProduct = null;
     }
 
@@ -235,20 +239,20 @@ export class EditComponent implements OnInit {
     deletecost() {
         let selectedNodes = this.costgridOptions.api.getSelectedNodes();
         this.costgridOptions.api.removeItems(selectedNodes);
-        
+
         for (let selectedNode of selectedNodes){
             this.procurementOrder.deleteCost(selectedNode);
         }
         this.selectedCost = null;
     }
-    
+
     onCellValueChanged(event){
         //修改价格
         if(event.colDef.field=='price'||event.colDef.field=="quantity"){
             this.procurementOrder.refreshPrice();
         }
     }
- 
+
     get diagnostic() {return JSON.stringify(this.procurementOrder);}
 
 

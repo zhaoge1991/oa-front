@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 
 export class SaveActionBarComponent {
     @Input() config:any;
-    @Input() object:any
+    @Input() object:any;
     @Output() objectSave = new EventEmitter();
     constructor() {}
     save() {

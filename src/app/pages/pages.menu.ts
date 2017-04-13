@@ -91,6 +91,28 @@ export const PAGES_MENU = [
                 ]
             },
             {
+                path: 'product',
+                data: {
+                    menu: {
+                        title: '产品管理',
+                        icon: 'ion-grid',
+                        selected: false,
+                        expanded: false,
+                        order: 0
+                    }
+                },
+                children: [
+                    {
+                        path: 'products',
+                        data: {
+                            menu: {
+                                title: '产品目录'
+                            }
+                        }
+                    }
+                ]
+            },
+            {
                 path: 'finance',
                 data: {
                     menu: {
@@ -334,6 +356,69 @@ export const PAGES_MENU = [
                         }
                     }
                 ]
+            }, {
+                path: 'setting',
+                data: {
+                    menu: {
+                        title: '设置',
+                        icon: 'ion-wrench',
+                        selected: false,
+                        expanded: false
+                    }
+                },
+                children: [
+                    {
+                        path: 'erpsetting',
+                        data: {
+                            menu: {
+                                title: 'Erp设置',
+                            }
+                        },
+                        children: [
+                            {
+                                path: 'country',
+                                data: {
+                                    menu: {
+                                        title: '国家',
+                                    }
+                                },
+                            },
+                            {
+                                path: 'zone',
+                                data: {
+                                    menu: {
+                                        title: '地区',
+                                    }
+                                },
+                            },
+                            {
+                                path: 'currency',
+                                data: {
+                                    menu: {
+                                        title: '货币',
+                                    }
+                                },
+                            },
+                            {
+                                path: 'quantifier',
+                                data: {
+                                    menu: {
+                                        title: '数量词',
+                                    }
+                                },
+                            },
+                            {
+                                path: 'erpconfig',
+                                data: {
+                                    menu: {
+                                        title: 'ERP配置',
+                                    }
+                                },
+                            }
+                        ],
+                    },
+                ],
+
             },
             {
                 path: 'dashboard',

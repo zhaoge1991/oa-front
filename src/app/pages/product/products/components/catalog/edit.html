@@ -1,4 +1,4 @@
-{{descriptionsstring}}
+
 <div class="row">
   <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
   </bar-common-action-bar>
@@ -30,31 +30,80 @@
               <div class="ng-form-group row">
                 <label class="col-sm-12 ng-form-control-label title-sm">Description</label>
               </div>
-
-              <div class="ng-form-group row">
-                <label class="col-sm-4 ng-form-control-label">订单类型</label>
-                <div class="col-sm-8">
-                  <ng-select [selectfor]="'order_type_id'" [showname]="'name'" [value]="data.order_type_id" (valueChange)="orderTypeChange($event)"></ng-select>
-                </div>
-              </div>
             </div>
 
-            <div class="col-md-3" *ngFor="let description of descriptions">
+            <div class="col-md-3" *ngFor="let description of data.catalog_description">
               <div class="ng-form-group row">
                 <label class="col-sm-12 ng-form-control-label">{{description?.language_id | languagepipe}}</label>
               </div>
               <div class="ng-form-group row">
                 <div class="col-sm-12">
-                  <input type="text" class="col-sm-12 ng-form-control-label" [(ngModel)]="description.name" name="name_{{description.language_id}}">
+                  <input type="text" class="col-sm-12 ng-form-control" [(ngModel)]="description.name" name="name_{{description.language_id}}">
                 </div>
               </div>
               <div class="ng-form-group row">
                 <div class="col-sm-12">
-                  <input type="text" class="col-sm-12 ng-form-control-label" [(ngModel)]="description.title" name="title_{{description.language_id}}">
+                  <input type="text" class="col-sm-12 ng-form-control" [(ngModel)]="description.title" name="title_{{description.language_id}}">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <div class="col-sm-12">
+                  <input type="text" class="col-sm-12 ng-form-control" [(ngModel)]="description.meta_description" name="m_description_{{description.language_id}}">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <div class="col-sm-12">
+                  <input type="text" class="col-sm-12 ng-form-control" [(ngModel)]="description.meta_keyword" name="m_keyword_{{description.language_id}}">
+                </div>
+              </div>
+              <div class="ng-form-group row">
+                <div class="col-sm-12">
+                  <input type="text" class="col-sm-12 ng-form-control" [(ngModel)]="description.description" name="description_{{description.language_id}}">
                 </div>
               </div>
             </div>
 
+          </div>
+        </div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <h5>基本信息</h5>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">筛选组</label>
+                <div class="col-sm-8">
+                  <filter-group-select (filter_groupsChange)="filterGroupsChange($event)"></filter-group-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="sort_order" class="col-sm-4 ng-form-control-label">排序</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="sort_order" [(ngModel)]="data.sort_order" name="sort_order">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">采购人</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" [value]="usersName"(focus)="userSelect.show()">
+                  <user-select #userSelect [(userArr)]="data.users"></user-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="status" class="col-sm-4 ng-form-control-label">状态</label>
+                <div class="col-sm-8">
+                  <select class="ng-form-control" id="status" name="status" [(ngModel)]="data.status">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -69,8 +118,13 @@
           </div>
           <div class="tab-contents">
             <div contents="filter-info">
-
-
+              <div class="filter-info">
+                <span *ngFor="let filter_group of data.filter_groups,let i=index">
+                  {{filter_group.filter_group_description | filtergrouppipe}}
+                  <i class="iconfont icon-guanbishanchu" (click)="data.filter_groups.splice(i,1)"></i>
+                </span>
+                <p *ngIf="!data.filter_groups || (data.filter_groups.length == 0)">无</p>
+              </div>
             </div>
           </div>
         </ng2-tab>

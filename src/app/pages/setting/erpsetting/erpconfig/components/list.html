@@ -1,0 +1,62 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div class="opendetail">
+          <h1 class="title">ERP配置列表</h1>
+          <table>
+            <tr>
+              <th>默认货币</th>
+              <td colspan="3">{{data["deploy.default.currency.currency"]|currencypipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>默认语言</th>
+              <td colspan="3">{{data["localisation.language.default"]|languagepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>英语</th>
+              <td colspan="3">{{data["localisation.language.english"]|languagepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>中文</th>
+              <td colspan="3">{{data["localisation.language.chinese"]|languagepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>采购角色</th>
+              <td colspan="3">{{data["user.role.procurement"]|rolepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>财务角色</th>
+              <td colspan="3">{{data["user.role.finance"]|rolepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>仓库角色</th>
+              <td colspan="3">{{data["user.role.depot"]|rolepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>货运角色</th>
+              <td colspan="3">{{data["user.role.shipping"]|rolepipe}}
+              </td>
+            </tr>
+            <tr>
+              <th>销售角色</th>
+              <td colspan="3">{{data["user.role.sale"]|rolepipe}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

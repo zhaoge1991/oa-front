@@ -1,0 +1,80 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save()">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div class="opendetail">
+          <h1 class="title">ERP配置列表</h1>
+          <table>
+            <tr>
+              <th>默认货币</th>
+              <td colspan="3">
+                <ng-select  [(value)]="data['deploy.default.currency.currency']" [selectfor]="'currency_id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>默认语言</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['localisation.language.default']" [selectfor]="'language_id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>英语</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['localisation.language.english']" [selectfor]="'language_id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>中文</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['localisation.language.chinese']" [selectfor]="'language_id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>采购角色</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['user.role.procurement']" [selectfor]="'id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>财务角色</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['user.role.finance']" [selectfor]="'id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>仓库角色</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['user.role.depot']" [selectfor]="'id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>货运角色</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['user.role.shipping']" [selectfor]="'id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+            <tr>
+              <th>销售角色</th>
+              <td colspan="3">
+                <ng-select [(value)]="data['user.role.sale']" [selectfor]="'id'" [showname]="'name'">
+                </ng-select>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

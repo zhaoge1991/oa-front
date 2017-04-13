@@ -30,4 +30,17 @@ export class GetService {
     }
   }
 
+  getObs(id?,sessname?:string,idname?:string,funname?:string){
+    return this.configservice[funname]().map(data => {
+      sessionStorage.setItem(sessname,JSON.stringify(data));
+      if(id){
+        for(var i=0;i<data.length;i++){
+          if(id == data[i][idname]){
+            return data[i];
+          }
+        }
+      } else {return data};
+    });
+  }
+
 }
