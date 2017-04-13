@@ -71,6 +71,7 @@ export class TurnoverComponent {
             width: 240,
             cellRenderer: (params) => {
                 let cn = this.appconfig.get('localisation.language.chinese');
+                if (!params.value) return '';
                 for (let i = 0; i < params.value.length; i++) {
                     if (params.value[i].language_id == cn) {
                         return params.value[i].name;

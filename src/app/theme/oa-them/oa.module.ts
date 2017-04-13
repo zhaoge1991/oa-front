@@ -103,7 +103,9 @@ import {
   LanguagePipe,
   FilterGroupPipe,
   DescriptionPipe,
-  RolePipe
+  RolePipe,
+  TaskLevelPipe,
+  TaskTypePipe
 } from './pipes';
 
 import {
@@ -206,7 +208,9 @@ const NGA_PIPES = [
   LanguagePipe,
   FilterGroupPipe,
   DescriptionPipe,
-  RolePipe
+  RolePipe,
+  TaskLevelPipe,
+  TaskTypePipe
 ];
 
 const NGA_SERVICES = [

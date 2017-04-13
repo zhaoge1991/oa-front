@@ -7,7 +7,7 @@ export class TaskLevelService {
   constructor(private http: HttpInterceptorService,private getservice: GetService){}
 
   get(id?: number){
-    return this.getservice.get(id,'TaskLevel','getTask_levels','getCurrency')
+    return this.getservice.get(id,'TaskLevel','task_level_id','getTask_levels')
   }
 
 }

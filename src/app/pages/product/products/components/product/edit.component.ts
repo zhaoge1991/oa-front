@@ -16,7 +16,7 @@ import {Product} from "../../../../../models/product/product/product";
 import {Filter} from "../../../../../models/product/filter/filter";
 
 @Component({
-  selector: 'product-catalog-edit',
+  selector: 'product-product-edit',
   templateUrl: './edit.html',
   styleUrls: ['./edit.scss']
 })

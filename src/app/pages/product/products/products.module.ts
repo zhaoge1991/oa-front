@@ -16,6 +16,7 @@ import { TreeModule } from 'angular-tree-component';
 import { ListComponent } from './components/list.component';
 import { EditComponent as CatalogComponent} from './components/catalog/edit.component';
 import { EditComponent as ProductComponent} from './components/product/edit.component';
+import {DetailComponent} from './components/product/detail.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { EditComponent as ProductComponent} from './components/product/edit.comp
     ProductsComponent,
     ListComponent,
     CatalogComponent,
-    ProductComponent
+    ProductComponent,
+    DetailComponent
   ],
   providers: [CanDeactivateGuard]
 })
