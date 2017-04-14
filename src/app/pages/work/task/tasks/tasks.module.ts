@@ -5,6 +5,7 @@ import { routing } from './tasks.routing';
 import {OaModule} from "../../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
+import { Ng2UeditorModule } from 'ng2-ueditor';
 
 import {OrderService} from "../../../../services/order/order.service";
 
@@ -25,6 +26,7 @@ import {TaskService} from "../../../../services/work/task/task.service";
     NgaModule,
     OaModule,
     SharedModule,
+    Ng2UeditorModule,
     AgGridModule.withComponents([]),
     routing
   ],

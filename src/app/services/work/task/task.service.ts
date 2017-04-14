@@ -53,9 +53,19 @@ export class TaskService{
     })
   }
 
+  //通过id获取事项
+  getById(id:number){
+    return this.http.get('/api/work/task/task/' + id).map(data=> {
+        if(data.status == 200){
+          return data.json().results.data.task;
+        }
+      }
+    )
+  }
+
   //修改
   put(id:number, body){
-    return this.http.put('/api/product/products/' + id, body).map(res=> {
+    return this.http.put('/api/work/task/task/' + id, body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '更新成功',
@@ -76,19 +86,9 @@ export class TaskService{
     });
   }
 
-  //通过id获取事项
-  getById(id:number){
-    return this.http.get('/api/work/task/task/' + id).map(data=> {
-        if(data.status == 200){
-          return data.json().results.data.task;
-        }
-      }
-    )
-  }
-
   //新增
   post(body){
-    return this.http.post('/api/product/products', body).map(res=> {
+    return this.http.post('/api/work/task/task', body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '新建成功',
