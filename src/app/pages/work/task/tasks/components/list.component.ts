@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {CommonActionBarConfig} from "../../../../../models/config/commonActionBarConfig";
 
 import {Task} from "../../../../../models/work/task/task";
+import {TaskListComponent} from "../../../shared/task_list/taskList.component";
 
 @Component({
   selector: 'work-tasks-list',
@@ -12,7 +13,6 @@ import {Task} from "../../../../../models/work/task/task";
 })
 
 export class ListComponent{
-  private selectedeRow: boolean;
   public selectedrowData: Task;
 
   actionConfig:CommonActionBarConfig;
@@ -24,6 +24,8 @@ export class ListComponent{
     this.actionConfig.openUrl = 'pages/work/task/tasks/detail';
     this.actionConfig.addNewUrl = 'pages/work/task/tasks/edit';
     this.actionConfig.editUrl = 'pages/work/task/tasks/edit';
+    this.actionConfig.forwardUrl = 'pages/work/task/tasks/edit';
+    this.actionConfig.deleteUrl = 'pages/work/task/tasks/edit';
     this.actionConfig.idName = 'task_id';
     this.actionConfig.noback = true;
   }
@@ -31,10 +33,13 @@ export class ListComponent{
 
   //选中行列表行配置
   onRowSelected($event) {
-    if($event.node.selected){
-      this.selectedrowData = $event.node.data as Task;
-      this.selectedeRow = true;
-    }
+    this.selectedrowData = $event;
+  }
+
+  //删除按钮点击后重新加载数据
+  @ViewChild('tasklist') taskList: TaskListComponent;
+  deleteData(e){
+    this.taskList.delete(e);
   }
 
   //双击列表单元格操作

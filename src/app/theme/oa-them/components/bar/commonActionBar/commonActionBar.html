@@ -3,6 +3,10 @@
   <bar-common-action-bar-open  [config]="config" [(object)]="object"></bar-common-action-bar-open>
   <!--新建按钮-->
   <bar-common-action-bar-new  [config]="config"></bar-common-action-bar-new>
+  <!--转发按钮-->
+  <bar-common-action-bar-forward [config]="config" [(object)]="object"></bar-common-action-bar-forward>
+  <!--任务进度按钮-->
+  <bar-common-action-bar-taskprogress [config]="config" [(object)]="object" (objectChange)="change($event)"></bar-common-action-bar-taskprogress>
   <!--订单审核按钮-->
   <bar-common-action-bar-orderCheck [config]="config" [object]="object" (objectChange)='change($event)'></bar-common-action-bar-orderCheck>
   <!--财务审核按钮-->

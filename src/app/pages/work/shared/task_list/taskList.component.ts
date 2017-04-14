@@ -44,11 +44,11 @@ export class TaskListComponent implements OnInit{
     this.createRowData($event.text-0);
     this.selectedeRow = false;
     this.selectedrowData = null;
+    this.rowSelected.emit(this.selectedrowData);
   }
 
   //行配置项(获取数据)
   private createRowData(page) {
-    console.log(this.getlistFun);
     this.listservice[this.getlistFun](page)
       .subscribe(data=>{
         this.paginate = data;
@@ -159,8 +159,9 @@ export class TaskListComponent implements OnInit{
   //选中行列表行配置
   onRowSelected($event) {
     if($event.node.selected){
-      this.rowSelected.emit($event);
+      this.selectedrowData = $event.node.data as Task;
       this.selectedeRow = true;
+      this.rowSelected.emit(this.selectedrowData);
     }
   }
 
@@ -169,9 +170,21 @@ export class TaskListComponent implements OnInit{
     this.cellDoubleClicked.emit($event);
   }
 
+  //删除数据
+  delete(e){
+    if(e){
+      this.listservice.delete(this.selectedrowData.task_id).subscribe(data=>{
+        this.selectedrowData = null;
+        this.rowSelected.emit(this.selectedrowData);
+        this.createRowData(this.paginate.current_page);
+      })
+    }
+  }
+
   //选中订单数据改变
   objectChange(){
     this.selectedrowData = null;
+    this.rowSelected.emit(this.selectedrowData);
     this.createRowData(this.paginate.current_page);
   }
 }
