@@ -63,6 +63,40 @@ export const PAGES_MENU = [
                 },
               }
             ]
+          },
+          {
+            path: 'task_manager',
+            data: {
+              menu: {
+                title: '管理事项'
+              }
+            },
+            children: [
+              {
+                path: 'task_managers',
+                data: {
+                  menu: {
+                    title: '待办事项'
+                  }
+                },
+              },
+              {
+                path: 'my_source_task',
+                data: {
+                  menu: {
+                    title: '我的事项'
+                  }
+                },
+              },
+              {
+                path: 'complete_task',
+                data: {
+                  menu: {
+                    title: '完成事项'
+                  }
+                },
+              }
+            ]
           }
         ]
       },

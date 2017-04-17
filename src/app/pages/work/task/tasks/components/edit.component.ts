@@ -40,7 +40,6 @@ export class EditComponent implements OnInit,DoCheck{
     private task_levelservice: TaskLevelService
   ){
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.addNewUrl = 'pages/customer/customers/edit';
     this.commonActionBarConfig.saveUrl = 'pages/customer/customers/edit';
     this.commonActionBarConfig.idName = 'customer_id';
     this.task_levels = this.task_levelservice.get();

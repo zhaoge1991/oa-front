@@ -5,10 +5,8 @@ import { WorkComponent } from './work.component';
 import { routing } from './work.routing';
 import {OaModule} from "../../theme/oa-them/oa.module";
 
-//import { OrderModule} from './order/order.module';
-import {OrderService} from "../../services/order/order.service";
-import {ShippingService} from "../../services/shipping/shipping.service";
 import {TaskModule} from "./task/task.module";
+import {TaskManagerModule} from "./task_manager/task_manager.module";
 
 @NgModule({
   imports: [
@@ -16,12 +14,12 @@ import {TaskModule} from "./task/task.module";
     routing,
     FormsModule,
     OaModule,
-    TaskModule
+    TaskModule,
+    TaskManagerModule
   ],
   declarations: [
     WorkComponent
-  ],
-  providers: [OrderService, ShippingService]
+  ]
 })
 export class WorkModule {
 }

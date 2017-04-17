@@ -22,6 +22,7 @@ export class DetailComponent implements OnInit,OnDestroy{
   ){
     this.commonActionBarConfig.idName = 'task_id';
     this.commonActionBarConfig.addNewUrl = 'pages/work/task/tasks/edit';
+    this.commonActionBarConfig.forwardUrl = 'pages/work/task/tasks/edit';
     this.commonActionBarConfig.taskProgress = true;
   }
   private commonActionBarConfig: CommonActionBarConfig = new CommonActionBarConfig();

@@ -53,6 +53,33 @@ export class TaskService{
     })
   }
 
+  //获取管理事项
+  getTaskManagers(page:number){
+    return this.http.get('/api/work/task/task_manager' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
+  //获取管理事项中我的事项
+  getMySourceTaskMangers(page:number){
+    return this.http.get('/api/work/task/task_manager/my_source_task' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
+  //获取管理事项中完成事项
+  getCompleteTaskMangers(page:number){
+    return this.http.get('/api/work/task/task_manager/complete' + '?page=' + page).map(data=>{
+      if(data.status == 200){
+        return data.json().results.data.tasks;
+      }
+    })
+  }
+
   //通过id获取事项
   getById(id:number){
     return this.http.get('/api/work/task/task/' + id).map(data=> {

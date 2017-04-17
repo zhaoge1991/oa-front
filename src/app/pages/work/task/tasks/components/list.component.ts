@@ -23,9 +23,7 @@ export class ListComponent{
     this.actionConfig = new CommonActionBarConfig();
     this.actionConfig.openUrl = 'pages/work/task/tasks/detail';
     this.actionConfig.addNewUrl = 'pages/work/task/tasks/edit';
-    this.actionConfig.editUrl = 'pages/work/task/tasks/edit';
     this.actionConfig.forwardUrl = 'pages/work/task/tasks/edit';
-    this.actionConfig.deleteUrl = 'pages/work/task/tasks/edit';
     this.actionConfig.idName = 'task_id';
     this.actionConfig.noback = true;
   }

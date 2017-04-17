@@ -5,8 +5,8 @@
 <div class="row">
   <ba-card baCardClass="with-scroll">
     <div class="row">
-      <h4 class="col-md-12">我发起的事项</h4>
-      <task-list #tasklist [getlistFun]="'getMyTasks'"
+      <h4 class="col-md-12">完成事项</h4>
+      <task-list #tasklist [getlistFun]="'getCompleteTaskMangers'"
                  (rowSelected)="onRowSelected($event)"
                  (cellDoubleClicked)="onCellDoubleClicked($event)"
       ></task-list>

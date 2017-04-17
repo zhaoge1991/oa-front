@@ -43,7 +43,7 @@ export class Task {
               this.users.push(new User(user));
             }
             for (let user of task.user_ccs){
-              this.users.push(new User(user));
+              this.user_ccs.push(new User(user));
             }
             for (let user_statu of task.user_status){
               this.user_status.push(new UserStatu(user_statu));

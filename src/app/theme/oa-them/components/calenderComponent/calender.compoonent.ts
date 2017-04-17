@@ -19,7 +19,7 @@ export class CalenderComponent{
   public isSelected:boolean
   public selectedDate
   public showCalender:boolean = false
-  @Input() placeholder = '默认提示文本';
+  @Input() placeholder = '请选择日期';
   @Input() disabled;
   @Input() value;
   @Output() valueChange = new EventEmitter();
@@ -34,6 +34,8 @@ export class CalenderComponent{
     }
   }
 
+  public dateRegExp = /((^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(10|12|0?[13578])([-\/\._])(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(11|0?[469])([-\/\._])(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\d{2})|([2-9]\d{3}))([-\/\._])(0?2)([-\/\._])(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)([-\/\._])(0?2)([-\/\._])(29)$)|(^([3579][26]00)([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][0][48])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][0][48])([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][2468][048])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][2468][048])([-\/\._])(0?2)([-\/\._])(29)$)|(^([1][89][13579][26])([-\/\._])(0?2)([-\/\._])(29)$)|(^([2-9][0-9][13579][26])([-\/\._])(0?2)([-\/\._])(29)$))/g
+
   /**
    *渲染日历方法
    * @param dateTime 显示日期
@@ -42,8 +44,7 @@ export class CalenderComponent{
     let date: Date, year, month, day;
 
     //没有传入日期则显示系统日期
-    if (dateTime) {
-      dateTime=='0000-00-00'?dateTime='1949-10-01':'';
+    if (dateTime && this.dateRegExp.test(dateTime)) {
       date = new Date(dateTime);
       [year, month, day] = dateTime.split('-');
       this.selectedIndex = +day;
