@@ -9,8 +9,6 @@ import {OaModule} from "../../../theme/oa-them/oa.module";
 import {NgaModule} from "../../../theme/nga.module";
 import {AgGridModule} from 'ag-grid-angular/main';
 
-import {OrderService} from "../../../services/order/order.service";
-
 //import { MySourceTaskComponent} from './my_sourceTask.component'
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 import {SharedModule} from "../shared/shared.module";

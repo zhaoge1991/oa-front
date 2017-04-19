@@ -1,0 +1,32 @@
+<div class="btnitem" *ngIf="config.comment && canShow">
+  <button type="button" class="available" (click)="chowcheck()" [disabled]="!object">
+    <i class="iconfont icon-shenhe"></i><span>评论</span>
+  </button>
+</div>
+
+<!--弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade task_progress_content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">评论/回复</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p>详情</p>
+            <ng2-ueditor [(ngModel)]="comment.content" name="content" [setting]="setting"></ng2-ueditor>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="postComment()" [disabled]="!comment.content">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

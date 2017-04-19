@@ -75,6 +75,8 @@ import {
   ProductEditActionBarComponent,
   ForwardActionBarComponent,
   TaskProgressActionBarComponent,
+  CommentActionBarComponent,
+  ReportRankingActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
@@ -107,7 +109,9 @@ import {
   DescriptionPipe,
   RolePipe,
   TaskLevelPipe,
-  TaskTypePipe
+  TaskTypePipe,
+  TimeLapsePipe,
+  ReportRankingPipe
 } from './pipes';
 
 import {
@@ -183,6 +187,8 @@ const NGA_COMPONENTS = [
   ProductEditActionBarComponent,
   ForwardActionBarComponent,
   TaskProgressActionBarComponent,
+  CommentActionBarComponent,
+  ReportRankingActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
@@ -213,7 +219,9 @@ const NGA_PIPES = [
   DescriptionPipe,
   RolePipe,
   TaskLevelPipe,
-  TaskTypePipe
+  TaskTypePipe,
+  TimeLapsePipe,
+  ReportRankingPipe
 ];
 
 const NGA_SERVICES = [

@@ -1,0 +1,15 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <h4 class="col-md-12">我的月报</h4>
+      <report-list #weeklist [reportType]="'month'"
+                 (rowSelected)="onRowSelected($event)"
+                 (cellDoubleClicked)="onCellDoubleClicked($event)"
+      ></report-list>
+    </div>
+  </ba-card>
+</div>

@@ -14,3 +14,5 @@ export * from './descriptionPipe';
 export * from './rolePipe';
 export * from './task_levelPipe';
 export * from './task_typePipe';
+export * from './timelapsePipe';
+export * from './reportrankingPipe';

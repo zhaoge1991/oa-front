@@ -9,7 +9,8 @@ import {CurentUserService} from "../../../../../../services/core/currentuser.ser
 @Component({
   selector: 'bar-common-action-bar-taskprogress',
   templateUrl: './taskProgressActionBar.component.html',
-  styleUrls: ['./taskProgressActionBar.component.scss']
+  styleUrls: ['./taskProgressActionBar.component.scss'],
+  providers: [TaskService]
 })
 
 export class TaskProgressActionBarComponent  implements OnChanges{
@@ -31,7 +32,7 @@ export class TaskProgressActionBarComponent  implements OnChanges{
   }
 
   ngOnChanges(){
-    if(this.object){
+    if(this.object && this.config.taskProgress){
       this.user_statu.task_id = this.object.task_id;
       this.isSourceUser();
     }

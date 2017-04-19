@@ -39,12 +39,16 @@
   <bar-common-action-bar-export [config]="config" [object]="object" (objectExport)='export($event)'></bar-common-action-bar-export>
   <!--附件按钮-->
   <bar-common-action-bar-annex [config]="config" [object]="object"></bar-common-action-bar-annex>
+  <!--催款提醒按钮-->
+  <bar-common-action-bar-paymentTip [config]="config" [(object)]="object"></bar-common-action-bar-paymentTip>
+  <!--评论按钮-->
+  <bar-common-action-bar-comment [config]="config" [(object)]="object" (commentChange)="comment($event)"></bar-common-action-bar-comment>
+  <!--评分按钮-->
+  <bar-common-action-bar-reportranking [config]="config" [(object)]="object" (objectChange)='change($event)'></bar-common-action-bar-reportranking>
   <!--删除按钮-->
   <bar-common-action-bar-delete  [config]="config" [(object)]="object" (objectDelete)='delete($event)' ></bar-common-action-bar-delete>
   <!--返回按钮-->
   <bar-common-action-bar-back  [config]="config" [(object)]="object"></bar-common-action-bar-back>
-  <!--催款提醒按钮-->
-  <bar-common-action-bar-paymentTip [config]="config" [(object)]="object"></bar-common-action-bar-paymentTip>
 
   <!--产品列表添加分类按钮-->
   <bar-common-action-bar-productCatalogAddParent [config]="config" [(object)]="object"></bar-common-action-bar-productCatalogAddParent>

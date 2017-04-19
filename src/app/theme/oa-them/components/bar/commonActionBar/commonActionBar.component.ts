@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, ViewChild, ViewEncapsulation, OnInit,OnChanges} from '@angular/core';
 import {CommonActionBarConfig} from "../../../../../models/config/commonActionBarConfig"
+import {Comment} from "../../../../../models/common/comment";
 @Component({
     selector: 'bar-common-action-bar',
     templateUrl: './commonActionBar.html',
@@ -14,8 +15,9 @@ export class CommonActionBarComponent{
     @Output() objectDelete = new EventEmitter();
     @Output() objectSave = new EventEmitter();
     @Output() objectExport = new EventEmitter();
+    @Output() objectComment = new EventEmitter();
     change(object){
-        this.objectChange.emit(this.object);
+        this.objectChange.emit(object);
     }
     delete(b:boolean){
         if(b){
@@ -29,6 +31,9 @@ export class CommonActionBarComponent{
     }
     export(e:string){
         this.objectExport.emit(e);
+    }
+    comment(e:Comment){
+      this.objectComment.emit(e);
     }
 
 

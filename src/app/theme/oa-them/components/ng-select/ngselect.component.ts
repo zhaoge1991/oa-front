@@ -12,6 +12,7 @@ import {OrderTypeService} from "../../../../services/core/ordertypeService/order
 import {QuantifierService} from "../../../../services/core/quantifierService/quantifier.service";
 import {LanguageService} from "../../../../services/core/languageService/language.service";
 import {RoleService} from "../../../../services/core/roleService/role.service";
+import {MonthRankingService} from "../../../../services/core/month_rankingService/month_ranking.service";
 @Component({
   selector: 'ng-select',
   templateUrl: './ngselect.component.html',
@@ -39,7 +40,8 @@ export class NgSelectComponent implements OnInit{
     private ordertypeservice: OrderTypeService,
     private quantifierservice: QuantifierService,
     private languageservice: LanguageService,
-    private roleservice: RoleService
+    private roleservice: RoleService,
+    private reportrankingservice: MonthRankingService
   ){}
 
   ngOnInit(){
@@ -68,6 +70,8 @@ export class NgSelectComponent implements OnInit{
         this.options = this.languageservice.get();break;
       case 'id':
         this.options = this.roleservice.get();break;
+      case 'report_month_ranking_id':
+            this.options = this.reportrankingservice.get();break;
       default:
             this.options = [];
     }

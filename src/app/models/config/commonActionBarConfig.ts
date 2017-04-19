@@ -24,4 +24,6 @@ export class CommonActionBarConfig {
     isproduct: boolean;
     forwardUrl: string;
     taskProgress:boolean;
+    comment: boolean;
+    reportranking: boolean;
 }

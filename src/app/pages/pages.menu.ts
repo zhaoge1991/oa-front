@@ -97,6 +97,22 @@ export const PAGES_MENU = [
                 },
               }
             ]
+          },
+          {
+            path: ['/pages/work/report/week'],
+            data: {
+              menu: {
+                title: '周报'
+              }
+            }
+          },
+          {
+            path: ['/pages/work/report/month'],
+            data: {
+              menu: {
+                title: '月报'
+              }
+            }
           }
         ]
       },
