@@ -1,7 +1,6 @@
 import {Component, Input,EventEmitter,Output,ViewChild,OnChanges} from '@angular/core';
 import {ModalDirective} from "ng2-bootstrap/index";
 
-import {AppconfigService} from "../../../../../../services/core/appConfigService/appConfigService";
 import {CurentUserService} from "../../../../../../services/core/currentuser.service";
 import {Comment} from "../../../../../../models/common/comment";
 

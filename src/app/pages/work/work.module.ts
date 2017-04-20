@@ -8,6 +8,7 @@ import {OaModule} from "../../theme/oa-them/oa.module";
 import {TaskModule} from "./task/task.module";
 import {TaskManagerModule} from "./task_manager/task_manager.module";
 import {ReportModule} from "./report/report.module";
+import {InformationModule} from "./information/information.module";
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {ReportModule} from "./report/report.module";
     OaModule,
     TaskModule,
     TaskManagerModule,
-    ReportModule
+    ReportModule,
+    InformationModule
   ],
   declarations: [
     WorkComponent

@@ -1,0 +1,41 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar
+      [config]="commonActionBarConfig"
+      [object]="data"
+      (objectDelete)="deleteData($event)"
+      (objectChange)="postRanking($event)"
+    >
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div>
+              <h1 class="title">
+                {{data.name}}
+                <span [ngStyle]="opinionTypeStyle">{{data.opinion_type_id | opiniontypepipe}}</span>
+              </h1>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div [innerHTML]="data.description"></div>
+              </div>
+              <hr>
+              <div class="col-md-12">
+                <h4>沟通</h4>
+                <comment-component [commonents]="data.comments"
+                                   [parent]="{name:'opinion_id',id:data.opinion_id}"
+                                   (newcommentChange)="postComment($event)"
+                                   (commentChange)="postReplay($event)"
+                ></comment-component>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

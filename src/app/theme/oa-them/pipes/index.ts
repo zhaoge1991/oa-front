@@ -16,3 +16,4 @@ export * from './task_levelPipe';
 export * from './task_typePipe';
 export * from './timelapsePipe';
 export * from './reportrankingPipe';
+export * from './opinion_typePipe';

@@ -4,57 +4,41 @@ import {GridOptions} from "ag-grid/main";
 import {Location} from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
-import {AlertService} from "../../../../../services/core/alert.component.service";
-import {AppconfigService} from "../../../../../services/core/appConfigService/appConfigService";
-import {CommonActionBarConfig} from "../../../../../models/config/commonActionBarConfig";
-import {Task} from "../../../../../models/work/task/task";
-import {TaskService} from "../../../../../services/work/task/task.service";
-import {TaskTypeService} from "../../../../../services/core/task_typeService/task_type.service";
-import {TaskLevelService} from "../../../../../services/core/task_levelService/task_level.service";
+import {AlertService} from "../../../../services/core/alert.component.service";
+import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
+import {Opinion} from "../../../../models/work/information/opinion";
+import {InformationService} from "../../../../services/work/information/information.service";
+
+
+
 
 
 @Component({
-  selector: 'sale-order-edit',
+  selector: 'information-opinion-edit',
   templateUrl: './edit.html',
-  styleUrls: []
+  styleUrls: ['./edit.scss']
 })
 
 export class EditComponent implements OnInit,DoCheck{
 
   private id:number;
   private olddata: any;
-  private data: Task;
+  private data: Opinion;
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
-  usersName: string = '';  //所有接受人名字符串
-  cc_usersName: string =  ''; //所有抄送用户名字符串
-  task_levels;
-  task_types;
+  lastreport;
+  source_usersName: string = '';  //所有发布人名字符串
+  receive_usersName: string =  ''; //所有接受人名字符串
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private taskservice: TaskService,
-    private alertservice: AlertService,
-    private task_typeservice: TaskTypeService,
-    private task_levelservice: TaskLevelService
+    private editservice: InformationService,
+    private alertservice: AlertService
   ){
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.saveUrl = 'pages/customer/customers/edit';
-    this.commonActionBarConfig.idName = 'customer_id';
-    this.task_levels = this.task_levelservice.get();
-    this.task_types = this.task_typeservice.get();
-  }
-
-  ngDoCheck(){
-    if(this.data){
-      if(this.olddata.users!==this.data.users){
-        this.usersName = this.getUsersName(this.data.users);
-      }
-      if(this.olddata.user_ccs!==this.data.user_ccs){
-        this.cc_usersName = this.getUsersName(this.data.user_ccs);
-      }
-    }
+    this.commonActionBarConfig.saveUrl = 'pages/work/information/opinion/save';
+    this.commonActionBarConfig.idName = 'opinion_id';
   }
 
   ngOnInit(){
@@ -64,23 +48,28 @@ export class EditComponent implements OnInit,DoCheck{
     });
     this.setData();
   }
+  ngDoCheck(){
+    if(this.data){
+      if(this.olddata.receive_users!==this.data.receive_users){
+        this.receive_usersName = this.getUsersName(this.data.receive_users);
+      }
+      if(this.olddata.source_users!==this.data.source_users){
+        this.source_usersName = this.getUsersName(this.data.source_users);
+      }
+    }
+  }
 
   setData(){
     if(this.id){
-      this.taskservice.getById(this.id).subscribe(data=>{
-
-        this.data = new Task(data);
-
+      this.editservice.getOpinion(this.id).subscribe(data=>{
+        this.data = new Opinion(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
-
       })
     } else {
-      this.data = new Task(null);
-
+      this.data = new Opinion(null);
       //保存原始数据
       this.olddata = JSON.parse(JSON.stringify(this.data));
-
     }
   }
 
@@ -104,9 +93,9 @@ export class EditComponent implements OnInit,DoCheck{
   //保存
   save(){
     if(this.isEdit){
-      this.taskservice.put(this.id,this.data).subscribe();
+      this.editservice.putOpinion(this.id,this.data).subscribe();
     } else {
-      this.taskservice.post(this.data).subscribe();
+      this.editservice.postOpinion(this.data).subscribe();
     }
     this.olddata = this.data;
   }

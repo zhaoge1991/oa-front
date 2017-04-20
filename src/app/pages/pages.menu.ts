@@ -113,6 +113,14 @@ export const PAGES_MENU = [
                 title: '月报'
               }
             }
+          },
+          {
+            path: ['/pages/work/information/opinion'],
+            data: {
+              menu: {
+                title: '需求管理'
+              }
+            }
           }
         ]
       },

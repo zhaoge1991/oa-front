@@ -1,0 +1,44 @@
+<div class="row" *ngIf="commonents.length>0">
+  <div class="col-md-12">
+    <div class="row">
+      <strong class="col-md-8">详细内容</strong>
+      <strong class="col-md-1">姓名</strong>
+      <strong class="col-md-2">时间</strong>
+      <strong class="col-md-1">操作</strong>
+    </div>
+  </div>
+  <div class="col-md-12" *ngFor="let comment of commonents">
+    <comment-item [commentitem]="comment" (replay)="replayclick($event)"></comment-item>
+    <hr>
+  </div>
+</div>
+<ng2-ueditor [(ngModel)]="newcomment.content" name="content"></ng2-ueditor>
+<button (click)="postComment()" class="btn btn-primary  btn-sm" type="button" [disabled]="!newcomment.content" style="margin-top:10px;">评论</button>
+
+<!--弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade comment_content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">评论/回复</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <p>详情</p>
+            <ng2-ueditor [(ngModel)]="comment.content" name="content" [setting]="setting"></ng2-ueditor>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="postReplay()" [disabled]="!comment.content">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -83,7 +83,9 @@ import {
   SampleOrderComponent,
   AnnexesComponent,
   FilterGroupSelectComponent,
-  ProductCatalogSelectComponent
+  ProductCatalogSelectComponent,
+  CommentComponent,
+  CommentItemComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
@@ -111,7 +113,8 @@ import {
   TaskLevelPipe,
   TaskTypePipe,
   TimeLapsePipe,
-  ReportRankingPipe
+  ReportRankingPipe,
+  OpinionTypePipe
 } from './pipes';
 
 import {
@@ -195,7 +198,9 @@ const NGA_COMPONENTS = [
   AlertComponent,
   AnnexesComponent,
   FilterGroupSelectComponent,
-  ProductCatalogSelectComponent
+  ProductCatalogSelectComponent,
+  CommentComponent,
+  CommentItemComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -221,7 +226,8 @@ const NGA_PIPES = [
   TaskLevelPipe,
   TaskTypePipe,
   TimeLapsePipe,
-  ReportRankingPipe
+  ReportRankingPipe,
+  OpinionTypePipe
 ];
 
 const NGA_SERVICES = [

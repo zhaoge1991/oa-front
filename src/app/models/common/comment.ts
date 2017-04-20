@@ -9,6 +9,7 @@ export class Comment {
     able_id: number;
     able_type: string;
     user: User;
+    childrens: Comment[];
     constructor(comment) {
         if (comment) {
             this.comment_id = comment.comment_id;
@@ -20,6 +21,10 @@ export class Comment {
             this.able_id = comment.able_id;
             this.able_type = comment.able_type;
             this.user = new User(comment.user);
+            this.childrens = [];
+            for(let children of comment.childrens){
+              this.childrens.push(new Comment(children));
+            }
         } else {
             this.comment_id = 0;
             this.parent_id = 0;
@@ -30,6 +35,7 @@ export class Comment {
             this.able_id = 0;
             this.able_type = '';
             this.user = new User(null);
+            this.childrens = [];
         }
 
     }

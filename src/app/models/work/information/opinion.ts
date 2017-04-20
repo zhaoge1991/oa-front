@@ -1,3 +1,5 @@
+
+import {User} from "../../user/user";
 export class Opinion {
     opinion_id: number;
     name: string;
@@ -6,6 +8,8 @@ export class Opinion {
     description: string;
     created_at: string;
     updated_at: string;
+    receive_users: User[];
+    source_users: User[];
     constructor(opinion) {
         if (opinion) {
             this.opinion_id = opinion.opinion_id;
@@ -15,6 +19,14 @@ export class Opinion {
             this.description = opinion.description;
             this.created_at = opinion.created_at;
             this.updated_at = opinion.updated_at;
+            this.receive_users = [];
+            this.source_users = [];
+            for(let user of opinion.receive_users){
+              this.receive_users.push(new User(user));
+            };
+            for(let user of opinion.source_users){
+              this.source_users.push(new User(user));
+            };
         } else {
             this.opinion_id = 0;
             this.name = '';
@@ -23,6 +35,8 @@ export class Opinion {
             this.description = '';
             this.created_at = '';
             this.updated_at = '';
+            this.receive_users = [];
+            this.source_users = [];
         }
 
     }
