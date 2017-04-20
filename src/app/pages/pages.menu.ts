@@ -115,6 +115,14 @@ export const PAGES_MENU = [
             }
           },
           {
+            path: ['/pages/work/information/announcement'],
+            data: {
+              menu: {
+                title: '公告信息'
+              }
+            }
+          },
+          {
             path: ['/pages/work/information/opinion'],
             data: {
               menu: {

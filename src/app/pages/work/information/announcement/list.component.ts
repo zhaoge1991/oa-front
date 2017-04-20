@@ -5,14 +5,12 @@ import {GridOptions} from 'ag-grid/main';
 import {Paginate} from "../../../../models/common/paginate";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
 
-import {OpinionService} from "../../../../services/work/information/information.service";
-import {OpinionTypeService} from "../../../../services/core/opinion_typeService/opinion_type.service";
-import {OpinionDateService} from "../../../../services/core/opinion_dateService/opinion_date.service";
-import {Opinion} from "../../../../models/work/information/opinion";
 import {CurentUserService} from "../../../../services/core/currentuser.service";
+import {Announcement} from "../../../../models/work/information/announcement";
+import {AnnouncementService} from "../../../../services/work/information/announcement.service";
 
 @Component({
-  selector: 'information-opinion-list',
+  selector: 'information-opinion-announcement',
   templateUrl: './list.html',
   styleUrls: ['./list.scss']
 })
@@ -20,19 +18,17 @@ import {CurentUserService} from "../../../../services/core/currentuser.service";
 export class ListComponent implements OnInit{
   private gridOptions:GridOptions;
   public showGrid:boolean;
-  public rowData: Opinion[];
+  public rowData: Announcement[];
   private columnDefs:any[];
   private selectedeRow: boolean;
-  public selectedrowData: Opinion;
+  public selectedrowData: Announcement;
   //翻页配置
   private paginate : Paginate;
   actionConfig:CommonActionBarConfig = new CommonActionBarConfig();
 
   constructor(
     private router: Router,
-    private listservice: OpinionService,
-    private opiniontypeservice: OpinionTypeService,
-    private opiniondateservice: OpinionDateService,
+    private listservice: AnnouncementService,
     private currentuserservice: CurentUserService
   ) {
     //按钮组配置
@@ -47,11 +43,11 @@ export class ListComponent implements OnInit{
   }
 
   actionDefault(){
-    this.actionConfig.openUrl = 'pages/work/information/opinion/detail';
-    this.actionConfig.editUrl = 'pages/work/information/opinion/edit';
-    this.actionConfig.addNewUrl = 'pages/work/information/opinion/edit';
-    this.actionConfig.deleteUrl = 'pages/work/information/opinion/delete';
-    this.actionConfig.idName = 'opinion_id';
+    this.actionConfig.openUrl = 'pages/work/information/announcement/detail';
+    this.actionConfig.editUrl = 'pages/work/information/announcement/edit';
+    this.actionConfig.addNewUrl = 'pages/work/information/announcement/edit';
+    this.actionConfig.deleteUrl = 'pages/work/information/announcement/delete';
+    this.actionConfig.idName = 'announcement_id';
     this.actionConfig.noback = true;
   }
 
@@ -63,7 +59,7 @@ export class ListComponent implements OnInit{
 
   //行配置项(获取数据)
   private createRowData(page) {
-    this.listservice.getOpinionList(page)
+    this.listservice.getAnnouncementList(page)
       .subscribe(data=>{
         this.paginate = data;
         this.rowData = this.paginate.data;
@@ -87,22 +83,12 @@ export class ListComponent implements OnInit{
         }
       },
       {
-        headerName: '需求类型',
-        field: 'opinion_type_id',
+        headerName: '发布日期',
+        field: 'date_added',
         width: 120,
-        cellRenderer: (params)=>{
-          let data = params.value;
-          if(data){
-            let status = this.opiniontypeservice.get(data)
-            if(status){return status[params.property]}else return '';
-          } else return '';
-        },
-        cellRendererParams: {
-          property: 'name'
-        }
       },
       {
-        headerName: '需求名称',
+        headerName: '公告名称',
         field: 'name',
         width: 210,
       },
@@ -152,23 +138,12 @@ export class ListComponent implements OnInit{
         },
       },
       {
-        headerName: '发布时间',
-        field: 'created_at',
-        width: 120,
-      },
-      {
-        headerName: '希望完成时间',
-        field: 'opinion_date_id',
+        headerName: '状态',
+        field: 'count_not_show',
         width: 120,
         cellRenderer: (params)=>{
           let data = params.value;
-          if(data){
-            let status = this.opiniondateservice.get(data)
-            if(status){return status[params.property]}else return '';
-          } else return '';
-        },
-        cellRendererParams: {
-          property: 'name'
+          return `${data}人未查看`
         }
       }
     ];
@@ -177,14 +152,14 @@ export class ListComponent implements OnInit{
   //选中行列表行配置
   onRowSelected($event) {
     if($event.node.selected){
-      this.selectedrowData = $event.node.data as Opinion;
+      this.selectedrowData = $event.node.data as Announcement;
       this.selectedeRow = true;
       this.actionChange(this.selectedrowData);
     }
   }
 
   //选中数据操作按钮变化
-  actionChange(data:Opinion){
+  actionChange(data:Announcement){
     let source_users = data.source_users;
     this.currentuserservice.getuser().subscribe(data=>{
       let user = data;
@@ -201,7 +176,7 @@ export class ListComponent implements OnInit{
 
   deleteData(e){
     if(e){
-      this.listservice.deleteOpinion(this.selectedrowData.opinion_id).subscribe(data=>{
+      this.listservice.deleteAnnouncement(this.selectedrowData.announcement_id).subscribe(data=>{
         this.selectedrowData = null;
         this.createRowData(this.paginate.current_page);
       })
@@ -210,7 +185,7 @@ export class ListComponent implements OnInit{
 
   //双击列表单元格操作
   onCellDoubleClicked($event){
-    this.router.navigate(['pages/work/information/opinion/detail/',$event.data.opinion_id])
+    this.router.navigate(['pages/work/information/announcement/detail/',$event.data.announcement_id])
   }
 
 }

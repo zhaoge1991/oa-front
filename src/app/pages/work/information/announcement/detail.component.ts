@@ -2,14 +2,14 @@ import {Component,OnInit,OnDestroy,ViewEncapsulation} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
-import {OpinionService} from "../../../../services/work/information/information.service";
-import {Opinion} from "../../../../models/work/information/opinion";
-import {OpinionTypeService} from "../../../../services/core/opinion_typeService/opinion_type.service";
+
 import {CurentUserService} from "../../../../services/core/currentuser.service";
+import {AnnouncementService} from "../../../../services/work/information/announcement.service";
+import {Announcement} from "../../../../models/work/information/announcement";
 
 
 @Component({
-  selector:'information-opinion-detail',
+  selector:'information-opinion-announcementannouncement',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './detail.html',
   styleUrls: ['./detail.scss']
@@ -19,14 +19,13 @@ export class DetailComponent implements OnInit,OnDestroy{
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private detailservice: OpinionService,
-    private opiniontypeservice: OpinionTypeService,
+    private detailservice: AnnouncementService,
     private currentuserservice: CurentUserService
   ){
-    this.commonActionBarConfig.idName = 'opinion_id';
-    this.commonActionBarConfig.editUrl = 'pages/work/information/opinion/edit';
-    this.commonActionBarConfig.addNewUrl = 'pages/work/information/opinion/edit';
-    this.commonActionBarConfig.deleteUrl = 'pages/work/information/opinion/delete';
+    this.commonActionBarConfig.idName = 'announcement_id';
+    this.commonActionBarConfig.editUrl = 'pages/work/information/announcement/edit';
+    this.commonActionBarConfig.addNewUrl = 'pages/work/information/announcement/edit';
+    this.commonActionBarConfig.deleteUrl = 'pages/work/information/announcement/delete';
   }
   private commonActionBarConfig: CommonActionBarConfig = new CommonActionBarConfig();
   private id:number;
@@ -42,23 +41,14 @@ export class DetailComponent implements OnInit,OnDestroy{
   ngOnDestroy(){this.sub.unsubscribe();}
 
   getById(id:number){
-    this.detailservice.getOpinion(id).subscribe(data=>{
-      this.data = data as Opinion;
-      this.setTaskLevelStyle(this.data.opinion_type_id);
+    this.detailservice.getAnnouncement(id).subscribe(data=>{
+      this.data = data as Announcement;
       this.actionChange(this.data);
     })
   }
 
-  opinionTypeStyle:{};
-  setTaskLevelStyle(id:number){
-    let type = this.opiniontypeservice.get(id);
-    this.opinionTypeStyle = {
-      backgroundColor: type.color
-    }
-  }
-
   //选中数据操作按钮变化
-  actionChange(data:Opinion){
+  actionChange(data:Announcement){
     let source_users = data.source_users;
     this.currentuserservice.getuser().subscribe(data=>{
       let user = data;
@@ -75,7 +65,7 @@ export class DetailComponent implements OnInit,OnDestroy{
 
 
   postComment(e){
-    this.detailservice.putComment(e,this.data.opinion_id).subscribe(()=>{
+    this.detailservice.putComment(e,this.data.announcement_id).subscribe(()=>{
       this.getById(this.id);
     });
   }
@@ -85,7 +75,7 @@ export class DetailComponent implements OnInit,OnDestroy{
   }
 
   deleteData(){
-    this.detailservice.deleteOpinion(this.id).subscribe(res=>this.location.back());
+    this.detailservice.deleteAnnouncement(this.id).subscribe(res=>this.location.back());
   }
 }
 

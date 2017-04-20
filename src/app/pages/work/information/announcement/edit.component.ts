@@ -6,12 +6,8 @@ import { Observable } from 'rxjs/Observable';
 
 import {AlertService} from "../../../../services/core/alert.component.service";
 import {CommonActionBarConfig} from "../../../../models/config/commonActionBarConfig";
-import {Opinion} from "../../../../models/work/information/opinion";
-import {OpinionService} from "../../../../services/work/information/information.service";
-
-
-
-
+import {Announcement} from "../../../../models/work/information/announcement";
+import {AnnouncementService} from "../../../../services/work/information/announcement.service";
 
 @Component({
   selector: 'information-opinion-edit',
@@ -23,7 +19,7 @@ export class EditComponent implements OnInit,DoCheck{
 
   private id:number;
   private olddata: any;
-  private data: Opinion;
+  private data: Announcement;
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
   lastreport;
@@ -33,11 +29,11 @@ export class EditComponent implements OnInit,DoCheck{
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private editservice: OpinionService,
+    private editservice: AnnouncementService,
     private alertservice: AlertService
   ){
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.saveUrl = 'pages/work/information/opinion/save';
+    this.commonActionBarConfig.saveUrl = 'pages/work/information/announcement/save';
     this.commonActionBarConfig.idName = 'opinion_id';
   }
 
@@ -61,13 +57,13 @@ export class EditComponent implements OnInit,DoCheck{
 
   setData(){
     if(this.id){
-      this.editservice.getOpinion(this.id).subscribe(data=>{
-        this.data = new Opinion(data);
+      this.editservice.getAnnouncement(this.id).subscribe(data=>{
+        this.data = new Announcement(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
       })
     } else {
-      this.data = new Opinion(null);
+      this.data = new Announcement(null);
       //保存原始数据
       this.olddata = JSON.parse(JSON.stringify(this.data));
     }
@@ -93,9 +89,9 @@ export class EditComponent implements OnInit,DoCheck{
   //保存
   save(){
     if(this.isEdit){
-      this.editservice.putOpinion(this.id,this.data).subscribe();
+      this.editservice.putAnnouncement(this.id,this.data).subscribe();
     } else {
-      this.editservice.postOpinion(this.data).subscribe();
+      this.editservice.postAnnouncement(this.data).subscribe();
     }
     this.olddata = this.data;
   }

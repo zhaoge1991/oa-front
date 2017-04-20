@@ -12,15 +12,17 @@ import {AgGridModule} from 'ag-grid-angular/main';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 import {SharedModule} from "../shared/shared.module";
 import { Ng2UeditorModule } from 'ng2-ueditor';
-import {InformationService} from "../../../services/work/information/information.service";
 
+import {OpinionService} from "../../../services/work/information/information.service";
 import {ListComponent as OpinionListComponent} from './opinion/list.component';
 import {DetailComponent as OpinionDetailComponent} from './opinion/detail.component';
 import {EditComponent as OpinionEditComponent} from './opinion/edit.component';
 
+import {AnnouncementService} from "../../../services/work/information/announcement.service";
 import {ListComponent as AnnouncementListComponent} from './announcement/list.component';
 import {DetailComponent as AnnouncementDetailComponent} from './announcement/detail.component';
 import {EditComponent as AnnouncementEditComponent} from './announcement/edit.component';
+
 
 
 
@@ -44,6 +46,6 @@ import {EditComponent as AnnouncementEditComponent} from './announcement/edit.co
     AnnouncementDetailComponent,
     AnnouncementEditComponent,
   ],
-  providers: [CanDeactivateGuard,InformationService]
+  providers: [CanDeactivateGuard,OpinionService,AnnouncementService]
 })
 export class InformationModule {}

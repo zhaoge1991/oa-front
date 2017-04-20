@@ -6,41 +6,39 @@ import {CurentUserService} from "../../core/currentuser.service";
 import {AppconfigService} from "../../core/appConfigService/appConfigService";
 
 @Injectable()
-export class OpinionService {
+export class AnnouncementService {
   constructor(private http:HttpInterceptorService,
               private messageservice:MessageService,
-              private location:Location,
-              private currentuserservice:CurentUserService,
-              private appconfigservice:AppconfigService) {
-  }
+              private location:Location
+  ) {}
 
   //获取需求列表
-  getOpinionList(page: number){
-    return this.http.get('/api/work/information/opinion' + '?page=' + page).map(data=> {
+  getAnnouncementList(page: number){
+    return this.http.get('/api/work/information/announcement' + '?page=' + page).map(data=> {
         if(data.status == 200){
-          return data.json().results.data.opinions;
+          return data.json().results.data.announcements;
         }
       }
     )
   }
 
   //通过id获取需求
-  getOpinion(id: number){
-    return this.http.get('/api/work/information/opinion/' + id).map(data=> {
+  getAnnouncement(id: number){
+    return this.http.get('/api/work/information/announcement/' + id).map(data=> {
         if(data.status == 200){
-          return data.json().results.data.opinion;
+          return data.json().results.data.announcement;
         }
       }
     )
   }
 
   //删除需求
-  deleteOpinion(id:number){
-    return this.http.delete('/api/work/information/opinion/' + id).map(res=> {
+  deleteAnnouncement(id:number){
+    return this.http.delete('/api/work/information/announcement/' + id).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '成功',
-          detail: '删除需求成功',
+          detail: '删除公告成功',
           severity: 'success',
           life: 3000
         });
@@ -50,12 +48,12 @@ export class OpinionService {
   }
 
   //修改需求
-  putOpinion(id:number, body){
-    return this.http.put('/api/work/information/opinion/' + id, body).map(res=> {
+  putAnnouncement(id:number, body){
+    return this.http.put('/api/work/information/announcement/' + id, body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '更新成功',
-          detail: '更新需求成功',
+          detail: '更新公告成功',
           severity: 'success',
           life: 3000
         });
@@ -63,7 +61,7 @@ export class OpinionService {
       } else {
         this.messageservice.putMessage({
           summary: '更新失败',
-          detail: '更新需求失败',
+          detail: '更新公告失败',
           severity: 'error',
           life: 3000
         })
@@ -73,12 +71,12 @@ export class OpinionService {
   }
 
   //新增需求
-  postOpinion(body){
-    return this.http.post('/api/work/information/opinion', body).map(res=> {
+  postAnnouncement(body){
+    return this.http.post('/api/work/information/announcement', body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '新建成功',
-          detail: '新建需求成功',
+          detail: '新建公告成功',
           severity: 'success',
           life: 3000
         });
@@ -86,7 +84,7 @@ export class OpinionService {
       } else {
         this.messageservice.putMessage({
           summary: '新建失败',
-          detail: '新建需求失败',
+          detail: '新建公告失败',
           severity: 'error',
           life: 3000
         })
@@ -97,18 +95,18 @@ export class OpinionService {
 
   //评论需求
   putComment(body,id){
-    return this.http.post('/api/work/information/opinion/'+id+'/comment', body).map(res=> {
+    return this.http.post('/api/work/information/announcement/'+id+'/comment', body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '评论成功',
-          detail: '需求评论成功',
+          detail: '公告评论成功',
           severity: 'success',
           life: 3000
         });
       } else {
         this.messageservice.putMessage({
           summary: '评论失败',
-          detail: '需求评论失败',
+          detail: '公告评论失败',
           severity: 'error',
           life: 3000
         })
@@ -119,7 +117,7 @@ export class OpinionService {
 
   //回复评论
   putReplay(body){
-    return this.http.post('/api/work/information/opinion/comment/reply', body).map(res=> {
+    return this.http.post('/api/work/information/announcement/comment/reply', body).map(res=> {
       if (res.status == 200) {
         this.messageservice.putMessage({
           summary: '回复成功',
