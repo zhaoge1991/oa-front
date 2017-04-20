@@ -22,8 +22,10 @@ export class Comment {
             this.able_type = comment.able_type;
             this.user = new User(comment.user);
             this.childrens = [];
-            for(let children of comment.childrens){
-              this.childrens.push(new Comment(children));
+            if(comment.childrens){
+              for(let children of comment.childrens){
+                this.childrens.push(new Comment(children));
+              }
             }
         } else {
             this.comment_id = 0;
