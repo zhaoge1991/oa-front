@@ -13,7 +13,7 @@ import {ICellEditorAngularComp} from 'ag-grid-angular/main';
 })
 export class AgGridMultiLineComponent implements ICellEditorAngularComp,AfterViewInit {
     @ViewChild('container', {read: ViewContainerRef}) public container;
-    private params: any;
+    public params: any;
 
     public happy = false;
     

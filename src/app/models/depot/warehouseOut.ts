@@ -1,3 +1,4 @@
+import {WarehouseOutProduct} from "./warehouseOutProduct"
 export class WarehouseOut {
     warehouse_out_id: number;
     warehouse_out_no: string;
@@ -8,6 +9,12 @@ export class WarehouseOut {
     remark: string;
     created_at: string;
     updated_at: string;
+    country_name:string;
+    order_no:string;
+    contract_no:string;
+    
+    products: WarehouseOutProduct[];
+
     constructor(out) {
         if (out) {
             this.warehouse_out_id = out.warehouse_out_id;
@@ -19,6 +26,28 @@ export class WarehouseOut {
             this.remark = out.remark;
             this.created_at = out.created_at;
             this.updated_at = out.updated_at;
+            this.products=[]
+            for (let product of out.products) {
+                this.products.push(new WarehouseOutProduct(product))
+            }
+            
+            
+            if(out.country_name){
+                this.country_name = out.country_name;
+            }else{
+                this.country_name='';
+            }
+            if(out.order_no){
+                this.order_no = out.order_no;
+            }else{
+                this.order_no='';
+            }
+            if(out.contract_no){
+                this.contract_no = out.contract_no;
+            }else{
+                this.contract_no='';
+            }
+            
         } else {
             this.warehouse_out_id = 0;
             this.warehouse_out_no = '';
@@ -29,7 +58,16 @@ export class WarehouseOut {
             this.remark = '';
             this.created_at = '';
             this.updated_at = '';
+            this.products=[];
         }
 
     }
+    addProduct(product: WarehouseOutProduct) {
+        this.products.push(product);
+
+    }
+    deleteProduct(index) {
+        this.products.splice(index, 1)
+    }
+    
 }

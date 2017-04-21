@@ -1,0 +1,39 @@
+<div *ngIf="warehouseEnter">
+    <div class="row">
+        <bar-common-action-bar [config]="commonActionBarConfig" [object]="warehouseEnter" (objectChange)="objectChange($event)" (objectDelete)="objectDelete($event)">
+  </bar-common-action-bar>
+    </div>
+    <div class="row">
+        <ba-card baCardClass="with-scroll">
+            <div class="opendetail">
+                <h1 class="title">入库单</h1>
+                <table>
+                    <tr>
+                        <th>入库单编号</th> <td>{{warehouseEnter?.warehouse_enter_no}}</td>
+                        <th>入库时间</th> <td>{{warehouseEnter?.enter_date}}</td>
+                        <th>入库人</th> <td>{{warehouseEnter?.user?.name}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <th>采购合同编号</th> <td>{{warehouseEnter?.procurement_order_no}}</td>
+                        <th>采购人</th> <td>{{warehouseEnter?.procurement_user_name}}</td>
+                        <th>采购价格</th><td >{{warehouseEnter?.procurement_order_price}}</td>
+                    </tr>
+                    <tr>
+                        <th>备注</th> <td colspan="5">{{warehouseEnter?.remark}}</td>
+                        
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>序号</th> <th>产品名称</th> <th>产品描述</th> <th>数量</th><th>备注</th>
+                    </tr>
+                    <tr *ngFor="let pro of warehouseEnter.products,let i=index">
+                        <td>{{i+1}}</td> <td>{{pro.model}}</td> <td>{{pro.zh_name}}</td><td>{{pro.quantity}}</td><td>{{pro.remark}}</td>
+                    </tr>
+                </table>
+                
+            </div>
+        </ba-card>
+    </div>
+</div>

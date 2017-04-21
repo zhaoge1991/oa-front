@@ -25,7 +25,7 @@ export class SupplierBankSelectComponent implements OnInit, OnChanges {
     constructor(
         private procurementSupplierService: ProcurementSupplierService,
     ) {
-        this.procurementSupplier = new ProcurementSupplier();
+        this.procurementSupplier = new ProcurementSupplier(null);
     }
     ngOnInit() {
         this.getData(this.procurementSupplierId);

@@ -69,12 +69,16 @@ export class ProcurementOrder {
             this.procurement_supplier_id = procurementOrder.procurement_supplier_id
             this.procurement_order_product = [];
             this.procurement_order_cost = [];
-            for (let product of procurementOrder.procurement_order_product) {
-                this.procurement_order_product.push(new ProcurementOrderProduct(product))
+            if (procurementOrder.procurement_order_product !== undefined) {
+                for (let product of procurementOrder.procurement_order_product) {
+                    this.procurement_order_product.push(new ProcurementOrderProduct(product))
+                }
             }
-            for (let cost of procurementOrder.procurement_order_cost) {
-                this.procurement_order_cost.push(new ProcurementOrderCost(cost))
-                this.other_price = this.other_price * 1 + cost.price * 1;
+            if (procurementOrder.procurement_order_cost !== undefined) {
+                for (let cost of procurementOrder.procurement_order_cost) {
+                    this.procurement_order_cost.push(new ProcurementOrderCost(cost))
+                    this.other_price = this.other_price * 1 + cost.price * 1;
+                }
             }
         } else {
             this.procurement_order_id = 0;
@@ -82,7 +86,7 @@ export class ProcurementOrder {
             this.price = 0;
             this.product_price = 0
             this.input_vat = 0
-            this.company = new ProcurementSupplier();
+            this.company = new ProcurementSupplier(null);
             this.date_delivery = ''
             this.date_real = ''
             this.order_place = ''
@@ -131,18 +135,18 @@ export class ProcurementOrder {
     }
 
     refreshPrice() {
-         let other_price = 0;
-         let product_price = 0;
+        let other_price = 0;
+        let product_price = 0;
         for (let product of this.procurement_order_product) {
-            product_price = product_price*1+product.quantity * product.price;
+            product_price = product_price * 1 + product.quantity * product.price;
         }
         for (let cost of this.procurement_order_cost) {
-            other_price = other_price*1+ cost.price*1;
+            other_price = other_price * 1 + cost.price * 1;
         }
         this.product_price = product_price;
         this.other_price = other_price;
-        this.price = product_price+other_price;
-        
+        this.price = product_price + other_price;
+
     }
 
 }

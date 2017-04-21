@@ -11,11 +11,13 @@ import {Comment} from "../../../../../models/common/comment";
 export class CommonActionBarComponent{
     @Input() config: CommonActionBarConfig;
     @Input() object: any;
+    @Input() objects: any;
     @Output() objectChange = new EventEmitter();
     @Output() objectDelete = new EventEmitter();
     @Output() objectSave = new EventEmitter();
     @Output() objectExport = new EventEmitter();
     @Output() objectComment = new EventEmitter();
+    @Output() onComplete = new EventEmitter();
     change(object){
         this.objectChange.emit(object);
     }
@@ -34,6 +36,9 @@ export class CommonActionBarComponent{
     }
     comment(e:Comment){
       this.objectComment.emit(e);
+    }
+    complete(event:boolean){
+        this.onComplete.emit(true);
     }
 
 

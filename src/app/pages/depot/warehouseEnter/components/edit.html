@@ -1,0 +1,114 @@
+{{diagnostic}}
+<div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]='warehouseEnter' (objectSave)="onWarehouseEnterSave($event)">
+    </bar-common-action-bar>
+</div>
+
+<div class="row">
+    <form class="form-horizontal" *ngIf="warehouseEnter">
+        <ba-card baCardClass="with-scroll">
+            <div class="row form-content">
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">入库单编号</label>
+                                <div class="col-sm-8">
+                                    <input type="text"  disabled  class="ng-form-control" id="onlineorder" [(ngModel)]="warehouseEnter.warehouse_enter_no" name="warehouse_enter_no">
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">采购合同编号</label>
+                                <div class="col-sm-8">
+                                    <input  disabled type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="warehouseEnter.procurement_order_no" name="procurement_order_no">
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+
+                          
+
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">入库时间</label>
+                                <div class="col-sm-8">
+                                    <ng-calender [disabled]="isEdit"  [(value)]="warehouseEnter.enter_date" [placeholder]="'请选择时间'"></ng-calender>
+                                </div>
+                            </div>
+                            <div class="ng-form-group row">
+                                <label class="col-sm-4 ng-form-control-label">采购人</label>
+                                <div class="col-sm-8">
+                                    <input  disabled type="text" class="ng-form-control"  [(ngModel)]="warehouseEnter.procurement_user_name" name="procurement_user_name">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 col-xs-12">
+                            <div class="ng-form-group row">
+                                <label for="num" class="col-sm-4 ng-form-control-label">采购价格</label>
+                                <div class="col-sm-8">
+                                    <input  disabled type="text" class="ng-form-control" id="onlineorder" [(ngModel)]="warehouseEnter.procurement_order_price" name="procurement_order_price">
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        
+
+                    </div>
+                </div>
+                <div class="col-md-12 form-unite">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="ng-form-group row">
+                                <label for="remark" class="col-sm-1 ng-form-control-label">备注</label>
+                                <div class="col-sm-11">
+                                    <textarea class="ng-form-control" id="remark" [(ngModel)]="warehouseEnter.remark" name="remark"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </ba-card>
+        <div class="row">
+            <div class="col-md-12 col-xs-12" *ngIf="warehouseEnter">
+                <ng2-tab selected="pro-list"
+                         selected-contents-class="animated"
+                         selected-index-class="selected">
+                    <div class="tabs">
+                        <div index="pro-list">商品清单</div>
+                    </div>
+                    <div class="tab-contents">
+                        <div contents="pro-list">
+                            <ag-grid-angular  #agGrid style="width: 100%; height: 180px;" class="ag-fresh"
+                                (rowSelected)="onSelectedProduct($event)"
+                                [columnDefs]="selectedcolumnDefs"
+                                [rowData]="warehouseEnter.products"
+                                [gridOptions]="progridOptions"
+                                enableColResize
+                                enableSorting
+                                enableFilter
+                                groupHeaders
+
+                                rowHeight="22"
+                                rowSelection="multiple"
+                                ></ag-grid-angular>
+                            <button (click)="addpbtn()">添加</button>
+                            <button (click)="deletepro()" [disabled]="!selectedProduct">删除</button>
+                            <product-select (productChange)="addproduct($event)"></product-select>
+                        </div>
+                    </div>
+                </ng2-tab>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

@@ -64,4 +64,15 @@
   <bar-common-action-bar-productEdit [config]="config" [(object)]="object"></bar-common-action-bar-productEdit>
   <!--产品列表删除产品按钮-->
   <bar-common-action-bar-productDelete [config]="config" [(object)]="object" (objectDelete)='delete($event)'></bar-common-action-bar-productDelete>
+  
+  <!--生成入库单按钮-->
+  <bar-common-action-bar-depot-generate-enter-order [config]="config" [(object)]="object"></bar-common-action-bar-depot-generate-enter-order>
+
+  <!--生成采购单按钮-->
+  <bar-common-action-bar-procurement-generate-procurement-order [config]="config" [(object)]="object" [objects]="objects" (onComplete)='complete($event)'></bar-common-action-bar-procurement-generate-procurement-order>
+  <!--生成冻结单按钮-->
+  <bar-common-action-bar-procurement-generate-freeze-order [config]="config" [(object)]="object" [objects]="objects" (onComplete)='complete($event)'></bar-common-action-bar-procurement-generate-freeze-order>
+  
 </div>
+
+  

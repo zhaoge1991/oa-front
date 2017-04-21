@@ -22,19 +22,19 @@ export class ProcurementSupplierService {
         })
     }
     add(procurementSupplier: ProcurementSupplier) {
-        return this.http.put('/api/procurement/supplier', procurementSupplier).map(res => {
+        return this.http.post('/api/procurement/supplier', procurementSupplier).map(res => {
             return res.json();
         });
     }
 
     edit(id: number, procurementSupplier: ProcurementSupplier) {
-        return this.http.post('/api/procurement/supplier/' + id, procurementSupplier).map(res => {
+        return this.http.put('/api/procurement/supplier/' + id, procurementSupplier).map(res => {
             return res.json();
         });
     }
 
-    delete(id: number) {
-        return this.http.delete('/api/procurement/supplier/' + id).map(res => {
+    delete(procurementSupplier: ProcurementSupplier) {
+        return this.http.delete('/api/procurement/supplier/' + procurementSupplier.procurement_supplier_id).map(res => {
             return res.json();
         })
     }

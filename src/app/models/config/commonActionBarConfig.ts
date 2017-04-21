@@ -19,6 +19,9 @@ export class CommonActionBarConfig {
     isprocurmentOrder: boolean;
     depotUrl: string;
     isShipping: boolean;
+    generateEnterOrderUrl:string;
+    generateProcurementOrder:boolean;
+    generateFreezeOrder:boolean;
     exportContract: boolean;
     exportOrder: boolean;
     isproduct: boolean;
