@@ -4,22 +4,14 @@ import {GridOptions} from "ag-grid/main";
 import {Location} from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 
-import {OrderEditModel} from "../../../../../common/models/order_edit.model";
-import {PaymentService} from "../../../../../services/core/paymentService/payment.service";
-import {AppconfigService} from "../../../../../services/core/appConfigService/appConfigService";
-import {QuantifierService} from "../../../../../services/core/quantifierService/quantifier.service";
-import {ProductSelectComponent} from "../../../../../theme/oa-them/components/productselectComponent/product_select.component";
-import {CostComponent} from "../../../../../theme/oa-them/components/costComponent/cost.component";
 import {AlertService} from "../../../../../services/core/alert.component.service";
+import {AppconfigService} from "../../../../../services/core/appConfigService/appConfigService";
 import {CommonActionBarConfig} from "../../../../../models/config/commonActionBarConfig";
-import {AgGridMultiLineComponent} from "../../../../../modules/agGrid/common/agGridMultiLine.component";
-import {AgGridCurrencyComponent} from "../../../../../modules/agGrid/common/agGridCurrency.component";
-import {TableOrderCost} from "../../../../../models/sale/table/TableOrderCost";
-import {TableOrderProduct} from "../../../../../models/sale/table/TableOrderProduct";
-import {ProvisionService} from "../../../../../services/core/provisionService/provision.service";
-import {TableContract} from "../../../../../models/sale/table/TableContract";
-import {CustomersService} from "../../../../../services/customer/customers.service";
-import {Customer} from "../../../../../models/customer/customer";
+import {Task} from "../../../../../models/work/task/task";
+import {TaskService} from "../../../../../services/work/task/task.service";
+import {TaskTypeService} from "../../../../../services/core/task_typeService/task_type.service";
+import {TaskLevelService} from "../../../../../services/core/task_levelService/task_level.service";
+
 
 @Component({
   selector: 'sale-order-edit',
@@ -29,35 +21,38 @@ import {Customer} from "../../../../../models/customer/customer";
 
 export class EditComponent implements OnInit,DoCheck{
 
-  private progridOptions: GridOptions;
-  private costgridOptions: GridOptions;
   private id:number;
   private olddata: any;
-  private data: Customer;
+  private data: Task;
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
+  usersName: string = '';  //所有接受人名字符串
+  cc_usersName: string =  ''; //所有抄送用户名字符串
+  task_levels;
+  task_types;
 
   constructor(
     private router:Router,
     private route:ActivatedRoute,
-    private orderservice: CustomersService,
-    private payment: PaymentService,
-    private provision: ProvisionService,
-    private appconfig: AppconfigService,
-    private quantifier: QuantifierService,
-    private location: Location,
-    private alertservice: AlertService
+    private taskservice: TaskService,
+    private alertservice: AlertService,
+    private task_typeservice: TaskTypeService,
+    private task_levelservice: TaskLevelService
   ){
     this.commonActionBarConfig = new CommonActionBarConfig();
-    this.commonActionBarConfig.addNewUrl = 'pages/customer/customers/edit';
     this.commonActionBarConfig.saveUrl = 'pages/customer/customers/edit';
     this.commonActionBarConfig.idName = 'customer_id';
+    this.task_levels = this.task_levelservice.get();
+    this.task_types = this.task_typeservice.get();
   }
 
   ngDoCheck(){
     if(this.data){
       if(this.olddata.users!==this.data.users){
-        this.getUsersName();
+        this.usersName = this.getUsersName(this.data.users);
+      }
+      if(this.olddata.user_ccs!==this.data.user_ccs){
+        this.cc_usersName = this.getUsersName(this.data.user_ccs);
       }
     }
   }
@@ -72,16 +67,16 @@ export class EditComponent implements OnInit,DoCheck{
 
   setData(){
     if(this.id){
-      this.orderservice.get(this.id).subscribe(data=>{
+      this.taskservice.getById(this.id).subscribe(data=>{
 
-        this.data = new Customer(data);
+        this.data = new Task(data);
 
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
 
       })
     } else {
-      this.data = new Customer(null);
+      this.data = new Task(null);
 
       //保存原始数据
       this.olddata = JSON.parse(JSON.stringify(this.data));
@@ -89,29 +84,29 @@ export class EditComponent implements OnInit,DoCheck{
     }
   }
 
-  usersName: string = ''; //所有用户名字符串
-  getUsersName(){
-    this.usersName = '';
-    let users = this.data.users;
+  //获取用户数组表用户名
+  getUsersName(users){
+    let usersNames = '';
     if(users){
       if(users&&users.length) {
         for (let i = 0; i < users.length; i++) {
           if (users.length <= 1) {
-            this.usersName += users[i].name
+            usersNames += users[i].name
           } else {
-            this.usersName += users[i].name + '、'
+            usersNames += users[i].name + '、'
           }
         }
-      }
+        return usersNames;
+      } else {return usersNames;}
     }
   }
 
   //保存
   save(){
     if(this.isEdit){
-      this.orderservice.put(this.id,this.data).subscribe();
+      this.taskservice.put(this.id,this.data).subscribe();
     } else {
-      this.orderservice.post(this.data).subscribe();
+      this.taskservice.post(this.data).subscribe();
     }
     this.olddata = this.data;
   }

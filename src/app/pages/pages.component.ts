@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 
 import { BaMenuService } from '../theme';
 import { PAGES_MENU } from './pages.menu';
+import {BaThemePreloader} from "../theme/services/baThemePreloader/baThemePreloader.service";
 
 import {CountryService} from "../services/core/countryService/country.service";
 import {StatusService} from "../services/core/statusService/status.service";
@@ -32,6 +33,7 @@ import {PermissionService} from "../services/core/permissionService/permission.s
 import {RoleService} from "../services/core/roleService/role.service";
 import {CurrencyService} from "../services/core/currencyService/currency.service";
 import {OrderTypeService} from "../services/core/ordertypeService/order_type.service";
+
 
 
 @Component({
@@ -67,6 +69,7 @@ export class Pages {
 
   constructor(
     private _menuService: BaMenuService,
+    private _baThemePreloader: BaThemePreloader,
 
     private countryservice: CountryService,
     private currencysercive: CurrencyService,
@@ -97,39 +100,46 @@ export class Pages {
     private roleservice: RoleService,
     private ordertypeservice: OrderTypeService
   ) {
+    BaThemePreloader.registerLoader( this._loadData());
   }
 
   ngOnInit() {
     this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
 
-    //加载所有配置
-    this.countryservice.get();
-    this.currencysercive.get();
-    this.statusservice.get();
-    this.projectservice.get();
-    this.languageservice.get();
-    this.quantifierservice.get();
-    this.degreeservice.get();
-    this.departmentservice.get();
-    this.positionservice.get();
-    this.demanderservice.get();
-    this.supplier_degreeservice.get();
-    this.supplier_level.get();
-    this.supplier_ratingservice.get();
-    this.supplier_statusservice.get();
-    this.paymentservice.get();
-    this.provisionservice.get();
-    this.transportservice.get();
-    this.sourceservice.get();
-    this.passwordservice.get();
-    this.opinion_datasservice.get();
-    this.opinion_typeservice.get();
-    this.month_rankingservice.get();
-    this.task_levelservice.get();
-    this.task_statuseservice.get();
-    this.task_typesservice.get();
-    this.permissionservice.get();
-    this.roleservice.get();
-    this.ordertypeservice.get();
+
+  }
+
+  private _loadData():Promise<any> {
+    return new Promise((resolve, reject) => {
+      //加载所有配置
+      this.countryservice.get();
+      this.currencysercive.get();
+      this.statusservice.get();
+      this.projectservice.get();
+      this.languageservice.get();
+      this.quantifierservice.get();
+      this.degreeservice.get();
+      this.departmentservice.get();
+      this.positionservice.get();
+      this.demanderservice.get();
+      this.supplier_degreeservice.get();
+      this.supplier_level.get();
+      this.supplier_ratingservice.get();
+      this.supplier_statusservice.get();
+      this.paymentservice.get();
+      this.provisionservice.get();
+      this.transportservice.get();
+      this.sourceservice.get();
+      this.passwordservice.get();
+      this.opinion_datasservice.get();
+      this.opinion_typeservice.get();
+      this.month_rankingservice.get();
+      this.task_levelservice.get();
+      this.task_statuseservice.get();
+      this.task_typesservice.get();
+      this.permissionservice.get();
+      this.roleservice.get();
+      this.ordertypeservice.get();
+    });
   }
 }

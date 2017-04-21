@@ -1,0 +1,10 @@
+.comment{
+  padding-left: 15px;
+  border:1px dashed #d0d0d0;
+  .replay{
+    cursor: pointer;
+    &:hover{
+      color: #00a0e9;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+import {User} from "../../user/user";
+import {Comment} from "../../common/comment";
 export class ReportMonth {
     report_month_id: number;
     user_id: number;
@@ -11,6 +13,8 @@ export class ReportMonth {
     month_coefficient_content: string;
     created_at: string;
     updated_at: string;
+    user: User;
+    comments: Comment[];
     constructor(reportMonth) {
         if (reportMonth) {
             this.report_month_id = reportMonth.report_month_id;
@@ -25,6 +29,11 @@ export class ReportMonth {
             this.month_coefficient_content = reportMonth.month_coefficient_content;
             this.created_at = reportMonth.created_at;
             this.updated_at = reportMonth.updated_at;
+            this.user = new User(reportMonth.user);
+            this.comments = [];
+            for(let comment of reportMonth.comments){
+              this.comments.push(new Comment(comment));
+            }
         } else {
             this.report_month_id = 0;
             this.user_id = 0;
@@ -38,6 +47,8 @@ export class ReportMonth {
             this.month_coefficient_content = '';
             this.created_at = '';
             this.updated_at = '';
+            this.user = new User(null);
+            this.comments = [];
         }
 
     }

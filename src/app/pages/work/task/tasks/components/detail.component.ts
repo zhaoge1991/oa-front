@@ -22,6 +22,8 @@ export class DetailComponent implements OnInit,OnDestroy{
   ){
     this.commonActionBarConfig.idName = 'task_id';
     this.commonActionBarConfig.addNewUrl = 'pages/work/task/tasks/edit';
+    this.commonActionBarConfig.forwardUrl = 'pages/work/task/tasks/edit';
+    this.commonActionBarConfig.taskProgress = true;
   }
   private commonActionBarConfig: CommonActionBarConfig = new CommonActionBarConfig();
   private id:number;
@@ -39,7 +41,6 @@ export class DetailComponent implements OnInit,OnDestroy{
   taskLevelStyle:{};
   setTaskLevelStyle(id:number){
     let level = this.tasklevelservice.get(id);
-    console.log(level);
     this.taskLevelStyle = {
       backgroundColor: '#'+level.color
     }
@@ -47,9 +48,13 @@ export class DetailComponent implements OnInit,OnDestroy{
 
   getById(id:number){
     this.taskservice.getById(id).subscribe(data=>{
-      this.data = data as Task;
+      this.data = data;
       this.setTaskLevelStyle(this.data.task_level_id);
     })
+  }
+
+  objectChange(){
+    this.getById(this.id);
   }
 }
 

@@ -1,0 +1,43 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <h4 class="col-md-12">我的周报</h4>
+      <report-list #weeklist [reportType]="'week'"
+                 (rowSelected)="onRowSelected($event)"
+                 (cellDoubleClicked)="onCellDoubleClicked($event)"
+      ></report-list>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedrowData">
+      <ng2-tab selected="next_week_plan"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="last_week">上周计划&完成事项</div>
+          <div index="next_week_plan">下周工作计划</div>
+          <div index="potential_customer" *ngIf="isSaleRole">潜力客户</div>
+          <div index="emphasis_customer" *ngIf="isSaleRole">重点客户</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="last_week">
+
+          </div>
+          <div contents="next_week_plan">
+            <p [innerHtml]="selectedrowData.next_week_plan"></p>
+          </div>
+          <div contents="potential_customer" *ngIf="isSaleRole">
+            <p>{{selectedrowData?.potential_customer?.name}}</p>
+          </div>
+          <div contents="emphasis_customer" *ngIf="isSaleRole">
+            <p>{{selectedrowData?.emphasis_customer?.name}}</p>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

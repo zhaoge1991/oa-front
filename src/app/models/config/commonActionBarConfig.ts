@@ -25,4 +25,8 @@ export class CommonActionBarConfig {
     exportContract: boolean;
     exportOrder: boolean;
     isproduct: boolean;
+    forwardUrl: string;
+    taskProgress:boolean;
+    comment: boolean;
+    reportranking: boolean;
 }

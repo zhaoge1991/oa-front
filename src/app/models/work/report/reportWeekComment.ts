@@ -1,3 +1,5 @@
+
+import {User} from "../../user/user";
 export class ReportWeekComment {
     week_comment_id: number;
     report_week_id: number;
@@ -5,6 +7,7 @@ export class ReportWeekComment {
     comment_content: string;
     created_at: string;
     updated_at: string;
+    user: User
     constructor(reportWeekComment) {
         if (reportWeekComment) {
             this.week_comment_id = reportWeekComment.week_comment_id;
@@ -15,6 +18,8 @@ export class ReportWeekComment {
 
             this.created_at = reportWeekComment.created_at;
             this.updated_at = reportWeekComment.updated_at;
+
+            this.user = new User(reportWeekComment.user);
         } else {
             this.week_comment_id = 0;
             this.report_week_id = 0;
@@ -22,6 +27,7 @@ export class ReportWeekComment {
             this.comment_content = '';
             this.created_at = '';
             this.updated_at = '';
+
         }
 
     }
