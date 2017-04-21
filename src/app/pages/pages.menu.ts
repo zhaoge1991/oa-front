@@ -387,10 +387,59 @@ export const PAGES_MENU = [
             }
           },
           {
+            path: 'order',
+            data: {
+              menu: {
+                title: '产品'
+              }
+            },
+            children: [
+            {
+              path: 'product',
+              data: {
+                menu: {
+                  title: '待处理产品'
+                }
+              }
+            },]
+          },
+          {
             path: 'procurement_order',
             data: {
               menu: {
                 title: '采购单'
+              }
+            }
+          },
+          {
+            path: 'supplier',
+            data: {
+              menu: {
+                title: '供应商管理'
+              }
+            },
+            children: [
+            {
+              path: '',
+              data: {
+                menu: {
+                  title: '供应商资料'
+                }
+              }
+            }, {
+              path: 'analysis',
+              data: {
+                menu: {
+                  title: '供应商分析'
+                }
+              }
+            },]
+          },
+          {
+            path: 'demander',
+            data: {
+              menu: {
+                title: '需求方'
               }
             }
           },
@@ -424,6 +473,82 @@ export const PAGES_MENU = [
                 title: '订单管理'
               }
             }
+          },
+          {
+            path: 'procurement_order',
+            data: {
+              menu: {
+                title: '采购单管理'
+              }
+            }
+          },
+          {
+            path: 'inventory',
+            data: {
+              menu: {
+                title: '库存信息'
+              }
+            },
+            children: [
+              {
+                path: 'warning',
+                data: {
+                  menu: {
+                    title: '缺料预警'
+                  }
+                }
+              },
+              {
+                path: 'dailiao',
+                data: {
+                  menu: {
+                    title: '呆料库存'
+                  }
+                }
+              },
+              {
+                path: 'turnover',
+                data: {
+                  menu: {
+                    title: '产品周转'
+                  }
+                }
+              },
+              {
+                path: 'inventory',
+                data: {
+                  menu: {
+                    title: '库存列表'
+                  }
+                }
+              }
+            ]
+          },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: '仓库清单'
+              }
+            },
+            children: [
+              {
+                path: 'enter_order',
+                data: {
+                  menu: {
+                    title: '入库单'
+                  }
+                }
+              },
+              {
+                path: 'out_order',
+                data: {
+                  menu: {
+                    title: '出库单'
+                  }
+                }
+              }
+            ]
           }
         ]
       },
