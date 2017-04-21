@@ -1,3 +1,5 @@
+import {User} from "../../user/user";
+import {UserStatu} from "./userStatu";
 export class Task {
     task_id: number;
     name: string;
@@ -13,6 +15,10 @@ export class Task {
     is_cron: number;
     created_at: string;
     updated_at: string;
+    users: User[];
+    source_user: User;
+    user_ccs: User[];
+    user_status: UserStatu[];
     constructor(task) {
         if (task) {
             this.task_id = task.task_id;
@@ -29,6 +35,19 @@ export class Task {
             this.is_cron = task.is_cron;
             this.created_at = task.created_at;
             this.updated_at = task.updated_at;
+            this.source_user = new User(task.source_user);
+            this.users = [];
+            this.user_ccs = [];
+            this.user_status = [];
+            for (let user of task.users){
+              this.users.push(new User(user));
+            }
+            for (let user of task.user_ccs){
+              this.user_ccs.push(new User(user));
+            }
+            for (let user_statu of task.user_status){
+              this.user_status.push(new UserStatu(user_statu));
+            }
         } else {
             this.task_id = 0;
             this.name = '';
@@ -44,6 +63,10 @@ export class Task {
             this.is_cron = 0;
             this.created_at = '';
             this.updated_at = '';
+            this.source_user = new User(null);
+            this.users = [];
+            this.user_ccs = [];
+            this.user_status = [];
         }
 
     }

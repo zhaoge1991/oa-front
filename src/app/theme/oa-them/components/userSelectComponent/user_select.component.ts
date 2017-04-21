@@ -94,7 +94,6 @@ export class UserSelectComponent implements OnInit{
   getTrreNodes(){
     this.departmentservice.get().subscribe(data=>{
       this.departmentservice.getdataTrre(data,this.usernodes)
-      console.log(this.usernodes);
     })
   }
   customTemplateStringOptions = {
@@ -107,32 +106,37 @@ export class UserSelectComponent implements OnInit{
   //加载列表数据
   init(key:string,page:number,department: number){
     this.userservice.getlist(key,page,department).subscribe(data=>{
-      this.paginate = data;
-      this.usersdata = this.paginate.data;
+      this.usersdata = data;
     })
   }
 
   //选择分类
-  private department: number;
+  private departmentObj: any;
   onchanged($event){
     this.searchtext = null;
-    this.department = $event.node.data.id;
-    console.log(this.department,$event);
-    this.init(this.searchtext,1,this.department);
+    this.departmentObj = $event.node.data;
+    this.init(this.searchtext,1,this.departmentObj.id);
   }
 
-  //翻页
-  pageClick($event){
-    this.init(this.searchtext,$event.text,this.department)
+  //选择所有用户
+  selectAll(){
+    this.userservice.getlist('',1,null).subscribe(data=>{
+      this.userArr = data;
+    })
+  }
+
+  //选择部门、组
+  selectDepartment(){
+    let newUsers = this.userArr.concat(this.usersdata);
+    this.userArr = this.filterUsers(newUsers);
   }
 
   //搜索
   private searchtext:string;
   search($event){
-    console.log($event);
-    this.department = null;
+    this.departmentObj = null;
     this.searchtext = $event;
-    this.init(this.searchtext,1,this.department)
+    this.init(this.searchtext,1,null)
   }
 
   //选中行更改

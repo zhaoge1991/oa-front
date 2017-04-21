@@ -1,0 +1,62 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar
+      [config]="commonActionBarConfig"
+      [object]="data"
+      (objectDelete)="deleteData($event)"
+      (objectComment)="postComment($event)"
+    >
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div>
+              <h1 class="title">{{name}}-{{year}}年{{month}}月第{{week}}周周报</h1>
+            </div>
+            <div>
+              <div *ngIf="isSale">
+                <h4>本周成单金额 $<span>{{data?.week_sales_amount}}</span></h4>
+                <h4>当月成单金额 $<span>{{data?.month_amount}}</span></h4>
+                <h4>月业绩目标 $<span>{{data?.sales_aims}}</span></h4>
+                <hr>
+                <h4>潜力成单客户记录</h4>
+                <div [innerHTML]="data.potential_customer"></div>
+                <h4>需重点开发跟进客户</h4>
+                <div [innerHTML]="data.emphasis_customer"></div>
+              </div>
+              <hr>
+              <h4>上周工作计划</h4>
+              <div [innerHTML]="lastreport.next_week_plan"></div>
+              <hr>
+              <h4>本周工作事项</h4>
+              <div>
+                <p><strong>完成事项</strong></p>
+                <p *ngFor="let task of tasks">{{task.date_complete}} {{task.name}}</p>
+                <p><strong>指派事项</strong></p>
+                <p *ngFor="let mysourcetask of mysourcetasks">{{mysourcetask.date_complete}} {{mysourcetask.name}}</p>
+              </div>
+              <hr>
+              <h4>工作中遇到的问题（包括需要协助的问题或者自己存在的问题）：</h4>
+              <div [innerHTML]="data.questions"></div>
+              <hr>
+              <h4>下周我打算对哪些新的方面进行尝试（主要写自己的思考以及对现有工作的突破和改进）：</h4>
+              <div [innerHTML]="data.new_try"></div>
+              <hr>
+              <h4>下周工作计划：</h4>
+              <div [innerHTML]="data.next_week_plan"></div>
+              <hr>
+              <h4>上级回复：</h4>
+              <div *ngFor="let comment of data.comments">
+                <p><strong>{{comment?.user?.name}}&nbsp;&nbsp;&nbsp;<span>{{comment?.created_at | timelapsepipe}}前</span></strong></p>
+                <div [innerHTML]="comment.content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

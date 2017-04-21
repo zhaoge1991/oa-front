@@ -19,7 +19,7 @@ export class CalenderComponent{
   public isSelected:boolean
   public selectedDate
   public showCalender:boolean = false
-  @Input() placeholder = '默认提示文本';
+  @Input() placeholder = '请选择日期';
   @Input() disabled;
   @Input() value;
   @Output() valueChange = new EventEmitter();
@@ -42,8 +42,7 @@ export class CalenderComponent{
     let date: Date, year, month, day;
 
     //没有传入日期则显示系统日期
-    if (dateTime) {
-      dateTime=='0000-00-00'?dateTime='1949-10-01':'';
+    if (dateTime && (dateTime!=='0000-00-00')) {
       date = new Date(dateTime);
       [year, month, day] = dateTime.split('-');
       this.selectedIndex = +day;

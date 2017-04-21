@@ -1,0 +1,16 @@
+<table *ngIf="progress">
+  <tr>
+    <th>序号</th>
+    <th>描述</th>
+    <th>姓名</th>
+    <th>状态</th>
+    <th>时间</th>
+  </tr>
+  <tr *ngFor="let progres of progress,let i=index">
+    <td>{{i+1}}</td>
+    <td [innerHTML]="progres?.description"></td>
+    <td>{{progres?.user?.name}}</td>
+    <td>{{progres?.task_status?.name}}</td>
+    <td>{{progres?.updated_at}}</td>
+  </tr>
+</table>

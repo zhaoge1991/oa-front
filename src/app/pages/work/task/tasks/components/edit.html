@@ -1,0 +1,89 @@
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-8 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="name" class="col-sm-2 ng-form-control-label">任务名称</label>
+                <div class="col-sm-10">
+                  <input type="text" class="ng-form-control" id="name" [(ngModel)]="data.name" name="name">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-4 ng-form-control-label">截止日期</label>
+                <div class="col-sm-8">
+                  <ng-calender [(value)]="data.deadline" [placeholder]="'请选择时间'"></ng-calender>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="user" class="col-sm-2 ng-form-control-label">接受人</label>
+                <div class="col-sm-10">
+                  <input type="text" class="ng-form-control" id="user" [value]="usersName" name="user" (focus)="userSelect.show()">
+                  <user-select #userSelect [(userArr)]="data.users"></user-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="user_ccs" class="col-sm-4 ng-form-control-label">抄送人</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="user_ccs" [value]="cc_usersName" name="user" (focus)="ccuserSelect.show()">
+                  <user-select #ccuserSelect [(userArr)]="data.user_ccs"></user-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-1 ng-form-control-label">任务级别</label>
+                <div class="col-sm-11">
+                  <span *ngFor="let task_level of task_levels" class="col-md-3">
+                      <label class="radio-inline custom-radio nowrap">
+                        <input type="radio" name="task_level" value="{{task_level?.task_level_id}}" [checked]="task_level.task_level_id == data.task_level_id" (change)="data.task_level_id=task_level.task_level_id">
+                        <span>{{task_level?.name}}</span>
+                      </label>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-1 ng-form-control-label">任务类型</label>
+                <div class="col-sm-11">
+                  <span *ngFor="let task_type of task_types" class="col-md-3">
+                      <label class="radio-inline custom-radio nowrap">
+                        <input type="radio" name="task_type" value="{{task_type?.task_type_id}}" [checked]="task_type.task_type_id == data.task_type_id" (change)="data.task_type_id = task_type.task_type_id">
+                        <span>{{task_type?.name}}</span>
+                      </label>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-1 ng-form-control-label">任务描述</label>
+                <div class="col-sm-11">
+                  <ng2-ueditor [(ngModel)]="data.description" name="description"></ng2-ueditor>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </form>
+</div>
+
+
+

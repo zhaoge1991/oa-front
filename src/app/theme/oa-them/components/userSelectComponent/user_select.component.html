@@ -10,6 +10,10 @@
       <div class="modal-body">
         <div class="userselect-content clearfix">
           <div class="pull-left treecontent" *ngIf="usernodes.length>0">
+            <div *ngIf="userArr">
+              <div class="select-all" (click)="selectAll()">选择所有用户</div>
+              <div class="select-all" (click)="selectDepartment()" *ngIf="departmentObj">选择{{departmentObj.name}}</div>
+            </div>
             <tree-root
               [nodes]="usernodes"
               [options]="customTemplateStringOptions"
@@ -29,7 +33,7 @@
               <div *ngIf="userObj">
                 <span>{{userObj.name}} <i class="iconfont icon-guanbishanchu" (click)="deleteUserobj()"></i></span>
               </div>
-              <div *ngIf="userArr">
+              <div *ngIf="userArr" class="userarr-content">
                 <span *ngFor="let user of userArr,let i = index">{{user.name}} <i class="iconfont icon-guanbishanchu" (click)="deleteUserArr(i)"></i></span>
               </div>
             </div>
@@ -47,7 +51,6 @@
             rowHeight="22"
             rowSelection="multiple"
             ></ag-grid-angular>
-            <pages-button [paginate]="paginate" (pageClick)="pageClick($event)"></pages-button>
           </div>
         </div>
       </div>

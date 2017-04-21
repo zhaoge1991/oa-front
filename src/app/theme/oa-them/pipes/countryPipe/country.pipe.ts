@@ -10,6 +10,6 @@ export class CountryPipe implements PipeTransform {
   ){}
   transform(id:number,property:string='name') {
     let country = this.pipeservice.get(id);
-    return country?country[property]:''
+    return country?country[property]:'';
   }
 }

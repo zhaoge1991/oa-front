@@ -1,0 +1,31 @@
+<div class="row">
+  <bar-common-action-bar [config]="actionConfig" [object]="selectedrowData" (objectChange)="objectChange($event)">
+  </bar-common-action-bar>
+</div>
+<div class="row">
+  <ba-card baCardClass="with-scroll">
+    <div class="row">
+      <h4 class="col-md-12">抄送我的事项</h4>
+      <task-list #tasklist [getlistFun]="'getCcTasks'"
+                 (rowSelected)="onRowSelected($event)"
+                 (cellDoubleClicked)="onCellDoubleClicked($event)"
+      ></task-list>
+    </div>
+  </ba-card>
+  <div class="row">
+    <div class="col-md-12 col-xs-12" *ngIf="selectedeRow">
+      <ng2-tab selected="pro-list"
+               selected-contents-class="fadeIn animated"
+               selected-index-class="selected">
+        <div class="tabs">
+          <div index="pro-list">任务进度</div>
+        </div>
+        <div class="tab-contents">
+          <div contents="pro-list">
+            <task-progress [progress]="selectedrowData.user_status"></task-progress>
+          </div>
+        </div>
+      </ng2-tab>
+    </div>
+  </div>
+</div>

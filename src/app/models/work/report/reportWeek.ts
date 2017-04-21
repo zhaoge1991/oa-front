@@ -1,3 +1,6 @@
+import {User} from "../../user/user";
+import {Comment} from "../../common/comment";
+
 export class ReportWeek {
     report_week_id: number;
     user_id: number;
@@ -12,6 +15,8 @@ export class ReportWeek {
     emphasis_customer:string
     created_at: string;
     updated_at: string;
+    user: User;
+    comments: Comment[];
     constructor(reportWeek) {
         if (reportWeek) {
             this.report_week_id = reportWeek.report_month_id;
@@ -25,10 +30,15 @@ export class ReportWeek {
             this.sales_aims = reportWeek.sales_aims;
             this.potential_customer = reportWeek.potential_customer;
             this.emphasis_customer = reportWeek.emphasis_customer;
-            
-            
+            this.user = new User(reportWeek.user);
+            this.comments = [];
+
             this.created_at = reportWeek.created_at;
             this.updated_at = reportWeek.updated_at;
+
+            for(let comment of reportWeek.comments){
+              this.comments.push(new Comment(comment));
+            }
         } else {
             this.report_week_id = 0;
             this.user_id = 0;
@@ -43,6 +53,8 @@ export class ReportWeek {
             this.emphasis_customer = '';
             this.created_at = '';
             this.updated_at = '';
+            this.user = new User(null);
+            this.comments = [];
         }
 
     }

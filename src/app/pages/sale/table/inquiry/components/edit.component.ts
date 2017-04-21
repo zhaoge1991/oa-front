@@ -161,7 +161,6 @@ export class EditComponent implements OnInit{
   setData(){
     if(this.id){
       this.orderservice.get(this.id).subscribe(data=>{
-        console.log(data);
         this.data = new Table(data);
         //保存原始数据
         this.olddata = JSON.parse(JSON.stringify(this.data));
@@ -174,6 +173,9 @@ export class EditComponent implements OnInit{
 
         //其他费用总和
         this.otherCost();
+
+        //保存原始数据
+        this.olddata = JSON.parse(JSON.stringify(this.data));
 
       })
     } else {

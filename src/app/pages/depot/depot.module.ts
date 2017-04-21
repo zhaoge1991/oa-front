@@ -11,6 +11,11 @@ import { WarehouseEnterModule} from './warehouseEnter/warehouseEnter.module';
 import {WarehouseEnterService} from '../../services/depot/warehouseEnter.service';
 import { WarehouseOutModule} from './warehouseOut/warehouseOut.module';
 import {WarehouseOutService} from '../../services/depot/warehouseOut.service';
+
+import {ProductListService} from "../../services/product/productList/product_list.service";
+import { InventoryModule} from './inventory/inventory.module';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -19,13 +24,14 @@ import {WarehouseOutService} from '../../services/depot/warehouseOut.service';
     OrderModule,
     ProcurementOrderModule,
     WarehouseEnterModule,
-    WarehouseOutModule
+    WarehouseOutModule,
+    InventoryModule
     
   ],
   declarations: [
     DepotComponent
   ],
-  providers: [OrderService,ProcurementOrderService,WarehouseEnterService,WarehouseOutService]
+  providers: [OrderService,ProcurementOrderService,WarehouseEnterService,WarehouseOutService,ProductListService]
 })
 
 export class DepotModule {

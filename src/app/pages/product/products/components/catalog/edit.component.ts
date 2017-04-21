@@ -1,4 +1,4 @@
-import {Component,OnInit,ViewChild} from '@angular/core';
+import {Component,OnInit,ViewChild,DoCheck} from '@angular/core';
 import { ActivatedRoute, Params,Router } from '@angular/router';
 import {GridOptions} from "ag-grid/main";
 import {Location} from '@angular/common';
@@ -11,15 +11,14 @@ import {Catalog} from "../../../../../models/product/catalog/catalog";
 import {ProductCatalogService} from "../../../../../services/product/productCatalog/product_catalog.service";
 import {LanguageService} from "../../../../../services/core/languageService/language.service";
 import {Language} from "../../../../../models/localisation/language";
-import {CatalogDescription} from "../../../../../models/product/catalog/catalogDescription";
 
 @Component({
-  selector: 'sale-order-edit',
+  selector: 'product-catalog-edit',
   templateUrl: './edit.html',
   styleUrls: ['./edit.scss']
 })
 
-export class EditComponent implements OnInit{
+export class EditComponent implements OnInit,DoCheck{
 
   private id:number;
   public parent_id: number;
@@ -28,7 +27,6 @@ export class EditComponent implements OnInit{
   private isEdit:boolean;
   private commonActionBarConfig: CommonActionBarConfig;
   public languages: Language[];
-  public descriptions: CatalogDescription[] = [];
 
   constructor(
     private route:ActivatedRoute,
@@ -52,58 +50,64 @@ export class EditComponent implements OnInit{
     this.setData();
   }
 
+  ngDoCheck(){
+    if(this.data){
+      this.getUsersName();
+    }
+  }
+
   //获取数据
   setData(){
     if(this.id){
       this.catalogservice.getcatalog(this.id).subscribe(data=>{
-        console.log(data);
-        this.data = new Catalog(data);
-        this.setDescription();
+        this.data = new Catalog(data,this.languages);
+        //保存原始数据
+        this.olddata = JSON.stringify(this.data);
       })
     } else {
-      this.data = new Catalog(null);
-      this.setDescription();
+      this.data = new Catalog(null,this.languages);
+      //保存原始数据
+      this.olddata = JSON.stringify(this.data);
     }
-    //保存原始数据
-    this.olddata = JSON.parse(JSON.stringify(this.data));
   }
 
-  //设置多语言描述
-  setDescription(){
-    //先循环语言生成所有语言描述数组
-    for(let i=0;i<this.languages.length;i++){
-      this.descriptions.push(new CatalogDescription(null));
-      //给每一个语言的描述加上对应语言id
-      this.descriptions[this.descriptions.length-1].language_id = this.languages[i].language_id;
-    }
-    //如果处于编辑状态则遍历数据对象的描述并与描述数组语言id对比，若一样则将数据的描述赋给相应语言描述
-    if(this.id){
-      let des = this.data.catalog_description;
-      for(let i=0;i<des.length;i++){
-        for(let j=0;j<this.descriptions.length;j++){
-          if(des[i].language_id == this.descriptions[j].language_id){
-            this.descriptions[j] = des[i];
-          }
+  usersName: string = ''; //所有用户名字符串
+  getUsersName(){
+    this.usersName = '';
+    let users = this.data.users;
+    if(users){
+      if(users&&users.length) {
+        for (let i = 0; i < users.length; i++) {
+          if(i == users.length-1){
+            this.usersName += users[i].name;
+          } else {this.usersName += users[i].name + '、'}
         }
       }
     }
-    console.log(this.descriptions);
   }
-  get descriptionsstring(){JSON.stringify(this.descriptions)};
+
+  //筛选组类别更改
+  filterGroupsChange($event){
+    this.data.filter_groups = JSON.parse(JSON.stringify($event));
+  }
+
 
   //保存
   save(){
+    if(this.parent_id){
+      this.data.parent_id = this.parent_id;
+    }
     if(this.isEdit){
       this.catalogservice.put(this.id,this.data).subscribe();
     } else {
       this.catalogservice.post(this.data).subscribe();
     }
-    this.olddata = this.data;
+    this.olddata = JSON.stringify(this.data);
   }
 
   //编辑守卫
   canDeactivate(): boolean|Observable<boolean>{
-    if(JSON.stringify(this.olddata) == JSON.stringify(this.data)){
+    if(this.olddata == JSON.stringify(this.data)){
       return true;
     } else {
       return this.alertservice.putMessage({

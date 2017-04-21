@@ -137,7 +137,7 @@ export class ListComponent{
         field: 'table_order',
         width: 120,
         cellRenderer: (params)=>{
-          let data = params.value.payment_id;
+          let data = params.value?params.value.payment_id:null;
           if(data){
             let status = this.payment.get(data)
             if(status){return status[params.property]}else return '';
@@ -152,7 +152,7 @@ export class ListComponent{
         field: 'table_order',
         width: 120,
         cellRenderer: (params)=>{
-          let data = params.value.transport_id;
+          let data = params.value?params.value.transport_id:null;
           if(data){
             let status = this.transport.get(data)
             if(status){return status[params.property]}else return '';

@@ -1,0 +1,74 @@
+<div class="row">
+  <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectSave)="save($event)">
+  </bar-common-action-bar>
+</div>
+
+<div class="row">
+  <form class="form-horizontal" *ngIf="data">
+    <ba-card baCardClass="with-scroll">
+      <div class="row form-content">
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label for="name" class="col-sm-4 ng-form-control-label">需求名称</label>
+                <div class="col-sm-8">
+                  <input type="text" class="ng-form-control" id="name" [(ngModel)]="data.name" name="name">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">需求类型</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'opinion_type_id'" [showname]="'name'" [(value)]="data.opinion_type_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+              <div class="ng-form-group row">
+                <label class="col-sm-4 ng-form-control-label">希望完成时间</label>
+                <div class="col-sm-8">
+                  <ng-select [selectfor]="'opinion_date_id'" [showname]="'name'" [(value)]="data.opinion_date_id"></ng-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="source_users" class="col-sm-1 ng-form-control-label">发布人</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="source_users" [value]="source_usersName" name="source_users" (focus)="source_usersSelect.show()">
+                  <user-select #source_usersSelect [(userArr)]="data.source_users"></user-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label for="receive_users" class="col-sm-1 ng-form-control-label">接受人</label>
+                <div class="col-sm-11">
+                  <input type="text" class="ng-form-control" id="receive_users" [value]="receive_usersName" name="receive_users" (focus)="receive_usersSelect.show()">
+                  <user-select #receive_usersSelect [(userArr)]="data.receive_users"></user-select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 form-unite">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="ng-form-group row">
+                <label  class="col-sm-1 ng-form-control-label">描述</label>
+                <div class="col-sm-11">
+                  <ng2-ueditor [(ngModel)]="data.description" name="description"></ng2-ueditor>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </form>
+</div>
+
+
+

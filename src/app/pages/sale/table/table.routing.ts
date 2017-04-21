@@ -1,12 +1,7 @@
 import {Routes, RouterModule} from '@angular/router';
 import {TableComponent} from './table.component.ts';
 
-//import {ListComponent} from './components/list.component';
-//import {EditComponent} from './components/edit.component.ts';
-//import {DetailComponent} from './components/detail.component';
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
-//import {OrderComponent} from "./order/order.component";
-import {InquiryComponent} from "./inquiry/inquiry.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [

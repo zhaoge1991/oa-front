@@ -1,0 +1,58 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar
+      [config]="commonActionBarConfig"
+      [object]="data"
+      (objectDelete)="deleteData($event)"
+      (objectChange)="postRanking($event)"
+    >
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div>
+              <h1 class="title">
+                {{data.name}}
+              </h1>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div [innerHTML]="data.description"></div>
+                <hr>
+              </div>
+              <div class="col-md-12">
+                <h4>任务描述</h4>
+                <div class="row">
+                  <div class="col-md-2">发起人:</div>
+                  <div class="col-md-10">{{data.source_users | userspipe}}</div>
+                  <div class="col-md-2">接受人:</div>
+                  <div class="col-md-10">{{data.receive_users | userspipe}}</div>
+                  <div class="col-md-2">发布时间:</div>
+                  <div class="col-md-10">{{data.date_added}}</div>
+                  <div class="col-md-2">已接受人数:</div>
+                  <div class="col-md-10">{{data.receive_users.length - data.not_receive_users.length}}</div>
+                  <div class="col-md-2">未接受人数:</div>
+                  <div class="col-md-10">{{data.not_receive_users.length}}</div>
+                  <div class="col-md-2">未接受人:</div>
+                  <div class="col-md-10">{{data.not_receive_users | userspipe}}</div>
+                </div>
+                <hr>
+              </div>
+              <div class="col-md-12" *ngIf="data.comments">
+                <h4>任务进度</h4>
+                <comment-component [commonents]="data.comments"
+                                   [parent]="{name:'announcement_id',id:data.announcement_id}"
+                                   (newcommentChange)="postComment($event)"
+                                   (commentChange)="postReplay($event)"
+                ></comment-component>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import {ProductsComponent} from './products.component';
 import {ListComponent} from './components/list.component';
 import { EditComponent as CatalogComponent} from './components/catalog/edit.component';
 import { EditComponent as ProductComponent} from './components/product/edit.component';
+import { DetailComponent} from './components/product/detail.component';
 
 import {CanDeactivateGuard} from "../../../theme/oa-them/guards/candeactivate/candeactivate.guard";
 
@@ -18,6 +19,7 @@ const routes:Routes = [
       {path: 'catalog/edit/:id', component: CatalogComponent,canDeactivate: [CanDeactivateGuard]},
       {path: 'product/edit', component: ProductComponent,canDeactivate: [CanDeactivateGuard]},
       {path: 'product/edit/:id', component: ProductComponent,canDeactivate: [CanDeactivateGuard]},
+      {path: 'product/detail/:id', component: DetailComponent}
     ]
   }
 ];

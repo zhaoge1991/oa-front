@@ -8,7 +8,7 @@ export class CurrencyPipe implements PipeTransform {
   constructor(
     private pipeservice: CurrencyService
   ){}
-  transform(id:number,property:string='code') {
+  transform(id:number,property:string='name') {
     let val = this.pipeservice.get(id);
     return val?val[property]:''
   }

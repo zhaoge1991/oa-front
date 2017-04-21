@@ -1,0 +1,44 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar [config]="commonActionBarConfig" [object]="data" (objectChange)="objectChange($event)" (objectDelete)="deleteData($event)">
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div class="level">
+              <span [ngStyle]="taskLevelStyle">{{data.task_level_id | tasklevelpipe}}</span>
+              <span class="type">【{{data.task_type_id | tasktypepipe}}】</span>
+            </div>
+            <div>
+              <h1 class="title">{{data.name}}</h1>
+            </div>
+            <div>
+              <p [innerHTML]="data.description"></p>
+              <hr>
+              <h3>任务进度</h3>
+              <div class="task_progress">
+                <table *ngIf="data.user_status">
+                  <tr>
+                    <th>描述</th>
+                    <th>姓名</th>
+                    <th>状态</th>
+                    <th>时间</th>
+                  </tr>
+                  <tr *ngFor="let progres of data.user_status">
+                    <td [innerHTML]="progres?.description" width="50%"></td>
+                    <td width="10%">{{progres?.user?.name}}</td>
+                    <td width="20%">{{progres?.task_status?.name}}</td>
+                    <td width="20%">{{progres?.updated_at}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

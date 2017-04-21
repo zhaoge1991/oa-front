@@ -1,4 +1,11 @@
+import {Injectable} from '@angular/core';
 import {CatalogDescription} from "./catalogDescription";
+import {LanguageService} from "../../../services/core/languageService/language.service";
+import {Language} from "../../localisation/language";
+import {User} from "../../user/user";
+import {CatalogFilterGroup} from "./catalogFilterGroup";
+
+@Injectable()
 export class Catalog {
     catalog_id: number;
     sort_order: number;
@@ -17,8 +24,10 @@ export class Catalog {
     packing_spec_id: number;
     created_at: string;
     updated_at: string;
+    users: User[];
     catalog_description: CatalogDescription[];
-    constructor(catalog) {
+    filter_groups: CatalogFilterGroup[];
+    constructor(catalog,languages:Language[]) {
         if (catalog) {
             this.catalog_id = catalog.catalog_id;
             this.sort_order = catalog.sort_order;
@@ -38,8 +47,17 @@ export class Catalog {
             this.created_at = catalog.created_at;
             this.updated_at = catalog.updated_at;
             this.catalog_description = [];
-            for (let catalog_description of catalog.catalog_description){
-              this.catalog_description.push(new CatalogDescription(catalog_description));
+            this.users = [];
+            this.filter_groups = [];
+            if(catalog.users){
+              for (let user of catalog.users){
+                this.users.push(new User(user));
+              };
+            }
+            if(catalog.filter_groups){
+              for (let filter_group of catalog.filter_groups){
+                this.filter_groups.push(new CatalogFilterGroup(filter_group,languages));
+              }
             }
         } else {
             this.catalog_id = 0;
@@ -60,7 +78,27 @@ export class Catalog {
             this.created_at = '';
             this.updated_at = '';
             this.catalog_description = [];
+            this.users = [];
+            this.filter_groups = [];
         }
-
+        //先循环语言生成所有语言描述数组
+        for(let i=0;i<languages.length;i++){
+          this.catalog_description.push(new CatalogDescription(null));
+          //给每一个语言的描述加上对应语言id
+          this.catalog_description[this.catalog_description.length-1].language_id = languages[i].language_id;
+        }
+        //如果处于编辑状态则遍历数据对象的描述并与描述数组语言id对比，若一样则将数据的描述赋给相应语言描述
+        if(catalog){
+          let des = catalog.catalog_description;
+          if(des){
+            for(let i=0;i<des.length;i++){
+              for(let j=0;j<this.catalog_description.length;j++){
+                if(des[i].language_id == this.catalog_description[j].language_id){
+                  this.catalog_description[j] = des[i];
+                }
+              }
+            }
+          }
+        }
     }
 }

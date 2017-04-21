@@ -1,0 +1,71 @@
+<div *ngIf="data">
+  <div class="row">
+    <bar-common-action-bar
+      [config]="commonActionBarConfig"
+      [object]="data"
+      (objectDelete)="deleteData($event)"
+      (objectChange)="postRanking($event)"
+    >
+    </bar-common-action-bar>
+  </div>
+  <div class="row">
+    <ba-card baCardClass="with-scroll">
+      <div class="detailcontent">
+        <div>
+          <div class="opendetail">
+            <div>
+              <h1 class="title">{{name}}-{{year}}年{{month}}月-月报</h1>
+            </div>
+            <div>
+              <h4>上月工作计划</h4>
+              <div class="col-md-12">
+                <div [innerHTML]="lastreport.next_month_plan" *ngIf="lastreport"></div>
+              </div>
+              <hr>
+              <h4>本月完成事项</h4>
+              <div class="col-md-12">
+                <div [innerHTML]="data.worked"></div>
+              </div>
+              <hr>
+              <h4>工作中遇到的问题（包括需要协助的问题或者自己存在的问题）：</h4>
+              <div class="col-md-12">
+                <div [innerHTML]="data.questions"></div>
+              </div>
+              <hr>
+              <h4>下月我打算对哪些新的方面进行尝试（主要写自己的思考以及对现有工作的突破和改进）：</h4>
+              <div class="col-md-12">
+                <div [innerHTML]="data.new_try"></div>
+              </div>
+              <hr>
+              <h4>下月工作计划：</h4>
+              <div class="col-md-12">
+                <div [innerHTML]="data.next_month_plan"></div>
+              </div>
+              <hr>
+              <div>
+                <div class="col-md-6">
+                  <h4>绩效系数：<span>{{data?.month_coefficient}}</span></h4>
+                </div>
+                <div class="col-md-6">
+                  <h4>评分等级：<span>{{data?.report_month_ranking_id|reportrankingpipe}}</span></h4>
+                </div>
+                <div class="col-md-12">
+                  <h4>月报评论：</h4>
+                  <div [innerHTML]="data.month_coefficient_content"></div>
+                </div>
+              </div>
+              <hr>
+              <h4>上级回复：</h4>
+              <div class="col-md-12">
+                <div *ngFor="let comment of data.comments">
+                  <p><strong>{{comment?.user?.name}}&nbsp;&nbsp;&nbsp;<span>{{comment?.created_at | timelapsepipe}}前</span></strong></p>
+                  <div [innerHTML]="comment.content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>

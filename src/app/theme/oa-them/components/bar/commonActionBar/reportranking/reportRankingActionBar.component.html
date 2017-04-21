@@ -1,0 +1,48 @@
+<div class="btnitem" *ngIf="config.reportranking && canShow">
+  <button type="button" class="available" (click)="chowcheck()" [disabled]="!object">
+    <i class="iconfont icon-shenhe"></i><span>评分</span>
+  </button>
+</div>
+
+<!--弹窗-->
+<div bsModal #checkdialog="bs-modal" class="modal fade task_progress_content" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+     aria-hidden="true" *ngIf="object">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" aria-label="Close" (click)="checkdialog.hide()">
+          <span aria-hidden="true">&times;</span>
+        </span>
+        <h4 class="modal-title">评分</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div class="ng-form-group row">
+              <label class="col-sm-3 ng-form-control-label">评分等级</label>
+              <div class="col-sm-9">
+                <ng-select id="report_month_ranking_id" [selectfor]="'report_month_ranking_id'" [showname]="'name'" [(value)]="object.report_month_ranking_id"></ng-select>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <div class="ng-form-group row">
+              <label class="col-sm-3 ng-form-control-label">绩效系数</label>
+              <div class="col-sm-9">
+                <input type="text" class="ng-form-control" id="month_coefficient"  [(ngModel)]="object.month_coefficient" name="month_coefficient">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <p>详情</p>
+            <ng2-ueditor [(ngModel)]="object.month_coefficient_content" name="month_coefficient_content" [setting]="setting"></ng2-ueditor>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary confirm-btn" (click)="postRanking()" [disabled]="object.report_month_ranking_id==0">提交</button>
+        <button class="btn btn-primary confirm-btn" (click)="checkdialog.hide()">取消</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
 import { DropdownModule, ModalModule } from 'ng2-bootstrap';
 import {AgGridModule} from 'ag-grid-angular/main';
+import { Ng2UeditorModule } from 'ng2-ueditor';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TreeModule } from 'angular-tree-component';
 
@@ -73,11 +74,19 @@ import {
   ProductDeleteActionBarComponent,
   ProductAddActionBarComponent,
   ProductEditActionBarComponent,
+  ForwardActionBarComponent,
+  TaskProgressActionBarComponent,
+  CommentActionBarComponent,
+  ReportRankingActionBarComponent,
   //end 公共操作栏
 
   AlertComponent,
   SampleOrderComponent,
-  AnnexesComponent
+  AnnexesComponent,
+  FilterGroupSelectComponent,
+  ProductCatalogSelectComponent,
+  CommentComponent,
+  CommentItemComponent
 } from './components';
 
 //import { BaCardBlur } from '../components/baCard/baCardBlur.directive';
@@ -98,7 +107,15 @@ import {
   OrderCostsPipe,
   OrderTypePipe,
   QuantifierPipe,
-  LanguagePipe
+  LanguagePipe,
+  FilterGroupPipe,
+  DescriptionPipe,
+  RolePipe,
+  TaskLevelPipe,
+  TaskTypePipe,
+  TimeLapsePipe,
+  ReportRankingPipe,
+  OpinionTypePipe
 } from './pipes';
 
 import {
@@ -173,11 +190,19 @@ const NGA_COMPONENTS = [
   ProductDeleteActionBarComponent,
   ProductAddActionBarComponent,
   ProductEditActionBarComponent,
+  ForwardActionBarComponent,
+  TaskProgressActionBarComponent,
+  CommentActionBarComponent,
+  ReportRankingActionBarComponent,
   //end 公共操作栏
 
   SampleOrderComponent,
   AlertComponent,
-  AnnexesComponent
+  AnnexesComponent,
+  FilterGroupSelectComponent,
+  ProductCatalogSelectComponent,
+  CommentComponent,
+  CommentItemComponent
 ];
 
 const NGA_DIRECTIVES = [
@@ -196,7 +221,15 @@ const NGA_PIPES = [
   OrderCostsPipe,
   OrderTypePipe,
   QuantifierPipe,
-  LanguagePipe
+  LanguagePipe,
+  FilterGroupPipe,
+  DescriptionPipe,
+  RolePipe,
+  TaskLevelPipe,
+  TaskTypePipe,
+  TimeLapsePipe,
+  ReportRankingPipe,
+  OpinionTypePipe
 ];
 
 const NGA_SERVICES = [
@@ -229,6 +262,7 @@ const NGA_GUARDS = [
     ReactiveFormsModule,
     NgUploaderModule,
     FileUploadModule,
+    Ng2UeditorModule,
     AgGridModule.withComponents([]),
     DropdownModule.forRoot(),
     ModalModule.forRoot(),

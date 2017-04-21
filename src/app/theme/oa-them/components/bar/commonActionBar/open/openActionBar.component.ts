@@ -18,7 +18,11 @@ export class OpenActionBarComponent {
     @Input() object:any
     constructor(private router: Router) {}
     open() {
+      if(this.object[this.config.idName]){
         this.router.navigate([this.config.openUrl,this.object[this.config.idName]]);
+      } else {
+        this.router.navigate([this.config.openUrl]);
+      }
     }
 
 }
